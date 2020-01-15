@@ -620,3 +620,23 @@ pre tt:after {
     font-size: 100%;
   }
 }
+
+/* fonts */
+
+@font-face {
+  font-family: Nexa;
+  font-weight: 600;
+  font-style: normal;
+  src: url("../fonts/NexaBold_1.woff2") format("woff2"),
+    url("../fonts/NexaBold_1.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Nexa;
+  font-weight: 300;
+  font-style: normal;
+  src: url("../fonts/NexaLight_1.woff2") format("woff2"),
+    url("../fonts/NexaLight_1.woff") format("woff");
+  font-display: swap;
+}

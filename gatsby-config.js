@@ -13,6 +13,35 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+
+    {
+      resolve: `gatsby-source-shopify`,
+      options: {
+        shopName: `foray-golf-dev`,
+        accessToken: `5b871ba787e3d8597fcba89d138305fa`,
+        verbose: true,
+        paginationSize: 50,
+        timeout: 200000000,
+      },
+    },
+
+    {
+      resolve: `gatsby-plugin-react-svg`,
+      options: {
+        rule: {
+          include: /\.inline\.svg$/,
+        },
+      },
+    },
+
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `fonts`,
+        path: `${__dirname}/src/fonts`,
+      },
+    },
+
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -31,4 +60,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
