@@ -8,6 +8,7 @@ const client = Client.buildClient({
 
 const defaultValues = {
   isCartOpen: false,
+  toggleCartOpen: () => {},
   cart: [],
   addProductToCart: () => {
     console.log("boo!");
@@ -17,12 +18,20 @@ const defaultValues = {
     return num;
   },
   client,
+  checkout: {
+    lineItems: [],
+  },
 };
 
 export const StoreContext = createContext(defaultValues);
 
 export const StoreProvider = ({ children }) => {
-  const [checkout, setCheckout] = useState({});
+  const [checkout, setCheckout] = useState(defaultValues.checkout);
+  const [isCartOpen, setCartOpen] = useState(false);
+
+  const toggleCartOpen = () => {
+    setCartOpen(!isCartOpen);
+  };
 
   useEffect(() => {
     initializeCheckout();
@@ -61,6 +70,7 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
+  // NOTE: newCheckout is dif here than the function above
   const addProductToCart = async variantId => {
     try {
       console.log("added");
@@ -71,11 +81,12 @@ export const StoreProvider = ({ children }) => {
         },
       ];
       console.log(checkout);
-      const addItems = await client.checkout.addLineItems(
+      const newCheckout = await client.checkout.addLineItems(
         checkout.id,
         lineItems
       );
-      console.log(addItems.webUrl);
+      console.log(newCheckout.webUrl);
+      setCheckout(newCheckout);
     } catch (e) {
       console.log(e.message);
     }
@@ -85,6 +96,9 @@ export const StoreProvider = ({ children }) => {
       value={{
         ...defaultValues,
         addProductToCart,
+        checkout,
+        toggleCartOpen,
+        isCartOpen,
       }}
     >
       {children}

@@ -23,6 +23,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-lazyload": "^2.6.5",
+    "react-spring": "^8.0.27",
     "shopify-buy": "^2.7.0",
     "styled-components": "^5.0.0"
   },

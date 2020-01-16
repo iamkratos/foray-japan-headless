@@ -1,12 +1,15 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
+import { useTransition } from "react-spring";
+
 import Wrapper from "../org/Wrapper";
 import TopBar from "./top-bar";
 import styled from "styled-components";
 import Logo from "../../images/logo.inline.svg";
 import Search from "../../images/search.inline.svg";
-import Cart from "../../images/cart.inline.svg";
+import CartIcon from "../../images/cart.inline.svg";
+import Cart from "./cart";
 
 import { StoreContext } from "../../context/StoreContext";
 
@@ -90,7 +93,14 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = ({ siteTitle }) => {
-  const { isCartOpen, addProductToCart } = useContext(StoreContext);
+  const { isCartOpen, toggleCartOpen, addProductToCart } = useContext(
+    StoreContext
+  );
+  const transitions = useTransition(isCartOpen, null, {
+    from: { transform: "translate3d(100%, 0, 0)" },
+    enter: { transform: "translate3d(0%, 0, 0)" },
+    leave: { transform: "translate3d(100%, 0, 0)" },
+  });
   return (
     <HeaderContainer>
       <TopBar />
@@ -131,10 +141,15 @@ const Header = ({ siteTitle }) => {
         </div>
         <div className="cart-container">
           <div className="inner-wrap">
-            <Cart />
+            <button onClick={toggleCartOpen}>
+              <CartIcon />
+            </button>
           </div>
         </div>
       </Wrapper>
+      {transitions.map(({ item, key, props }) => {
+        return item && <Cart key={key} style={props} />;
+      })}
     </HeaderContainer>
   );
 };

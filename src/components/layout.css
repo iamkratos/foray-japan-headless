@@ -641,6 +641,18 @@ pre tt:after {
   font-display: swap;
 }
 
-
 /* colors */
 
+body,
+p,
+ul,
+li,
+a,
+h1,
+h2,
+h3,
+h4,
+textarea,
+input {
+  font-family: "Nexa";
+}
