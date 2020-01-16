@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useStaticQuery } from "gatsby";
+import LazyLoad from "react-lazyload";
 
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
@@ -9,7 +10,9 @@ import ProductGridItem from "../components/Product/product-grid-item";
 
 import styled from "styled-components";
 
-const ProductGridContainer = styled.section``;
+const ProductGridContainer = styled.section`
+  margin-top: 40px;
+`;
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -42,9 +45,18 @@ const IndexPage = () => {
               descriptionHtml
               variants {
                 availableForSale
+                shopifyId
                 selectedOptions {
                   name
                   value
+                }
+              }
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
+                maxVariantPrice {
+                  amount
                 }
               }
             }
@@ -56,14 +68,18 @@ const IndexPage = () => {
 
   // console.log(data);
   let products = data.allShopifyCollection.edges[0].node.products;
-  console.log(products);
+  // console.log(products);
   return (
     <Layout>
       <SEO title="Home" />
       <ProductGridContainer>
-        <Wrapper>
+        <Wrapper flex>
           {products.map(product => {
-            return <ProductGridItem product={product} />;
+            return (
+              <LazyLoad height={200}>
+                <ProductGridItem product={product} />
+              </LazyLoad>
+            );
           })}
         </Wrapper>
       </ProductGridContainer>

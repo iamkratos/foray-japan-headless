@@ -1,9 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { TransitionMixin } from "../helpers";
+import { StoreContext } from "../../context/StoreContext";
 
 const ProductGridItemContainer = styled.div`
+  flex: 0 0 50%;
+  margin-bottom: 40px;
   > .inner-wrap {
     max-width: 400px;
     margin: 0 auto;
@@ -27,7 +30,17 @@ const ProductGridItemContainer = styled.div`
 `;
 
 const ProductGridItem = ({ product }) => {
+  const { isCartOpen, addProductToCart } = useContext(StoreContext);
   console.log(product);
+
+  const {
+    images: [firstImage],
+    variants: [firstVariant],
+  } = product;
+
+  console.log("bangers", firstImage, firstVariant);
+
+  // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
 
   function handleHoverIn(e) {
@@ -79,7 +92,7 @@ const ProductGridItem = ({ product }) => {
       }
     });
 
-    console.log(filteredColors, "filtered colors");
+    // console.log(filteredColors, "filtered colors");
     setCurrentColor(imageArray);
   }
 
@@ -93,7 +106,6 @@ const ProductGridItem = ({ product }) => {
         >
           {currentColor.length > 0
             ? currentColor.map((image, index) => {
-                console.log(image, index);
                 // fetchInventoryQuantities();
                 if (index < 2) {
                   return (
@@ -107,7 +119,6 @@ const ProductGridItem = ({ product }) => {
                 }
               })
             : product.images.slice(0, 2).map((image, index) => {
-                console.log(image, index);
                 // fetchInventoryQuantities();
                 if (index < 2) {
                   return (
@@ -123,11 +134,14 @@ const ProductGridItem = ({ product }) => {
         </div>
         <div className="info-container">
           <div className="inner-wrap">
+            <div className="title-container">
+              <h4>{product.title}</h4>
+              <p></p>
+            </div>
             <div className="color-container">
               <ul className="colors">
                 {finalColors.map((color, i) => {
                   let colorHandle = color.replace(/\s+/g, "-").toLowerCase();
-                  console.log("iii", i);
 
                   return (
                     <li>
@@ -141,6 +155,9 @@ const ProductGridItem = ({ product }) => {
               </ul>
             </div>
           </div>
+          <button onClick={() => addProductToCart(firstVariant.shopifyId)}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </ProductGridItemContainer>

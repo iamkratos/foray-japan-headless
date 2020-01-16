@@ -1,12 +1,14 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import Wrapper from "../org/Wrapper";
 import TopBar from "./top-bar";
 import styled from "styled-components";
 import Logo from "../../images/logo.inline.svg";
 import Search from "../../images/search.inline.svg";
 import Cart from "../../images/cart.inline.svg";
+
+import { StoreContext } from "../../context/StoreContext";
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -87,59 +89,54 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const Header = ({ siteTitle }) => (
-  <HeaderContainer>
-    <TopBar />
-    <Wrapper flex activeClass>
-      <div className="search-container">
-        <div className="inner-wrap">
-          <Search />
+const Header = ({ siteTitle }) => {
+  const { isCartOpen, addProductToCart } = useContext(StoreContext);
+  return (
+    <HeaderContainer>
+      <TopBar />
+      <Wrapper flex activeClass>
+        <div className="search-container">
+          <div className="inner-wrap">
+            <Search />
+          </div>
         </div>
-      </div>
-      <div className="link-container left">
-        <nav>
-          <ul>
-            <li>
-              <Link to="#">New Arrivals</Link>
-            </li>
-            <li>
-              <Link to="#">Shop By</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className="logo-container">
-        <Link to="/">
-          <Logo />
-        </Link>
-      </div>
-      <div className="link-container">
-        <nav>
-          <ul>
-            <li>
-              <Link to="#">Collections</Link>
-            </li>
-            <li>
-              <Link to="#">Final Sale</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className="cart-container">
-        <div className="inner-wrap">
-          <Cart />
+        <div className="link-container left">
+          <nav>
+            <ul>
+              <li>
+                <Link to="#">New Arrivals</Link>
+              </li>
+              <li>
+                <Link to="#">Shop By</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
-      </div>
-    </Wrapper>
-  </HeaderContainer>
-);
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: ``,
+        <div className="logo-container">
+          <Link to="/">
+            <Logo />
+          </Link>
+        </div>
+        <div className="link-container">
+          <nav>
+            <ul>
+              <li>
+                <Link to="#">Collections</Link>
+              </li>
+              <li>
+                <Link to="#">Final Sale</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="cart-container">
+          <div className="inner-wrap">
+            <Cart />
+          </div>
+        </div>
+      </Wrapper>
+    </HeaderContainer>
+  );
 };
 
 export default Header;
