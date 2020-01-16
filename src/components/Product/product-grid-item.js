@@ -78,13 +78,13 @@ const ProductGridItem = ({ product }) => {
     let filteredColors = product.images.map(image => {
       let altTextCheck =
         image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
-      console.log(
-        "alt text is ",
-        altTextCheck,
-        image.altText,
-        " filter condition ",
-        filterCondition
-      );
+      // console.log(
+      //   "alt text is ",
+      //   altTextCheck,
+      //   image.altText,
+      //   " filter condition ",
+      //   filterCondition
+      // );
       if (altTextCheck == filterCondition) {
         imageArray.push(image);
       } else {

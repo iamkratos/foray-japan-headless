@@ -30,6 +30,12 @@ export const StoreProvider = ({ children }) => {
 
   const initializeCheckout = async () => {
     try {
+      // Check if it's a browser
+      const isBrowser = typeof window != "undefined";
+      // Check if id exists
+      // If id exists, fetch checkout from Shopify
+      // If id does not, create new checkout
+      // Set checkout to state
       const newCheckout = await client.checkout.create();
       setCheckout(newCheckout.id);
     } catch (e) {
