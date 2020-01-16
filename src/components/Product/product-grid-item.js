@@ -31,14 +31,14 @@ const ProductGridItemContainer = styled.div`
 
 const ProductGridItem = ({ product }) => {
   const { isCartOpen, addProductToCart } = useContext(StoreContext);
-  console.log(product);
+  // console.log(product);
 
   const {
     images: [firstImage],
     variants: [firstVariant],
   } = product;
 
-  console.log("bangers", firstImage, firstVariant);
+  // console.log("bangers", firstImage, firstVariant);
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -52,7 +52,7 @@ const ProductGridItem = ({ product }) => {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
-  console.log("top log", product);
+  // console.log("top log", product);
 
   //  Filter Color Buttons
 
