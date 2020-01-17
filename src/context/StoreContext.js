@@ -88,6 +88,9 @@ export const StoreProvider = ({ children }) => {
       );
       console.log(newCheckout.webUrl);
       setCheckout(newCheckout);
+      if (!isCartOpen) {
+        toggleCartOpen();
+      }
     } catch (e) {
       console.log(e.message);
     }

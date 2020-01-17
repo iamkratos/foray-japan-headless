@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { useTransition } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
+
 import TopBar from "./top-bar";
 import styled from "styled-components";
 import Logo from "../../images/logo.inline.svg";
@@ -12,6 +13,7 @@ import CartIcon from "../../images/cart.inline.svg";
 import Cart from "./cart";
 
 import { StoreContext } from "../../context/StoreContext";
+import { TransitionMixin } from "../helpers";
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -69,6 +71,30 @@ const HeaderContainer = styled.header`
             text-transform: uppercase;
             font-size: 12px;
             letter-spacing: 1px;
+            position: relative;
+
+            &:after {
+              content: " ";
+              width: 0;
+              height: 0;
+              border-left: 5px solid transparent;
+              border-right: 5px solid transparent;
+              border-bottom: 5px solid black;
+              display: block;
+              text-align: center;
+              margin: 10px auto 0px;
+              position: absolute;
+              left: 0;
+              right: 0;
+              opacity: 0;
+              ${TransitionMixin(".25s")}
+            }
+
+            &:hover {
+              &::after {
+                opacity: 1;
+              }
+            }
           }
         }
       }

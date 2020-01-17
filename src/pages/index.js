@@ -2,10 +2,11 @@ import React from "react";
 import { Link, useStaticQuery } from "gatsby";
 import LazyLoad from "react-lazyload";
 
+import SEO from "../components/seo";
+import HomePageSlider from "../components/Sliders/home-page-slider";
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
 import Image from "../components/image";
-import SEO from "../components/seo";
 import ProductGridItem from "../components/Product/product-grid-item";
 
 import styled from "styled-components";
@@ -72,6 +73,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
+      <HomePageSlider />
       <ProductGridContainer>
         <Wrapper flex>
           {products.map(product => {

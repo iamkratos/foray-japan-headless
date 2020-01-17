@@ -3,10 +3,39 @@ import styled from "styled-components";
 import { TransitionMixin } from "../helpers";
 
 const LayoutContainer = styled.div`
+  .slick-prev:before,
+  .slick-next:before {
+    content: "";
+  }
+  .slick-next {
+    right: 0;
+    z-index: 10;
+  }
+  .slick-prev {
+    left: auto;
+    z-index: 10;
+    right: 40px;
+  }
+
+  .slick-arrow {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    top: auto;
+    bottom: 0;
+    transform: none;
+
+    svg {
+      height: 30px;
+      width: 30px;
+      stroke: #000;
+      stroke-width: 1px;
+    }
+  }
   .color-container {
     .colors {
       list-style: none;
-      padding: 5px 0 0;
+      padding: 0;
       margin: 0px;
       text-align: right;
 
@@ -22,14 +51,17 @@ const LayoutContainer = styled.div`
           &.black {
             background-color: #000;
           }
+          &.nero-black {
+            background-color: #000;
+          }
           &.berry {
             background-color: #781327;
           }
-          &.grey.chambray {
+          &.grey-chambray {
             background-color: #928ca1;
           }
 
-          &.blue.chambray {
+          &.blue-chambray {
             background-color: #5b87c9;
           }
           &.eggplant {
@@ -39,7 +71,7 @@ const LayoutContainer = styled.div`
             background-color: #65825f !important;
           }
 
-          &.military.green {
+          &.military-green {
             background-color: #65825f !important;
           }
           &.white,
@@ -104,11 +136,11 @@ const LayoutContainer = styled.div`
             background-position: top center;
           }
 
-          &.baja {
+          &.baja-blue {
             background-color: #7f7adb !important;
           }
 
-          &.light.blue {
+          &.light-blue {
             background-color: #b5cfe6 !important;
           }
 
@@ -148,24 +180,24 @@ const LayoutContainer = styled.div`
           &.rosso-red {
             background-color: #d71a2b;
           }
-          &.amparo {
+          &.amparo-blue {
             background-color: #395bc4 !important;
           }
-          &.navy.black {
+          &.navy-black {
             background-color: #07225f;
           }
 
           &.limone {
             background-color: #ffeb00;
           }
-          &.pavone {
+          &.blue-pavone {
             background-color: #15dfe8;
           }
 
           &.ruby {
             background-color: #7b3d54;
           }
-          &.rose.gold {
+          &.rose-gold {
             background-color: #dec6be !important;
           }
 
