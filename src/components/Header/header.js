@@ -93,7 +93,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = ({ siteTitle }) => {
-  const { isCartOpen, toggleCartOpen, addProductToCart } = useContext(
+  const { isCartOpen, toggleCartOpen, addProductToCart, checkout } = useContext(
     StoreContext
   );
   const transitions = useTransition(isCartOpen, null, {
@@ -101,6 +101,10 @@ const Header = ({ siteTitle }) => {
     enter: { transform: "translate3d(0%, 0, 0)" },
     leave: { transform: "translate3d(100%, 0, 0)" },
   });
+
+  const qty = checkout.lineItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
   return (
     <HeaderContainer>
       <TopBar />
@@ -142,6 +146,7 @@ const Header = ({ siteTitle }) => {
         <div className="cart-container">
           <div className="inner-wrap">
             <button onClick={toggleCartOpen}>
+              {qty > 0 ? qty : ""}
               <CartIcon />
             </button>
           </div>

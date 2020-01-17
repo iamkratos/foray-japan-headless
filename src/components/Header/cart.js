@@ -37,7 +37,13 @@ const CartContainer = styled(animated.section)`
 `;
 
 const Cart = ({ style }) => {
-  const { isCartOpen, toggleCartOpen, checkout } = useContext(StoreContext);
+  const {
+    isCartOpen,
+    toggleCartOpen,
+    checkout,
+    removeProductFromCart,
+    updateQuantityInCart,
+  } = useContext(StoreContext);
   console.log(checkout.lineItems);
   return (
     <CartContainer style={{ ...style }}>
@@ -45,7 +51,7 @@ const Cart = ({ style }) => {
       <button onClick={toggleCartOpen}>Close Cart</button>
       <div className="cart-items-container">
         {checkout.lineItems.map(item => {
-          console.log("item", item);
+          console.log("cart here", item);
           return (
             <div key={item.id}>
               <div className="inner-wrap">
@@ -63,6 +69,23 @@ const Cart = ({ style }) => {
                   })}
                   <p>{item.quantity}</p>
                   <p>{item.variant.price}</p>
+                  <button
+                    onClick={() =>
+                      updateQuantityInCart(item, item.quantity - 1)
+                    }
+                  >
+                    - 1
+                  </button>
+                  <button
+                    onClick={() =>
+                      updateQuantityInCart(item, item.quantity + 1)
+                    }
+                  >
+                    + 1
+                  </button>
+                  <button onClick={() => removeProductFromCart(item.id)}>
+                    Remove All
+                  </button>
                 </div>
               </div>
             </div>

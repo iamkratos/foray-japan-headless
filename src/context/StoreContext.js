@@ -13,6 +13,7 @@ const defaultValues = {
   addProductToCart: () => {
     console.log("boo!");
   },
+  removeProductFromCart: () => {},
   formatMoney: value => {
     var num = "$" + value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
     return num;
@@ -80,7 +81,7 @@ export const StoreProvider = ({ children }) => {
           quantity: 1,
         },
       ];
-      console.log(checkout);
+      console.log(client.checkout);
       const newCheckout = await client.checkout.addLineItems(
         checkout.id,
         lineItems
@@ -91,11 +92,43 @@ export const StoreProvider = ({ children }) => {
       console.log(e.message);
     }
   };
+  const removeProductFromCart = async lineItemId => {
+    try {
+      const newCheckout = await client.checkout.removeLineItems(checkout.id, [
+        lineItemId,
+      ]);
+      // console.log(newCheckout.webUrl);
+      setCheckout(newCheckout);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const updateQuantityInCart = async (lineItemId, value) => {
+    try {
+      console.log("line item", lineItemId);
+      let updatedLineItems = {
+        id: lineItemId.id,
+        quantity: value,
+        variantId: lineItemId.variant.id,
+      };
+
+      const newCheckout = await client.checkout.updateLineItems(
+        checkout.id,
+        updatedLineItems
+      );
+      setCheckout(newCheckout);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return (
     <StoreContext.Provider
       value={{
         ...defaultValues,
         addProductToCart,
+        updateQuantityInCart,
+        removeProductFromCart,
         checkout,
         toggleCartOpen,
         isCartOpen,
