@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useTransition } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
@@ -12,6 +12,7 @@ import Search from "../../images/search.inline.svg";
 import CartIcon from "../../images/cart.inline.svg";
 import Cart from "./cart";
 import Overlay from "./overlay";
+import MegaMenu from "./mega-menu";
 
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin } from "../helpers";
@@ -19,8 +20,13 @@ import { TransitionMixin } from "../helpers";
 const HeaderContainer = styled.header`
   background-color: #fff;
   border-bottom: 1px solid #ccc;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
-  .wrapper-container-one {
+  > .wrapper-container-one {
     padding: 10px 0;
   }
 
@@ -70,8 +76,8 @@ const HeaderContainer = styled.header`
             font-family: "Nexa";
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 1px;
+            font-size: 11px;
+            letter-spacing: 0.1em;
             position: relative;
 
             &:after {
@@ -91,7 +97,8 @@ const HeaderContainer = styled.header`
               ${TransitionMixin(".25s")}
             }
 
-            &:hover {
+            &:hover,
+            &.active {
               &::after {
                 opacity: 1;
               }
@@ -127,6 +134,13 @@ const Header = ({ siteTitle }) => {
   const { isCartOpen, toggleCartOpen, addProductToCart, checkout } = useContext(
     StoreContext
   );
+
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [megaMenuIndex, setMegaMenuIndex] = useState(-1);
+
+  // Pass down to <MegaMenu />
+  const [menuOneImageIndex, setMenuOneImageIndex] = useState(0);
+
   const transitions = useTransition(isCartOpen, null, {
     from: { transform: "translate3d(100%, 0, 0)" },
     enter: { transform: "translate3d(0%, 0, 0)" },
@@ -138,11 +152,32 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0 },
   });
 
+  const megaMenuTransitions = useTransition(isMegaMenuOpen, null, {
+    from: { opacity: 0, transform: "translate3d(0, -100%, 0)" },
+    enter: { opacity: 1, transform: "translate3d(0%, 0, 0)" },
+    leave: { opacity: 0, transform: "translate3d(0, -100%, 0)" },
+  });
+
   const qty = checkout.lineItems.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
+
+  function triggerMegaMenu(menu) {
+    if (!isMegaMenuOpen) {
+      console.log("setting", menu);
+      setIsMegaMenuOpen(true);
+    }
+
+    setMegaMenuIndex(menu);
+    setMenuOneImageIndex(menu == 1 ? 0 : 0);
+  }
+
+  function closeMegaMenu() {
+    setMegaMenuIndex(-1);
+    setIsMegaMenuOpen(false);
+  }
   return (
-    <>
+    <div onMouseLeave={closeMegaMenu}>
       <HeaderContainer>
         <TopBar />
         <Wrapper align flex activeClass>
@@ -158,7 +193,13 @@ const Header = ({ siteTitle }) => {
                   <Link to="#">New Arrivals</Link>
                 </li>
                 <li>
-                  <Link to="#">Shop By</Link>
+                  <Link
+                    className={megaMenuIndex === 0 ? "active" : ""}
+                    onMouseEnter={() => triggerMegaMenu(0)}
+                    to="#"
+                  >
+                    Shop By
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -172,7 +213,13 @@ const Header = ({ siteTitle }) => {
             <nav>
               <ul>
                 <li>
-                  <Link to="#">Collections</Link>
+                  <Link
+                    className={megaMenuIndex === 1 ? "active" : ""}
+                    onMouseEnter={() => triggerMegaMenu(1)}
+                    to="#"
+                  >
+                    Collections
+                  </Link>
                 </li>
                 <li>
                   <Link to="#">Final Sale</Link>
@@ -189,14 +236,29 @@ const Header = ({ siteTitle }) => {
             </div>
           </div>
         </Wrapper>
+
         {transitions.map(({ item, key, props }) => {
           return item && <Cart key={key} style={props} />;
         })}
       </HeaderContainer>
+
       {secondSetTransitions.map(({ item, key, props }) => {
         return item && <Overlay key={key} style={props} />;
       })}
-    </>
+      {megaMenuTransitions.map(({ item, key, props }) => {
+        return (
+          item && (
+            <MegaMenu
+              megaMenuIndex={megaMenuIndex}
+              setMenuOneImageIndex={setMenuOneImageIndex}
+              menuOneImageIndex={menuOneImageIndex}
+              key={key}
+              style={props}
+            />
+          )
+        );
+      })}
+    </div>
   );
 };
 

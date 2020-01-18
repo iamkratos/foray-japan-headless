@@ -22,11 +22,21 @@ const WrapperWrap = styled.div`
   &.mt-sm {
     margin-top: 40px;
   }
+
+  &.hide {
+    display: none;
+  }
+
   &.rel {
     position: relative;
   }
   &.shadow {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  }
+
+  &.shift-right {
+    max-width: 100vw;
+    /* padding-left: 6vw; */
   }
 `;
 
@@ -36,12 +46,15 @@ export default class Wrapper extends Component {
       size,
       children,
       flex,
+      shiftRight,
       align,
       mt,
+      hide,
       rel,
       shadow,
       activeClass,
       secondActiveClass,
+      className,
     } = this.props;
     let classes = [];
 
@@ -59,6 +72,9 @@ export default class Wrapper extends Component {
     if (rel != null) {
       classes.push(rel);
     }
+    if (className != null) {
+      classes.push(className);
+    }
     if (shadow != null) {
       classes.push("shadow");
     }
@@ -70,6 +86,12 @@ export default class Wrapper extends Component {
     }
     if (secondActiveClass != null) {
       classes.push("wrapper-container-two");
+    }
+    if (shiftRight != null) {
+      classes.push("shift-right");
+    }
+    if (hide != null) {
+      classes.push("hide");
     }
 
     classes = classes.join(" ");

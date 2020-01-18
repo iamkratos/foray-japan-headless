@@ -259,14 +259,25 @@ const ProductPage = ({ data }) => {
     // 2. Sort Sizes and Check That They're Available
     let newSizesArray = [];
     if (color != null) {
+      console.log("case A", color);
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
+          console.log(option.value);
           if (option.value == color) {
+            console.log("psuhing");
             newSizesArray.push(variant);
           }
         });
       });
+      console.log("new sizes", newSizesArray);
+      if (newSizesArray.length === 0) {
+        console.log("this is happening");
+        product.variants.map(variant => {
+          newSizesArray.push(variant);
+        });
+      }
     } else {
+      console.log("case B");
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
           newSizesArray.push(variant);
@@ -336,7 +347,7 @@ const ProductPage = ({ data }) => {
   // const [colorVariants, setColorVariants] = useState();
 
   function checkTooltipText() {
-    if (hoverColor != currentImageSet[0].altText) {
+    if (currentImageSet[0] && hoverColor != currentImageSet[0].altText) {
       setHoverColor(currentImageSet[0].altText);
     }
   }

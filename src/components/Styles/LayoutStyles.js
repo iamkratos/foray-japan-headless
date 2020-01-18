@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { TransitionMixin } from "../helpers";
 
 const LayoutContainer = styled.div`
+  /* layout */
+  .main-content-container {
+    margin-top: 129px;
+  }
   /* slick */
   .slick-prev:before,
   .slick-next:before {

@@ -26,6 +26,7 @@ const IndexPage = () => {
             id
             products {
               id
+              handle
               title
               images {
                 altText
@@ -42,11 +43,12 @@ const IndexPage = () => {
                   amount
                 }
               }
-              handle
+
               descriptionHtml
               variants {
                 availableForSale
                 shopifyId
+
                 selectedOptions {
                   name
                   value
