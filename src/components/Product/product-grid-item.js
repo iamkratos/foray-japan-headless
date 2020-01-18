@@ -63,6 +63,7 @@ const ProductGridItemContainer = styled.div`
           text-transform: uppercase;
           letter-spacing: 1px;
           margin: 0px;
+          color: #000;
 
           &.hide {
             display: none;
@@ -134,21 +135,6 @@ const ProductGridItemContainer = styled.div`
           font-size: 13px;
           color: #777;
           margin-bottom: 0px;
-        }
-        .tooltip-container {
-          background-color: #3b444b;
-          color: #fff;
-          display: inline-block;
-          text-transform: uppercase;
-          font-weight: bold;
-          font-size: 11px;
-          line-height: 1;
-          padding: 5px 4px 3px;
-          white-space: nowrap;
-          z-index: 10;
-          border-radius: 2px;
-          letter-spacing: 0.7px;
-          ${TransitionMixin(".25s")}
         }
       }
       .color-container {
@@ -370,7 +356,7 @@ const ProductGridItem = ({ product }) => {
                       <li>
                         <button
                           disabled={!isAvailable}
-                          class={isAvailable ? "" : "disabled"}
+                          class={isAvailable ? "" : "disabled "}
                           onClick={() => addProductToCart(size.shopifyId)}
                         >
                           {sizeText}
@@ -387,7 +373,8 @@ const ProductGridItem = ({ product }) => {
             <div className="title-container">
               <h4>{product.title}</h4>
               <p>${product.priceRange.maxVariantPrice.amount}</p>
-              {hoverColor !== "none" ? (
+              {console.log(hoverColor, "hover color")}
+              {hoverColor !== null ? (
                 <div className="tooltip-container">
                   <div className="inner-wrap">{hoverColor}</div>
                 </div>

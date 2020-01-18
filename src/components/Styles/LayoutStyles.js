@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { TransitionMixin } from "../helpers";
 
 const LayoutContainer = styled.div`
+  /* slick */
   .slick-prev:before,
   .slick-next:before {
     content: "";
@@ -32,6 +33,8 @@ const LayoutContainer = styled.div`
       stroke-width: 1px;
     }
   }
+
+  /* color index */
   .color-container {
     .colors {
       list-style: none;
@@ -42,11 +45,13 @@ const LayoutContainer = styled.div`
       li {
         display: inline-block;
         margin-right: 5px;
+
         .color-btn-container {
           height: 20px;
           width: 20px;
           border-radius: 50%;
           border: 1px solid #000;
+
           ${TransitionMixin(".25s")}
           &.black {
             background-color: #000;
@@ -219,6 +224,24 @@ const LayoutContainer = styled.div`
         }
       }
     }
+  }
+
+  /* tooltip */
+
+  .tooltip-container {
+    background-color: #3b444b;
+    color: #fff;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1;
+    padding: 5px 4px 3px;
+    white-space: nowrap;
+    z-index: 10;
+    border-radius: 2px;
+    letter-spacing: 0.7px;
+    ${TransitionMixin(".25s")}
   }
 `;
 

@@ -4,6 +4,9 @@ import styled from "styled-components";
 const WrapperWrap = styled.div`
   max-width: 90vw;
   margin: 0 auto;
+  &.md {
+    max-width: 80vw;
+  }
   &.sm {
     max-width: 70vw;
   }
@@ -11,6 +14,8 @@ const WrapperWrap = styled.div`
   &.flex-wrap {
     display: flex;
     flex-wrap: wrap;
+  }
+  &.align {
     align-items: center;
   }
 
@@ -31,6 +36,7 @@ export default class Wrapper extends Component {
       size,
       children,
       flex,
+      align,
       mt,
       rel,
       shadow,
@@ -55,6 +61,9 @@ export default class Wrapper extends Component {
     }
     if (shadow != null) {
       classes.push("shadow");
+    }
+    if (align != null) {
+      classes.push("align");
     }
     if (activeClass != null) {
       classes.push("wrapper-container-one");

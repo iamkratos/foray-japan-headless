@@ -657,3 +657,7 @@ textarea,
 input {
   font-family: "Nexa";
 }
+
+button:hover {
+  cursor: pointer;
+}

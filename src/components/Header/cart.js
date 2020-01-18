@@ -77,21 +77,6 @@ const CartContainer = styled(animated.section)`
     min-height: 69vh;
     border-bottom: 1px solid #ccc;
 
-    /* &::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      background-color: #f5f5f5;
-    }
-
-    &::-webkit-scrollbar {
-      width: 1px;
-      background-color: #f5f5f5;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #000000;
-      border: 2px solid #555555;
-    } */
-
     .cart-item-container {
       margin-bottom: 30px;
       > .inner-wrap {

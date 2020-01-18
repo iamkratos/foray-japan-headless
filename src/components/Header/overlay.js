@@ -21,9 +21,10 @@ const Overlay = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
   return (
-    <OverlayContainer onClick={toggleCartOpen} style={{ ...style }}>
-      overlay
-    </OverlayContainer>
+    <OverlayContainer
+      onClick={toggleCartOpen}
+      style={{ ...style }}
+    ></OverlayContainer>
   );
 };
 

@@ -13,8 +13,6 @@ import Header from "./Header/header";
 import "./layout.css";
 import LayoutStyles from "./Styles/LayoutStyles";
 
-import { StoreProvider } from "../context/StoreContext";
-
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -27,7 +25,7 @@ const Layout = ({ children }) => {
   `);
 
   return (
-    <StoreProvider>
+    <>
       <LayoutStyles>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div>
@@ -39,7 +37,7 @@ const Layout = ({ children }) => {
           </footer>
         </div>
       </LayoutStyles>
-    </StoreProvider>
+    </>
   );
 };
 

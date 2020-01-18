@@ -105,6 +105,10 @@ const HeaderContainer = styled.header`
     flex: 1;
     text-align: right;
     .inner-wrap {
+      button {
+        background-color: transparent;
+        border: none;
+      }
       svg {
         height: 35px;
         width: 35px;
@@ -141,7 +145,7 @@ const Header = ({ siteTitle }) => {
     <>
       <HeaderContainer>
         <TopBar />
-        <Wrapper flex activeClass>
+        <Wrapper align flex activeClass>
           <div className="search-container">
             <div className="inner-wrap">
               <Search />
