@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "gatsby";
 
 import Img from "gatsby-image";
 import { TransitionMixin } from "../helpers";
@@ -294,7 +295,7 @@ const ProductGridItem = ({ product }) => {
 
   // -- Hover Color Show Tooltip
 
-  const [hoverColor, setHoverColor] = useState("");
+  const [hoverColor, setHoverColor] = useState("none");
 
   useEffect(() => {
     handleColorChange(product.images[0].altText);
@@ -315,34 +316,36 @@ const ProductGridItem = ({ product }) => {
           onMouseEnter={handleHoverIn}
           onMouseLeave={handleHoverOut}
         >
-          {currentColor.length > 0
-            ? currentColor.map((image, index) => {
-                // fetchInventoryQuantities();
-                if (index < 2) {
-                  return (
-                    <Img
-                      className={`image-${index} ${
-                        index == 1 && fadeIn == true ? "fade-in" : ""
-                      }`}
-                      fluid={image.localFile.childImageSharp.fluid}
-                    />
-                  );
-                }
-              })
-            : product.images.slice(0, 2).map((image, index) => {
-                // handleSizesSort(firstVariant)
-                // console.log("first variant", firstVariant, image);
-                if (index < 2) {
-                  return (
-                    <Img
-                      className={`image-${index} ${
-                        index == 1 && fadeIn == true ? "fade-in" : ""
-                      }`}
-                      fluid={image.localFile.childImageSharp.fluid}
-                    />
-                  );
-                }
-              })}
+          <Link to={`/products/${product.handle}`}>
+            {currentColor.length > 0
+              ? currentColor.map((image, index) => {
+                  // fetchInventoryQuantities();
+                  if (index < 2) {
+                    return (
+                      <Img
+                        className={`image-${index} ${
+                          index == 1 && fadeIn == true ? "fade-in" : ""
+                        }`}
+                        fluid={image.localFile.childImageSharp.fluid}
+                      />
+                    );
+                  }
+                })
+              : product.images.slice(0, 2).map((image, index) => {
+                  // handleSizesSort(firstVariant)
+                  // console.log("first variant", firstVariant, image);
+                  if (index < 2) {
+                    return (
+                      <Img
+                        className={`image-${index} ${
+                          index == 1 && fadeIn == true ? "fade-in" : ""
+                        }`}
+                        fluid={image.localFile.childImageSharp.fluid}
+                      />
+                    );
+                  }
+                })}
+          </Link>
 
           {/* Sizes Logic */}
           <div className="quick-shop-container">
@@ -384,15 +387,21 @@ const ProductGridItem = ({ product }) => {
             <div className="title-container">
               <h4>{product.title}</h4>
               <p>${product.priceRange.maxVariantPrice.amount}</p>
-              <div className="tooltip-container">
-                <div className="inner-wrap">{hoverColor}</div>
-              </div>
+              {hoverColor !== "none" ? (
+                <div className="tooltip-container">
+                  <div className="inner-wrap">{hoverColor}</div>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
             <div className="color-container">
               <ul class="colors" onMouseLeave={checkTooltipText}>
                 {finalColors.map((color, i) => {
                   let colorHandle = color
                     .replace(/\s+/g, "-")
+                    .replace(/\{/g, "")
+                    .replace(/\//g, "-")
                     .replace("&", "")
                     .toLowerCase();
 

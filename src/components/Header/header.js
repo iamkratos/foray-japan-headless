@@ -11,6 +11,7 @@ import Logo from "../../images/logo.inline.svg";
 import Search from "../../images/search.inline.svg";
 import CartIcon from "../../images/cart.inline.svg";
 import Cart from "./cart";
+import Overlay from "./overlay";
 
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin } from "../helpers";
@@ -127,61 +128,71 @@ const Header = ({ siteTitle }) => {
     enter: { transform: "translate3d(0%, 0, 0)" },
     leave: { transform: "translate3d(100%, 0, 0)" },
   });
+  const secondSetTransitions = useTransition(isCartOpen, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
 
   const qty = checkout.lineItems.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
   return (
-    <HeaderContainer>
-      <TopBar />
-      <Wrapper flex activeClass>
-        <div className="search-container">
-          <div className="inner-wrap">
-            <Search />
+    <>
+      <HeaderContainer>
+        <TopBar />
+        <Wrapper flex activeClass>
+          <div className="search-container">
+            <div className="inner-wrap">
+              <Search />
+            </div>
           </div>
-        </div>
-        <div className="link-container left">
-          <nav>
-            <ul>
-              <li>
-                <Link to="#">New Arrivals</Link>
-              </li>
-              <li>
-                <Link to="#">Shop By</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="logo-container">
-          <Link to="/">
-            <Logo />
-          </Link>
-        </div>
-        <div className="link-container">
-          <nav>
-            <ul>
-              <li>
-                <Link to="#">Collections</Link>
-              </li>
-              <li>
-                <Link to="#">Final Sale</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="cart-container">
-          <div className="inner-wrap">
-            <button onClick={toggleCartOpen}>
-              {qty > 0 ? qty : ""}
-              <CartIcon />
-            </button>
+          <div className="link-container left">
+            <nav>
+              <ul>
+                <li>
+                  <Link to="#">New Arrivals</Link>
+                </li>
+                <li>
+                  <Link to="#">Shop By</Link>
+                </li>
+              </ul>
+            </nav>
           </div>
-        </div>
-      </Wrapper>
-      {transitions.map(({ item, key, props }) => {
-        return item && <Cart key={key} style={props} />;
+          <div className="logo-container">
+            <Link to="/">
+              <Logo />
+            </Link>
+          </div>
+          <div className="link-container">
+            <nav>
+              <ul>
+                <li>
+                  <Link to="#">Collections</Link>
+                </li>
+                <li>
+                  <Link to="#">Final Sale</Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="cart-container">
+            <div className="inner-wrap">
+              <button onClick={toggleCartOpen}>
+                {qty > 0 ? qty : ""}
+                <CartIcon />
+              </button>
+            </div>
+          </div>
+        </Wrapper>
+        {transitions.map(({ item, key, props }) => {
+          return item && <Cart key={key} style={props} />;
+        })}
+      </HeaderContainer>
+      {secondSetTransitions.map(({ item, key, props }) => {
+        return item && <Overlay key={key} style={props} />;
       })}
-    </HeaderContainer>
+    </>
   );
 };
 
