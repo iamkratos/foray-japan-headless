@@ -2,19 +2,20 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
 import { StoreContext } from "../../context/StoreContext";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 import X from "../../images/x.inline.svg";
 
 const CartContainer = styled(animated.section)`
   position: fixed;
   top: 0;
   right: 0;
-  width: 35%;
+  width: 100%;
   height: 100%;
   background-color: #fff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   z-index: 1000;
   padding: 20px 20px 30px 30px;
+  ${media.medium`width: 35%;`}
   .title-container {
     display: flex;
     align-items: center;

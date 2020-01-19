@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 
 import Img from "gatsby-image";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 import { StoreContext } from "../../context/StoreContext";
 
 const ProductGridItemContainer = styled.div`
-  flex: 0 0 50%;
+  flex: 1 1 100%;
   margin-bottom: 40px;
+
+  ${media.medium`flex: 0 0 50%;`}
   > .inner-wrap {
     max-width: 400px;
     margin: 0 auto;
