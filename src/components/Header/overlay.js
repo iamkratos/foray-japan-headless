@@ -9,7 +9,7 @@ const OverlayContainer = styled(animated.div)`
   top: 0;
   width: 100%;
   height: 100vh;
-  z-index: 900;
+  z-index: 700;
 `;
 
 const Overlay = ({ style }) => {

@@ -57,7 +57,7 @@ const LayoutContainer = styled.div`
           border: 1px solid #000;
 
           ${TransitionMixin(".25s")}
-          &.black {
+          &.black, &.black-splatter-print {
             background-color: #000;
           }
           &.nero-black {
@@ -73,10 +73,10 @@ const LayoutContainer = styled.div`
           &.blue-chambray {
             background-color: #5b87c9;
           }
-          &.eggplant {
+          &.eggplant-pink {
             background-color: #b55580 !important;
           }
-          &.army {
+          &.army-navy {
             background-color: #65825f !important;
           }
 
@@ -127,7 +127,7 @@ const LayoutContainer = styled.div`
           &.papaya {
             background-color: #ffb014 !important;
           }
-          &.charcoal {
+          &.charcoal-black {
             background-color: #383234 !important;
           }
 
@@ -175,6 +175,7 @@ const LayoutContainer = styled.div`
             background-color: #a53e5f;
           }
           &.flamingo,
+          &.new-mosto--flamingo--venere,
           &.venere {
             background-color: pink !important;
           }
@@ -203,7 +204,7 @@ const LayoutContainer = styled.div`
             background-color: #15dfe8;
           }
 
-          &.ruby {
+          &.ruby-wine {
             background-color: #7b3d54;
           }
           &.rose-gold {
@@ -214,7 +215,7 @@ const LayoutContainer = styled.div`
             background-color: teal;
           }
 
-          &.dove {
+          &.dove-grey {
             background-color: #dad5d5 !important;
           }
 

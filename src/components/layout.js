@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
 import Header from "./Header/header";
+import Footer from "./Footer/footer";
 import "./layout.css";
 import LayoutStyles from "./Styles/LayoutStyles";
 
@@ -30,11 +31,7 @@ const Layout = ({ children }) => {
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="main-content-container">
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
+          <Footer />
         </div>
       </LayoutStyles>
     </>

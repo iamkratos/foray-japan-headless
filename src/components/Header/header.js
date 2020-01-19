@@ -20,7 +20,7 @@ import { TransitionMixin } from "../helpers";
 const HeaderContainer = styled.header`
   background-color: #fff;
   border-bottom: 1px solid #ccc;
-  z-index: 1000;
+  z-index: 500;
   position: fixed;
   top: 0;
   left: 0;
@@ -236,11 +236,11 @@ const Header = ({ siteTitle }) => {
             </div>
           </div>
         </Wrapper>
-
-        {transitions.map(({ item, key, props }) => {
-          return item && <Cart key={key} style={props} />;
-        })}
       </HeaderContainer>
+
+      {transitions.map(({ item, key, props }) => {
+        return item && <Cart key={key} style={props} />;
+      })}
 
       {secondSetTransitions.map(({ item, key, props }) => {
         return item && <Overlay key={key} style={props} />;

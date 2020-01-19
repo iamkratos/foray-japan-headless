@@ -218,7 +218,7 @@ const ProductGridItem = ({ product }) => {
         let altTextCheck =
           image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
 
-        console.log(altTextCheck, " ", filterCondition);
+        // console.log(altTextCheck, " ", filterCondition);
         if (altTextCheck == filterCondition) {
           imageArray.push(image);
         } else {
@@ -246,23 +246,71 @@ const ProductGridItem = ({ product }) => {
   const [sizes, setSizes] = useState([]);
 
   function handleSizesSort(selectedColor) {
+    console.log("selected color is", selectedColor);
     let availableSizesArray = [];
-    if (selectedColor) {
+
+    // Check if product is a glove
+    if (
+      selectedColor &&
+      (selectedColor
+        .toLowerCase()
+        .trim()
+        .includes("left") ||
+        selectedColor
+          .toLowerCase()
+          .trim()
+          .includes("right"))
+    ) {
+      let gloveOrientation = selectedColor
+        .toLowerCase()
+        .trim()
+        .includes("left")
+        ? "left"
+        : "right";
+      console.log("glove properties", gloveOrientation, product);
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          if (option.value.includes(selectedColor)) {
+          console.log(
+            "compare",
+            option.value.toLowerCase().trim(),
+            gloveOrientation
+          );
+          if (option.value.toLowerCase().includes(gloveOrientation)) {
             availableSizesArray.push(variant);
           }
         });
       });
-      // console.log("sizes here", availableSizesArray);
     } else {
-      product.variants.map(variant => {
-        variant.selectedOptions.map(option => {
-          availableSizesArray.push(variant);
+      // if product is not a glove, run this
+      if (selectedColor) {
+        console.log("case a");
+        product.variants.map(variant => {
+          variant.selectedOptions.map(option => {
+            if (option.value.includes(selectedColor)) {
+              availableSizesArray.push(variant);
+            }
+          });
         });
-      });
+        // console.log("sizes here", availableSizesArray);
+      } else {
+        console.log("case b");
+        product.variants.map(variant => {
+          variant.selectedOptions.map(option => {
+            availableSizesArray.push(variant);
+          });
+        });
+      }
+
+      // fallback: if there aren't any sizes found, load them all
+      if (availableSizesArray.length < 1) {
+        product.variants.map(variant => {
+          variant.selectedOptions.map(option => {
+            availableSizesArray.push(variant);
+          });
+        });
+      }
     }
+
     setSizes(availableSizesArray);
 
     // console.log("the sizes are", sizes, availableSizesArray.length);
@@ -285,12 +333,28 @@ const ProductGridItem = ({ product }) => {
 
   useEffect(() => {
     handleColorChange(product.images[0].altText);
-    setHoverColor(product.images[0].altText);
+    if (
+      product.images[0].altText &&
+      product.images[0].altText.toLowerCase().includes("left")
+    ) {
+      setHoverColor("Left");
+    } else {
+      setHoverColor(product.images[0].altText);
+    }
   }, []);
 
   function checkTooltipText() {
-    if (hoverColor != currentColor[0].altText) {
+    // check for glove product
+    if (
+      currentColor[0] &&
+      !currentColor[0].altText.toLowerCase().includes("left") &&
+      hoverColor != currentColor[0].altText
+    ) {
+      console.log("current color is", currentColor[0].altText);
       setHoverColor(currentColor[0].altText);
+    } else {
+      console.log("baby", sizes);
+      setHoverColor(sizes[0].selectedOptions[0].value);
     }
   }
 
@@ -346,6 +410,7 @@ const ProductGridItem = ({ product }) => {
               </h4>
               <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
                 {sizes.length > 0 &&
+                  // console.log("updated sizes", sizes) &&
                   sizes.map(size => {
                     let isAvailable = size.availableForSale;
                     let sizeText = size.selectedOptions[1]
@@ -391,6 +456,8 @@ const ProductGridItem = ({ product }) => {
                     .replace(/\//g, "-")
                     .replace("&", "")
                     .toLowerCase();
+
+                  console.log("glove color", color);
 
                   return (
                     <li>

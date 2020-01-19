@@ -10,6 +10,12 @@ const WrapperWrap = styled.div`
   &.sm {
     max-width: 70vw;
   }
+  &.fw {
+    max-width: 100vw;
+  }
+  &.black {
+    background-color: #000;
+  }
 
   &.flex-wrap {
     display: flex;

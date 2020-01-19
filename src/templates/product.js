@@ -266,7 +266,10 @@ const ProductPage = ({ data }) => {
         if (
           color &&
           image.altText &&
-          image.altText.toLowerCase().trim() == color.toLowerCase().trim()
+          image.altText
+            .toLowerCase()
+            .trim()
+            .includes(color.toLowerCase().trim())
         ) {
           newImageArray.push(image);
         }
@@ -281,11 +284,11 @@ const ProductPage = ({ data }) => {
     // 2. Sort Sizes and Check That They're Available
     let newSizesArray = [];
     if (color != null) {
+      color = color.includes("Left") ? "Left" : color;
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log(option.value, color, "another one");
+          console.log(option.value, " | ", color, "another one");
           if (option.value.toLowerCase().trim() == color.toLowerCase().trim()) {
-            console.log("psuhing");
             newSizesArray.push(variant);
           }
         });
@@ -368,14 +371,38 @@ const ProductPage = ({ data }) => {
   // const [colorVariants, setColorVariants] = useState();
 
   function checkTooltipText() {
-    if (currentImageSet[0] && hoverColor != currentImageSet[0].altText) {
+    // Glove Logic
+    if (
+      currentImageSet[0] &&
+      (!currentImageSet[0].altText
+        .toLowerCase()
+        .trim()
+        .includes("left") ||
+        !currentImageSet[0].altText
+          .toLowerCase()
+          .trim()
+          .includes("right")) &&
+      hoverColor != currentImageSet[0].altText
+    ) {
       setHoverColor(currentImageSet[0].altText);
+    } else {
+      setHoverColor(currentSizeSet[0].selectedOptions[0].value);
     }
   }
 
   useEffect(() => {
     handleVariantChange(product.images[0].altText);
-    setHoverColor(product.images[0].altText);
+    if (
+      product.images[0].altText &&
+      product.images[0].altText
+        .toLowerCase()
+        .trim()
+        .includes("left")
+    ) {
+      setHoverColor("Left");
+    } else {
+      setHoverColor(product.images[0].altText);
+    }
 
     // Loop through all variants to check if they're avail
     for (let i = 0; i < product.variants.length; i++) {

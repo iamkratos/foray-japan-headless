@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { useStaticQuery, graphql, Link } from "gatsby";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 import { animated } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
@@ -14,7 +14,7 @@ const MegaMenuContainer = styled(animated.div)`
   left: 0;
   background-color: #fff;
   min-height: 368px;
-  z-index: 500;
+  z-index: 400;
   border-bottom: 1px solid #efefef;
 
   .linklist-container {
@@ -77,6 +77,7 @@ const MegaMenuContainer = styled(animated.div)`
     flex: 1;
     position: relative;
     min-height: 368px;
+    ${media.xl`min-height: 468px;`}
   }
 `;
 
@@ -86,6 +87,7 @@ const ImageContainer = styled.div`
   height: 100%;
   width: 100%;
   opacity: 0;
+  overflow: hidden;
   ${TransitionMixin(".25s")}
   &.fade-in {
     opacity: 1;
@@ -102,7 +104,7 @@ const MegaMenu = ({
     query {
       topsImage: file(relativePath: { eq: "menu-items/shop-by/tops.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -111,7 +113,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/shop-by/bottoms.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -120,7 +122,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/shop-by/outerwear.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -129,14 +131,14 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/shop-by/dresses.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       kidsImage: file(relativePath: { eq: "menu-items/shop-by/kids.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -145,7 +147,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/shop-by/accessories.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -154,7 +156,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/shop-by/viewall.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -164,14 +166,14 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/graphic-floral-new.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       dluxe: file(relativePath: { eq: "menu-items/collections/d-luxe.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -180,7 +182,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/winter-floom.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -189,7 +191,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/mercury-rising.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -198,7 +200,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/sun-daze.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -207,7 +209,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/power-pleats.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -216,14 +218,14 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/america.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
       }
       core: file(relativePath: { eq: "menu-items/collections/core.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -232,7 +234,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/lace-escape.jpeg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -241,7 +243,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/floom.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -250,7 +252,7 @@ const MegaMenu = ({
         relativePath: { eq: "menu-items/collections/rockstud.jpg" }
       ) {
         childImageSharp {
-          fluid(maxWidth: 600) {
+          fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
           }
         }
