@@ -20,7 +20,7 @@ const CollectionPage = ({ data }) => {
   console.log("collection image", collection.image);
   return (
     <Layout>
-      {collection.image && collection.image.localFile && (
+      {collection.image && collection.image.localFile.childImageSharp != null && (
         <BannerContainer>
           <Img fluid={collection.image.localFile.childImageSharp.fluid} />
         </BannerContainer>
