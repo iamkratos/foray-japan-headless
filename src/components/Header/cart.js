@@ -82,6 +82,7 @@ const CartContainer = styled(animated.section)`
       > .inner-wrap {
         display: flex;
         .image-container {
+          max-width: 133px;
           img {
             /* max-width: 100px; */
             margin-bottom: 0px;

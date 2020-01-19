@@ -112,6 +112,11 @@ const ProductPageContainer = styled.section`
 
       .description-container {
         padding: 15px 0;
+        color: #4a4a4a;
+        font-size: 14px;
+        margin: 0 0 10px;
+        font-weight: 400;
+        line-height: 1.5;
       }
 
       .variant-selector-container {
@@ -250,20 +255,36 @@ const ProductPage = ({ data }) => {
   function handleVariantChange(color) {
     // 1. Sort Variant Images
     let newImageArray = [];
-    product.images.map(image => {
-      if (image.altText == color) {
+    if (color != null) {
+      console.log("color is ", color);
+      product.images.map(image => {
+        console.log(
+          "here they are ",
+          image.altText && image.altText.toLowerCase().trim(),
+          color.toLowerCase().trim()
+        );
+        if (
+          color &&
+          image.altText &&
+          image.altText.toLowerCase().trim() == color.toLowerCase().trim()
+        ) {
+          newImageArray.push(image);
+        }
+      });
+      console.log("double", newImageArray);
+    } else {
+      product.images.map(image => {
         newImageArray.push(image);
-      }
-    });
+      });
+    }
     setCurrentImageSet(newImageArray);
     // 2. Sort Sizes and Check That They're Available
     let newSizesArray = [];
     if (color != null) {
-      console.log("case A", color);
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log(option.value);
-          if (option.value == color) {
+          console.log(option.value, color, "another one");
+          if (option.value.toLowerCase().trim() == color.toLowerCase().trim()) {
             console.log("psuhing");
             newSizesArray.push(variant);
           }
@@ -271,13 +292,11 @@ const ProductPage = ({ data }) => {
       });
       console.log("new sizes", newSizesArray);
       if (newSizesArray.length === 0) {
-        console.log("this is happening");
         product.variants.map(variant => {
           newSizesArray.push(variant);
         });
       }
     } else {
-      console.log("case B");
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
           newSizesArray.push(variant);
@@ -313,8 +332,10 @@ const ProductPage = ({ data }) => {
           }
         });
       });
+      console.log("case A");
     } else {
-      console.log("there is not a size ", userSize);
+      // console.log("there is not a size ", userSize);
+      console.log("case B");
       for (let i = 0; i < newSizesArray.length; i++) {
         if (newSizesArray[i].availableForSale == true) {
           setSizeId(newSizesArray[i].shopifyId);
@@ -393,6 +414,7 @@ const ProductPage = ({ data }) => {
             <div className="thumbnail-container">
               <div className="inner-wrap" ref={scrollContainer}>
                 {currentImageSet.map((image, index) => {
+                  console.log("Case C");
                   return (
                     <button onClick={() => swapMainImage(index)}>
                       <Img fluid={image.localFile.childImageSharp.fluid} />
@@ -405,6 +427,7 @@ const ProductPage = ({ data }) => {
               <div className="inner-wrap">
                 {mainImageIndex == null
                   ? currentImageSet.slice(0, 1).map(image => {
+                      console.log("Case D");
                       return (
                         <Img fluid={image.localFile.childImageSharp.fluid} />
                       );
@@ -412,6 +435,8 @@ const ProductPage = ({ data }) => {
                   : currentImageSet
                       .slice(mainImageIndex, mainImageIndex + 1)
                       .map(image => {
+                        console.log(currentImageSet);
+                        console.log("Case E");
                         return (
                           <Img fluid={image.localFile.childImageSharp.fluid} />
                         );
