@@ -13,13 +13,7 @@ const OverlayContainer = styled(animated.div)`
 `;
 
 const Overlay = ({ style }) => {
-  const {
-    isCartOpen,
-    toggleCartOpen,
-    checkout,
-    removeProductFromCart,
-    updateQuantityInCart,
-  } = useContext(StoreContext);
+  const { toggleCartOpen } = useContext(StoreContext);
   return (
     <OverlayContainer
       onClick={toggleCartOpen}

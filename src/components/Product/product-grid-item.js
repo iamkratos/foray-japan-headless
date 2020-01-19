@@ -168,13 +168,8 @@ const ProductGridItemContainer = styled.div`
 `;
 
 const ProductGridItem = ({ product }) => {
-  const { isCartOpen, addProductToCart } = useContext(StoreContext);
+  const { addProductToCart } = useContext(StoreContext);
   console.log(product);
-
-  const {
-    images: [firstImage],
-    variants: [firstVariant],
-  } = product;
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -196,7 +191,7 @@ const ProductGridItem = ({ product }) => {
   product.variants.map(variants => {
     // -- Filter Duplicate Colors
     variants.selectedOptions.map(option => {
-      if (option.name == "Color") {
+      if (option.name === "Color") {
         finalColors.push(option.value);
       }
     });
@@ -214,12 +209,12 @@ const ProductGridItem = ({ product }) => {
       // Set color images
       let imageArray = [];
       let filterCondition = color.replace(/\s+/g, "-").toLowerCase();
-      let filteredColors = product.images.map(image => {
+      product.images.map(image => {
         let altTextCheck =
           image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
 
         // console.log(altTextCheck, " ", filterCondition);
-        if (altTextCheck == filterCondition) {
+        if (altTextCheck === filterCondition) {
           imageArray.push(image);
         } else {
           return;
@@ -231,10 +226,10 @@ const ProductGridItem = ({ product }) => {
 
       // Find available sizes based on color and
       // console.log("current color", color, filterCondition);
-      if (currentColor.length > 0) {
-        let selectedColor = currentColor[0].altText;
-        // console.log("product here", selectedColor);
-      }
+      // if (currentColor.length > 0) {
+      //   let selectedColor = currentColor[0].altText;
+      //   // console.log("product here", selectedColor);
+      // }
 
       // Sort sizes
       handleSizesSort(color);

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { useStaticQuery, graphql, Link } from "gatsby";
@@ -369,8 +369,8 @@ const MegaMenu = ({
   }
 
   console.log("mm index is", megaMenuIndex);
-  let hideMenuOne = megaMenuIndex == 0 ? "" : "hide";
-  let hideMenuTwo = megaMenuIndex == 1 ? "" : "hide";
+  let hideMenuOne = megaMenuIndex === 0 ? "" : "hide";
+  let hideMenuTwo = megaMenuIndex === 1 ? "" : "hide";
   return (
     <MegaMenuContainer style={{ ...style }}>
       {/* Shop By */}

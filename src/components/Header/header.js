@@ -1,6 +1,5 @@
 import { Link } from "gatsby";
-import PropTypes from "prop-types";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTransition } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
@@ -8,7 +7,7 @@ import Wrapper from "../org/Wrapper";
 import TopBar from "./top-bar";
 import styled from "styled-components";
 import Logo from "../../images/logo.inline.svg";
-import Search from "../../images/search.inline.svg";
+import SearchIcon from "../../images/search.inline.svg";
 import CartIcon from "../../images/cart.inline.svg";
 import Cart from "./cart";
 import Overlay from "./overlay";
@@ -16,6 +15,8 @@ import MegaMenu from "./mega-menu";
 
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin } from "../helpers";
+
+import Search from "../Search/search";
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -131,9 +132,7 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = ({ siteTitle }) => {
-  const { isCartOpen, toggleCartOpen, addProductToCart, checkout } = useContext(
-    StoreContext
-  );
+  const { isCartOpen, toggleCartOpen, checkout } = useContext(StoreContext);
 
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [megaMenuIndex, setMegaMenuIndex] = useState(-1);
@@ -169,7 +168,7 @@ const Header = ({ siteTitle }) => {
     }
 
     setMegaMenuIndex(menu);
-    setMenuOneImageIndex(menu == 1 ? 0 : 0);
+    setMenuOneImageIndex(menu === 1 ? 0 : 0);
   }
 
   function closeMegaMenu() {
@@ -177,13 +176,13 @@ const Header = ({ siteTitle }) => {
     setIsMegaMenuOpen(false);
   }
   return (
-    <div onMouseLeave={closeMegaMenu}>
+    <div role="group" onMouseLeave={closeMegaMenu}>
       <HeaderContainer>
         <TopBar />
         <Wrapper align flex activeClass>
           <div className="search-container">
             <div className="inner-wrap">
-              <Search />
+              <SearchIcon />
             </div>
           </div>
           <div className="link-container left">
@@ -236,6 +235,7 @@ const Header = ({ siteTitle }) => {
             </div>
           </div>
         </Wrapper>
+        <Search />
       </HeaderContainer>
 
       {transitions.map(({ item, key, props }) => {
