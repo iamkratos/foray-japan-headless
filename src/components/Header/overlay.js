@@ -13,10 +13,10 @@ const OverlayContainer = styled(animated.div)`
 `;
 
 const Overlay = ({ style }) => {
-  const { toggleCartOpen } = useContext(StoreContext);
+  const { toggleCartClose } = useContext(StoreContext);
   return (
     <OverlayContainer
-      onClick={toggleCartOpen}
+      onClick={toggleCartClose}
       style={{ ...style }}
     ></OverlayContainer>
   );

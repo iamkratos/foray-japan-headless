@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { media } from "../helpers";
 
 const WrapperWrap = styled.div`
   max-width: 90vw;
   margin: 0 auto;
-  &.md {
-    max-width: 80vw;
-  }
   &.sm {
-    max-width: 70vw;
+    ${media.medium`max-width: 70vw;`}
+  }
+  &.md {
+    ${media.medium`max-width: 80vw;`}
   }
   &.fw {
     max-width: 100vw;

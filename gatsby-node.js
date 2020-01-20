@@ -27,6 +27,16 @@ exports.createPages = async ({ graphql, boundActionCreators }) => {
     }
   `);
 
+  const standardPages = await graphql(`
+    {
+      allShopifyPage {
+        nodes {
+          handle
+        }
+      }
+    }
+  `);
+
   // Product Pages
   productPages.data.allShopifyProduct.edges.forEach(edge => {
     createPage({
@@ -45,6 +55,17 @@ exports.createPages = async ({ graphql, boundActionCreators }) => {
       component: path.resolve("./src/templates/collection-basic.js"),
       context: {
         handle: edge.node.handle,
+      },
+    });
+  });
+
+  // Standard Pages
+  standardPages.data.allShopifyPage.nodes.forEach(node => {
+    createPage({
+      path: `/pages/${node.handle}`,
+      component: path.resolve("./src/templates/standard-page.js"),
+      context: {
+        handle: node.handle,
       },
     });
   });

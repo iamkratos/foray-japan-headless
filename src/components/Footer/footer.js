@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 import Facebook from "../../images/facebook.inline.svg";
 import Instagram from "../../images/instagram.inline.svg";
 import Twitter from "../../images/twitter.inline.svg";
@@ -12,11 +12,18 @@ import Wrapper from "../org/Wrapper";
 const FooterContainer = styled.footer`
   .footer-links {
     padding: 70px 0;
+    display: block;
+    ${media.medium`display: flex;`}
 
     .link-list-container {
       flex: 1;
-      display: flex;
-      justify-content: center;
+      display: block;
+      text-align: center;
+      margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0px;
+      }
+      ${media.medium`text-align: left; display: flex; justify-content: center;`}
 
       h4 {
         font-size: 13px;
@@ -134,7 +141,7 @@ const Footer = () => {
                 <Link to="/collections/bottoms">Technology</Link>
               </li>
               <li>
-                <Link to="/collections/outerwear">Privacy Policy</Link>
+                <Link to="/pages/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
                 <Link to="/collections/dresses">Terms of Use</Link>
@@ -145,10 +152,10 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/collections/accessories">Returns</Link>
+                <a href="http://returns.foraygolf.com/">Returns</a>
               </li>
               <li>
-                <Link to="/collections/accessories">Sizing</Link>
+                <Link to="/pages/sizing">Sizing</Link>
               </li>
             </ul>
           </div>

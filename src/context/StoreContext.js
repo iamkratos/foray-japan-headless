@@ -9,6 +9,7 @@ const client = Client.buildClient({
 const defaultValues = {
   isCartOpen: false,
   toggleCartOpen: () => {},
+  toggleCartClose: () => {},
   cart: [],
   addProductToCart: () => {
     console.log("boo!");
@@ -33,6 +34,9 @@ export const StoreProvider = ({ children }) => {
   const toggleCartOpen = () => {
     setCartOpen(!isCartOpen);
   };
+  const toggleCartClose = () => {
+    setCartOpen(false);
+  };
 
   useEffect(() => {
     initializeCheckout();
@@ -53,12 +57,9 @@ export const StoreProvider = ({ children }) => {
 
       if (currentCheckoutId) {
         // If id exists, fetch checkout from Shopify
-        console.log("case 1", client.checkout);
         newCheckout = await client.checkout.fetch(currentCheckoutId);
-        console.log("case 1", newCheckout);
       } else {
         // If id does not, create new checkout
-        console.log("case 2");
         newCheckout = await client.checkout.create();
         localStorage.setItem("checkout_id", newCheckout.id);
       }
@@ -135,6 +136,7 @@ export const StoreProvider = ({ children }) => {
         checkout,
         toggleCartOpen,
         isCartOpen,
+        toggleCartClose,
       }}
     >
       {children}

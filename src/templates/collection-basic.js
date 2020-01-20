@@ -10,9 +10,13 @@ import Img from "gatsby-image";
 import ProductGridItem from "../components/Product/product-grid-item";
 
 const ProductGridContainer = styled.section`
-  margin-top: 40px;
+  padding-top: 40px;
 `;
-const BannerContainer = styled.section``;
+const BannerContainer = styled.section`
+  img {
+    margin-bottom: 0px;
+  }
+`;
 
 const CollectionPage = ({ data }) => {
   const collection = data.allShopifyCollection.edges[0].node;
@@ -25,8 +29,6 @@ const CollectionPage = ({ data }) => {
           <Img fluid={collection.image.localFile.childImageSharp.fluid} />
         </BannerContainer>
       )}
-
-      <h1>Collection page</h1>
 
       <ProductGridContainer>
         <Wrapper flex>

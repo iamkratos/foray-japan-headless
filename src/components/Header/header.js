@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { useTransition } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
@@ -11,10 +11,12 @@ import SearchIcon from "../../images/search.inline.svg";
 import CartIcon from "../../images/cart.inline.svg";
 import Cart from "./cart";
 import Overlay from "./overlay";
+import SearchOverlay from "./search-overlay";
 import MegaMenu from "./mega-menu";
+import MobileMenu from "./mobile-menu";
 
 import { StoreContext } from "../../context/StoreContext";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 
 import Search from "../Search/search";
 
@@ -38,23 +40,40 @@ const HeaderContainer = styled.header`
     a {
       display: inline-block;
       svg {
-        max-width: 140px;
-        max-height: 65px;
+        max-width: 120px;
+        max-height: 55px;
+        ${media.medium`max-width: 140px;max-height: 65px;`}
       }
     }
   }
   .search-container {
     flex: 1;
     .inner-wrap {
-      svg {
-        height: 35px;
-        width: 35px;
-        stroke-width: 1px;
+      display: flex;
+      align-items: center;
+      button {
+        background-color: transparent;
+        border: none;
+        svg {
+          height: 25px;
+          width: 25px;
+          top: 3px;
+          position: relative;
+          stroke-width: 1px;
+          ${media.medium`height: 35px; width: 35px; top: 0px;`}
+        }
+
+        &.hamburger {
+          ${media.medium`display: none;`}
+        }
       }
     }
   }
   .link-container {
-    flex: 0.7;
+    flex: 1;
+    display: none;
+    ${media.medium`display: block;`}
+    ${media.large`flex: 0.7;`}
     &.left {
       text-align: right;
     }
@@ -118,9 +137,10 @@ const HeaderContainer = styled.header`
         border: none;
       }
       svg {
-        height: 35px;
-        width: 35px;
+        height: 25px;
+        width: 25px;
         stroke-width: 1px;
+        ${media.medium`height: 35px; width: 35px;`}
 
         path {
           stroke: #000;
@@ -135,15 +155,25 @@ const Header = ({ siteTitle }) => {
   const { isCartOpen, toggleCartOpen, checkout } = useContext(StoreContext);
 
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [megaMenuIndex, setMegaMenuIndex] = useState(-1);
 
   // Pass down to <MegaMenu />
   const [menuOneImageIndex, setMenuOneImageIndex] = useState(0);
 
+  const inputEl = useRef(null);
+
   const transitions = useTransition(isCartOpen, null, {
     from: { transform: "translate3d(100%, 0, 0)" },
     enter: { transform: "translate3d(0%, 0, 0)" },
     leave: { transform: "translate3d(100%, 0, 0)" },
+  });
+
+  const moibleMenutransitions = useTransition(isMobileMenuOpen, null, {
+    from: { transform: "translate3d(-100%, 0, 0)" },
+    enter: { transform: "translate3d(-0%, 0, 0)" },
+    leave: { transform: "translate3d(-100%, 0, 0)" },
   });
   const secondSetTransitions = useTransition(isCartOpen, null, {
     from: { opacity: 0 },
@@ -157,6 +187,18 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0, transform: "translate3d(0, -100%, 0)" },
   });
 
+  const searchTransitions = useTransition(isSearchOpen, null, {
+    from: { opacity: 0, transform: "translate3d(0, -100%, 0)" },
+    enter: { opacity: 1, transform: "translate3d(0%, 0, 0)" },
+    leave: { opacity: 0, transform: "translate3d(0, -100%, 0)" },
+  });
+
+  const searchOverlayTransitions = useTransition(isSearchOpen, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+
   const qty = checkout.lineItems.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
@@ -165,6 +207,7 @@ const Header = ({ siteTitle }) => {
     if (!isMegaMenuOpen) {
       console.log("setting", menu);
       setIsMegaMenuOpen(true);
+      setIsSearchOpen(false);
     }
 
     setMegaMenuIndex(menu);
@@ -175,6 +218,20 @@ const Header = ({ siteTitle }) => {
     setMegaMenuIndex(-1);
     setIsMegaMenuOpen(false);
   }
+
+  function handleCartOpen() {
+    toggleCartOpen();
+    closeMegaMenu();
+  }
+
+  function handleSearchToggle() {
+    if (isSearchOpen === false) {
+      setIsSearchOpen(true);
+      closeMegaMenu();
+    } else {
+      setIsSearchOpen(false);
+    }
+  }
   return (
     <div role="group" onMouseLeave={closeMegaMenu}>
       <HeaderContainer>
@@ -182,7 +239,21 @@ const Header = ({ siteTitle }) => {
         <Wrapper align flex activeClass>
           <div className="search-container">
             <div className="inner-wrap">
-              <SearchIcon />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={
+                  isMobileMenuOpen
+                    ? "hamburger hamburger--slider is-active"
+                    : "hamburger hamburger--slider"
+                }
+              >
+                <div className="hamburger-box">
+                  <div className="hamburger-inner"></div>
+                </div>
+              </button>
+              <button onClick={() => handleSearchToggle()}>
+                <SearchIcon />
+              </button>
             </div>
           </div>
           <div className="link-container left">
@@ -228,18 +299,31 @@ const Header = ({ siteTitle }) => {
           </div>
           <div className="cart-container">
             <div className="inner-wrap">
-              <button onClick={toggleCartOpen}>
+              <button onClick={handleCartOpen}>
                 {qty > 0 ? qty : ""}
                 <CartIcon />
               </button>
             </div>
           </div>
         </Wrapper>
-        <Search />
       </HeaderContainer>
+
+      {moibleMenutransitions.map(({ item, key, props }) => {
+        return item && <MobileMenu key={key} style={props} />;
+      })}
 
       {transitions.map(({ item, key, props }) => {
         return item && <Cart key={key} style={props} />;
+      })}
+
+      {searchTransitions.map(({ item, key, props }) => {
+        return (
+          item && <Search key={key} style={props} isSearchOpen={isSearchOpen} />
+        );
+      })}
+
+      {searchOverlayTransitions.map(({ item, key, props }) => {
+        return item && <SearchOverlay key={key} style={props} />;
       })}
 
       {secondSetTransitions.map(({ item, key, props }) => {

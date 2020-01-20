@@ -17,6 +17,10 @@ const ProductGridItemContainer = styled.div`
   }
   .image-container {
     position: relative;
+    max-height: 420px;
+    overflow-y: hidden;
+
+    ${media.medium`max-height: 100%;`}
 
     .image-1 {
       position: absolute !important;
