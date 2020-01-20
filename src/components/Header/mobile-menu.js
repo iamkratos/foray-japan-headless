@@ -196,7 +196,7 @@ const MobileMenu = ({ style }) => {
               {shopByLinks.map(link => (
                 <li>
                   <Wrapper>
-                    <Link top={link.url}>{link.title}</Link>
+                    <Link to={link.url}>{link.title}</Link>
                   </Wrapper>
                 </li>
               ))}
@@ -215,7 +215,7 @@ const MobileMenu = ({ style }) => {
               {collectionLinks.map(link => (
                 <li>
                   <Wrapper>
-                    <Link top={link.url}>{link.title}</Link>
+                    <Link to={link.url}>{link.title}</Link>
                   </Wrapper>
                 </li>
               ))}
