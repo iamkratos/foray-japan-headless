@@ -59,6 +59,7 @@ const LayoutContainer = styled.div`
           width: 20px;
           border-radius: 50%;
           border: 1px solid #000;
+          padding: 0px;
           -webkit-appearance: none;
 
           ${TransitionMixin(".25s")}
