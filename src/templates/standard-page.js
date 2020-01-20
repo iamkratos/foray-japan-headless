@@ -11,6 +11,8 @@ const StandardPage = ({ data }) => {
     page.handle == "privacy-policy"
   ) {
     return <BasicPage page={page} />;
+  } else {
+    return <h1>{page.title}</h1>;
   }
 };
 
