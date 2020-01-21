@@ -5,31 +5,90 @@ import { StoreContext } from "../context/StoreContext";
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
 import styled from "styled-components";
-import { TransitionMixin } from "../components/helpers";
+import { TransitionMixin, media } from "../components/helpers";
 import Img from "gatsby-image";
 import ProductGridItem from "../components/Product/product-grid-item";
 import SEO from "../components/seo";
 
-const ProductGridContainer = styled.section`
-  padding-top: 40px;
-`;
+const ProductGridContainer = styled.section``;
 const BannerContainer = styled.section`
   img {
     margin-bottom: 0px;
   }
+
+  .desktop-only {
+    display: none;
+    ${media.medium`display: block;`}
+  }
+
+  .mobile-only {
+    ${media.medium`display: none;`}
+  }
+
+  .title-container {
+    padding-top: 20px;
+    text-align: center;
+    padding: 30px 0;
+
+    h1 {
+      margin-bottom: 0px;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+`;
+
+const TitleContainer = styled.div`
+  .title-container {
+    padding-top: 20px;
+    text-align: center;
+    padding: 30px 0;
+
+    h1 {
+      margin-bottom: 0px;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
 `;
 
 const CollectionPage = ({ data }) => {
-  const collection = data.allShopifyCollection.edges[0].node;
+  const collection =
+    data.allShopifyCollection.edges[0] &&
+    data.allShopifyCollection.edges[0].node;
+  const mobileCollectionImage =
+    data.allFile.edges[0] && data.allFile.edges[0].node;
   console.log(data);
   console.log("collection image", collection.image);
   return (
     <Layout>
       <SEO title={collection.title} />
-      {collection.image && collection.image.localFile.childImageSharp != null && (
+      {collection.image &&
+      collection.image.localFile.childImageSharp != null ? (
         <BannerContainer>
-          <Img fluid={collection.image.localFile.childImageSharp.fluid} />
+          <Img
+            className="desktop-only"
+            fluid={collection.image.localFile.childImageSharp.fluid}
+          />
+          {mobileCollectionImage ? (
+            <Img
+              className="mobile-only"
+              fluid={mobileCollectionImage.childImageSharp.fluid}
+            />
+          ) : (
+            <div className="title-container">
+              <h1>{collection.title}</h1>
+            </div>
+          )}
         </BannerContainer>
+      ) : (
+        <TitleContainer>
+          <div className="title-container">
+            <h1>{collection.title}</h1>
+          </div>
+        </TitleContainer>
       )}
 
       <ProductGridContainer>
@@ -49,6 +108,23 @@ const CollectionPage = ({ data }) => {
 
 export const query = graphql`
   query($handle: String!) {
+    allFile(
+      filter: {
+        relativeDirectory: { eq: "collections" }
+        name: { eq: $handle }
+      }
+    ) {
+      edges {
+        node {
+          id
+          childImageSharp {
+            fluid(maxWidth: 992) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
     allShopifyCollection(filter: { handle: { eq: $handle } }) {
       edges {
         node {

@@ -96,6 +96,7 @@ const ProductGridItemContainer = styled.div`
               font-weight: bold;
               border: 1px solid #000;
               padding: 5px 5px 3px;
+              background-color: transparent;
               line-height: 1;
               color: #000;
               ${TransitionMixin(".25s")}

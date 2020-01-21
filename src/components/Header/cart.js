@@ -88,6 +88,7 @@ const CartContainer = styled(animated.section)`
             /* max-width: 100px; */
             margin-bottom: 0px;
             max-height: 200px;
+            min-width: 133px;
           }
         }
 

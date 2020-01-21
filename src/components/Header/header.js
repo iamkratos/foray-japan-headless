@@ -135,10 +135,23 @@ const HeaderContainer = styled.header`
       button {
         background-color: transparent;
         border: none;
+        height: 30px;
+        position: relative;
       }
+
+      sup {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        font-weight: bold;
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
+      }
+
       svg {
-        height: 25px;
-        width: 25px;
+        height: 30px;
+        width: 30px;
         stroke-width: 1px;
         ${media.medium`height: 35px; width: 35px;`}
 
@@ -300,7 +313,7 @@ const Header = ({ siteTitle }) => {
           <div className="cart-container">
             <div className="inner-wrap">
               <button onClick={handleCartOpen}>
-                {qty > 0 ? qty : ""}
+                <sup>{qty > 0 ? qty : ""}</sup>
                 <CartIcon />
               </button>
             </div>

@@ -4,6 +4,7 @@ import Img from "gatsby-image";
 
 import { StoreContext } from "../context/StoreContext";
 import Wrapper from "../components/org/Wrapper";
+import SEO from "../components/seo";
 import Layout from "../components/layout";
 import styled from "styled-components";
 import { TransitionMixin, media } from "../components/helpers";
@@ -329,7 +330,9 @@ const ProductPage = ({ data }) => {
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
           console.log(option.value, " | ", color, "another one");
-          if (option.value.toLowerCase().trim() == color.toLowerCase().trim()) {
+          if (
+            option.value.toLowerCase().trim() === color.toLowerCase().trim()
+          ) {
             newSizesArray.push(variant);
           }
         });
@@ -476,6 +479,7 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
+      <SEO title={product.title} />
       <ProductPageContainer>
         <Wrapper className="single-product-grid" flex>
           <div className="product-images-container">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useStaticQuery } from "gatsby";
+import { Link, useStaticQuery, graphql } from "gatsby";
 import LazyLoad from "react-lazyload";
 
 import SEO from "../components/seo";

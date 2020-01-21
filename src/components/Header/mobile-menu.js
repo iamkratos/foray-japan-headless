@@ -79,6 +79,12 @@ const MobileMenuContainer = styled(animated.div)`
           }
           a {
             font-size: 13px;
+            color: #777;
+
+            &:active,
+            &:focus {
+              color: #000;
+            }
           }
         }
       }
