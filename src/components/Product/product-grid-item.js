@@ -150,6 +150,9 @@ const ProductGridItemContainer = styled.div`
           li {
             position: relative;
             margin-bottom: 0px;
+            &:last-child {
+              margin-right: 0px;
+            }
             &:hover {
               .tooltip-container {
                 opacity: 1;

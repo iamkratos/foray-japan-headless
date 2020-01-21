@@ -6,10 +6,17 @@ import { StoreContext } from "../context/StoreContext";
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
 import styled from "styled-components";
-import { TransitionMixin } from "../components/helpers";
+import { TransitionMixin, media } from "../components/helpers";
 
 const ProductPageContainer = styled.section`
-  padding: 40px 0;
+  padding: 20px 0 40px;
+  ${media.medium`order: 1;`}
+
+  .single-product-grid {
+    display: block;
+
+    ${media.medium`display: flex;`}
+  }
 
   .product-images-container {
     display: flex;
@@ -17,13 +24,16 @@ const ProductPageContainer = styled.section`
 
     .thumbnail-container {
       flex: 0.5;
+      order: 2;
+      ${media.medium`order: 1;`}
 
       > .inner-wrap {
         max-width: 120px;
-        max-height: 450px;
+        max-height: 300px;
         overflow-y: scroll;
         margin-bottom: 0px;
         margin: 0 auto;
+        ${media.medium`max-height: 450px;`}
 
         &::-webkit-scrollbar-track {
           -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -56,10 +66,22 @@ const ProductPageContainer = styled.section`
           }
         }
       }
+
+      .mobile-only {
+        margin-top: 20px;
+        text-align: center;
+        ${media.medium`display: none;`}
+
+        .colors {
+          text-align: center;
+        }
+      }
     }
 
     .main-photo-container {
       flex: 2;
+      order: 1;
+      ${media.medium`order: 2;`}
       .inner-wrap {
         .gatsby-image-wrapper {
           max-width: 400px;
@@ -72,9 +94,10 @@ const ProductPageContainer = styled.section`
     flex: 1;
 
     > .inner-wrap {
-      max-width: 80%;
+      max-width: 100%;
       margin: 0 auto;
       padding-top: 3%;
+      ${media.medium`max-width: 80%;`}
       h1 {
         color: #000;
         font-size: 24px;
@@ -436,7 +459,7 @@ const ProductPage = ({ data }) => {
   return (
     <Layout>
       <ProductPageContainer>
-        <Wrapper flex>
+        <Wrapper className="single-product-grid" flex>
           <div className="product-images-container">
             <div className="thumbnail-container">
               <div className="inner-wrap" ref={scrollContainer}>
@@ -449,6 +472,37 @@ const ProductPage = ({ data }) => {
                   );
                 })}
               </div>
+              {finalColors.length > 0 && (
+                <div className="variant-selector-container color-container mobile-only">
+                  <ul class="colors" onMouseLeave={checkTooltipText}>
+                    {finalColors.map((color, i) => {
+                      let colorHandle = color
+                        .replace(/\s+/g, "-")
+                        .replace(/\{/g, "")
+                        .replace(/\//g, "-")
+                        .replace("&", "")
+                        .toLowerCase();
+
+                      return (
+                        <li>
+                          <button
+                            onMouseEnter={() => setHoverColor(color)}
+                            onClick={() => handleVariantChange(color)}
+                            className={`color-btn-container ${colorHandle}`}
+                          ></button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  {hoverColor !== null ? (
+                    <div className="tooltip-container">
+                      <div className="inner-wrap">{hoverColor}</div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
             </div>
             <div className="main-photo-container">
               <div className="inner-wrap">

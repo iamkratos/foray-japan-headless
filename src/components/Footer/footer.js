@@ -207,7 +207,10 @@ const Footer = () => {
       </Wrapper>
       <Wrapper className="fw black copyright">
         <Wrapper>
-          <p>Copyright © 2020 FORAY GOLF, LLC. All Rights Reserved.</p>
+          <p>
+            Copyright © {new Date().getFullYear()} FORAY GOLF, LLC. All Rights
+            Reserved.
+          </p>
         </Wrapper>
       </Wrapper>
     </FooterContainer>

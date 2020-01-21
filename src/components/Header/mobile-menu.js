@@ -13,10 +13,17 @@ const MobileMenuContainer = styled(animated.div)`
   background-color: #fff;
   top: 129px;
   z-index: 400;
-  min-height: 90vh;
-  max-height: 90vh;
+  min-height: calc(100vh - 129px);
+  max-height: calc(100vh - 129px);
   overflow-y: scroll;
   padding-bottom: 20px;
+
+  p {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
 
   > ul {
     padding: 20px 0 0;
@@ -222,7 +229,18 @@ const MobileMenu = ({ style }) => {
             </ul>
           </Wrapper>
         </li>
+        <li>
+          <Wrapper>
+            <Link to="/collections/graphic-floral-collection">
+              #TeamForayGolf
+              <span>
+                <ChevronRight />
+              </span>
+            </Link>
+          </Wrapper>
+        </li>
       </ul>
+      <p>&copy; {new Date().getFullYear()} Foray Golf. All Rights Reserved.</p>
     </MobileMenuContainer>
   );
 };
