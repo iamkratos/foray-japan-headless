@@ -11,10 +11,10 @@ const MobileMenuContainer = styled(animated.div)`
   left: 0;
   width: 100%;
   background-color: #fff;
-  top: 129px;
+  top: 83px;
   z-index: 400;
-  min-height: calc(100vh - 129px);
-  max-height: calc(100vh - 129px);
+  min-height: calc(100vh - 83px);
+  max-height: calc(100vh - 83px);
   overflow-y: scroll;
   padding-bottom: 20px;
 

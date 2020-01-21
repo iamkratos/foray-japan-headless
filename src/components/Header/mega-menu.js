@@ -10,7 +10,7 @@ import Wrapper from "../org/Wrapper";
 const MegaMenuContainer = styled(animated.div)`
   position: fixed;
   width: 100%;
-  top: 129px;
+  top: 83px;
   left: 0;
   background-color: #fff;
   min-height: 368px;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useStaticQuery } from "gatsby";
+import { useStaticQuery, Link } from "gatsby";
 import Slider from "react-slick";
 import styled from "styled-components";
 import Img from "gatsby-image";
@@ -10,10 +10,39 @@ import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
 import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
+import { media } from "../helpers";
 
 // Slider Container
 
-const SlideContainer = styled.div``;
+const SlideContainer = styled.div`
+  position: relative;
+  .desktop-only {
+    display: none;
+    ${media.medium`display: block;`}
+  }
+  .mobile-only {
+    ${media.medium`display: none;`}
+  }
+
+  .mobile-overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ${media.medium`display: none;`}
+
+    .overlay-content {
+      h2 {
+        color: #fff;
+      }
+    }
+  }
+`;
 const SliderContainer = styled.div`
   img {
     margin-bottom: 0px;
@@ -50,6 +79,35 @@ const HomePageSlider = () => {
           }
         }
       }
+      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      slideTwoMobile: file(relativePath: { eq: "slides/mobile-slide-2.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      slideThreeMobile: file(
+        relativePath: { eq: "slides/mobile-slide-3.jpg" }
+      ) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
   console.log("data", data);
@@ -67,13 +125,55 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Img fluid={data.slideOne.childImageSharp.fluid} />
+          <Link to="/collections/graphic-floral-collection">
+            <Img
+              className="desktop-only"
+              fluid={data.slideOne.childImageSharp.fluid}
+            />
+            <Img
+              className="mobile-only"
+              fluid={data.slideOneMobile.childImageSharp.fluid}
+            />
+            <div className="mobile-overlay">
+              <div className="overlay-content">
+                <h2>Graphic Floral</h2>
+              </div>
+            </div>
+          </Link>
         </SlideContainer>
         <SlideContainer>
-          <Img fluid={data.slideTwo.childImageSharp.fluid} />
+          <Link to="/collections/graphic-floral-collection">
+            <Img
+              className="desktop-only"
+              fluid={data.slideTwo.childImageSharp.fluid}
+            />
+            <Img
+              className="mobile-only"
+              fluid={data.slideTwoMobile.childImageSharp.fluid}
+            />
+            <div className="mobile-overlay">
+              <div className="overlay-content">
+                <h2>Graphic Floral</h2>
+              </div>
+            </div>
+          </Link>
         </SlideContainer>
         <SlideContainer>
-          <Img fluid={data.slideThree.childImageSharp.fluid} />
+          <Link to="/collections/graphic-floral-collection">
+            <Img
+              className="desktop-only"
+              fluid={data.slideThree.childImageSharp.fluid}
+            />
+            <Img
+              className="mobile-only"
+              fluid={data.slideThreeMobile.childImageSharp.fluid}
+            />
+            <div className="mobile-overlay">
+              <div className="overlay-content">
+                <h2>Graphic Floral</h2>
+              </div>
+            </div>
+          </Link>
         </SlideContainer>
       </Slider>
     </SliderContainer>

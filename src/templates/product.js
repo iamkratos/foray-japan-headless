@@ -29,7 +29,7 @@ const ProductPageContainer = styled.section`
 
       > .inner-wrap {
         max-width: 120px;
-        max-height: 300px;
+        max-height: 370px;
         overflow-y: scroll;
         margin-bottom: 0px;
         margin: 0 auto;
@@ -223,6 +223,7 @@ const ProductPageContainer = styled.section`
                 line-height: 1;
                 padding: 8px 10px;
                 margin: 0;
+                background-color: transparent;
                 ${TransitionMixin(".25s")}
                 &.active {
                   border-color: #000;

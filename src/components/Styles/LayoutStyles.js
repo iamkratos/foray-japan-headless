@@ -5,7 +5,7 @@ import { TransitionMixin } from "../helpers";
 const LayoutContainer = styled.div`
   /* layout */
   .main-content-container {
-    margin-top: 129px;
+    margin-top: 83px;
 
     > main {
       min-height: 100vh;
@@ -52,7 +52,7 @@ const LayoutContainer = styled.div`
 
       li {
         display: inline-block;
-        margin-right: 5px;
+        margin: 2px;
         &:last-child {
           margin-right: 0px;
         }

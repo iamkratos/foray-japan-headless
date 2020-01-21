@@ -23,7 +23,7 @@ const searchClient = algoliasearch(
 const SearchContainer = styled(animated.div)`
   position: fixed;
   width: 100%;
-  top: 129px;
+  top: 83px;
   padding-top: 20px;
   background-color: #fff;
   border-bottom: 1px solid #ccc;

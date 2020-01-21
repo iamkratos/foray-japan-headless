@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import Wrapper from "../org/Wrapper";
 import styled from "styled-components";
+import { media } from "../helpers";
 
 const TopBarContainer = styled.div`
   background-color: #000;
   padding: 13px 0 10px;
+  display: none;
+  ${media.medium`display: block;`}
   p {
     margin: 0px;
     color: #fff;
