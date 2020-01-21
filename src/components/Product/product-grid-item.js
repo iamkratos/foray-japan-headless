@@ -62,7 +62,7 @@ const ProductGridItemContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0;
+        ${media.medium`opacity: 0;`}
         ${TransitionMixin(".25s")}
         h4 {
           font-size: 13px;
@@ -233,13 +233,6 @@ const ProductGridItem = ({ product }) => {
       // console.log(imageArray, "filtered colors");
       setCurrentColor(imageArray);
 
-      // Find available sizes based on color and
-      // console.log("current color", color, filterCondition);
-      // if (currentColor.length > 0) {
-      //   let selectedColor = currentColor[0].altText;
-      //   // console.log("product here", selectedColor);
-      // }
-
       // Sort sizes
       handleSizesSort(color);
     } else {
@@ -345,6 +338,11 @@ const ProductGridItem = ({ product }) => {
     } else {
       setHoverColor(product.images[0].altText);
     }
+
+    if (window.innerWidth < 992) {
+      setShowQuickShop(true);
+    }
+    console.log(window.innerWidth, "window inner width");
   }, []);
 
   function checkTooltipText() {

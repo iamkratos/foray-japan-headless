@@ -1,11 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 
 const LayoutContainer = styled.div`
   /* layout */
   .main-content-container {
     margin-top: 83px;
+
+    ${media.medium`margin-top: 129px;`}
 
     > main {
       min-height: 100vh;

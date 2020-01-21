@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { TransitionMixin } from "../components/helpers";
 import Img from "gatsby-image";
 import ProductGridItem from "../components/Product/product-grid-item";
+import SEO from "../components/seo";
 
 const ProductGridContainer = styled.section`
   padding-top: 40px;
@@ -24,6 +25,7 @@ const CollectionPage = ({ data }) => {
   console.log("collection image", collection.image);
   return (
     <Layout>
+      <SEO title={collection.title} />
       {collection.image && collection.image.localFile.childImageSharp != null && (
         <BannerContainer>
           <Img fluid={collection.image.localFile.childImageSharp.fluid} />
