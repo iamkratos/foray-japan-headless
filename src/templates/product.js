@@ -10,7 +10,7 @@ import { TransitionMixin, media } from "../components/helpers";
 
 const ProductPageContainer = styled.section`
   padding: 20px 0 40px;
-  ${media.medium`order: 1;`}
+  ${media.medium`order: 1;padding: 40px 0 40px;`}
 
   .single-product-grid {
     display: block;
@@ -96,35 +96,46 @@ const ProductPageContainer = styled.section`
     > .inner-wrap {
       max-width: 100%;
       margin: 0 auto;
-      padding-top: 3%;
-      ${media.medium`max-width: 80%;`}
-      h1 {
-        color: #000;
-        font-size: 24px;
-        margin: 0 0 10px;
-        line-height: 1.5;
+      padding-top: 5%;
+
+      display: flex;
+      flex-wrap: wrap;
+      ${media.medium`max-width: 80%; display: block; padding-top: 3%;`}
+      > * {
+        flex: 1 1 100%;
       }
-      p {
-        /* font-family: Helvetica Neue, -apple-system, BlinkMacSystemFont, Segoe UI,
+
+      .title-container {
+        order: 1;
+        flex: 1 1 50%;
+        h1 {
+          color: #000;
+          margin: 0 0 10px;
+          line-height: 1.5;
+          text-transform: uppercase;
+          font-size: 16px;
+        }
+        p {
+          /* font-family: Helvetica Neue, -apple-system, BlinkMacSystemFont, Segoe UI,
           Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
           Helvetica Neue, sans-serif; */
-        color: #4a4a4a;
-        font-size: 14px;
-        margin: 0 0 10px;
-        font-weight: 400;
-        line-height: 1.5;
-        &:last-child {
-          margin-bottom: 0px;
-        }
+          color: #4a4a4a;
+          font-size: 14px;
+          margin: 0 0 10px;
+          font-weight: 400;
+          line-height: 1.5;
+          &:last-child {
+            margin-bottom: 0px;
+          }
 
-        &.price {
-          font-weight: bold;
-          color: #777;
-          font-size: 17px;
-          border-top: 1px solid #efefef;
-          border-bottom: 1px solid #efefef;
-          padding: 15px 0;
-          line-height: 1;
+          &.price {
+            font-weight: bold;
+            color: #777;
+            font-size: 15px;
+
+            line-height: 1;
+            ${media.medium`font-size: 17px;border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;padding: 15px 0;`}
+          }
         }
       }
 
@@ -134,18 +145,22 @@ const ProductPageContainer = styled.section`
       }
 
       .description-container {
-        padding: 15px 0;
+        padding: 25px 0 15px;
         color: #4a4a4a;
         font-size: 14px;
         margin: 0 0 10px;
         font-weight: 400;
         line-height: 1.5;
+        order: 3;
+        ${media.medium`padding: 15px 0;`}
       }
 
       .variant-selector-container {
         &.color-container {
-          margin-top: 20px;
-          margin-bottom: 40px;
+          order: 2;
+          flex: 1 1 50%;
+          text-align: right;
+          ${media.medium`display: block;margin-top: 20px; margin-bottom: 40px; text-align: left;`}
           h4 {
             text-transform: uppercase;
             font-weight: bold;
@@ -153,12 +168,12 @@ const ProductPageContainer = styled.section`
             letter-spacing: 1px;
             font-size: 14px;
             margin-bottom: 10px;
+            display: none;
+            ${media.medium`display: block;`}
           }
 
           ul {
             &.colors {
-              text-align: left;
-
               li {
                 margin-bottom: 0px;
 
@@ -178,7 +193,8 @@ const ProductPageContainer = styled.section`
           }
         }
         &.sizes {
-          margin-top: 20px;
+          order: 4;
+          ${media.medium`margin-top: 20px;`}
           h4 {
             text-transform: uppercase;
             font-weight: bold;
@@ -235,6 +251,7 @@ const ProductPageContainer = styled.section`
       }
       .add-to-cart-container {
         margin-top: 40px;
+        order: 5;
         .inner-wrap {
           button {
             background-color: #000;
@@ -472,37 +489,6 @@ const ProductPage = ({ data }) => {
                   );
                 })}
               </div>
-              {finalColors.length > 0 && (
-                <div className="variant-selector-container color-container mobile-only">
-                  <ul class="colors" onMouseLeave={checkTooltipText}>
-                    {finalColors.map((color, i) => {
-                      let colorHandle = color
-                        .replace(/\s+/g, "-")
-                        .replace(/\{/g, "")
-                        .replace(/\//g, "-")
-                        .replace("&", "")
-                        .toLowerCase();
-
-                      return (
-                        <li>
-                          <button
-                            onMouseEnter={() => setHoverColor(color)}
-                            onClick={() => handleVariantChange(color)}
-                            className={`color-btn-container ${colorHandle}`}
-                          ></button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  {hoverColor !== null ? (
-                    <div className="tooltip-container">
-                      <div className="inner-wrap">{hoverColor}</div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-              )}
             </div>
             <div className="main-photo-container">
               <div className="inner-wrap">
@@ -527,10 +513,12 @@ const ProductPage = ({ data }) => {
           </div>
           <div className="product-info-wrapper">
             <div className="inner-wrap">
-              <h1>{product.title}</h1>
-              <p className="price">
-                ${product.priceRange.maxVariantPrice.amount}
-              </p>
+              <div className="title-container">
+                <h1>{product.title}</h1>
+                <p className="price">
+                  ${product.priceRange.maxVariantPrice.amount}
+                </p>
+              </div>
               <div
                 className="description-container"
                 dangerouslySetInnerHTML={createMarkup()}
@@ -539,33 +527,35 @@ const ProductPage = ({ data }) => {
               {finalColors.length > 0 && (
                 <div className="variant-selector-container color-container">
                   <h4>Select Color</h4>
-                  <ul class="colors" onMouseLeave={checkTooltipText}>
-                    {finalColors.map((color, i) => {
-                      let colorHandle = color
-                        .replace(/\s+/g, "-")
-                        .replace(/\{/g, "")
-                        .replace(/\//g, "-")
-                        .replace("&", "")
-                        .toLowerCase();
+                  <div className="inner-wrap">
+                    <ul class="colors" onMouseLeave={checkTooltipText}>
+                      {finalColors.map((color, i) => {
+                        let colorHandle = color
+                          .replace(/\s+/g, "-")
+                          .replace(/\{/g, "")
+                          .replace(/\//g, "-")
+                          .replace("&", "")
+                          .toLowerCase();
 
-                      return (
-                        <li>
-                          <button
-                            onMouseEnter={() => setHoverColor(color)}
-                            onClick={() => handleVariantChange(color)}
-                            className={`color-btn-container ${colorHandle}`}
-                          ></button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  {hoverColor !== null ? (
-                    <div className="tooltip-container">
-                      <div className="inner-wrap">{hoverColor}</div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                        return (
+                          <li>
+                            <button
+                              onMouseEnter={() => setHoverColor(color)}
+                              onClick={() => handleVariantChange(color)}
+                              className={`color-btn-container ${colorHandle}`}
+                            ></button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    {hoverColor !== null ? (
+                      <div className="tooltip-container">
+                        <div className="inner-wrap">{hoverColor}</div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               )}
 
