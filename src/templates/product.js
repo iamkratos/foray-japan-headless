@@ -267,7 +267,8 @@ const ProductPageContainer = styled.section`
         }
       }
       .add-to-cart-container {
-        margin-top: 40px;
+        margin-top: 20px;
+        ${media.medium`margin-top: 40px;`}
         order: 5;
         .inner-wrap {
           button {
