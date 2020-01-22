@@ -12,6 +12,7 @@ import SEO from "../components/seo";
 
 const ProductGridContainer = styled.section``;
 const BannerContainer = styled.section`
+  padding-bottom: 30px;
   img {
     margin-bottom: 0px;
   }
