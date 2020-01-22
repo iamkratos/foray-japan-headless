@@ -131,8 +131,9 @@ const ProductPageContainer = styled.section`
 
           &.price {
             font-weight: bold;
-            color: #777;
+            color: #848484;
             font-size: 15px;
+            letter-spacing: 0.7px;
 
             line-height: 1;
             ${media.medium`font-size: 17px;border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;padding: 15px 0;`}
@@ -240,6 +241,7 @@ const ProductPageContainer = styled.section`
                     cursor: not-allowed;
                     color: #000;
                     background-color: #fff;
+                    border-color: #ccc;
                   }
                 }
 
@@ -521,7 +523,7 @@ const ProductPage = ({ data }) => {
               <div className="title-container">
                 <h1>{product.title}</h1>
                 <p className="price">
-                  ${product.priceRange.maxVariantPrice.amount}
+                  ${parseFloat(product.priceRange.maxVariantPrice.amount)}
                 </p>
               </div>
               <div

@@ -440,7 +440,7 @@ const ProductGridItem = ({ product }) => {
           <div className="inner-wrap">
             <div className="title-container">
               <h4>{product.title}</h4>
-              <p>${product.priceRange.maxVariantPrice.amount}</p>
+              <p>${parseFloat(product.priceRange.maxVariantPrice.amount)}</p>
               {console.log(hoverColor, "hover color")}
               {hoverColor !== null ? (
                 <div className="tooltip-container">
