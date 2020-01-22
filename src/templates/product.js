@@ -313,6 +313,7 @@ const ProductPage = ({ data }) => {
   function handleVariantChange(color) {
     // 1. Sort Variant Images
     let newImageArray = [];
+    console.log("color check ", color);
     if (color != null) {
       console.log("color is ", color);
       product.images.map(image => {
@@ -501,14 +502,17 @@ const ProductPage = ({ data }) => {
           <div className="product-images-container">
             <div className="thumbnail-container">
               <div className="inner-wrap" ref={scrollContainer}>
-                {currentImageSet.map((image, index) => {
-                  console.log("Case C");
-                  return (
-                    <button onClick={() => swapMainImage(index)}>
-                      <Img fluid={image.localFile.childImageSharp.fluid} />
-                    </button>
-                  );
-                })}
+                {currentImageSet &&
+                  currentImageSet.map((image, index) => {
+                    console.log("Case C");
+                    return (
+                      <button key={index} onClick={() => swapMainImage(index)}>
+                        {image.localFile.childImageSharp && (
+                          <Img fluid={image.localFile.childImageSharp.fluid} />
+                        )}
+                      </button>
+                    );
+                  })}
               </div>
             </div>
             <div className="main-photo-container">
@@ -526,7 +530,10 @@ const ProductPage = ({ data }) => {
                         console.log(currentImageSet);
                         console.log("Case E");
                         return (
-                          <Img fluid={image.localFile.childImageSharp.fluid} />
+                          <Img
+                            key={mainImageIndex}
+                            fluid={image.localFile.childImageSharp.fluid}
+                          />
                         );
                       })}
               </div>
@@ -549,7 +556,7 @@ const ProductPage = ({ data }) => {
                 <div className="variant-selector-container color-container">
                   <h4>Select Color</h4>
                   <div className="inner-wrap">
-                    <ul class="colors" onMouseLeave={checkTooltipText}>
+                    <ul className="colors" onMouseLeave={checkTooltipText}>
                       {finalColors.map((color, i) => {
                         let colorHandle = color
                           .replace(/\s+/g, "-")
@@ -559,7 +566,7 @@ const ProductPage = ({ data }) => {
                           .toLowerCase();
 
                         return (
-                          <li>
+                          <li key={i}>
                             <button
                               onMouseEnter={() => setHoverColor(color)}
                               onClick={() => handleVariantChange(color)}
@@ -585,13 +592,13 @@ const ProductPage = ({ data }) => {
                   <h4>Select Size</h4>
                   <ul>
                     {currentSizeSet.length > 0 &&
-                      currentSizeSet.map(size => {
+                      currentSizeSet.map((size, index) => {
                         let isAvailable = size.availableForSale;
                         let sizeText = size.selectedOptions[1]
                           ? size.selectedOptions[1].value
                           : size.selectedOptions[0].value;
                         return (
-                          <li>
+                          <li key={index}>
                             <button
                               disabled={!isAvailable}
                               className={

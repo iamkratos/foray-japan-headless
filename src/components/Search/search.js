@@ -11,7 +11,7 @@ import {
 
 import Wrapper from "../org/Wrapper";
 import ProductSearchResult from "../Product/product-search-result";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 
 import { animated } from "react-spring";
 
@@ -28,6 +28,7 @@ const SearchContainer = styled(animated.div)`
   background-color: #fff;
   border-bottom: 1px solid #ccc;
   z-index: 400;
+  ${media.medium`top: 129px;`}
   .ais-SearchBox {
     max-width: 100%;
 
