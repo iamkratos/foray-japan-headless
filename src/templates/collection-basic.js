@@ -34,6 +34,7 @@ const BannerContainer = styled.section`
       margin-bottom: 0px;
       font-size: 18px;
       text-transform: uppercase;
+      ${media.medium`display: none;`}
       letter-spacing: 1px;
     }
   }

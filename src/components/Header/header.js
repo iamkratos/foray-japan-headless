@@ -147,6 +147,7 @@ const HeaderContainer = styled.header`
         font-size: 12px;
         width: 100%;
         text-align: center;
+        top: auto;
       }
 
       svg {
