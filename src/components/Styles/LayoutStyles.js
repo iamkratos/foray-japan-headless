@@ -55,7 +55,7 @@ const LayoutContainer = styled.div`
 
       li {
         display: inline-block;
-        margin: 2px;
+        margin: 2px 5px;
 
         .color-btn-container {
           height: 20px;
