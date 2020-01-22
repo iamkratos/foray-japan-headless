@@ -209,7 +209,7 @@ const ProductPageContainer = styled.section`
         }
         &.sizes {
           order: 4;
-          ${media.medium`margin-top: 20px;`}
+          margin-top: 20px;
           h4 {
             text-transform: uppercase;
             font-weight: bold;
