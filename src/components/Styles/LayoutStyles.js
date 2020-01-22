@@ -51,13 +51,11 @@ const LayoutContainer = styled.div`
       padding: 0;
       margin: 0px;
       text-align: right;
+      ${media.medium`text-align: left;`}
 
       li {
         display: inline-block;
         margin: 2px;
-        &:last-child {
-          margin-right: 0px;
-        }
 
         .color-btn-container {
           height: 20px;

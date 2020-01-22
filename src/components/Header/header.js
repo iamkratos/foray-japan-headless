@@ -148,6 +148,7 @@ const HeaderContainer = styled.header`
         width: 100%;
         text-align: center;
         top: auto;
+        ${media.medium`bottom: 5px;`}
       }
 
       svg {

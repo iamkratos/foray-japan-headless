@@ -148,12 +148,11 @@ const ProductGridItemContainer = styled.div`
         flex: 1;
 
         .colors {
+          text-align: right;
           li {
             position: relative;
             margin-bottom: 0px;
-            &:last-child {
-              margin-right: 0px;
-            }
+
             &:hover {
               .tooltip-container {
                 opacity: 1;

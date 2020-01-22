@@ -13,6 +13,12 @@ import SEO from "../components/seo";
 const ProductGridContainer = styled.section``;
 const BannerContainer = styled.section`
   padding-bottom: 30px;
+  ${media.medium`padding-bottom: 30px;`}
+
+  &.no-pad-bottom {
+    padding-bottom: 0px;
+    ${media.medium`padding-bottom: 0px;`}
+  }
   img {
     margin-bottom: 0px;
   }
@@ -27,16 +33,17 @@ const BannerContainer = styled.section`
   }
 
   .title-container {
-    padding-top: 20px;
     text-align: center;
     padding: 30px 0;
+    display: block;
+    ${media.medium`display: none;`}
 
     h1 {
       margin-bottom: 0px;
       font-size: 18px;
       text-transform: uppercase;
-      ${media.medium`display: none;`}
       letter-spacing: 1px;
+      ${media.medium`display: none;`}
     }
   }
 `;
@@ -69,7 +76,9 @@ const CollectionPage = ({ data }) => {
       <SEO title={collection.title} />
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (
-        <BannerContainer>
+        <BannerContainer
+          className={!mobileCollectionImage ? "no-pad-bottom" : ""}
+        >
           <Img
             className="desktop-only"
             fluid={collection.image.localFile.childImageSharp.fluid}
@@ -80,9 +89,11 @@ const CollectionPage = ({ data }) => {
               fluid={mobileCollectionImage.childImageSharp.fluid}
             />
           ) : (
-            <div className="title-container">
-              <h1>{collection.title}</h1>
-            </div>
+            <TitleContainer>
+              <div className="title-container">
+                <h1>{collection.title}</h1>
+              </div>
+            </TitleContainer>
           )}
         </BannerContainer>
       ) : (

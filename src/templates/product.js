@@ -87,6 +87,7 @@ const ProductPageContainer = styled.section`
         .gatsby-image-wrapper {
           max-width: 400px;
           margin: 0 auto;
+          ${media.xl`max-width: 500px;`}
         }
       }
     }
@@ -147,14 +148,26 @@ const ProductPageContainer = styled.section`
       }
 
       .description-container {
-        padding: 25px 0 15px;
+        padding: 15px 0 5px;
         color: #4a4a4a;
         font-size: 14px;
-        margin: 0 0 10px;
+        margin: 0;
         font-weight: 400;
         line-height: 1.5;
         order: 3;
         ${media.medium`padding: 15px 0;`}
+
+        p {
+          margin-bottom: 20px;
+
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+
+        br {
+          display: none;
+        }
       }
 
       .variant-selector-container {
