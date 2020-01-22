@@ -220,7 +220,6 @@ const Header = ({ siteTitle }) => {
 
   function triggerMegaMenu(menu) {
     if (!isMegaMenuOpen) {
-      console.log("setting", menu);
       setIsMegaMenuOpen(true);
       setIsSearchOpen(false);
     }

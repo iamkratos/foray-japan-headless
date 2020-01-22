@@ -230,7 +230,8 @@ const ProductGridItem = ({ product }) => {
         }
       });
 
-      // console.log(imageArray, "filtered colors");
+      console.log(filterCondition, "filtered colors");
+      setHoverColor(filterCondition);
       setCurrentColor(imageArray);
 
       // Sort sizes
@@ -264,14 +265,9 @@ const ProductGridItem = ({ product }) => {
         .includes("left")
         ? "left"
         : "right";
-      console.log("glove properties", gloveOrientation, product);
+
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log(
-            "compare",
-            option.value.toLowerCase().trim(),
-            gloveOrientation
-          );
           if (option.value.toLowerCase().includes(gloveOrientation)) {
             availableSizesArray.push(variant);
           }

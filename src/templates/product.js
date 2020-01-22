@@ -330,7 +330,7 @@ const ProductPage = ({ data }) => {
             .trim()
             .includes(color.toLowerCase().trim())
         ) {
-          newImageArray.push(image);
+          return newImageArray.push(image);
         }
       });
       console.log("double", newImageArray);
@@ -429,6 +429,12 @@ const ProductPage = ({ data }) => {
 
   const [hoverColor, setHoverColor] = useState("none");
 
+  function handleColorClick(color) {
+    console.log("color is ", color);
+    handleVariantChange(color);
+    setHoverColor(color);
+  }
+
   // const [colorVariants, setColorVariants] = useState();
 
   function checkTooltipText() {
@@ -446,7 +452,12 @@ const ProductPage = ({ data }) => {
       hoverColor != currentImageSet[0].altText
     ) {
       setHoverColor(currentImageSet[0].altText);
+      console.log("case x ", currentImageSet[0].altText);
     } else {
+      console.log(
+        "what we looking for ",
+        currentSizeSet[0].selectedOptions[0].value
+      );
       setHoverColor(currentSizeSet[0].selectedOptions[0].value);
     }
   }
@@ -565,11 +576,13 @@ const ProductPage = ({ data }) => {
                           .replace("&", "")
                           .toLowerCase();
 
+                        console.log("color option ", color);
+
                         return (
                           <li key={i}>
                             <button
                               onMouseEnter={() => setHoverColor(color)}
-                              onClick={() => handleVariantChange(color)}
+                              onClick={() => handleColorClick(color)}
                               className={`color-btn-container ${colorHandle}`}
                             ></button>
                           </li>

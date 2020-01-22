@@ -260,7 +260,7 @@ const MegaMenu = ({
     }
   `);
 
-  console.log("data!", data);
+  // console.log("data!", data);
   const collectionLinks = [
     {
       title: "Graphic Floral",
@@ -368,7 +368,6 @@ const MegaMenu = ({
     setMenuOneImageIndex(menuIndex);
   }
 
-  console.log("mm index is", megaMenuIndex);
   let hideMenuOne = megaMenuIndex === 0 ? "" : "hide";
   let hideMenuTwo = megaMenuIndex === 1 ? "" : "hide";
   return (
