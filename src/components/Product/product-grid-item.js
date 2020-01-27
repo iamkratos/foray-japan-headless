@@ -178,7 +178,7 @@ const ProductGridItemContainer = styled.div`
 
 const ProductGridItem = ({ product }) => {
   const { addProductToCart } = useContext(StoreContext);
-  console.log(product);
+  // console.log(product);
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -338,7 +338,6 @@ const ProductGridItem = ({ product }) => {
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
     }
-    console.log(window.innerWidth, "window inner width");
   }, []);
 
   function checkTooltipText() {
@@ -348,10 +347,10 @@ const ProductGridItem = ({ product }) => {
       !currentColor[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentColor[0].altText
     ) {
-      console.log("current color is", currentColor[0].altText);
+      // console.log("current color is", currentColor[0].altText);
       setHoverColor(currentColor[0].altText);
     } else {
-      console.log("baby", sizes);
+      // console.log("baby", sizes);
       setHoverColor(sizes[0].selectedOptions[0].value);
     }
   }
@@ -436,7 +435,6 @@ const ProductGridItem = ({ product }) => {
             <div className="title-container">
               <h4>{product.title}</h4>
               <p>${parseFloat(product.priceRange.maxVariantPrice.amount)}</p>
-              {console.log(hoverColor, "hover color")}
               {hoverColor !== null ? (
                 <div className="tooltip-container">
                   <div className="inner-wrap">{hoverColor}</div>
@@ -455,7 +453,7 @@ const ProductGridItem = ({ product }) => {
                     .replace("&", "")
                     .toLowerCase();
 
-                  console.log("glove color", color);
+                  // console.log("glove color", color);
 
                   return (
                     <li>

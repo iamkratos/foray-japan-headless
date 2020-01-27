@@ -9,6 +9,7 @@ import { TransitionMixin, media } from "../components/helpers";
 import Img from "gatsby-image";
 import ProductGridItem from "../components/Product/product-grid-item";
 import SEO from "../components/seo";
+import ProductFilter from "../components/Filter/filter";
 
 const ProductGridContainer = styled.section``;
 const BannerContainer = styled.section`
@@ -69,15 +70,15 @@ const CollectionPage = ({ data }) => {
     data.allShopifyCollection.edges[0].node;
   const mobileCollectionImage =
     data.allFile.edges[0] && data.allFile.edges[0].node;
-  console.log(data);
-  console.log("collection image", collection.image);
+  // console.log(data);
+  // console.log("collection image", collection.image);
   return (
     <Layout>
       <SEO title={collection.title} />
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (
         <BannerContainer
-          className={!mobileCollectionImage ? "no-pad-bottom" : ""}
+          className={mobileCollectionImage === null ? "no-pad-bottom" : ""}
         >
           <Img
             className="desktop-only"
@@ -89,7 +90,7 @@ const CollectionPage = ({ data }) => {
               fluid={mobileCollectionImage.childImageSharp.fluid}
             />
           ) : (
-            <TitleContainer>
+            <TitleContainer className="mobile-padding">
               <div className="title-container">
                 <h1>{collection.title}</h1>
               </div>
@@ -103,6 +104,8 @@ const CollectionPage = ({ data }) => {
           </div>
         </TitleContainer>
       )}
+
+      <ProductFilter products={collection.products} />
 
       <ProductGridContainer>
         <Wrapper flex>

@@ -16,6 +16,7 @@ const MegaMenuContainer = styled(animated.div)`
   min-height: 368px;
   z-index: 400;
   border-bottom: 1px solid #efefef;
+  ${media.medium`top: 129px;`}
 
   .linklist-container {
     flex: 1;

@@ -659,7 +659,7 @@ export const query = graphql`
             altText
             localFile {
               childImageSharp {
-                fluid(maxWidth: 500) {
+                fluid(maxWidth: 500, quality: 95) {
                   ...GatsbyImageSharpFluid
                 }
               }
