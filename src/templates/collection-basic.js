@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { graphql } from "gatsby";
 import LazyLoad from "react-lazyload";
-import { StoreContext } from "../context/StoreContext";
+
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
 import styled from "styled-components";
@@ -70,8 +70,13 @@ const CollectionPage = ({ data }) => {
     data.allShopifyCollection.edges[0].node;
   const mobileCollectionImage =
     data.allFile.edges[0] && data.allFile.edges[0].node;
-  // console.log(data);
-  // console.log("collection image", collection.image);
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  let productGridItems =
+    filteredProducts && filteredProducts.length > 0
+      ? filteredProducts
+      : collection.products;
   return (
     <Layout>
       <SEO title={collection.title} />
@@ -105,11 +110,15 @@ const CollectionPage = ({ data }) => {
         </TitleContainer>
       )}
 
-      <ProductFilter products={collection.products} />
+      {/* <ProductFilter
+        setFilteredProducts={setFilteredProducts}
+        filteredProducts={filteredProducts}
+        products={collection.products}
+      /> */}
 
       <ProductGridContainer>
         <Wrapper flex>
-          {collection.products.map(product => {
+          {productGridItems.map(product => {
             return (
               <LazyLoad height={200}>
                 <ProductGridItem product={product} />
@@ -156,6 +165,10 @@ export const query = graphql`
           }
           title
           products {
+            options {
+              name
+              values
+            }
             availableForSale
             priceRange {
               maxVariantPrice {

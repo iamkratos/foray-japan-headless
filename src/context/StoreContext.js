@@ -38,6 +38,29 @@ export const StoreProvider = ({ children }) => {
     setCartOpen(false);
   };
 
+  // This handles all color filtering. Only use for Filters
+  const colorHandlize = colorInNormalText => {
+    let alteredColor = colorInNormalText
+      .replace(/\s+/g, "-")
+      .replace(/\{/g, "")
+      .replace(/\//g, "-")
+      .replace("&", "")
+      .toLowerCase();
+    return alteredColor;
+  };
+
+  const colorHandlizeAndReplaceSimilarColors = colorInNormalText => {
+    let alteredColor = colorInNormalText
+      .replace("Rosso ", "")
+      .replace("Nero ", "")
+      .replace(/\s+/g, "-")
+      .replace(/\{/g, "")
+      .replace(/\//g, "-")
+      .replace("&", "")
+      .toLowerCase();
+    return alteredColor;
+  };
+
   useEffect(() => {
     initializeCheckout();
   }, []);
@@ -137,6 +160,8 @@ export const StoreProvider = ({ children }) => {
         toggleCartOpen,
         isCartOpen,
         toggleCartClose,
+        colorHandlize,
+        colorHandlizeAndReplaceSimilarColors,
       }}
     >
       {children}
