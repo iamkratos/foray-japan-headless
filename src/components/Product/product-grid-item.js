@@ -64,8 +64,9 @@ const ProductGridItemContainer = styled.div`
         justify-content: center;
         ${media.medium`opacity: 0;`}
         ${TransitionMixin(".25s")}
-        .quick-shop-text {
+        .quick-shop-text, .view-dress {
           font-size: 13px;
+          text-decoration: none;
           text-transform: uppercase;
           letter-spacing: 1px;
           margin: 0px;
@@ -327,6 +328,8 @@ const ProductGridItem = ({ product }) => {
   const [hoverColor, setHoverColor] = useState("none");
 
   useEffect(() => {
+    // Define whether quick shop should show
+
     handleColorChange(product.images[0].altText);
     if (
       product.images[0].altText &&
@@ -356,6 +359,14 @@ const ProductGridItem = ({ product }) => {
       setHoverColor(sizes[0].selectedOptions[0].value);
     }
   }
+
+  let showQuickShopText = true;
+  product.tags &&
+    product.tags.map(tag => {
+      if (tag == "NO-QS") {
+        showQuickShopText = false;
+      }
+    });
 
   return (
     <ProductGridItemContainer>
@@ -399,43 +410,52 @@ const ProductGridItem = ({ product }) => {
           {/* Sizes Logic */}
           <div className="quick-shop-container">
             {/* {console.log(sizes)} */}
-            <div
-              className="inner-wrap"
-              onMouseEnter={handleQuickShopHoverIn}
-              onMouseLeave={handleQuickShopHoverOut}
-            >
-              <button
-                className={
-                  showQuickShop == true
-                    ? "quick-shop-text"
-                    : "hide quick-shop-text"
-                }
+            {showQuickShopText === true ? (
+              <div
+                className="inner-wrap"
+                onMouseEnter={handleQuickShopHoverIn}
+                onMouseLeave={handleQuickShopHoverOut}
               >
-                Quick Shop
-              </button>
-              <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
-                {sizes.length > 0 &&
-                  // console.log("updated sizes", sizes) &&
-                  sizes.map(size => {
-                    let isAvailable = size.availableForSale;
-                    let sizeText = size.selectedOptions[1]
-                      ? size.selectedOptions[1].value
-                      : size.selectedOptions[0].value;
+                <button
+                  onClick={handleQuickShopHoverIn}
+                  className={
+                    showQuickShop == true
+                      ? "quick-shop-text"
+                      : "hide quick-shop-text"
+                  }
+                >
+                  Quick Shop
+                </button>
+                <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
+                  {sizes.length > 0 &&
+                    // console.log("updated sizes", sizes) &&
+                    sizes.map(size => {
+                      let isAvailable = size.availableForSale;
+                      let sizeText = size.selectedOptions[1]
+                        ? size.selectedOptions[1].value
+                        : size.selectedOptions[0].value;
 
-                    return (
-                      <li>
-                        <button
-                          disabled={!isAvailable}
-                          class={isAvailable ? "" : "disabled "}
-                          onClick={() => addProductToCart(size.shopifyId)}
-                        >
-                          {sizeText}
-                        </button>
-                      </li>
-                    );
-                  })}
-              </ul>
-            </div>
+                      return (
+                        <li>
+                          <button
+                            disabled={!isAvailable}
+                            class={isAvailable ? "" : "disabled "}
+                            onClick={() => addProductToCart(size.shopifyId)}
+                          >
+                            {sizeText}
+                          </button>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            ) : (
+              <div className="inner-wrap">
+                <Link className="view-dress" to={`/products/${product.handle}`}>
+                  View Product
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div className="info-container">
