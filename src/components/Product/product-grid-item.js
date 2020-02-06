@@ -64,12 +64,14 @@ const ProductGridItemContainer = styled.div`
         justify-content: center;
         ${media.medium`opacity: 0;`}
         ${TransitionMixin(".25s")}
-        h4 {
+        .quick-shop-text {
           font-size: 13px;
           text-transform: uppercase;
           letter-spacing: 1px;
           margin: 0px;
           color: #000;
+          border: none;
+          font-weight: bold;
 
           &.hide {
             display: none;
@@ -402,9 +404,15 @@ const ProductGridItem = ({ product }) => {
               onMouseEnter={handleQuickShopHoverIn}
               onMouseLeave={handleQuickShopHoverOut}
             >
-              <h4 className={showQuickShop == true ? "" : "hide"}>
+              <button
+                className={
+                  showQuickShop == true
+                    ? "quick-shop-text"
+                    : "hide quick-shop-text"
+                }
+              >
                 Quick Shop
-              </h4>
+              </button>
               <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
                 {sizes.length > 0 &&
                   // console.log("updated sizes", sizes) &&
