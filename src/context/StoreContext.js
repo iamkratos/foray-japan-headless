@@ -119,6 +119,34 @@ export const StoreProvider = ({ children }) => {
       console.log(e.message);
     }
   };
+
+  const addMultipleProductsToCart = async (variantIdOne, variantIdTwo) => {
+    try {
+      console.log("added");
+      const lineItems = [
+        {
+          variantId: variantIdOne,
+          quantity: 1,
+        },
+        {
+          variantId: variantIdTwo,
+          quantity: 1,
+        },
+      ];
+      console.log(client.checkout);
+      const newCheckout = await client.checkout.addLineItems(
+        checkout.id,
+        lineItems
+      );
+      console.log(newCheckout.webUrl);
+      setCheckout(newCheckout);
+      if (!isCartOpen) {
+        toggleCartOpen();
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   const removeProductFromCart = async lineItemId => {
     try {
       const newCheckout = await client.checkout.removeLineItems(checkout.id, [
@@ -154,6 +182,7 @@ export const StoreProvider = ({ children }) => {
       value={{
         ...defaultValues,
         addProductToCart,
+        addMultipleProductsToCart,
         updateQuantityInCart,
         removeProductFromCart,
         checkout,

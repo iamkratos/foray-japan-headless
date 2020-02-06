@@ -8,6 +8,8 @@ import SEO from "../components/seo";
 import Layout from "../components/layout";
 import styled from "styled-components";
 import { TransitionMixin, media } from "../components/helpers";
+import AddonProduct from "../components/Product/addon-product";
+import AddToCart from "../components/Product/add-to-cart";
 
 const ProductPageContainer = styled.section`
   padding: 20px 0 40px;
@@ -298,7 +300,7 @@ const ProductPageContainer = styled.section`
 
 const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
-  const { addProductToCart } = useContext(StoreContext);
+
   // console.log(product);
   function createMarkup() {
     return { __html: product.descriptionHtml };
@@ -309,6 +311,7 @@ const ProductPage = ({ data }) => {
   const [sizeId, setSizeId] = useState();
   const [userSize, setUserSize] = useState();
   const scrollContainer = useRef(null);
+  const [isThereAnAddonProduct, setAnAddonProduct] = useState(false);
 
   function handleVariantChange(color) {
     // 1. Sort Variant Images
@@ -463,6 +466,7 @@ const ProductPage = ({ data }) => {
   }
 
   useEffect(() => {
+    tagCheck(product.tags);
     handleVariantChange(product.images[0].altText);
     if (
       product.images[0].altText &&
@@ -504,6 +508,19 @@ const ProductPage = ({ data }) => {
     setMainImageIndex(index);
     console.log(index);
   }
+
+  //   Check for tag
+  function tagCheck(tags) {
+    tags &&
+      tags.map(tag => {
+        console.log("tag", tag);
+        if (tag.includes("addon-shorts-")) {
+          setAnAddonProduct(true);
+          console.log("tag set to true");
+        }
+      });
+  }
+  console.log("addon product", isThereAnAddonProduct);
 
   return (
     <Layout>
@@ -562,7 +579,6 @@ const ProductPage = ({ data }) => {
                 className="description-container"
                 dangerouslySetInnerHTML={createMarkup()}
               />
-
               {finalColors.length > 0 && (
                 <div className="variant-selector-container color-container">
                   <h4>Select Color</h4>
@@ -599,7 +615,6 @@ const ProductPage = ({ data }) => {
                   </div>
                 </div>
               )}
-
               {currentSizeSet.length > 0 && (
                 <div className="variant-selector-container sizes">
                   <h4>Select Size</h4>
@@ -630,14 +645,15 @@ const ProductPage = ({ data }) => {
                   </ul>
                 </div>
               )}
-
-              <div className="add-to-cart-container">
-                <div className="inner-wrap">
-                  <button onClick={() => addProductToCart(sizeId)}>
-                    Add To Cart
-                  </button>
-                </div>
-              </div>
+              {isThereAnAddonProduct ? (
+                <AddonProduct
+                  firstProductVariantId={sizeId}
+                  product={product}
+                  tags={product.tags}
+                />
+              ) : (
+                <AddToCart sizeId={sizeId} />
+              )}
             </div>
           </div>
         </Wrapper>

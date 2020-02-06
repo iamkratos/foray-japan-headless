@@ -237,6 +237,12 @@ const Cart = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
   console.log(checkout.lineItems);
+
+  let checkOutItems = checkout.lineItems.filter(
+    item => !item.title.includes("Sneaky Pocket Short")
+  );
+
+  console.log("real checkout", checkOutItems);
   return (
     <CartContainer style={{ ...style }}>
       <div className="title-container">

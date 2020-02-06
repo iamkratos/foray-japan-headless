@@ -279,13 +279,13 @@ const Header = ({ siteTitle }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link
+                  <a
                     className={megaMenuIndex === 0 ? "active" : ""}
                     onMouseEnter={() => triggerMegaMenu(0)}
-                    to="#"
+                    href="#"
                   >
                     Shop By
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -299,16 +299,16 @@ const Header = ({ siteTitle }) => {
             <nav>
               <ul>
                 <li>
-                  <Link
+                  <a
                     className={megaMenuIndex === 1 ? "active" : ""}
                     onMouseEnter={() => triggerMegaMenu(1)}
-                    to="#"
+                    href="#"
                   >
                     Collections
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link to="#">Final Sale</Link>
+                  <a href="#">Final Sale</a>
                 </li>
               </ul>
             </nav>
