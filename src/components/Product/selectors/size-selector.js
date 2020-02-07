@@ -5,6 +5,7 @@ const SizeSelector = ({
   variantIndicator,
   addonSelectedSize,
   setAddonSelectedSize,
+  setChildProductSize,
 }) => {
   console.log("var indicator", allProductVariants);
 
@@ -39,6 +40,7 @@ const SizeSelector = ({
       : size.selectedOptions[0].value;
     console.log(size);
     setAddonSelectedSize(size.shopifyId);
+    setChildProductSize(size.selectedOptions[1].value);
   }
 
   return (

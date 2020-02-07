@@ -120,13 +120,20 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
-  const addMultipleProductsToCart = async (variantIdOne, variantIdTwo) => {
+  const addMultipleProductsToCart = async (
+    variantIdOne,
+    variantIdTwo,
+    childProductSize
+  ) => {
     try {
-      console.log("added");
+      console.log("added", variantIdTwo);
       const lineItems = [
         {
           variantId: variantIdOne,
           quantity: 1,
+          customAttributes: [
+            { key: "childProductSize", value: childProductSize },
+          ],
         },
         {
           variantId: variantIdTwo,
@@ -159,6 +166,19 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
+  const removeMultipleProductsFromCart = async lineItemIds => {
+    try {
+      const newCheckout = await client.checkout.removeLineItems(
+        checkout.id,
+        lineItemIds
+      );
+      // console.log(newCheckout.webUrl);
+      setCheckout(newCheckout);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const updateQuantityInCart = async (lineItemId, value) => {
     try {
       console.log("line item", lineItemId);
@@ -177,6 +197,18 @@ export const StoreProvider = ({ children }) => {
       console.log(e.message);
     }
   };
+
+  const updateMultipleQuantitiesInCart = async updatedLineItems => {
+    try {
+      const newCheckout = await client.checkout.updateLineItems(
+        checkout.id,
+        updatedLineItems
+      );
+      setCheckout(newCheckout);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return (
     <StoreContext.Provider
       value={{
@@ -184,7 +216,9 @@ export const StoreProvider = ({ children }) => {
         addProductToCart,
         addMultipleProductsToCart,
         updateQuantityInCart,
+        updateMultipleQuantitiesInCart,
         removeProductFromCart,
+        removeMultipleProductsFromCart,
         checkout,
         toggleCartOpen,
         isCartOpen,

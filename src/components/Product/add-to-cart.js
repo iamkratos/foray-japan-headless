@@ -3,16 +3,20 @@ import styled from "styled-components";
 
 import { StoreContext } from "../../context/StoreContext";
 
-const AddToCart = ({ sizeId, sizeIdTwo }) => {
-  console.log("id 2", sizeIdTwo);
+const AddToCart = ({ sizeId, sizeIdTwo, childProductSize }) => {
+  console.log("add to cart check", sizeId, sizeIdTwo);
   const { addProductToCart, addMultipleProductsToCart } = useContext(
     StoreContext
   );
   return (
     <div className="add-to-cart-container">
       <div className="inner-wrap">
-        {sizeIdTwo !== null || sizeIdTwo !== "" ? (
-          <button onClick={() => addMultipleProductsToCart(sizeId, sizeIdTwo)}>
+        {sizeIdTwo !== undefined && sizeIdTwo !== "" ? (
+          <button
+            onClick={() =>
+              addMultipleProductsToCart(sizeId, sizeIdTwo, childProductSize)
+            }
+          >
             Add To Cart
           </button>
         ) : (

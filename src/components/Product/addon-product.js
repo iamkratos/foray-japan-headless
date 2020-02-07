@@ -33,6 +33,7 @@ const AddonProduct = ({ product, tags, firstProductVariantId }) => {
   console.log(data);
   const [addonProductColor, setAddonProductColor] = useState("");
   const [addonSelectedSize, setAddonSelectedSize] = useState("");
+  const [childProductSize, setChildProductSize] = useState("");
   let isThereAnAddonProduct = false;
   useEffect(() => {
     tagCheck(tags);
@@ -59,10 +60,13 @@ const AddonProduct = ({ product, tags, firstProductVariantId }) => {
           allProductVariants={data.allShopifyProduct.edges[0].node}
           addonSelectedSize={addonSelectedSize}
           setAddonSelectedSize={setAddonSelectedSize}
+          childProductSize={childProductSize}
+          setChildProductSize={setChildProductSize}
         />
         <AddToCart
           sizeId={firstProductVariantId}
           sizeIdTwo={addonSelectedSize}
+          childProductSize={childProductSize}
         />
       </div>
     </AddonProductContainer>

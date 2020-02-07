@@ -4,6 +4,7 @@ import { animated } from "react-spring";
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin, media } from "../helpers";
 import X from "../../images/x.inline.svg";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 const CartContainer = styled(animated.section)`
   position: fixed;
@@ -234,13 +235,144 @@ const Cart = ({ style }) => {
     toggleCartOpen,
     checkout,
     removeProductFromCart,
+    removeMultipleProductsFromCart,
+    updateMultipleQuantitiesInCart,
     updateQuantityInCart,
   } = useContext(StoreContext);
-  console.log(checkout.lineItems);
 
+  const data = useStaticQuery(graphql`
+    query {
+      allShopifyCollection(filter: { title: { eq: "Dresses" } }) {
+        edges {
+          node {
+            id
+            products {
+              id
+              title
+              tags
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  console.log(checkout.lineItems);
+  console.log("do better", data);
+
+  let allDresses = data.allShopifyCollection.edges[0].node.products;
   let checkOutItems = checkout.lineItems.filter(
     item => !item.title.includes("Sneaky Pocket Short")
   );
+
+  function handleRemoveAll(item) {
+    // If the product is a dress, search for addon tag, then remove that product
+    if (item.title.includes("Dress")) {
+      let lineItemsArray = [];
+      let addonProductColor;
+      let addonProductSize =
+        item.customAttributes[0] && item.customAttributes[0].value;
+      let dressProduct = allDresses.filter(dress => dress.title === item.title);
+      console.log("the dress product is", addonProductSize, dressProduct);
+
+      // Push initial product to remove array
+
+      lineItemsArray.push(item.id);
+
+      // Find addon color variant
+      dressProduct[0] &&
+        dressProduct[0].tags.map(tag => {
+          if (tag.includes("addon-shorts-")) {
+            addonProductColor = tag.replace("addon-shorts-", "");
+          }
+        });
+
+      console.log("the addon product is", addonProductColor);
+
+      // Find checkout item
+      let addonProduct;
+      checkout.lineItems.map(lineItem => {
+        if (
+          lineItem.title.includes("Add On") &&
+          lineItem.variant.selectedOptions[1].value === addonProductSize
+        ) {
+          // Get addon item
+          let itemCheck = lineItem.variant.selectedOptions[0].value
+            .toLowerCase()
+            .replace(/ /g, "-");
+
+          // If there is only one, we can remove all the items. If there is more, update quanity, then remove one
+          if (itemCheck === addonProductColor && lineItem.quantity === 1) {
+            lineItemsArray.push(lineItem.id);
+            removeMultipleProductsFromCart(lineItemsArray);
+            console.log("remove both");
+          } else {
+            console.log("only remove 1");
+            // updateQuantityInCart(lineItem, lineItem.quantity - 1);
+            // removeProductFromCart(item.id);
+            let updatedLineItems = [
+              {
+                id: item.id,
+                quantity: 0,
+                variantId: item.variant.id,
+              },
+              {
+                id: lineItem.id,
+                quantity: lineItem.quantity - item.quantity,
+                variantId: lineItem.variant.id,
+              },
+            ];
+            updateMultipleQuantitiesInCart(updatedLineItems);
+          }
+        }
+      });
+    } else {
+      removeProductFromCart(item.id);
+    }
+  }
+
+  function handleUpdateQuantity(item, newQuantity) {
+    if (item.title.includes("Dress")) {
+      // let lineItemsArray = [];
+      let addonProductColor;
+      let addonProductSize =
+        item.customAttributes[0] && item.customAttributes[0].value;
+      let dressProduct = allDresses.filter(dress => dress.title === item.title);
+      console.log("the dress product is", addonProductSize, dressProduct);
+
+      // Find addon color variant
+      dressProduct[0] &&
+        dressProduct[0].tags.map(tag => {
+          if (tag.includes("addon-shorts-")) {
+            addonProductColor = tag.replace("addon-shorts-", "");
+          }
+        });
+
+      checkout.lineItems.map(lineItem => {
+        if (
+          lineItem.title.includes("Add On") &&
+          lineItem.variant.selectedOptions[1].value === addonProductSize
+        ) {
+          let lineItemsArray = [
+            {
+              id: item.id,
+              quantity: newQuantity,
+              variantId: item.variant.id,
+            },
+            {
+              id: lineItem.id,
+              quantity: newQuantity,
+              variantId: lineItem.variant.id,
+            },
+          ];
+          console.log("yaaaa", lineItem);
+          updateMultipleQuantitiesInCart(lineItemsArray);
+        }
+      });
+    } else {
+      updateQuantityInCart(item, newQuantity);
+    }
+  }
 
   console.log("real checkout", checkOutItems);
   return (
@@ -283,31 +415,32 @@ const Cart = ({ style }) => {
                       <div className="right-container">
                         <p className="price">${item.variant.price}</p>
                       </div>
-
-                      <div className="action-buttons">
-                        <button
-                          className="decrement"
-                          onClick={() =>
-                            updateQuantityInCart(item, item.quantity - 1)
-                          }
-                        >
-                          -
-                        </button>
-                        <button
-                          className="increment"
-                          onClick={() =>
-                            updateQuantityInCart(item, item.quantity + 1)
-                          }
-                        >
-                          +
-                        </button>
-                        <button
-                          className="remove-all"
-                          onClick={() => removeProductFromCart(item.id)}
-                        >
-                          Remove All
-                        </button>
-                      </div>
+                      {!item.title.includes("Add On") && (
+                        <div className="action-buttons">
+                          <button
+                            className="decrement"
+                            onClick={() =>
+                              handleUpdateQuantity(item, item.quantity - 1)
+                            }
+                          >
+                            -
+                          </button>
+                          <button
+                            className="increment"
+                            onClick={() =>
+                              handleUpdateQuantity(item, item.quantity + 1)
+                            }
+                          >
+                            +
+                          </button>
+                          <button
+                            className="remove-all"
+                            onClick={() => handleRemoveAll(item)}
+                          >
+                            Remove All
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
