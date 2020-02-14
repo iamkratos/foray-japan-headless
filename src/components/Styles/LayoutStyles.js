@@ -65,6 +65,11 @@ const LayoutContainer = styled.div`
           padding: 0 3px;
           -webkit-appearance: none;
 
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+          }
+
           ${TransitionMixin(".25s")}
           &.black, &.black-splatter-print {
             background-color: #000;

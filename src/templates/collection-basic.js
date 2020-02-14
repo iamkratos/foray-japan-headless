@@ -11,7 +11,9 @@ import ProductGridItem from "../components/Product/product-grid-item";
 import SEO from "../components/seo";
 import ProductFilter from "../components/Filter/filter";
 
-const ProductGridContainer = styled.section``;
+const ProductGridContainer = styled.section`
+  flex: 5;
+`;
 const BannerContainer = styled.section`
   padding-bottom: 30px;
   ${media.medium`padding-bottom: 30px;`}
@@ -64,6 +66,8 @@ const TitleContainer = styled.div`
   }
 `;
 
+const CollectionContainer = styled.section``;
+
 const CollectionPage = ({ data }) => {
   const collection =
     data.allShopifyCollection.edges[0] &&
@@ -72,6 +76,7 @@ const CollectionPage = ({ data }) => {
     data.allFile.edges[0] && data.allFile.edges[0].node;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filterColor, setFilterColor] = useState("");
 
   let productGridItems =
     filteredProducts && filteredProducts.length > 0
@@ -110,23 +115,31 @@ const CollectionPage = ({ data }) => {
         </TitleContainer>
       )}
 
-      {/* <ProductFilter
-        setFilteredProducts={setFilteredProducts}
-        filteredProducts={filteredProducts}
-        products={collection.products}
-      /> */}
-
-      <ProductGridContainer>
+      <CollectionContainer>
         <Wrapper flex>
-          {productGridItems.map(product => {
-            return (
-              <LazyLoad height={200}>
-                <ProductGridItem product={product} />
-              </LazyLoad>
-            );
-          })}
+          <ProductFilter
+            setFilteredProducts={setFilteredProducts}
+            setFilterColor={setFilterColor}
+            filteredProducts={filteredProducts}
+            products={collection.products}
+          />
+
+          <ProductGridContainer>
+            <Wrapper flex>
+              {productGridItems.map(product => {
+                return (
+                  <LazyLoad height={200}>
+                    <ProductGridItem
+                      product={product}
+                      filterColor={filterColor}
+                    />
+                  </LazyLoad>
+                );
+              })}
+            </Wrapper>
+          </ProductGridContainer>
         </Wrapper>
-      </ProductGridContainer>
+      </CollectionContainer>
     </Layout>
   );
 };
@@ -199,6 +212,7 @@ export const query = graphql`
               }
               shopifyId
               image {
+                altText
                 localFile {
                   id
                 }

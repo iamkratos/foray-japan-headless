@@ -179,9 +179,9 @@ const ProductGridItemContainer = styled.div`
   }
 `;
 
-const ProductGridItem = ({ product }) => {
-  const { addProductToCart } = useContext(StoreContext);
-  // console.log(product);
+const ProductGridItem = ({ product, filterColor }) => {
+  const { addProductToCart, colorHandlize } = useContext(StoreContext);
+  console.log("filter color", filterColor);
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -225,21 +225,28 @@ const ProductGridItem = ({ product }) => {
         let altTextCheck =
           image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
 
-        // console.log(altTextCheck, " ", filterCondition);
-        if (altTextCheck === filterCondition) {
+        console.log(altTextCheck, " altt", filterCondition);
+        if (
+          altTextCheck === filterCondition ||
+          (altTextCheck && altTextCheck.includes(filterCondition))
+        ) {
           imageArray.push(image);
         } else {
           return;
         }
       });
 
-      console.log(filterCondition, "filtered colors");
-      setHoverColor(filterCondition);
-      setCurrentColor(imageArray);
+      console.log("magic happens here", filterColor, filterCondition);
+      filterColor === undefined &&
+        // setHoverColor(filterCondition);
+        setHoverColor("yeesss");
 
+      setCurrentColor(imageArray);
+      console.log("filter case 1");
       // Sort sizes
-      handleSizesSort(color);
+      handleSizesSort(colorHandlize(color));
     } else {
+      console.log("filter case 2");
       handleSizesSort();
     }
   }
@@ -282,17 +289,25 @@ const ProductGridItem = ({ product }) => {
         console.log("case a");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
-            if (option.value.includes(selectedColor)) {
+            let handlizedColor = colorHandlize(option.value);
+            console.log(selectedColor, handlizedColor);
+            if (handlizedColor.includes(selectedColor)) {
               availableSizesArray.push(variant);
             }
           });
         });
-        // console.log("sizes here", availableSizesArray);
+        console.log("sizes here", availableSizesArray);
       } else {
-        console.log("case b");
+        // console.log("case b");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
-            availableSizesArray.push(variant);
+            let handlizedColor = colorHandlize(option.value);
+            let handlizedAltText =
+              product.images[0].altText &&
+              colorHandlize(product.images[0].altText);
+            if (handlizedAltText === handlizedColor) {
+              availableSizesArray.push(variant);
+            }
           });
         });
       }
@@ -307,7 +322,18 @@ const ProductGridItem = ({ product }) => {
       }
     }
 
+    // setHoverColor(
+    //   availableSizesArray[0] &&
+    //     availableSizesArray[0].images[0] &&
+    //     availableSizesArray[0].images[0].altText
+    // );
+
     setSizes(availableSizesArray);
+    console.log("presy", filterColor, availableSizesArray);
+
+    filterColor !== "" && filterColor !== undefined
+      ? setHoverColor(availableSizesArray[0].image.altText)
+      : setHoverColor(product.images[0].altText);
 
     // console.log("the sizes are", sizes, availableSizesArray.length);
   }
@@ -329,21 +355,26 @@ const ProductGridItem = ({ product }) => {
 
   useEffect(() => {
     // Define whether quick shop should show
+    console.log("filter changed");
 
-    handleColorChange(product.images[0].altText);
+    filterColor !== ""
+      ? handleColorChange(filterColor)
+      : handleColorChange(product.images[0].altText);
+
     if (
       product.images[0].altText &&
       product.images[0].altText.toLowerCase().includes("left")
     ) {
       setHoverColor("Left");
     } else {
-      setHoverColor(product.images[0].altText);
+      // setHoverColor(product.images[0].altText);
+      console.log("magic here", sizes);
     }
 
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
     }
-  }, []);
+  }, [filterColor]);
 
   function checkTooltipText() {
     // check for glove product
@@ -356,7 +387,7 @@ const ProductGridItem = ({ product }) => {
       setHoverColor(currentColor[0].altText);
     } else {
       // console.log("baby", sizes);
-      setHoverColor(sizes[0].selectedOptions[0].value);
+      sizes && setHoverColor(sizes[0].selectedOptions[0].value);
     }
   }
 

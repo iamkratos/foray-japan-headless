@@ -187,19 +187,22 @@ const Footer = () => {
             <h4>Follow Us</h4>
             <ul>
               <li>
-                <Link to="/collections/tops">
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/foraygolfusa/"
+                >
                   <Instagram />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/collections/tops">
+                <a target="_blank" href="https://www.facebook.com/FORAYGOLF">
                   <Facebook />
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/collections/tops">
+                <a target="_blank" href="https://twitter.com/foraygolf">
                   <Twitter />
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

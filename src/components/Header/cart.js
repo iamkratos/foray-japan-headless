@@ -267,7 +267,11 @@ const Cart = ({ style }) => {
 
   function handleRemoveAll(item) {
     // If the product is a dress, search for addon tag, then remove that product
-    if (item.title.includes("Dress")) {
+    if (
+      item.title.includes("Dress") &&
+      !item.title.includes("Dresses") &&
+      !item.title.includes("Girls")
+    ) {
       let lineItemsArray = [];
       let addonProductColor;
       let addonProductSize =
@@ -332,7 +336,11 @@ const Cart = ({ style }) => {
   }
 
   function handleUpdateQuantity(item, newQuantity) {
-    if (item.title.includes("Dress")) {
+    if (
+      item.title.includes("Dress") &&
+      !item.title.includes("Dresses") &&
+      !item.title.includes("Girls")
+    ) {
       // let lineItemsArray = [];
       let addonProductColor;
       let addonProductSize =
@@ -387,67 +395,77 @@ const Cart = ({ style }) => {
         </div>
       </div>
       <div className="cart-items-container">
-        {checkout.lineItems.map(item => {
-          console.log("cart here", item);
-          return (
-            <div className="cart-item-container" key={item.id}>
-              <div className="inner-wrap">
-                <div className="image-container">
-                  <img src={item.variant.image.src} alt="" />
-                </div>
-                <div className="content-container">
-                  <div className="inner-wrap">
-                    <div className="left-container">
-                      <h4>{item.title}</h4>
-                      {item.variant.selectedOptions.map(option => {
-                        return (
-                          <p className={"variant " + option.name.toLowerCase()}>
-                            <span class="label">{option.name}:</span>{" "}
-                            <span className="value">{option.value}</span>
-                          </p>
-                        );
-                      })}
-                      <p>
-                        <span class="label">Qty:</span>{" "}
-                        <span class="value">{item.quantity}</span>
-                      </p>
+        {checkout.lineItems.length > 0 ? (
+          checkout.lineItems.map(item => {
+            console.log("cart here", item);
+            return (
+              <div className="cart-item-container" key={item.id}>
+                <div className="inner-wrap">
+                  <div className="image-container">
+                    <img src={item.variant.image.src} alt="" />
+                  </div>
+                  <div className="content-container">
+                    <div className="inner-wrap">
+                      <div className="left-container">
+                        <h4>{item.title}</h4>
+                        {item.variant.selectedOptions.map(option => {
+                          return (
+                            <p
+                              className={"variant " + option.name.toLowerCase()}
+                            >
+                              <span class="label">{option.name}:</span>{" "}
+                              <span className="value">{option.value}</span>
+                            </p>
+                          );
+                        })}
+                        <p>
+                          <span class="label">Qty:</span>{" "}
+                          <span class="value">{item.quantity}</span>
+                        </p>
 
-                      <div className="right-container">
-                        <p className="price">${item.variant.price}</p>
-                      </div>
-                      {!item.title.includes("Add On") && (
-                        <div className="action-buttons">
-                          <button
-                            className="decrement"
-                            onClick={() =>
-                              handleUpdateQuantity(item, item.quantity - 1)
-                            }
-                          >
-                            -
-                          </button>
-                          <button
-                            className="increment"
-                            onClick={() =>
-                              handleUpdateQuantity(item, item.quantity + 1)
-                            }
-                          >
-                            +
-                          </button>
-                          <button
-                            className="remove-all"
-                            onClick={() => handleRemoveAll(item)}
-                          >
-                            Remove All
-                          </button>
+                        <div className="right-container">
+                          <p className="price">${item.variant.price}</p>
                         </div>
-                      )}
+                        {!item.title.includes("Add On") && (
+                          <div className="action-buttons">
+                            <button
+                              className="decrement"
+                              onClick={() =>
+                                handleUpdateQuantity(item, item.quantity - 1)
+                              }
+                            >
+                              -
+                            </button>
+                            <button
+                              className="increment"
+                              onClick={() =>
+                                handleUpdateQuantity(item, item.quantity + 1)
+                              }
+                            >
+                              +
+                            </button>
+                            <button
+                              className="remove-all"
+                              onClick={() => handleRemoveAll(item)}
+                            >
+                              Remove All
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            );
+          })
+        ) : (
+          <div className="no-item-container">
+            <div className="inner-wrap">
+              <p>There are no items in your cart.</p>
             </div>
-          );
-        })}
+          </div>
+        )}
       </div>
       <div className="cart-summary-container">
         <div className="inner-wrap">

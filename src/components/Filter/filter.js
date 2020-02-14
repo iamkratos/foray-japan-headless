@@ -1,7 +1,17 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
+import styled from "styled-components";
 
-const ProductFilter = ({ products, filteredProducts, setFilteredProducts }) => {
+const FilterContainer = styled.div`
+  flex: 1;
+`;
+
+const ProductFilter = ({
+  products,
+  filteredProducts,
+  setFilteredProducts,
+  setFilterColor,
+}) => {
   console.log("products here", products);
 
   function onlyUnique(value, index, self) {
@@ -30,6 +40,7 @@ const ProductFilter = ({ products, filteredProducts, setFilteredProducts }) => {
   console.log(finalColors);
 
   function filterByColor(handlelizedFilterColor) {
+    setFilterColor(handlelizedFilterColor);
     let filteredProducts = [];
     products.map(product => {
       let filteredProductValues = [];
@@ -54,17 +65,25 @@ const ProductFilter = ({ products, filteredProducts, setFilteredProducts }) => {
   }
 
   return (
-    <div>
-      <p>color filter</p>
-      {finalColors.map(regularCaseColor => {
-        let color = colorHandlize(regularCaseColor);
-        return (
-          <button onClick={() => filterByColor(color)} value={color}>
-            {color}
-          </button>
-        );
-      })}
-    </div>
+    <FilterContainer>
+      <h4>color filter</h4>
+      <div className="color-container">
+        <ul className="colors">
+          {finalColors.map(regularCaseColor => {
+            let color = colorHandlize(regularCaseColor);
+            return (
+              <li>
+                <button
+                  onClick={() => filterByColor(color)}
+                  value={color}
+                  className={"color-btn-container " + color}
+                ></button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </FilterContainer>
   );
 };
 

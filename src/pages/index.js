@@ -48,6 +48,9 @@ const IndexPage = () => {
               variants {
                 availableForSale
                 shopifyId
+                image {
+                  altText
+                }
 
                 selectedOptions {
                   name
