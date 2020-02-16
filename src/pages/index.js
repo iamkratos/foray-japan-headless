@@ -18,9 +18,7 @@ const ProductGridContainer = styled.section`
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allShopifyCollection(
-        filter: { title: { eq: "Graphic Floral Collection" } }
-      ) {
+      allShopifyCollection(filter: { title: { eq: "Home Page Slider" } }) {
         edges {
           node {
             id

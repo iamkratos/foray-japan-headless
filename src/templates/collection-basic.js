@@ -77,11 +77,18 @@ const CollectionPage = ({ data }) => {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filterColor, setFilterColor] = useState("");
+  const [filterSize, setFilterSize] = useState("");
 
   let productGridItems =
     filteredProducts && filteredProducts.length > 0
       ? filteredProducts
       : collection.products;
+
+  function handleResetFilters() {
+    productGridItems = [];
+    setFilteredProducts([]);
+    setFilterColor("");
+  }
   return (
     <Layout>
       <SEO title={collection.title} />
@@ -118,10 +125,14 @@ const CollectionPage = ({ data }) => {
       <CollectionContainer>
         <Wrapper flex>
           <ProductFilter
-            setFilteredProducts={setFilteredProducts}
             setFilterColor={setFilterColor}
+            filterColor={filterColor}
+            filterSize={filterSize}
+            setFilterSize={setFilterSize}
             filteredProducts={filteredProducts}
+            setFilteredProducts={setFilteredProducts}
             products={collection.products}
+            handleResetFilters={handleResetFilters}
           />
 
           <ProductGridContainer>

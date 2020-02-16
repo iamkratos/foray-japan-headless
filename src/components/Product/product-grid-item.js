@@ -181,6 +181,7 @@ const ProductGridItemContainer = styled.div`
 
 const ProductGridItem = ({ product, filterColor }) => {
   const { addProductToCart, colorHandlize } = useContext(StoreContext);
+  // console.log("filter color", filterColor);
   console.log("filter color", filterColor);
 
   // Hover Over Effect
@@ -247,6 +248,7 @@ const ProductGridItem = ({ product, filterColor }) => {
       handleSizesSort(colorHandlize(color));
     } else {
       console.log("filter case 2");
+      setCurrentColor([]);
       handleSizesSort();
     }
   }
@@ -412,6 +414,7 @@ const ProductGridItem = ({ product, filterColor }) => {
               ? currentColor.map((image, index) => {
                   // fetchInventoryQuantities();
                   if (index < 2) {
+                    console.log("case x", currentColor);
                     return (
                       <Img
                         className={`image-${index} ${
