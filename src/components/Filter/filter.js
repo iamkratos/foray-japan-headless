@@ -15,6 +15,17 @@ const FilterContainer = styled.div`
 
   .current-filter {
     margin-bottom: 20px;
+    .title-container {
+      h1 {
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 20px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid #ccc;
+        display: inline-block;
+      }
+    }
     button {
       display: block;
       font-weight: bold;
@@ -128,6 +139,11 @@ const FilterContainer = styled.div`
             line-height: 1;
             padding: 5px;
             min-width: 82px;
+
+            &.active {
+              background-color: #000;
+              color: #fff;
+            }
           }
         }
       }
@@ -144,9 +160,12 @@ const ProductFilter = ({
   filteredProducts,
   setFilteredProducts,
   handleResetFilters,
+  setTootipColor,
+  tooltipColor,
+  collection,
+  currentColorTooltip,
+  setCurrentColorTooltip,
 }) => {
-  const [tooltipColor, setTootipColor] = useState("");
-  const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
@@ -186,7 +205,7 @@ const ProductFilter = ({
     });
   });
   finalSizes = finalSizes.filter(onlyUnique);
-  console.log("legit sizes", finalSizes);
+  // console.log("legit sizes", finalSizes);
 
   function filterByColor(handlelizedFilterColor, filterFullTitle) {
     setFilterColor(handlelizedFilterColor);
@@ -209,47 +228,77 @@ const ProductFilter = ({
         filteredProducts.push(product);
       }
     });
-    console.log("the filtered products are", filteredProducts.length);
+    // console.log("the filtered products are", filteredProducts.length);
     setFilteredProducts(filteredProducts);
     setTootipColor(filterFullTitle);
     setCurrentColorTooltip(filterFullTitle);
+    setFilterSize("");
   }
 
   // TODO: Need to finalize this
 
-  function filterBySize(handlelizedFilterSize, sizeFullTitle) {
-    // console.log(filteredProducts);
+  function filterBySize(handlelizedFilterSize, sizeFullTitle, colorFilter) {
     let sizeFilteredProducts = [];
+    setFilterSize(handlelizedFilterSize);
 
-    let productsToFilter =
-      filteredProducts.length > 0 ? filteredProducts : products;
+    let productsToFilter = products;
+    // console.log("to filter", productsToFilter);
+
     productsToFilter.map(product => {
       let filteredProductSizeValues = [];
-      product.options.map(option => {
-        if (option.name === "Size") {
-          option.values.map(value => {
-            let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
-            console.log(
-              "right at the top",
-              handlizedValue,
-              handlelizedFilterSize
+
+      // 1. If there is a color filter, check if the product has that first
+      console.log("color filter", colorFilter);
+      if (colorFilter !== "" || colorFilter !== undefined) {
+        let doesProductHaveColor = false;
+        product.options[0].values.map(colorVariant => {
+          if (
+            colorHandlizeAndReplaceSimilarColors(colorVariant) === colorFilter
+          ) {
+            doesProductHaveColor = true;
+          }
+        });
+        if (doesProductHaveColor) {
+          product.variants.map(variant => {
+            let handlizedColor = colorFilter;
+            let handlizedFilterSize = handlelizedFilterSize;
+
+            let handlizedVariantColor = colorHandlizeAndReplaceSimilarColors(
+              variant.selectedOptions[0].value
             );
-            if (handlizedValue === handlelizedFilterSize) {
-              filteredProductSizeValues.push(value);
+
+            let handlizedVariantSize = colorHandlizeAndReplaceSimilarColors(
+              variant.selectedOptions[1].value
+            );
+
+            console.log(
+              "yooo",
+              handlizedVariantColor,
+              handlizedColor,
+              handlizedVariantSize,
+              handlizedFilterSize
+            );
+
+            if (
+              variant.availableForSale &&
+              handlizedVariantColor.includes(handlizedColor) &&
+              handlizedVariantSize === handlizedFilterSize
+            ) {
+              console.log("i dont sleep");
+              sizeFilteredProducts.push(product);
             }
           });
         }
-      });
-      if (filteredProductSizeValues.length > 0) {
-        sizeFilteredProducts.push(product);
+        console.log("triggered", sizeFilteredProducts);
+        setFilteredProducts(sizeFilteredProducts);
+        // setFilterColor(colorFilter);
+      } else {
+        // 2. No color selected so sort thru the first available variant
+        console.log("no color");
       }
+
+      console.log("final filter products", filteredProductSizeValues);
     });
-    console.log(
-      "size filtered products",
-      sizeFilteredProducts,
-      products.length
-    );
-    setFilteredProducts(sizeFilteredProducts);
   }
 
   function handleColorFilterHover(color) {
@@ -258,6 +307,7 @@ const ProductFilter = ({
 
   // this for monitoring the tooltip
   function handleColorFilterReset() {
+    console.log(currentColorTooltip, tooltipColor);
     if (currentColorTooltip !== tooltipColor) {
       setTootipColor(currentColorTooltip);
     }
@@ -266,6 +316,9 @@ const ProductFilter = ({
   return (
     <FilterContainer>
       <div className="current-filter">
+        <div className="title-container">
+          <h1>{collection.title}</h1>
+        </div>
         <div className="inner-wrap">
           <button onClick={handleResetFilters}>Remove All Filters</button>
         </div>
@@ -303,14 +356,20 @@ const ProductFilter = ({
             {finalSizes.map(regularCaseSize => {
               let size = colorHandlize(regularCaseSize);
               return (
-                <li className={"size-" + size}>
+                <li prop={filterSize} className={"size-" + size}>
                   <button
                     // onMouseEnter={() =>
                     //   handleColorFilterHover(regularCaseColor)
                     // }
-                    onClick={() => filterBySize(size, regularCaseSize)}
+                    onClick={() =>
+                      filterBySize(size, regularCaseSize, filterColor)
+                    }
                     value={size}
-                    className={"size-btn-container " + size}
+                    className={
+                      filterSize == size
+                        ? "size-btn-container active " + size
+                        : "size-btn-container " + size
+                    }
                   >
                     {regularCaseSize}
                   </button>

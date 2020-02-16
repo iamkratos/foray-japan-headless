@@ -182,7 +182,6 @@ const ProductGridItemContainer = styled.div`
 const ProductGridItem = ({ product, filterColor }) => {
   const { addProductToCart, colorHandlize } = useContext(StoreContext);
   // console.log("filter color", filterColor);
-  console.log("filter color", filterColor);
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -226,7 +225,6 @@ const ProductGridItem = ({ product, filterColor }) => {
         let altTextCheck =
           image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
 
-        console.log(altTextCheck, " altt", filterCondition);
         if (
           altTextCheck === filterCondition ||
           (altTextCheck && altTextCheck.includes(filterCondition))
@@ -237,18 +235,17 @@ const ProductGridItem = ({ product, filterColor }) => {
         }
       });
 
-      console.log("magic happens here", filterColor, filterCondition);
       filterColor === undefined &&
         // setHoverColor(filterCondition);
         setHoverColor("yeesss");
 
       setCurrentColor(imageArray);
-      console.log("filter case 1");
+      console.log("filter case 1", imageArray);
       // Sort sizes
       handleSizesSort(colorHandlize(color));
     } else {
       console.log("filter case 2");
-      setCurrentColor([]);
+
       handleSizesSort();
     }
   }
@@ -256,7 +253,7 @@ const ProductGridItem = ({ product, filterColor }) => {
   const [sizes, setSizes] = useState([]);
 
   function handleSizesSort(selectedColor) {
-    console.log("selected color is", selectedColor);
+    // console.log("selected color is", selectedColor);
     let availableSizesArray = [];
 
     // Check if product is a glove
@@ -288,25 +285,31 @@ const ProductGridItem = ({ product, filterColor }) => {
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        console.log("case a");
+        // console.log("case a");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
-            console.log(selectedColor, handlizedColor);
             if (handlizedColor.includes(selectedColor)) {
               availableSizesArray.push(variant);
+              console.log("one side", selectedColor, handlizedColor);
             }
           });
         });
-        console.log("sizes here", availableSizesArray);
+        // console.log("sizes here", availableSizesArray);
       } else {
-        // console.log("case b");
+        console.log("case b");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
             let handlizedAltText =
               product.images[0].altText &&
               colorHandlize(product.images[0].altText);
+            console.log(
+              "log",
+              product.images[0].altText,
+              handlizedColor,
+              handlizedAltText
+            );
             if (handlizedAltText === handlizedColor) {
               availableSizesArray.push(variant);
             }
@@ -330,8 +333,8 @@ const ProductGridItem = ({ product, filterColor }) => {
     //     availableSizesArray[0].images[0].altText
     // );
 
-    setSizes(availableSizesArray);
     console.log("presy", filterColor, availableSizesArray);
+    setSizes(availableSizesArray);
 
     filterColor !== "" && filterColor !== undefined
       ? setHoverColor(availableSizesArray[0].image.altText)
@@ -344,7 +347,7 @@ const ProductGridItem = ({ product, filterColor }) => {
   const [showQuickShop, setShowQuickShop] = useState(true);
 
   function handleQuickShopHoverIn(e) {
-    console.log("hover in");
+    // console.log("hover in");
     setShowQuickShop(false);
   }
   function handleQuickShopHoverOut(e) {
@@ -357,7 +360,7 @@ const ProductGridItem = ({ product, filterColor }) => {
 
   useEffect(() => {
     // Define whether quick shop should show
-    console.log("filter changed");
+    // console.log("filter changed");
 
     filterColor !== ""
       ? handleColorChange(filterColor)
@@ -370,12 +373,13 @@ const ProductGridItem = ({ product, filterColor }) => {
       setHoverColor("Left");
     } else {
       // setHoverColor(product.images[0].altText);
-      console.log("magic here", sizes);
+      // console.log("magic here", sizes);
     }
 
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
     }
+    console.log("current color", currentColor);
   }, [filterColor]);
 
   function checkTooltipText() {
@@ -414,7 +418,7 @@ const ProductGridItem = ({ product, filterColor }) => {
               ? currentColor.map((image, index) => {
                   // fetchInventoryQuantities();
                   if (index < 2) {
-                    console.log("case x", currentColor);
+                    // console.log("case x", currentColor);
                     return (
                       <Img
                         className={`image-${index} ${
@@ -443,7 +447,7 @@ const ProductGridItem = ({ product, filterColor }) => {
 
           {/* Sizes Logic */}
           <div className="quick-shop-container">
-            {/* {console.log(sizes)} */}
+            {console.log("sizes here", sizes)}
             {showQuickShopText === true ? (
               <div
                 className="inner-wrap"
@@ -461,6 +465,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                   Quick Shop
                 </button>
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
+                  {console.log("here are the sizes pre-map", sizes)}
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
                     sizes.map(size => {

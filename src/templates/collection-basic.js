@@ -13,6 +13,11 @@ import ProductFilter from "../components/Filter/filter";
 
 const ProductGridContainer = styled.section`
   flex: 5;
+
+  .no-results {
+    font-size: 18px;
+    text-align: center;
+  }
 `;
 const BannerContainer = styled.section`
   padding-bottom: 30px;
@@ -78,16 +83,22 @@ const CollectionPage = ({ data }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filterColor, setFilterColor] = useState("");
   const [filterSize, setFilterSize] = useState("");
+  const [currentColorTooltip, setCurrentColorTooltip] = useState("");
+  const [tooltipColor, setTootipColor] = useState("");
 
-  let productGridItems =
-    filteredProducts && filteredProducts.length > 0
-      ? filteredProducts
-      : collection.products;
+  useEffect(() => {
+    setFilteredProducts(collection.products);
+  }, []);
+
+  let productGridItems = filteredProducts;
 
   function handleResetFilters() {
     productGridItems = [];
-    setFilteredProducts([]);
+    setFilteredProducts(collection.products);
     setFilterColor("");
+    setFilterSize("");
+    setTootipColor("");
+    setCurrentColorTooltip("");
   }
   return (
     <Layout>
@@ -131,11 +142,19 @@ const CollectionPage = ({ data }) => {
             setFilterSize={setFilterSize}
             filteredProducts={filteredProducts}
             setFilteredProducts={setFilteredProducts}
+            collection={collection}
             products={collection.products}
             handleResetFilters={handleResetFilters}
+            tooltipColor={tooltipColor}
+            setTootipColor={setTootipColor}
+            currentColorTooltip={currentColorTooltip}
+            setCurrentColorTooltip={setCurrentColorTooltip}
           />
 
           <ProductGridContainer>
+            {productGridItems.length === 0 && (
+              <h2 className="no-results">No products found.</h2>
+            )}
             <Wrapper flex>
               {productGridItems.map(product => {
                 return (
