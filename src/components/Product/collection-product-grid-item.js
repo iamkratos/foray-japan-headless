@@ -14,7 +14,11 @@ const ProductGridItem = ({
   setFilterColor,
   filteredProducts,
 }) => {
-  const { addProductToCart, colorHandlize } = useContext(StoreContext);
+  const {
+    addProductToCart,
+    colorHandlize,
+    colorHandlizeAndReplaceSimilarColors,
+  } = useContext(StoreContext);
 
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -44,33 +48,36 @@ const ProductGridItem = ({
   finalColors = finalColors.filter(onlyUnique);
 
   // Handle Color Change
-  const [currentColor, setCurrentColor] = useState([]);
   const [currentProductImages, setCurrentProductImages] = useState([]);
-  let imageArray = [];
+
   function sortImagesAltText(color) {
     console.log("fendi", color);
-    imageArray = [];
-    let filterColorCondition = color.replace(/\s+/g, "-").toLowerCase();
-    product.images.map(image => {
-      let altTextCheck =
-        image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
+    let imageArray = [];
 
-      console.log(
-        "filter condition",
-        altTextCheck,
-        filterColorCondition,
-        altTextCheck && altTextCheck.includes(filterColorCondition)
-      );
-      if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
-        imageArray.push(image);
-      } else {
-      }
-    });
+    if (color) {
+      imageArray = [];
+      let filterColorCondition = color.replace(/\s+/g, "-").toLowerCase();
+      product.images.map(image => {
+        let altTextCheck =
+          image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
+
+        console.log(
+          "filter condition",
+          altTextCheck,
+          filterColorCondition,
+          altTextCheck && altTextCheck.includes(filterColorCondition)
+        );
+        if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
+          imageArray.push(image);
+        } else {
+        }
+      });
+    }
 
     // setCurrentColor(imageArray);
     setCurrentProductImages(imageArray);
   }
-  console.log("image array here", imageArray, currentProductImages);
+  console.log("image array here", currentProductImages);
 
   function handleColorChange(color) {
     // If there are multiple colors, set up the color/size switcher
@@ -78,10 +85,33 @@ const ProductGridItem = ({
       // Set color images
       sortImagesAltText(color);
       // Sort sizes
-      handleSizesSort(colorHandlize(filterColor));
-      console.log("color sort 1");
+      handleSizesSort(colorHandlize(color));
+      console.log("color sort 1", color, filterColor);
     } else {
-      console.log("color sort 2");
+      console.log("color sort 2", product, currentProductImages);
+      if (product.images[0]) {
+        product.images[0].altText &&
+          console.log(
+            "color sort 2.5",
+            colorHandlizeAndReplaceSimilarColors(product.images[0].altText)
+          );
+
+        // Variant-less products don't have alt text
+        if (product.images[0].altText) {
+          const oldColor =
+            product.images[0].altText &&
+            colorHandlizeAndReplaceSimilarColors(product.images[0].altText);
+
+          // Set color images
+          sortImagesAltText(oldColor);
+          // Sort sizes
+          handleSizesSort(colorHandlize(oldColor));
+        } else {
+          console.log("color sort 3");
+          sortImagesAltText();
+          handleSizesSort();
+        }
+      }
     }
   }
 
@@ -208,12 +238,12 @@ const ProductGridItem = ({
   function checkTooltipText() {
     // check for glove product
     if (
-      currentColor[0] &&
-      !currentColor[0].altText.toLowerCase().includes("left") &&
-      hoverColor != currentColor[0].altText
+      currentProductImages[0].altText &&
+      !currentProductImages[0].altText.toLowerCase().includes("left") &&
+      hoverColor != currentProductImages[0].altText
     ) {
       // console.log("current color is", currentColor[0].altText);
-      setHoverColor(currentColor[0].altText);
+      setHoverColor(currentProductImages[0].altText);
     } else {
       // console.log("baby", sizes);
       sizes && setHoverColor(sizes[0].selectedOptions[0].value);
@@ -228,8 +258,6 @@ const ProductGridItem = ({
       }
     });
 
-  console.log("current product images", imageArray);
-
   return (
     <ProductStyles>
       <div className="inner-wrap">
@@ -239,7 +267,7 @@ const ProductGridItem = ({
           onMouseLeave={handleHoverOut}
         >
           <Link to={`/products/${product.handle}`}>
-            {currentProductImages.length > 2
+            {currentProductImages.length > 0
               ? currentProductImages.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
                   // console.log("first variant", firstVariant, image);

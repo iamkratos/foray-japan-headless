@@ -81,8 +81,8 @@ const CollectionPage = ({ data }) => {
     data.allFile.edges[0] && data.allFile.edges[0].node;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [filterColor, setFilterColor] = useState("none");
-  const [filterSize, setFilterSize] = useState("none");
+  const [filterColor, setFilterColor] = useState("");
+  const [filterSize, setFilterSize] = useState("");
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
 
@@ -91,12 +91,11 @@ const CollectionPage = ({ data }) => {
   }, []);
 
   function handleResetFilters() {
-    setFilteredProducts([]);
-    setFilteredProducts(collection.products);
     setFilterColor("");
     setFilterSize("");
     setTootipColor("");
     setCurrentColorTooltip("");
+    setFilteredProducts(collection.products);
   }
   return (
     <Layout>

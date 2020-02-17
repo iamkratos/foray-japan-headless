@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import styled from "styled-components";
 
+import { TransitionMixin } from "../helpers";
+
 const FilterContainer = styled.div`
   flex: 1;
 
@@ -139,8 +141,9 @@ const FilterContainer = styled.div`
             line-height: 1;
             padding: 5px;
             min-width: 82px;
+            ${TransitionMixin(".25s")}
 
-            &.active {
+            &.active, &:hover {
               background-color: #000;
               color: #fff;
             }
@@ -208,6 +211,7 @@ const ProductFilter = ({
   // console.log("legit sizes", finalSizes);
 
   function filterByColor(handlelizedFilterColor, filterFullTitle) {
+    console.log("specs", handlelizedFilterColor);
     setFilterColor(handlelizedFilterColor);
     let filteredProducts = [];
     products.map(product => {
@@ -217,6 +221,7 @@ const ProductFilter = ({
           option.values.map(value => {
             console.log(value);
             let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
+            console.log("specs", handlizedValue, handlelizedFilterColor);
             if (handlizedValue === handlelizedFilterColor) {
               filteredProductValues.push(value);
             }
@@ -228,7 +233,11 @@ const ProductFilter = ({
         filteredProducts.push(product);
       }
     });
-    // console.log("the filtered products are", filteredProducts.length);
+    console.log(
+      "the filtered products are",
+      filteredProducts,
+      filteredProducts.length
+    );
     setFilteredProducts(filteredProducts);
     setTootipColor(filterFullTitle);
     setCurrentColorTooltip(filterFullTitle);
@@ -250,7 +259,7 @@ const ProductFilter = ({
 
       // 1. If there is a color filter, check if the product has that first
       console.log("color filter", colorFilter);
-      if (colorFilter !== "" || colorFilter !== undefined) {
+      if (colorFilter && (colorFilter !== "" || colorFilter !== undefined)) {
         let doesProductHaveColor = false;
         product.options[0].values.map(colorVariant => {
           if (
