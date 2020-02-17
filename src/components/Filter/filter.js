@@ -240,9 +240,10 @@ const ProductFilter = ({
   function filterBySize(handlelizedFilterSize, sizeFullTitle, colorFilter) {
     let sizeFilteredProducts = [];
     setFilterSize(handlelizedFilterSize);
+    setFilterColor(colorFilter);
+    console.log("to filter", colorFilter);
 
     let productsToFilter = products;
-    // console.log("to filter", productsToFilter);
 
     productsToFilter.map(product => {
       let filteredProductSizeValues = [];
@@ -258,40 +259,37 @@ const ProductFilter = ({
             doesProductHaveColor = true;
           }
         });
+        console.log("does it have color", doesProductHaveColor);
         if (doesProductHaveColor) {
+          console.log("we have a winner", product);
           product.variants.map(variant => {
             let handlizedColor = colorFilter;
             let handlizedFilterSize = handlelizedFilterSize;
-
             let handlizedVariantColor = colorHandlizeAndReplaceSimilarColors(
               variant.selectedOptions[0].value
             );
-
             let handlizedVariantSize = colorHandlizeAndReplaceSimilarColors(
               variant.selectedOptions[1].value
             );
 
             console.log(
-              "yooo",
-              handlizedVariantColor,
-              handlizedColor,
-              handlizedVariantSize,
-              handlizedFilterSize
+              "glock",
+              variant.availableForSale &&
+                handlizedVariantColor.includes(handlizedColor),
+              handlizedVariantSize === handlizedFilterSize
             );
-
             if (
               variant.availableForSale &&
               handlizedVariantColor.includes(handlizedColor) &&
               handlizedVariantSize === handlizedFilterSize
             ) {
-              console.log("i dont sleep");
               sizeFilteredProducts.push(product);
             }
           });
+          setFilteredProducts(sizeFilteredProducts);
         }
-        console.log("triggered", sizeFilteredProducts);
-        setFilteredProducts(sizeFilteredProducts);
-        // setFilterColor(colorFilter);
+
+        console.log("triggered", sizeFilteredProducts, filteredProducts);
       } else {
         // 2. No color selected so sort thru the first available variant
         console.log("no color");

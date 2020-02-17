@@ -61,6 +61,10 @@ export const StoreProvider = ({ children }) => {
     return alteredColor;
   };
 
+  // function handleProductGridItemVariantChange(colorHandle, product) {
+
+  // }
+
   useEffect(() => {
     initializeCheckout();
   }, []);

@@ -7,7 +7,7 @@ import Layout from "../components/layout";
 import styled from "styled-components";
 import { TransitionMixin, media } from "../components/helpers";
 import Img from "gatsby-image";
-import ProductGridItem from "../components/Product/product-grid-item";
+import CollectionProductGridItem from "../components/Product/collection-product-grid-item";
 import SEO from "../components/seo";
 import ProductFilter from "../components/Filter/filter";
 
@@ -81,8 +81,8 @@ const CollectionPage = ({ data }) => {
     data.allFile.edges[0] && data.allFile.edges[0].node;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [filterColor, setFilterColor] = useState("");
-  const [filterSize, setFilterSize] = useState("");
+  const [filterColor, setFilterColor] = useState("none");
+  const [filterSize, setFilterSize] = useState("none");
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
 
@@ -90,10 +90,8 @@ const CollectionPage = ({ data }) => {
     setFilteredProducts(collection.products);
   }, []);
 
-  let productGridItems = filteredProducts;
-
   function handleResetFilters() {
-    productGridItems = [];
+    setFilteredProducts([]);
     setFilteredProducts(collection.products);
     setFilterColor("");
     setFilterSize("");
@@ -152,16 +150,18 @@ const CollectionPage = ({ data }) => {
           />
 
           <ProductGridContainer>
-            {productGridItems.length === 0 && (
+            {filteredProducts.length === 0 && (
               <h2 className="no-results">No products found.</h2>
             )}
             <Wrapper flex>
-              {productGridItems.map(product => {
+              {filteredProducts.map(product => {
                 return (
                   <LazyLoad height={200}>
-                    <ProductGridItem
+                    <CollectionProductGridItem
                       product={product}
                       filterColor={filterColor}
+                      setFilterColor={setFilterColor}
+                      filteredProducts={filteredProducts}
                     />
                   </LazyLoad>
                 );
