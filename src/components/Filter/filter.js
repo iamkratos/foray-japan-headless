@@ -300,8 +300,59 @@ const ProductFilter = ({
 
         console.log("triggered", sizeFilteredProducts, filteredProducts);
       } else {
-        // 2. No color selected so sort thru the first available variant
-        console.log("no color");
+        // 2. No color selected so sort thru the first available variant of collection products
+        console.log(
+          "no color selectd, so just go thru sizes",
+          handlelizedFilterSize
+        );
+
+        let sizeFilteredProducts = [];
+        collection.products.map(product => {
+          // check within variant to see if it's available and has the size
+          console.log(product);
+          let sizeFilteredValues = [];
+          product.variants.map((variant, index) => {
+            // set filter condition so it only checks the first variant color
+            // -- check if it has color
+            let initialSizeFilterCondition;
+            let doesProductHaveColor = variant.selectedOptions[1]
+              ? true
+              : false;
+            if (index === 0 && doesProductHaveColor) {
+              initialSizeFilterCondition = variant.selectedOptions[0].value;
+            }
+
+            // if it doesn;t have a color
+
+            if (!doesProductHaveColor) {
+              let isVariantAvailable = variant.availableForSale;
+              let doesVariantHaveSize =
+                colorHandlizeAndReplaceSimilarColors(
+                  variant.selectedOptions[0].value
+                ) === handlelizedFilterSize
+                  ? true
+                  : false;
+
+              console.log(
+                "has no color",
+                isVariantAvailable,
+                colorHandlizeAndReplaceSimilarColors(
+                  variant.selectedOptions[0].value
+                ) === handlelizedFilterSize
+              );
+
+              if (
+                isVariantAvailable &&
+                colorHandlizeAndReplaceSimilarColors(
+                  variant.selectedOptions[0].value
+                ) === handlelizedFilterSize
+              ) {
+                sizeFilteredValues.push(true);
+              }
+            }
+          });
+          console.log("choppa", sizeFilteredValues);
+        });
       }
 
       console.log("final filter products", filteredProductSizeValues);
