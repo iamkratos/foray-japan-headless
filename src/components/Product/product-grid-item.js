@@ -226,12 +226,10 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor("yeesss");
 
       setCurrentColor(imageArray);
-      console.log("filter case 1", imageArray);
+
       // Sort sizes
       handleSizesSort(colorHandlize(color));
     } else {
-      console.log("filter case 2");
-
       handleSizesSort();
     }
   }
@@ -277,7 +275,6 @@ const ProductGridItem = ({ product, filterColor }) => {
             let handlizedColor = colorHandlize(option.value);
             if (handlizedColor.includes(selectedColor)) {
               availableSizesArray.push(variant);
-              console.log("one side", selectedColor, handlizedColor);
             }
           });
         });
@@ -290,12 +287,7 @@ const ProductGridItem = ({ product, filterColor }) => {
             let handlizedAltText =
               product.images[0].altText &&
               colorHandlize(product.images[0].altText);
-            console.log(
-              "log",
-              product.images[0].altText,
-              handlizedColor,
-              handlizedAltText
-            );
+
             if (handlizedAltText === handlizedColor) {
               availableSizesArray.push(variant);
             }
@@ -319,7 +311,6 @@ const ProductGridItem = ({ product, filterColor }) => {
     //     availableSizesArray[0].images[0].altText
     // );
 
-    console.log("presy", filterColor, availableSizesArray);
     setSizes(availableSizesArray);
 
     filterColor !== "" && filterColor !== undefined
@@ -433,7 +424,6 @@ const ProductGridItem = ({ product, filterColor }) => {
 
           {/* Sizes Logic */}
           <div className="quick-shop-container">
-            {console.log("sizes here", sizes)}
             {showQuickShopText === true ? (
               <div
                 className="inner-wrap"
@@ -451,7 +441,6 @@ const ProductGridItem = ({ product, filterColor }) => {
                   Quick Shop
                 </button>
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
-                  {console.log("here are the sizes pre-map", sizes)}
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
                     sizes.map(size => {

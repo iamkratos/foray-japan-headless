@@ -51,7 +51,6 @@ const ProductGridItem = ({
   const [currentProductImages, setCurrentProductImages] = useState([]);
 
   function sortImagesAltText(color) {
-    console.log("fendi", color);
     let imageArray = [];
 
     if (color) {
@@ -61,12 +60,6 @@ const ProductGridItem = ({
         let altTextCheck =
           image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
 
-        console.log(
-          "filter condition",
-          altTextCheck,
-          filterColorCondition,
-          altTextCheck && altTextCheck.includes(filterColorCondition)
-        );
         if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
           imageArray.push(image);
         } else {
@@ -77,7 +70,6 @@ const ProductGridItem = ({
     // setCurrentColor(imageArray);
     setCurrentProductImages(imageArray);
   }
-  console.log("image array here", currentProductImages);
 
   function handleColorChange(color) {
     // If there are multiple colors, set up the color/size switcher
@@ -86,16 +78,8 @@ const ProductGridItem = ({
       sortImagesAltText(color);
       // Sort sizes
       handleSizesSort(colorHandlize(color));
-      console.log("color sort 1", color, filterColor);
     } else {
-      console.log("color sort 2", product, currentProductImages);
       if (product.images[0]) {
-        product.images[0].altText &&
-          console.log(
-            "color sort 2.5",
-            colorHandlizeAndReplaceSimilarColors(product.images[0].altText)
-          );
-
         // Variant-less products don't have alt text
         if (product.images[0].altText) {
           const oldColor =
@@ -107,7 +91,6 @@ const ProductGridItem = ({
           // Sort sizes
           handleSizesSort(colorHandlize(oldColor));
         } else {
-          console.log("color sort 3");
           sortImagesAltText();
           handleSizesSort();
         }
@@ -156,25 +139,19 @@ const ProductGridItem = ({
             let handlizedColor = colorHandlize(option.value);
             if (handlizedColor.includes(selectedColor)) {
               availableSizesArray.push(variant);
-              console.log("one side", selectedColor, handlizedColor);
             }
           });
         });
         // console.log("sizes here", availableSizesArray);
       } else {
-        console.log("case b");
+        // console.log("case b");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
             let handlizedAltText =
               product.images[0].altText &&
               colorHandlize(product.images[0].altText);
-            console.log(
-              "log",
-              product.images[0].altText,
-              handlizedColor,
-              handlizedAltText
-            );
+
             if (handlizedAltText === handlizedColor) {
               availableSizesArray.push(variant);
             }
@@ -198,7 +175,6 @@ const ProductGridItem = ({
     //     availableSizesArray[0].images[0].altText
     // );
 
-    console.log("presy", filterColor, availableSizesArray);
     setSizes(availableSizesArray);
 
     filterColor !== "" && filterColor !== undefined
@@ -225,8 +201,6 @@ const ProductGridItem = ({
   const [hoverColor, setHoverColor] = useState("none");
 
   useEffect(() => {
-    console.log("use effect running", filterColor);
-
     // Define whether quick shop should show
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
@@ -300,7 +274,6 @@ const ProductGridItem = ({
 
           {/* Sizes Logic */}
           <div className="quick-shop-container">
-            {console.log("sizes here", sizes)}
             {showQuickShopText === true ? (
               <div
                 className="inner-wrap"
@@ -318,7 +291,6 @@ const ProductGridItem = ({
                   Quick Shop
                 </button>
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
-                  {console.log("here are the sizes pre-map", sizes)}
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
                     sizes.map(size => {
@@ -364,7 +336,7 @@ const ProductGridItem = ({
               )}
             </div>
             <div className="color-container">
-              <ul class="colors" onMouseLeave={checkTooltipText}>
+              <ul className="colors" onMouseLeave={checkTooltipText}>
                 {finalColors.map((color, i) => {
                   let colorHandle = color
                     .replace(/\s+/g, "-")

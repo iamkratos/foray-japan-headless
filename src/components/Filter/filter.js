@@ -2,22 +2,67 @@ import React, { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import styled from "styled-components";
 
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 
 const FilterContainer = styled.div`
   flex: 1;
+  position: fixed;
+  left: 0;
+  top: calc(100% - 40px);
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  transform: translate3d(0px, 0%, 0px);
+  height: 80vh;
+  ${TransitionMixin(".25s")}
+  ${media.medium`z-index: 100; position: static; `}
+
+  &.active {
+    transform: translate3d(0px, -60%, 0px);
+  }
+
+  > .inner-wrap {
+    max-width: 90vw;
+    margin: 0 auto;
+
+    .scroll-container {
+      max-height: 300px;
+      overflow-y: scroll;
+      ${media.medium`max-height: 100%; overflow-y: initial;`}
+    }
+  }
+
+  .filter-mobile-trigger {
+    height: 40px;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${media.medium`display: none;`}
+
+    button {
+      color: #fff;
+      font-weight: bold;
+      width: 100%;
+      height: 100%;
+      -webkit-appearance: none;
+      background-color: #000;
+    }
+  }
 
   .color-container {
     .colors {
-      margin-left: -6px;
       display: flex;
       flex-wrap: wrap;
+      ${media.medium`margin-left: -6px;`}
     }
   }
 
   .current-filter {
     margin-bottom: 20px;
     .title-container {
+      padding: 20px 0 0;
+      ${media.medium`padding: 0;`}
       h1 {
         font-size: 16px;
         text-transform: uppercase;
@@ -37,6 +82,8 @@ const FilterContainer = styled.div`
       border: none;
       box-shadow: none;
       padding: 0px;
+      color: #777;
+      background-color: #fff;
     }
   }
 
@@ -56,8 +103,9 @@ const FilterContainer = styled.div`
       .sizes {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 0 0 -6px;
+        margin: 0;
         padding: 0px;
+        ${media.medium`margin: 0 0 0 -6px;`}
 
         li {
           list-style: none;
@@ -141,6 +189,8 @@ const FilterContainer = styled.div`
             line-height: 1;
             padding: 5px;
             min-width: 82px;
+            background-color: #fff;
+            -webkit-appearance: none;
             ${TransitionMixin(".25s")}
 
             &.active, &:hover {
@@ -159,9 +209,10 @@ const FilterContainer = styled.div`
       .features {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 0 0 -6px;
+        margin: 0;
         padding: 0px;
         list-style: none;
+        ${media.medium`margin: 0 0 0 -6px;`}
         li {
           margin: 2px 5px 7px;
           flex: 0 0 45%;
@@ -216,6 +267,13 @@ const ProductFilter = ({
     StoreContext
   );
 
+  // Mobile Fitler
+  const [toggleMobileFilter, setToggleMobileFilter] = useState(false);
+
+  function handleMobileFilterToggle() {
+    setToggleMobileFilter(!toggleMobileFilter);
+  }
+
   //   1. Find All Unique Values of Color Variant
 
   let finalColors = [];
@@ -260,10 +318,8 @@ const ProductFilter = ({
   });
 
   finalFeatureTags = finalFeatureTags.filter(onlyUnique);
-  console.log("legit features", finalFeatureTags);
 
   function filterByColor(handlelizedFilterColor, filterFullTitle) {
-    console.log("specs", handlelizedFilterColor);
     setFilterColor(handlelizedFilterColor);
     let filteredProducts = [];
     products.map(product => {
@@ -271,9 +327,7 @@ const ProductFilter = ({
       product.options.map(option => {
         if (option.name === "Color") {
           option.values.map(value => {
-            console.log(value);
             let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
-            console.log("specs", handlizedValue, handlelizedFilterColor);
             if (handlizedValue === handlelizedFilterColor) {
               filteredProductValues.push(value);
             }
@@ -285,11 +339,7 @@ const ProductFilter = ({
         filteredProducts.push(product);
       }
     });
-    console.log(
-      "the filtered products are",
-      filteredProducts,
-      filteredProducts.length
-    );
+
     setFilteredProducts(filteredProducts);
     setTootipColor(filterFullTitle);
     setCurrentColorTooltip(filterFullTitle);
@@ -301,8 +351,6 @@ const ProductFilter = ({
     let sizeFilteredProducts = [];
     setFilterSize(handlelizedFilterSize);
     setFilterColor(colorFilter);
-
-    console.log("filter by size");
 
     let productsToFilter = products;
 
@@ -426,11 +474,6 @@ const ProductFilter = ({
           ) {
             doesProductHaveColor = true;
           }
-          console.log(
-            "does product have color",
-            1 + colorHandlizeAndReplaceSimilarColors(colorVariant),
-            2 + filterColor
-          );
         });
       } else {
         console.log("no color selected yet");
@@ -442,7 +485,6 @@ const ProductFilter = ({
         let initialSizeFilterCondition;
 
         product.variants.map((variant, index) => {
-          console.log("condition set", index, doesProductHaveColor);
           if (index === 0 && doesProductHaveColor) {
             initialSizeFilterCondition = variant.selectedOptions[0].value;
           }
@@ -454,30 +496,22 @@ const ProductFilter = ({
                 variant.selectedOptions[0].value
               ) === filterSize;
 
-          console.log(
-            "doesVariantColorMatchFirstVariant",
-            initialSizeFilterCondition,
-            variant.selectedOptions[0].value
-          );
+          let isVariantAvailable = variant.availableForSale;
+
           let doesVariantColorMatchFirstVariant = doesProductHaveColor
             ? initialSizeFilterCondition === variant.selectedOptions[0].value
             : true;
 
           if (variant.selectedOptions[1]) {
-            console.log(
-              "case aaa",
-              initialSizeFilterCondition,
-              variant.selectedOptions[1].value,
-              doesVariantHaveSize,
-              doesVariantColorMatchFirstVariant
-            );
-
-            if (doesVariantHaveSize && doesVariantColorMatchFirstVariant) {
+            if (
+              doesVariantHaveSize &&
+              doesVariantColorMatchFirstVariant &&
+              isVariantAvailable
+            ) {
               doesProductHaveSize = true;
             }
           } else {
-            console.log("case bbb", doesVariantHaveSize);
-            if (doesVariantHaveSize) {
+            if (doesVariantHaveSize && isVariantAvailable) {
               doesProductHaveSize = true;
             }
           }
@@ -556,97 +590,114 @@ const ProductFilter = ({
   }
 
   return (
-    <FilterContainer>
-      <div className="current-filter">
-        <div className="title-container">
-          <h1>{collection.title}</h1>
-        </div>
-        <div className="inner-wrap">
-          <button onClick={handleResetFilters}>Remove All Filters</button>
-        </div>
+    <FilterContainer className={toggleMobileFilter ? "active" : ""}>
+      <div className="filter-mobile-trigger">
+        <button onClick={handleMobileFilterToggle}>
+          {toggleMobileFilter ? "Close" : "Filter"}
+        </button>
       </div>
-      <div className="color-filter-container">
-        <h4 className="filter-title">Colors</h4>
-        <div className="color-container">
-          <ul className="colors" onMouseLeave={handleColorFilterReset}>
-            {finalColors.map(regularCaseColor => {
-              let color = colorHandlize(regularCaseColor);
-              return (
-                <li className={color}>
-                  <button
-                    onMouseEnter={() =>
-                      handleColorFilterHover(regularCaseColor)
-                    }
-                    onClick={() => filterByColor(color, regularCaseColor)}
-                    value={color}
-                    className={"color-btn-container " + color}
-                  ></button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="tooltip-container">
-          <div className="inner-wrap">{tooltipColor}</div>
-        </div>
-      </div>
+      <div className="inner-wrap">
+        <div className="scroll-container">
+          <div className="current-filter">
+            <div className="title-container">
+              <h1>{collection.title}</h1>
+            </div>
+            <div className="inner-wrap">
+              <button onClick={handleResetFilters}>Remove All Filters</button>
+            </div>
+          </div>
+          {finalColors.length > 0 && (
+            <div className="color-filter-container">
+              <h4 className="filter-title">Colors</h4>
+              <div className="color-container">
+                <ul className="colors" onMouseLeave={handleColorFilterReset}>
+                  {finalColors.map(regularCaseColor => {
+                    let color = colorHandlize(regularCaseColor);
+                    return (
+                      <li className={color}>
+                        <button
+                          onMouseEnter={() =>
+                            handleColorFilterHover(regularCaseColor)
+                          }
+                          onClick={() => filterByColor(color, regularCaseColor)}
+                          value={color}
+                          className={"color-btn-container " + color}
+                        ></button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div
+                className={
+                  tooltipColor.length > 0
+                    ? "tooltip-container active"
+                    : "tooltip-container hide"
+                }
+              >
+                <div className="inner-wrap">{tooltipColor}</div>
+              </div>
+            </div>
+          )}
 
-      <div className="size-filter-container">
-        <h4 className="filter-title">Sizes</h4>
-        <div className="size-container">
-          <ul className="sizes">
-            {finalSizes.map(regularCaseSize => {
-              let size = colorHandlize(regularCaseSize);
-              return (
-                <li prop={filterSize} className={"size-" + size}>
-                  <button
-                    // onMouseEnter={() =>
-                    //   handleColorFilterHover(regularCaseColor)
-                    // }
-                    onClick={() => filterBySize(size, filterColor)}
-                    value={size}
-                    className={
-                      filterSize == size
-                        ? "size-btn-container active " + size
-                        : "size-btn-container " + size
-                    }
-                  >
-                    {regularCaseSize}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+          <div className="size-filter-container">
+            <h4 className="filter-title">Sizes</h4>
+            <div className="size-container">
+              <ul className="sizes">
+                {finalSizes.map(regularCaseSize => {
+                  let size = colorHandlize(regularCaseSize);
+                  return (
+                    <li prop={filterSize} className={"size-" + size}>
+                      <button
+                        // onMouseEnter={() =>
+                        //   handleColorFilterHover(regularCaseColor)
+                        // }
+                        onClick={() => filterBySize(size, filterColor)}
+                        value={size}
+                        className={
+                          filterSize == size
+                            ? "size-btn-container active " + size
+                            : "size-btn-container " + size
+                        }
+                      >
+                        {regularCaseSize}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
 
-      <div className="tags-container features">
-        <h4 className="filter-title">Features</h4>
+          <div className="tags-container features">
+            <h4 className="filter-title">Features</h4>
 
-        <div className="features-container">
-          <ul className="features">
-            {finalFeatureTags.map(regularCaseFeature => {
-              let feature = regularCaseFeature.replace("Features_", "");
-              return (
-                <li className={"feature-" + feature}>
-                  <button
-                    // onMouseEnter={() =>
-                    //   handleColorFilterHover(regularCaseColor)
-                    // }
-                    onClick={() => handleTagFilter(regularCaseFeature)}
-                    value={feature}
-                    className={
-                      filterFeature === regularCaseFeature
-                        ? "tag-btn-container active"
-                        : "tag-btn-container"
-                    }
-                  >
-                    {feature}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+            <div className="features-container">
+              <ul className="features">
+                {finalFeatureTags.map(regularCaseFeature => {
+                  let feature = regularCaseFeature.replace("Features_", "");
+                  return (
+                    <li className={"feature-" + feature}>
+                      <button
+                        // onMouseEnter={() =>
+                        //   handleColorFilterHover(regularCaseColor)
+                        // }
+                        onClick={() => handleTagFilter(regularCaseFeature)}
+                        value={feature}
+                        className={
+                          filterFeature === regularCaseFeature
+                            ? "tag-btn-container active"
+                            : "tag-btn-container"
+                        }
+                      >
+                        {feature}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </FilterContainer>

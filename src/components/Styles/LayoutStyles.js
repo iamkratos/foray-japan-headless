@@ -107,7 +107,8 @@ const LayoutContainer = styled.div`
           &.twill {
             background-color: navy;
           }
-          &.grey {
+          &.grey,
+          &.grey-marl {
             background-color: grey;
           }
           &.red {
@@ -262,6 +263,15 @@ const LayoutContainer = styled.div`
     border-radius: 2px;
     letter-spacing: 0.7px;
     ${TransitionMixin(".25s")}
+
+    &.hide {
+      opacity: 0;
+      ${TransitionMixin("0s")}
+
+      &.active {
+        opacity: 1;
+      }
+    }
   }
 
   /* Hamburger */
