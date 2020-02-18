@@ -71,6 +71,10 @@ const TitleContainer = styled.div`
   }
 `;
 
+const Spacer = styled.div`
+  height: 40px;
+`;
+
 const CollectionContainer = styled.section``;
 
 const CollectionPage = ({ data }) => {
@@ -123,11 +127,7 @@ const CollectionPage = ({ data }) => {
           )}
         </BannerContainer>
       ) : (
-        <TitleContainer>
-          <div className="title-container">
-            <h1>{collection.title}</h1>
-          </div>
-        </TitleContainer>
+        <Spacer />
       )}
 
       <CollectionContainer>
