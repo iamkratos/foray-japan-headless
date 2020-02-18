@@ -152,6 +152,43 @@ const FilterContainer = styled.div`
       }
     }
   }
+
+  .tags-container {
+    margin-top: 50px;
+    .features-container {
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 0 0 -6px;
+        padding: 0px;
+        list-style: none;
+        li {
+          margin: 2px 5px 7px;
+          flex: 0 0 45%;
+
+          button {
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 11px;
+            border: 1px solid #000;
+            background-color: transparent;
+            border-radius: 24px;
+            line-height: 1;
+            padding: 6px 5px 5px;
+            width: 100%;
+            ${TransitionMixin(".25s")}
+
+            &.active,
+            &:hover {
+              background-color: #000;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 const ProductFilter = ({
@@ -168,6 +205,8 @@ const ProductFilter = ({
   collection,
   currentColorTooltip,
   setCurrentColorTooltip,
+  filterFeature,
+  setFilterFeature,
 }) => {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
@@ -208,7 +247,20 @@ const ProductFilter = ({
     });
   });
   finalSizes = finalSizes.filter(onlyUnique);
-  // console.log("legit sizes", finalSizes);
+
+  // 2. Find all unique feature tags
+  let finalFeatureTags = [];
+
+  products.map(product => {
+    product.tags.map(tag => {
+      if (tag.includes("Features")) {
+        finalFeatureTags.push(tag);
+      }
+    });
+  });
+
+  finalFeatureTags = finalFeatureTags.filter(onlyUnique);
+  console.log("legit features", finalFeatureTags);
 
   function filterByColor(handlelizedFilterColor, filterFullTitle) {
     console.log("specs", handlelizedFilterColor);
@@ -242,14 +294,15 @@ const ProductFilter = ({
     setTootipColor(filterFullTitle);
     setCurrentColorTooltip(filterFullTitle);
     setFilterSize("");
+    setFilterFeature("");
   }
 
-  // TODO: Need to finalize this
-
-  function filterBySize(handlelizedFilterSize, sizeFullTitle, colorFilter) {
+  function filterBySize(handlelizedFilterSize, colorFilter) {
     let sizeFilteredProducts = [];
     setFilterSize(handlelizedFilterSize);
     setFilterColor(colorFilter);
+
+    console.log("filter by size");
 
     let productsToFilter = products;
 
@@ -355,6 +408,139 @@ const ProductFilter = ({
         setFilteredProducts(sizeFilteredProducts);
       }
     });
+    setFilterFeature("");
+  }
+
+  function handleTagFilter(tagName) {
+    setFilterFeature(tagName);
+    // 1. There is a color + size
+
+    let filteredFeatureProducts = [];
+    products.map(product => {
+      // -- color check
+      let doesProductHaveColor = false;
+      if (filterColor !== "" && filterColor !== undefined) {
+        product.options[0].values.map(colorVariant => {
+          if (
+            colorHandlizeAndReplaceSimilarColors(colorVariant) === filterColor
+          ) {
+            doesProductHaveColor = true;
+          }
+          console.log(
+            "does product have color",
+            1 + colorHandlizeAndReplaceSimilarColors(colorVariant),
+            2 + filterColor
+          );
+        });
+      } else {
+        console.log("no color selected yet");
+      }
+
+      // -- size check
+      let doesProductHaveSize;
+      if (filterSize && (filterSize !== "" || filterSize !== undefined)) {
+        let initialSizeFilterCondition;
+
+        product.variants.map((variant, index) => {
+          console.log("condition set", index, doesProductHaveColor);
+          if (index === 0 && doesProductHaveColor) {
+            initialSizeFilterCondition = variant.selectedOptions[0].value;
+          }
+          let doesVariantHaveSize = variant.selectedOptions[1]
+            ? colorHandlizeAndReplaceSimilarColors(
+                variant.selectedOptions[1].value
+              ) === filterSize
+            : colorHandlizeAndReplaceSimilarColors(
+                variant.selectedOptions[0].value
+              ) === filterSize;
+
+          console.log(
+            "doesVariantColorMatchFirstVariant",
+            initialSizeFilterCondition,
+            variant.selectedOptions[0].value
+          );
+          let doesVariantColorMatchFirstVariant = doesProductHaveColor
+            ? initialSizeFilterCondition === variant.selectedOptions[0].value
+            : true;
+
+          if (variant.selectedOptions[1]) {
+            console.log(
+              "case aaa",
+              initialSizeFilterCondition,
+              variant.selectedOptions[1].value,
+              doesVariantHaveSize,
+              doesVariantColorMatchFirstVariant
+            );
+
+            if (doesVariantHaveSize && doesVariantColorMatchFirstVariant) {
+              doesProductHaveSize = true;
+            }
+          } else {
+            console.log("case bbb", doesVariantHaveSize);
+            if (doesVariantHaveSize) {
+              doesProductHaveSize = true;
+            }
+          }
+        });
+      }
+
+      // -- tag check
+      let doesProductHaveTag = false;
+      product.tags.map(tag => {
+        if (tag.includes(tagName)) {
+          doesProductHaveTag = true;
+        }
+      });
+
+      // console.log("pre-tag filter check", filterColor, filterSize);
+
+      // Size + Color
+
+      if (
+        filterSize !== undefined &&
+        filterSize !== "" &&
+        filterColor !== undefined &&
+        filterColor !== ""
+      ) {
+        console.log("case 1", doesProductHaveSize, doesProductHaveTag);
+        if (doesProductHaveColor && doesProductHaveTag && doesProductHaveSize) {
+          filteredFeatureProducts.push(product);
+        }
+      }
+
+      // Color
+      if (filterColor && (filterSize === undefined || filterSize === "")) {
+        console.log("case 2");
+        if (doesProductHaveColor && doesProductHaveTag) {
+          filteredFeatureProducts.push(product);
+        }
+      }
+      // Size
+      if (filterSize && (filterColor === undefined || filterColor === "")) {
+        console.log("case 3", doesProductHaveSize, doesProductHaveTag);
+        if (doesProductHaveSize && doesProductHaveTag) {
+          filteredFeatureProducts.push(product);
+        }
+      }
+
+      // Just the tags
+      if (
+        (filterSize === undefined || filterSize === "") &&
+        (filterColor === undefined || filterColor === "")
+      ) {
+        console.log("case 4", doesProductHaveSize);
+        if (doesProductHaveTag) {
+          filteredFeatureProducts.push(product);
+        }
+      }
+
+      // if (doesProductHaveColor && doesProductHaveTag && doesProductHaveSize) {
+      //   console.log("this product is showing", product);
+      //   filteredFeatureProducts.push(product);
+      // }
+    });
+
+    setFilteredProducts(filteredFeatureProducts);
   }
 
   function handleColorFilterHover(color) {
@@ -417,9 +603,7 @@ const ProductFilter = ({
                     // onMouseEnter={() =>
                     //   handleColorFilterHover(regularCaseColor)
                     // }
-                    onClick={() =>
-                      filterBySize(size, regularCaseSize, filterColor)
-                    }
+                    onClick={() => filterBySize(size, filterColor)}
                     value={size}
                     className={
                       filterSize == size
@@ -428,6 +612,36 @@ const ProductFilter = ({
                     }
                   >
                     {regularCaseSize}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+
+      <div className="tags-container features">
+        <h4 className="filter-title">Features</h4>
+
+        <div className="features-container">
+          <ul className="features">
+            {finalFeatureTags.map(regularCaseFeature => {
+              let feature = regularCaseFeature.replace("Features_", "");
+              return (
+                <li className={"feature-" + feature}>
+                  <button
+                    // onMouseEnter={() =>
+                    //   handleColorFilterHover(regularCaseColor)
+                    // }
+                    onClick={() => handleTagFilter(regularCaseFeature)}
+                    value={feature}
+                    className={
+                      filterFeature === regularCaseFeature
+                        ? "tag-btn-container active"
+                        : "tag-btn-container"
+                    }
+                  >
+                    {feature}
                   </button>
                 </li>
               );

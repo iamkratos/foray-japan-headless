@@ -87,6 +87,7 @@ const CollectionPage = ({ data }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [filterColor, setFilterColor] = useState("");
   const [filterSize, setFilterSize] = useState("");
+  const [filterFeature, setFilterFeature] = useState("");
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
 
@@ -98,6 +99,7 @@ const CollectionPage = ({ data }) => {
     setFilterColor("");
     setFilterSize("");
     setTootipColor("");
+    setFilterFeature("");
     setCurrentColorTooltip("");
     setFilteredProducts(collection.products);
   }
@@ -146,6 +148,8 @@ const CollectionPage = ({ data }) => {
             setTootipColor={setTootipColor}
             currentColorTooltip={currentColorTooltip}
             setCurrentColorTooltip={setCurrentColorTooltip}
+            filterFeature={filterFeature}
+            setFilterFeature={setFilterFeature}
           />
 
           <ProductGridContainer>
