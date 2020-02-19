@@ -8,7 +8,7 @@ const FilterContainer = styled.div`
   flex: 1;
   position: fixed;
   left: 0;
-  top: calc(100% - 40px);
+  top: calc(100% - 50px);
   width: 100%;
   z-index: 900;
   background-color: #fff;
@@ -26,14 +26,31 @@ const FilterContainer = styled.div`
     margin: 0 auto;
 
     .scroll-container {
-      max-height: 300px;
+      max-height: 44vh;
       overflow-y: scroll;
-      ${media.medium`max-height: 100%; overflow-y: initial;`}
+      margin-top: 10px;
+      padding-bottom: 10px;
+
+      ${media.medium`max-height: 100%; overflow-y: initial;margin-top: 0px;padding-bottom: 0px;`}
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: #f5f5f5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #000000;
+        /* border: 2px solid #555555; */
+      }
     }
   }
 
   .filter-mobile-trigger {
-    height: 40px;
+    height: 50px;
     background-color: #000;
     display: flex;
     align-items: center;
@@ -78,12 +95,16 @@ const FilterContainer = styled.div`
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: 12px;
+      font-size: 11px;
       border: none;
       box-shadow: none;
       padding: 0px;
-      color: #777;
+      color: #fff;
       background-color: #fff;
+      background-color: #000;
+      padding: 6px 10px 5px;
+      border-radius: 4px;
+      line-height: 1;
     }
   }
 
@@ -95,7 +116,9 @@ const FilterContainer = styled.div`
   }
 
   .color-filter-container {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+
+    ${media.medium`margin-bottom: 50px;`}
   }
 
   .size-filter-container {
@@ -477,7 +500,7 @@ const ProductFilter = ({
           }
         });
       } else {
-        console.log("no color selected yet");
+        // console.log("no color selected yet");
       }
 
       // -- size check
@@ -537,7 +560,7 @@ const ProductFilter = ({
         filterColor !== undefined &&
         filterColor !== ""
       ) {
-        console.log("case 1", doesProductHaveSize, doesProductHaveTag);
+        // console.log("case 1", doesProductHaveSize, doesProductHaveTag);
         if (doesProductHaveColor && doesProductHaveTag && doesProductHaveSize) {
           filteredFeatureProducts.push(product);
         }
@@ -545,14 +568,14 @@ const ProductFilter = ({
 
       // Color
       if (filterColor && (filterSize === undefined || filterSize === "")) {
-        console.log("case 2");
+        // console.log("case 2");
         if (doesProductHaveColor && doesProductHaveTag) {
           filteredFeatureProducts.push(product);
         }
       }
       // Size
       if (filterSize && (filterColor === undefined || filterColor === "")) {
-        console.log("case 3", doesProductHaveSize, doesProductHaveTag);
+        // console.log("case 3", doesProductHaveSize, doesProductHaveTag);
         if (doesProductHaveSize && doesProductHaveTag) {
           filteredFeatureProducts.push(product);
         }
@@ -563,16 +586,11 @@ const ProductFilter = ({
         (filterSize === undefined || filterSize === "") &&
         (filterColor === undefined || filterColor === "")
       ) {
-        console.log("case 4", doesProductHaveSize);
+        // console.log("case 4", doesProductHaveSize);
         if (doesProductHaveTag) {
           filteredFeatureProducts.push(product);
         }
       }
-
-      // if (doesProductHaveColor && doesProductHaveTag && doesProductHaveSize) {
-      //   console.log("this product is showing", product);
-      //   filteredFeatureProducts.push(product);
-      // }
     });
 
     setFilteredProducts(filteredFeatureProducts);
@@ -654,9 +672,6 @@ const ProductFilter = ({
                       className={"size-" + size}
                     >
                       <button
-                        // onMouseEnter={() =>
-                        //   handleColorFilterHover(regularCaseColor)
-                        // }
                         onClick={() => filterBySize(size, filterColor)}
                         value={size}
                         className={
@@ -684,9 +699,6 @@ const ProductFilter = ({
                   return (
                     <li key={index} className={"feature-" + feature}>
                       <button
-                        // onMouseEnter={() =>
-                        //   handleColorFilterHover(regularCaseColor)
-                        // }
                         onClick={() => handleTagFilter(regularCaseFeature)}
                         value={feature}
                         className={

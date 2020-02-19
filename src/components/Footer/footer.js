@@ -152,7 +152,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="http://returns.foraygolf.com/">Returns</a>
+                <a rel="noreferrer" href="http://returns.foraygolf.com/">
+                  Returns
+                </a>
               </li>
               <li>
                 <Link to="/pages/sizing">Sizing</Link>
@@ -188,6 +190,7 @@ const Footer = () => {
             <ul>
               <li>
                 <a
+                  rel="noreferrer"
                   target="_blank"
                   href="https://www.instagram.com/foraygolfusa/"
                 >
@@ -195,12 +198,20 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a target="_blank" href="https://www.facebook.com/FORAYGOLF">
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  href="https://www.facebook.com/FORAYGOLF"
+                >
                   <Facebook />
                 </a>
               </li>
               <li>
-                <a target="_blank" href="https://twitter.com/foraygolf">
+                <a
+                  rel="noreferrer"
+                  target="_blank"
+                  href="https://twitter.com/foraygolf"
+                >
                   <Twitter />
                 </a>
               </li>

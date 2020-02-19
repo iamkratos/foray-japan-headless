@@ -3,8 +3,13 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import Wrapper from "../org/Wrapper";
+import { media } from "../helpers";
 
 const SplitSectionContainer = styled.section`
+  .split-section-wrapper {
+    display: block;
+    ${media.medium`display: flex;`}
+  }
   .left-container {
     flex: 1;
   }
@@ -39,7 +44,7 @@ const SplitSection = () => {
   `);
   return (
     <SplitSectionContainer>
-      <Wrapper size="fw" flex>
+      <Wrapper className="split-section-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="inner-wrap">
             <Link>

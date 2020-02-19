@@ -89,8 +89,6 @@ const HomePageProductSlider = ({ products }) => {
   const [updateCount, setUpdateCount] = useState(0);
   const sliderEl = useRef(null);
 
-  console.log(products.length);
-
   var settings = {
     dots: false,
     fade: false,

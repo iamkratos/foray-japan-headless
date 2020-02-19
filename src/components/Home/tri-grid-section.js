@@ -3,9 +3,13 @@ import { Link, useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import Wrapper from "../org/Wrapper";
-import { TransitionMixin } from "../helpers";
+import { TransitionMixin, media } from "../helpers";
 
 const TriGridContainer = styled.section`
+  .tri-grid-wrapper {
+    display: block;
+    ${media.medium`display: flex;`}
+  }
   .left-container {
     flex: 1;
   }
@@ -34,13 +38,16 @@ const TriGridContainer = styled.section`
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
+
+      ${media.medium`opacity: 0;`}
       ${TransitionMixin(".25s")}
 
       .overlay-content {
         h3 {
           color: #fff;
-          font-size: 40px;
+          font-size: 21px;
+          margin: 0px;
+          ${media.medium`font-size: 40px;`}
         }
       }
     }
@@ -79,10 +86,10 @@ const TriGridSection = () => {
       }
     }
   `);
-  console.log("gruid data", data);
+
   return (
     <TriGridContainer>
-      <Wrapper size="fw" flex>
+      <Wrapper className="tri-grid-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="image-container">
             <Link to="/collections/graphic-floral-collection">
