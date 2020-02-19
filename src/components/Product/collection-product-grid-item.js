@@ -169,19 +169,11 @@ const ProductGridItem = ({
       }
     }
 
-    // setHoverColor(
-    //   availableSizesArray[0] &&
-    //     availableSizesArray[0].images[0] &&
-    //     availableSizesArray[0].images[0].altText
-    // );
-
     setSizes(availableSizesArray);
 
-    filterColor !== "" && filterColor !== undefined
+    (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
       ? setHoverColor(availableSizesArray[0].image.altText)
       : setHoverColor(product.images[0].altText);
-
-    // console.log("the sizes are", sizes, availableSizesArray.length);
   }
 
   // Quick Shop Hover Over
@@ -212,13 +204,16 @@ const ProductGridItem = ({
   function checkTooltipText() {
     // check for glove product
     if (
+      currentProductImages &&
       currentProductImages[0].altText &&
       !currentProductImages[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentProductImages[0].altText
     ) {
       // console.log("current color is", currentColor[0].altText);
       setHoverColor(currentProductImages[0].altText);
+      console.log("case aaa");
     } else {
+      console.log("case bbb");
       // console.log("baby", sizes);
       sizes && setHoverColor(sizes[0].selectedOptions[0].value);
     }
@@ -303,7 +298,7 @@ const ProductGridItem = ({
                         <li>
                           <button
                             disabled={!isAvailable}
-                            class={isAvailable ? "" : "disabled "}
+                            className={isAvailable ? "" : "disabled "}
                             onClick={() => addProductToCart(size.shopifyId)}
                           >
                             {sizeText}

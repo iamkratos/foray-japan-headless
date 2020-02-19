@@ -6,9 +6,8 @@ const SizeSelector = ({
   addonSelectedSize,
   setAddonSelectedSize,
   setChildProductSize,
+  childProductSize,
 }) => {
-  console.log("var indicator", allProductVariants);
-
   // 1. Sort for variants that have the indicator in them
   let indicator = variantIndicator;
   let variants = allProductVariants.variants;
@@ -53,11 +52,21 @@ const SizeSelector = ({
             let sizeText = size.selectedOptions[1]
               ? size.selectedOptions[1].value
               : size.selectedOptions[0].value;
+            console.log(
+              "size",
+              sizeText === size.selectedOptions[1].value,
+              sizeText,
+              size.selectedOptions[1].value
+            );
             return (
               <li key={index}>
                 <button
                   disabled={!isAvailable}
-                  className={isAvailable ? "" : "disabled "}
+                  className={
+                    isAvailable && size.shopifyId === addonSelectedSize
+                      ? "active"
+                      : "" && (isAvailable ? "" : "disabled ")
+                  }
                   onClick={() => handleSizeChange(size)}
                 >
                   {sizeText}

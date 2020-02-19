@@ -181,9 +181,9 @@ const ProductPageContainer = styled.section`
           h4 {
             text-transform: uppercase;
             font-weight: bold;
-            color: #000;
+            color: #4a4a4a;
             letter-spacing: 1px;
-            font-size: 14px;
+            font-size: 12px;
             margin-bottom: 10px;
             display: none;
             ${media.medium`display: block;`}
@@ -215,9 +215,9 @@ const ProductPageContainer = styled.section`
           h4 {
             text-transform: uppercase;
             font-weight: bold;
-            color: #000;
+            color: #4a4a4a;
             letter-spacing: 1px;
-            font-size: 14px;
+            font-size: 12px;
             margin-bottom: 10px;
           }
 
@@ -316,15 +316,8 @@ const ProductPage = ({ data }) => {
   function handleVariantChange(color) {
     // 1. Sort Variant Images
     let newImageArray = [];
-    console.log("color check ", color);
     if (color != null) {
-      console.log("color is ", color);
       product.images.map(image => {
-        console.log(
-          "here they are ",
-          image.altText && image.altText.toLowerCase().trim(),
-          color.toLowerCase().trim()
-        );
         if (
           color &&
           image.altText &&
@@ -336,7 +329,6 @@ const ProductPage = ({ data }) => {
           return newImageArray.push(image);
         }
       });
-      console.log("double", newImageArray);
     } else {
       product.images.map(image => {
         newImageArray.push(image);
@@ -349,7 +341,6 @@ const ProductPage = ({ data }) => {
       color = color.includes("Left") ? "Left" : color;
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log(option.value, " | ", color, "another one");
           if (
             option.value.toLowerCase().trim() === color.toLowerCase().trim()
           ) {
@@ -357,7 +348,6 @@ const ProductPage = ({ data }) => {
           }
         });
       });
-      console.log("new sizes", newSizesArray);
       if (newSizesArray.length === 0) {
         product.variants.map(variant => {
           newSizesArray.push(variant);
@@ -370,7 +360,7 @@ const ProductPage = ({ data }) => {
         });
       });
     }
-    console.log(newSizesArray);
+
     setCurrentSizeSet(newSizesArray);
     // 3. Set Image Index To First Image and scroll up
     setMainImageIndex(0);
@@ -385,7 +375,6 @@ const ProductPage = ({ data }) => {
         let isVariantAvailable = variant.availableForSale;
         variant.selectedOptions.map(option => {
           if (option.value == userSize) {
-            console.log("variant avail", isVariantAvailable);
             if (isVariantAvailable) {
               setSizeId(variant.shopifyId);
             } else {
@@ -399,10 +388,9 @@ const ProductPage = ({ data }) => {
           }
         });
       });
-      console.log("case A");
     } else {
       // console.log("there is not a size ", userSize);
-      console.log("case B");
+
       for (let i = 0; i < newSizesArray.length; i++) {
         if (newSizesArray[i].availableForSale == true) {
           setSizeId(newSizesArray[i].shopifyId);
@@ -433,7 +421,6 @@ const ProductPage = ({ data }) => {
   const [hoverColor, setHoverColor] = useState("none");
 
   function handleColorClick(color) {
-    console.log("color is ", color);
     handleVariantChange(color);
     setHoverColor(color);
   }
@@ -455,12 +442,7 @@ const ProductPage = ({ data }) => {
       hoverColor != currentImageSet[0].altText
     ) {
       setHoverColor(currentImageSet[0].altText);
-      console.log("case x ", currentImageSet[0].altText);
     } else {
-      console.log(
-        "what we looking for ",
-        currentSizeSet[0].selectedOptions[0].value
-      );
       setHoverColor(currentSizeSet[0].selectedOptions[0].value);
     }
   }
@@ -488,7 +470,6 @@ const ProductPage = ({ data }) => {
       }
     }
     // setSize(product.variants[0] ? product.variants[0].shopifyId : "");
-    console.log("current size", currentSizeSet);
   }, []);
 
   finalColors = finalColors.filter(onlyUnique);
@@ -506,21 +487,18 @@ const ProductPage = ({ data }) => {
   const [mainImageIndex, setMainImageIndex] = useState();
   function swapMainImage(index) {
     setMainImageIndex(index);
-    console.log(index);
   }
 
   //   Check for tag
   function tagCheck(tags) {
     tags &&
       tags.map(tag => {
-        console.log("tag", tag);
         if (tag.includes("addon-shorts-")) {
           setAnAddonProduct(true);
-          console.log("tag set to true");
         }
       });
   }
-  console.log("addon product", isThereAnAddonProduct);
+  // console.log("addon product", isThereAnAddonProduct);
 
   return (
     <Layout>
@@ -532,7 +510,6 @@ const ProductPage = ({ data }) => {
               <div className="inner-wrap" ref={scrollContainer}>
                 {currentImageSet &&
                   currentImageSet.map((image, index) => {
-                    console.log("Case C");
                     return (
                       <button key={index} onClick={() => swapMainImage(index)}>
                         {image.localFile.childImageSharp && (
@@ -547,7 +524,6 @@ const ProductPage = ({ data }) => {
               <div className="inner-wrap">
                 {mainImageIndex == null
                   ? currentImageSet.slice(0, 1).map(image => {
-                      console.log("Case D");
                       return (
                         <Img fluid={image.localFile.childImageSharp.fluid} />
                       );
@@ -555,8 +531,6 @@ const ProductPage = ({ data }) => {
                   : currentImageSet
                       .slice(mainImageIndex, mainImageIndex + 1)
                       .map(image => {
-                        console.log(currentImageSet);
-                        console.log("Case E");
                         return (
                           <Img
                             key={mainImageIndex}
@@ -591,8 +565,6 @@ const ProductPage = ({ data }) => {
                           .replace(/\//g, "-")
                           .replace("&", "")
                           .toLowerCase();
-
-                        console.log("color option ", color);
 
                         return (
                           <li key={i}>

@@ -12,6 +12,7 @@ const ProductSearchResultContainer = styled.div`
     flex: 1;
     .image-container {
       img {
+        max-height: 150px;
         max-width: 100px;
         margin: 0 auto 10px;
         display: block;

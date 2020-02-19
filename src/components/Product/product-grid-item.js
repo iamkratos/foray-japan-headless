@@ -280,7 +280,6 @@ const ProductGridItem = ({ product, filterColor }) => {
         });
         // console.log("sizes here", availableSizesArray);
       } else {
-        console.log("case b");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
@@ -356,7 +355,6 @@ const ProductGridItem = ({ product, filterColor }) => {
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
     }
-    console.log("current color", currentColor);
   }, [filterColor]);
 
   function checkTooltipText() {
@@ -402,6 +400,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
+                        alt={product.title + "Image " + index}
                       />
                     );
                   }
@@ -416,6 +415,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
+                        alt={product.title + "Image " + index}
                       />
                     );
                   }
@@ -443,14 +443,14 @@ const ProductGridItem = ({ product, filterColor }) => {
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
-                    sizes.map(size => {
+                    sizes.map((size, i) => {
                       let isAvailable = size.availableForSale;
                       let sizeText = size.selectedOptions[1]
                         ? size.selectedOptions[1].value
                         : size.selectedOptions[0].value;
 
                       return (
-                        <li>
+                        <li key={i}>
                           <button
                             disabled={!isAvailable}
                             class={isAvailable ? "" : "disabled "}
@@ -498,7 +498,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                   // console.log("glove color", color);
 
                   return (
-                    <li>
+                    <li key={i}>
                       <button
                         className={`color-btn-container ${colorHandle}`}
                         onClick={() => handleColorChange(color)}

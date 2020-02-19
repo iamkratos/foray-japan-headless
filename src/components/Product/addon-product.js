@@ -4,7 +4,17 @@ import SizeSelector from "./selectors/size-selector";
 import { useStaticQuery, graphql } from "gatsby";
 import AddToCart from "./add-to-cart";
 
-const AddonProductContainer = styled.div``;
+const AddonProductContainer = styled.div`
+  margin-top: 40px;
+  .inner-wrap {
+    h4 {
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      color: #000;
+    }
+  }
+`;
 
 const AddonProduct = ({ product, tags, firstProductVariantId }) => {
   const data = useStaticQuery(graphql`
@@ -30,10 +40,11 @@ const AddonProduct = ({ product, tags, firstProductVariantId }) => {
       }
     }
   `);
-  console.log(data);
+
   const [addonProductColor, setAddonProductColor] = useState("");
   const [addonSelectedSize, setAddonSelectedSize] = useState("");
   const [childProductSize, setChildProductSize] = useState("");
+  // const [childProductSize, setChildProductSize] = useState("");
   let isThereAnAddonProduct = false;
   useEffect(() => {
     tagCheck(tags);
@@ -50,7 +61,6 @@ const AddonProduct = ({ product, tags, firstProductVariantId }) => {
       });
   }
 
-  console.log(isThereAnAddonProduct);
   return (
     <AddonProductContainer>
       <div className="inner-wrap">

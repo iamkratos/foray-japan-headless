@@ -224,6 +224,22 @@ const CartContainer = styled(animated.section)`
         padding: 10px;
         display: inline-block;
         text-align: center;
+        border: 1px solid #000;
+        ${TransitionMixin(".25s")}
+
+        &.disabled {
+          opacity: 0.5;
+          &:hover {
+            background-color: #000;
+            color: #fff;
+            cursor: not-allowed;
+          }
+        }
+
+        &:hover {
+          background-color: #fff;
+          color: #000;
+        }
       }
     }
   }
@@ -257,9 +273,6 @@ const Cart = ({ style }) => {
     }
   `);
 
-  console.log(checkout.lineItems);
-  console.log("do better", data);
-
   let allDresses = data.allShopifyCollection.edges[0].node.products;
   let checkOutItems = checkout.lineItems.filter(
     item => !item.title.includes("Sneaky Pocket Short")
@@ -277,7 +290,7 @@ const Cart = ({ style }) => {
       let addonProductSize =
         item.customAttributes[0] && item.customAttributes[0].value;
       let dressProduct = allDresses.filter(dress => dress.title === item.title);
-      console.log("the dress product is", addonProductSize, dressProduct);
+      // console.log("the dress product is", addonProductSize, dressProduct);
 
       // Push initial product to remove array
 
@@ -291,7 +304,7 @@ const Cart = ({ style }) => {
           }
         });
 
-      console.log("the addon product is", addonProductColor);
+      // console.log("the addon product is", addonProductColor);
 
       // Find checkout item
       let addonProduct;
@@ -309,9 +322,9 @@ const Cart = ({ style }) => {
           if (itemCheck === addonProductColor && lineItem.quantity === 1) {
             lineItemsArray.push(lineItem.id);
             removeMultipleProductsFromCart(lineItemsArray);
-            console.log("remove both");
+            // console.log("remove both");
           } else {
-            console.log("only remove 1");
+            // console.log("only remove 1");
             // updateQuantityInCart(lineItem, lineItem.quantity - 1);
             // removeProductFromCart(item.id);
             let updatedLineItems = [
@@ -346,7 +359,7 @@ const Cart = ({ style }) => {
       let addonProductSize =
         item.customAttributes[0] && item.customAttributes[0].value;
       let dressProduct = allDresses.filter(dress => dress.title === item.title);
-      console.log("the dress product is", addonProductSize, dressProduct);
+      // console.log("the dress product is", addonProductSize, dressProduct);
 
       // Find addon color variant
       dressProduct[0] &&
@@ -373,7 +386,6 @@ const Cart = ({ style }) => {
               variantId: lineItem.variant.id,
             },
           ];
-          console.log("yaaaa", lineItem);
           updateMultipleQuantitiesInCart(lineItemsArray);
         }
       });
@@ -382,7 +394,6 @@ const Cart = ({ style }) => {
     }
   }
 
-  console.log("real checkout", checkOutItems);
   return (
     <CartContainer style={{ ...style }}>
       <div className="title-container">
@@ -475,7 +486,14 @@ const Cart = ({ style }) => {
           </h2>
           <p>Shipping, taxes, and discounts calculated at checkout.</p>
           <div className="btn-container">
-            <a href="#">Check Out</a>
+            <a
+              className={checkout.lineItems.length === 0 ? "disabled" : ""}
+              href={checkout.webUrl}
+            >
+              {checkout.lineItems.length === 0
+                ? "No items in cart"
+                : " Check Out"}
+            </a>
           </div>
         </div>
       </div>

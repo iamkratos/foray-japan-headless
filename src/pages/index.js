@@ -1,19 +1,12 @@
 import React from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
-import LazyLoad from "react-lazyload";
+import { useStaticQuery, graphql } from "gatsby";
 
 import SEO from "../components/seo";
 import HomePageSlider from "../components/Sliders/home-page-slider";
-import Wrapper from "../components/org/Wrapper";
+import HomePageProductSlider from "../components/Sliders/home-page-product-slider";
+import SplitSection from "../components/Home/split-section";
+import TriGridSection from "../components/Home/tri-grid-section";
 import Layout from "../components/layout";
-import Image from "../components/image";
-import ProductGridItem from "../components/Product/product-grid-item";
-
-import styled from "styled-components";
-
-const ProductGridContainer = styled.section`
-  margin-top: 40px;
-`;
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -77,17 +70,9 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home" />
       <HomePageSlider />
-      <ProductGridContainer>
-        <Wrapper flex>
-          {products.map(product => {
-            return (
-              <LazyLoad height={200}>
-                <ProductGridItem product={product} />
-              </LazyLoad>
-            );
-          })}
-        </Wrapper>
-      </ProductGridContainer>
+      <HomePageProductSlider products={products} />
+      <TriGridSection />
+      <SplitSection />
     </Layout>
   );
 };

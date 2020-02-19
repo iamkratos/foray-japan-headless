@@ -157,9 +157,9 @@ const CollectionPage = ({ data }) => {
               <h2 className="no-results">No products found.</h2>
             )}
             <Wrapper flex>
-              {filteredProducts.map(product => {
+              {filteredProducts.map((product, index) => {
                 return (
-                  <LazyLoad height={200}>
+                  <LazyLoad key={index} height={200}>
                     <CollectionProductGridItem
                       product={product}
                       filterColor={filterColor}

@@ -24,9 +24,7 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            <p>
-              FREE RETURNS ON ALL ORDERS & FREE 2 DAY SHIPPING ON ORDERS $150+
-            </p>
+            <p>FREE GROUND SHIPPING ON ALL ORDERS & FREE RETURNS</p>
           </div>
           <div className="right-container"></div>
         </Wrapper>

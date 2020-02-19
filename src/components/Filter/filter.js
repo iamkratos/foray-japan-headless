@@ -10,12 +10,12 @@ const FilterContainer = styled.div`
   left: 0;
   top: calc(100% - 40px);
   width: 100%;
-  z-index: 1000;
+  z-index: 900;
   background-color: #fff;
   transform: translate3d(0px, 0%, 0px);
   height: 80vh;
   ${TransitionMixin(".25s")}
-  ${media.medium`z-index: 100; position: static; `}
+  ${media.medium`z-index: 100; position: static; height: 100%; `}
 
   &.active {
     transform: translate3d(0px, -60%, 0px);
@@ -188,10 +188,11 @@ const FilterContainer = styled.div`
             font-size: 12px;
             line-height: 1;
             padding: 5px;
-            min-width: 82px;
+            min-width: 64px;
             background-color: #fff;
             -webkit-appearance: none;
             ${TransitionMixin(".25s")}
+            ${media.xl`min-width: 82px;`}
 
             &.active, &:hover {
               background-color: #000;
@@ -221,7 +222,7 @@ const FilterContainer = styled.div`
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 1px;
-            font-size: 11px;
+            font-size: 10px;
             border: 1px solid #000;
             background-color: transparent;
             border-radius: 24px;
@@ -521,7 +522,7 @@ const ProductFilter = ({
       // -- tag check
       let doesProductHaveTag = false;
       product.tags.map(tag => {
-        if (tag.includes(tagName)) {
+        if (tag === tagName) {
           doesProductHaveTag = true;
         }
       });
@@ -611,10 +612,10 @@ const ProductFilter = ({
               <h4 className="filter-title">Colors</h4>
               <div className="color-container">
                 <ul className="colors" onMouseLeave={handleColorFilterReset}>
-                  {finalColors.map(regularCaseColor => {
+                  {finalColors.map((regularCaseColor, index) => {
                     let color = colorHandlize(regularCaseColor);
                     return (
-                      <li className={color}>
+                      <li key={index} className={color}>
                         <button
                           onMouseEnter={() =>
                             handleColorFilterHover(regularCaseColor)
@@ -644,10 +645,14 @@ const ProductFilter = ({
             <h4 className="filter-title">Sizes</h4>
             <div className="size-container">
               <ul className="sizes">
-                {finalSizes.map(regularCaseSize => {
+                {finalSizes.map((regularCaseSize, index) => {
                   let size = colorHandlize(regularCaseSize);
                   return (
-                    <li prop={filterSize} className={"size-" + size}>
+                    <li
+                      key={index}
+                      prop={filterSize}
+                      className={"size-" + size}
+                    >
                       <button
                         // onMouseEnter={() =>
                         //   handleColorFilterHover(regularCaseColor)
@@ -674,10 +679,10 @@ const ProductFilter = ({
 
             <div className="features-container">
               <ul className="features">
-                {finalFeatureTags.map(regularCaseFeature => {
+                {finalFeatureTags.map((regularCaseFeature, index) => {
                   let feature = regularCaseFeature.replace("Features_", "");
                   return (
-                    <li className={"feature-" + feature}>
+                    <li key={index} className={"feature-" + feature}>
                       <button
                         // onMouseEnter={() =>
                         //   handleColorFilterHover(regularCaseColor)
