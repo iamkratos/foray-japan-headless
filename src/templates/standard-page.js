@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import BasicPage from "./pages/basic-page";
+import CorporatePage from "./pages/corporate-page";
 
 const StandardPage = ({ data }) => {
   console.log(data);
@@ -8,9 +9,12 @@ const StandardPage = ({ data }) => {
   if (
     page.handle === "terms-of-use" ||
     page.handle === "sizing" ||
-    page.handle == "privacy-policy"
+    page.handle === "privacy-policy" ||
+    page.handle === "returns-exchange-policy"
   ) {
     return <BasicPage page={page} />;
+  } else if (page.handle === "corporate") {
+    return <CorporatePage page={page} />;
   } else {
     return <h1>{page.title}</h1>;
   }

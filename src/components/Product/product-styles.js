@@ -69,6 +69,8 @@ const ProductGridItemContainer = styled.div`
           color: #000;
           border: none;
           font-weight: bold;
+          -webkit-appearance: none;
+          background-color: #fff;
 
           &.hide {
             display: none;

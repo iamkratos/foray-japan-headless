@@ -76,7 +76,7 @@ const FilterContainer = styled.div`
   }
 
   .current-filter {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     .title-container {
       padding: 20px 0 0;
       ${media.medium`padding: 0;`}
@@ -689,32 +689,34 @@ const ProductFilter = ({
             </div>
           </div>
 
-          <div className="tags-container features">
-            <h4 className="filter-title">Features</h4>
+          {finalFeatureTags.length > 0 && (
+            <div className="tags-container features">
+              <h4 className="filter-title">Features</h4>
 
-            <div className="features-container">
-              <ul className="features">
-                {finalFeatureTags.map((regularCaseFeature, index) => {
-                  let feature = regularCaseFeature.replace("Features_", "");
-                  return (
-                    <li key={index} className={"feature-" + feature}>
-                      <button
-                        onClick={() => handleTagFilter(regularCaseFeature)}
-                        value={feature}
-                        className={
-                          filterFeature === regularCaseFeature
-                            ? "tag-btn-container active"
-                            : "tag-btn-container"
-                        }
-                      >
-                        {feature}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
+              <div className="features-container">
+                <ul className="features">
+                  {finalFeatureTags.map((regularCaseFeature, index) => {
+                    let feature = regularCaseFeature.replace("Features_", "");
+                    return (
+                      <li key={index} className={"feature-" + feature}>
+                        <button
+                          onClick={() => handleTagFilter(regularCaseFeature)}
+                          value={feature}
+                          className={
+                            filterFeature === regularCaseFeature
+                              ? "tag-btn-container active"
+                              : "tag-btn-container"
+                          }
+                        >
+                          {feature}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </FilterContainer>

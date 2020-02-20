@@ -211,9 +211,7 @@ const ProductGridItem = ({
     ) {
       // console.log("current color is", currentColor[0].altText);
       setHoverColor(currentProductImages[0].altText);
-      console.log("case aaa");
     } else {
-      console.log("case bbb");
       // console.log("baby", sizes);
       sizes && setHoverColor(sizes[0].selectedOptions[0].value);
     }

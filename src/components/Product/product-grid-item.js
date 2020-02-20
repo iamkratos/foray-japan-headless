@@ -67,6 +67,8 @@ const ProductGridItemContainer = styled.div`
           color: #000;
           border: none;
           font-weight: bold;
+          -webkit-appearance: none;
+          background-color: #fff;
           &.hide {
             display: none;
           }
@@ -312,7 +314,7 @@ const ProductGridItem = ({ product, filterColor }) => {
 
     setSizes(availableSizesArray);
 
-    filterColor !== "" && filterColor !== undefined
+    (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
       ? setHoverColor(availableSizesArray[0].image.altText)
       : setHoverColor(product.images[0].altText);
 

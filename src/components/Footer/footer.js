@@ -144,10 +144,10 @@ const Footer = () => {
                 <Link to="/pages/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/collections/dresses">Terms of Use</Link>
+                <Link to="/pages/term-of-use">Terms of Use</Link>
               </li>
               <li>
-                <Link to="/collections/accessories">
+                <Link to="/pages/returns-exchange-policy">
                   Shipping &amp; Exchanges
                 </Link>
               </li>
@@ -176,7 +176,7 @@ const Footer = () => {
                 <Link to="/collections/outerwear">TeamForayGolf</Link>
               </li>
               <li>
-                <Link to="/collections/dresses">Corporate &amp; Wholesale</Link>
+                <Link to="/pages/corporate">Corporate &amp; Wholesale</Link>
               </li>
               <li>
                 <Link to="/collections/accessories">Contact Us</Link>

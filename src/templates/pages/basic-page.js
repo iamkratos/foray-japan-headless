@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import SEO from "../../components/seo";
 import Layout from "../../components/layout";
 import Wrapper from "../../components/org/Wrapper";
 import { media } from "../../components/helpers";
@@ -29,13 +30,14 @@ const BasicPage = ({ page }) => {
   }
   return (
     <Layout>
+      <SEO title={page.title} />
       <BasicPageContainer>
         <Wrapper>
           <div className="title-container">
             <h1>{page.title}</h1>
           </div>
           <div className="content-container">
-            <Wrapper size="sm">
+            <Wrapper size="xs">
               <div dangerouslySetInnerHTML={createMarkup()}></div>
             </Wrapper>
           </div>

@@ -10,21 +10,35 @@ import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
 import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
-import { media } from "../helpers";
+import { media, TransitionMixin } from "../helpers";
 
 // Slider Container
 
-const SlideContainer = styled.div``;
+const SlideContainer = styled.div`
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+`;
 const SliderContainer = styled.div`
   padding-top: 30px;
   .slider-grid {
     flex-wrap: nowrap;
+    display: block;
+    ${media.medium`display: flex;`}
     .content-container {
       flex: 1;
       .inner-wrap {
         h1 {
-          margin: 20% 0 0;
-          font-size: 40px;
+          font-size: 24px;
+          margin: 0 0 20px;
+          text-align: center;
+
+          br {
+            display: none;
+            ${media.medium`display: block;`}
+          }
+          ${media.medium`text-align: left; margin: 20% 0 0; font-size: 40px;`}
         }
       }
     }
@@ -38,9 +52,11 @@ const SliderContainer = styled.div`
         > div {
           > div {
             > div {
+              margin-bottom: 0px;
               > .inner-wrap {
-                max-width: 90%;
+                max-width: 400px;
                 margin: 0 auto;
+                ${media.medium`max-width: 90%;`}
               }
             }
           }
@@ -49,9 +65,16 @@ const SliderContainer = styled.div`
     }
   }
   .slick-arrows-container {
-    margin: 19vh 0 0;
+    margin: 20px 0;
     position: relative;
-    right: -20px;
+    top: -40px;
+    ${media.medium`top: 0; right: -20px;margin: 19vh 0 0;`}
+
+    .inner-wrap {
+      display: flex;
+      justify-content: center;
+      ${media.medium`display: block;`}
+    }
     button {
       display: block;
       background-color: #fff;
@@ -63,6 +86,20 @@ const SliderContainer = styled.div`
       padding: 0px;
       height: 35px;
       width: 35px;
+      ${TransitionMixin(".25s")}
+
+      &:active,
+      &:focus {
+        outline: 0;
+      }
+
+      &:hover {
+        background-color: #000;
+
+        svg {
+          stroke: #fff;
+        }
+      }
 
       svg {
         padding: 0;
@@ -72,10 +109,12 @@ const SliderContainer = styled.div`
         stroke-width: 1px;
         height: 28px;
         width: 28px;
+        ${TransitionMixin(".25s")}
       }
 
       &.prev-arrow {
-        margin-bottom: 20px;
+        margin-right: 15px;
+        ${media.medium`margin-right: 0px; margin-bottom: 20px;`}
       }
       &.disabled {
         opacity: 0.5;
@@ -99,6 +138,15 @@ const HomePageProductSlider = ({ products }) => {
     slidesToScroll: 1,
     afterChange: () => setUpdateCount(updateCount + 1),
     beforeChange: (current, next) => setSlideIndex(next),
+    mobileFirst: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   return (
     <SliderContainer>
@@ -106,7 +154,7 @@ const HomePageProductSlider = ({ products }) => {
         <div className="content-container">
           <div className="inner-wrap">
             <h1>
-              New
+              New {""}
               <br />
               Arrivals
             </h1>

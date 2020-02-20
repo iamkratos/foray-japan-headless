@@ -8,6 +8,10 @@ const WrapperWrap = styled.div`
   &.sm {
     ${media.medium`max-width: 70vw;`}
   }
+
+  &.xs {
+    ${media.medium`max-width: 800px;`}
+  }
   &.md {
     ${media.medium`max-width: 80vw;`}
   }
