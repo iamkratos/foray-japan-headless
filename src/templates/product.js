@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
 
-import { StoreContext } from "../context/StoreContext";
 import Wrapper from "../components/org/Wrapper";
 import SEO from "../components/seo";
 import Layout from "../components/layout";
@@ -287,6 +286,16 @@ const ProductPageContainer = styled.section`
             line-height: 1;
             border: 1px solid #000;
             ${TransitionMixin(".25s")}
+
+            &.disabled {
+              opacity: 0.5;
+
+              &:hover {
+                cursor: not-allowed;
+                background-color: #000;
+                color: #fff;
+              }
+            }
             &:hover {
               background-color: #fff;
               color: #000;

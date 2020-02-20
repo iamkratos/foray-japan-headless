@@ -11,11 +11,12 @@ const SearchOverlayContainer = styled(animated.div)`
   z-index: 350;
 `;
 
-const SearchOverlay = ({ style }) => {
+const SearchOverlay = ({ style, setIsSearchOpen }) => {
   return (
-    <SearchOverlayContainer style={{ ...style }}>
-      overlay
-    </SearchOverlayContainer>
+    <SearchOverlayContainer
+      onClick={() => setIsSearchOpen(false)}
+      style={{ ...style }}
+    ></SearchOverlayContainer>
   );
 };
 

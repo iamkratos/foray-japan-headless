@@ -37,6 +37,18 @@ exports.createPages = async ({ graphql, boundActionCreators }) => {
     }
   `);
 
+  const blogPosts = await graphql(`
+    {
+      allShopifyArticle(filter: { blog: { title: { eq: "TEAMFORAYGOLF" } } }) {
+        edges {
+          node {
+            url
+          }
+        }
+      }
+    }
+  `);
+
   // Product Pages
   productPages.data.allShopifyProduct.edges.forEach(edge => {
     createPage({
@@ -66,6 +78,21 @@ exports.createPages = async ({ graphql, boundActionCreators }) => {
       component: path.resolve("./src/templates/standard-page.js"),
       context: {
         handle: node.handle,
+      },
+    });
+  });
+
+  // Blog Posts
+  blogPosts.data.allShopifyArticle.edges.forEach(node => {
+    const link = node.node.url.replace(
+      "https://www.foraygolf.com/blogs/teamforaygolf/",
+      ""
+    );
+    createPage({
+      path: `/blogs/teamforaygolf/${link}`,
+      component: path.resolve("./src/templates/blog-post.js"),
+      context: {
+        link: node.node.url,
       },
     });
   });

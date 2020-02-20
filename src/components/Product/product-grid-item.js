@@ -402,7 +402,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
-                        alt={product.title + "Image " + index}
+                        alt={product.title + " Image " + index}
                       />
                     );
                   }
@@ -417,7 +417,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
-                        alt={product.title + "Image " + index}
+                        alt={product.title + " Image " + index}
                       />
                     );
                   }

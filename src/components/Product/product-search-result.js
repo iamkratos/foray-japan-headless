@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import { media } from "../helpers";
 
 const ProductSearchResultContainer = styled.div`
-  flex: 0 0 25%;
+  flex: 0 0 50%;
   display: flex;
   align-items: flex-end;
   margin-bottom: 30px;
+  ${media.medium`flex: 0 0 25%;`}
   > .inner-wrap {
     max-width: 90%;
     flex: 1;

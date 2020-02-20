@@ -408,7 +408,6 @@ const Cart = ({ style }) => {
       <div className="cart-items-container">
         {checkout.lineItems.length > 0 ? (
           checkout.lineItems.map(item => {
-            console.log("cart here", item);
             return (
               <div className="cart-item-container" key={item.id}>
                 <div className="inner-wrap">
@@ -435,7 +434,9 @@ const Cart = ({ style }) => {
                         </p>
 
                         <div className="right-container">
-                          <p className="price">${item.variant.price}</p>
+                          {!item.title.includes("Add On") && (
+                            <p className="price">${item.variant.price}</p>
+                          )}
                         </div>
                         {!item.title.includes("Add On") && (
                           <div className="action-buttons">

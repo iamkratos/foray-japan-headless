@@ -21,7 +21,7 @@ const SlideContainer = styled.div`
   }
 `;
 const SliderContainer = styled.div`
-  padding-top: 30px;
+  padding: 40px 0;
   .slider-grid {
     flex-wrap: nowrap;
     display: block;

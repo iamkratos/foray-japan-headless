@@ -339,7 +339,15 @@ const Header = ({ siteTitle }) => {
       })}
 
       {searchOverlayTransitions.map(({ item, key, props }) => {
-        return item && <SearchOverlay key={key} style={props} />;
+        return (
+          item && (
+            <SearchOverlay
+              setIsSearchOpen={setIsSearchOpen}
+              key={key}
+              style={props}
+            />
+          )
+        );
       })}
 
       {secondSetTransitions.map(({ item, key, props }) => {

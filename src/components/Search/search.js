@@ -70,6 +70,15 @@ const SearchContainer = styled(animated.div)`
 
 const HitsContainer = styled.div`
   padding-bottom: 30px;
+  min-height: 100vh;
+
+  .hits-wrapper {
+    max-height: 70vh;
+    overflow: hidden;
+    position: relative;
+    overflow-y: scroll;
+    ${media.medium`overflow-y: initial; max-height: 100%;`}
+  }
 `;
 const SearchMessageContainer = styled.div`
   h4 {
@@ -100,7 +109,7 @@ const Hits = ({ hits }) => {
 
   return (
     <HitsContainer>
-      <Wrapper flex>
+      <Wrapper className="hits-wrapper" flex>
         {filteredHits.slice(0, 8).map(hit => {
           return <ProductSearchResult product={hit} />;
         })}

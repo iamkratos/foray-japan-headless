@@ -20,7 +20,19 @@ const AddToCart = ({ sizeId, sizeIdTwo, childProductSize }) => {
             Add To Cart
           </button>
         ) : (
-          <button onClick={() => addProductToCart(sizeId)}>Add To Cart</button>
+          <button
+            className={
+              sizeIdTwo !== undefined && sizeIdTwo === "" ? "disabled" : ""
+            }
+            disabled={
+              sizeIdTwo !== undefined && sizeIdTwo === "" ? true : false
+            }
+            onClick={() => addProductToCart(sizeId)}
+          >
+            {sizeIdTwo !== undefined && sizeIdTwo === ""
+              ? "Must Select Add-On Size"
+              : "Add To Cart"}
+          </button>
         )}
       </div>
     </div>
