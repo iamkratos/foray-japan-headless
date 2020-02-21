@@ -49,7 +49,6 @@ const ArticleGridItemContainer = styled.article`
 `;
 
 const ArticleGridItem = ({ article }) => {
-  console.log(article);
   const link = article.url.replace("https://www.foraygolf.com", "");
   return (
     <ArticleGridItemContainer>

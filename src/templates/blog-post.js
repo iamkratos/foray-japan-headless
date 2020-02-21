@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import SEO from "../components/seo";
 import Layout from "../components/layout";
-import Wrapper from "../components/org/wrapper";
+import Wrapper from "../components/org/Wrapper";
 
 const BlogPostContainerStyles = styled.section`
   padding: 40px 0;

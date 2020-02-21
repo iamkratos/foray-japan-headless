@@ -50,7 +50,6 @@ const BlogIndexPage = () => {
     }
   `);
   const articles = data.allShopifyArticle.edges;
-  console.log(articles);
   return (
     <Layout>
       <SEO title="TEAMFORAYGOLF" />
