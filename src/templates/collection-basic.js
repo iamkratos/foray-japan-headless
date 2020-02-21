@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { graphql } from "gatsby";
 import LazyLoad from "react-lazyload";
 
