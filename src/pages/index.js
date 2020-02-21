@@ -60,6 +60,13 @@ const IndexPage = () => {
           }
         }
       }
+      seoImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+        childImageSharp {
+          original {
+            src
+          }
+        }
+      }
     }
   `);
 

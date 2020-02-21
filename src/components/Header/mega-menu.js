@@ -13,10 +13,14 @@ const MegaMenuContainer = styled(animated.div)`
   top: 83px;
   left: 0;
   background-color: #fff;
-  min-height: 368px;
+  /* min-height: 368px; */
   z-index: 400;
   border-bottom: 1px solid #efefef;
   ${media.medium`top: 129px;`}
+  ${TransitionMixin(".25s")}
+  &.shrunk {
+    ${media.medium`top: 100px;`}
+  }
 
   .linklist-container {
     flex: 1;
@@ -77,8 +81,8 @@ const MegaMenuContainer = styled(animated.div)`
   .image-container {
     flex: 1;
     position: relative;
-    min-height: 368px;
-    ${media.xl`min-height: 468px;`}
+    min-height: 310px;
+    ${media.xl`min-height: 430px;`}
   }
 `;
 
@@ -99,11 +103,12 @@ const MegaMenu = ({
   megaMenuIndex,
   menuOneImageIndex,
   setMenuOneImageIndex,
+  isMenuShrunk,
   style,
 }) => {
   const data = useStaticQuery(graphql`
     query {
-      topsImage: file(relativePath: { eq: "menu-items/shop-by/tops.jpg" }) {
+      topsImage: file(relativePath: { eq: "menu-items/shop-by/tops-1.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
@@ -111,7 +116,7 @@ const MegaMenu = ({
         }
       }
       bottomsImage: file(
-        relativePath: { eq: "menu-items/shop-by/bottoms.jpg" }
+        relativePath: { eq: "menu-items/shop-by/bottoms-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -120,7 +125,7 @@ const MegaMenu = ({
         }
       }
       outerwearImage: file(
-        relativePath: { eq: "menu-items/shop-by/outerwear.jpg" }
+        relativePath: { eq: "menu-items/shop-by/outerwear-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -129,7 +134,7 @@ const MegaMenu = ({
         }
       }
       dressesImage: file(
-        relativePath: { eq: "menu-items/shop-by/dresses.jpg" }
+        relativePath: { eq: "menu-items/shop-by/dresses-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -137,7 +142,7 @@ const MegaMenu = ({
           }
         }
       }
-      kidsImage: file(relativePath: { eq: "menu-items/shop-by/kids.jpg" }) {
+      kidsImage: file(relativePath: { eq: "menu-items/shop-by/kids-1.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
@@ -145,7 +150,7 @@ const MegaMenu = ({
         }
       }
       accessoriesImage: file(
-        relativePath: { eq: "menu-items/shop-by/accessories.jpg" }
+        relativePath: { eq: "menu-items/shop-by/accessories-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -372,7 +377,10 @@ const MegaMenu = ({
   let hideMenuOne = megaMenuIndex === 0 ? "" : "hide";
   let hideMenuTwo = megaMenuIndex === 1 ? "" : "hide";
   return (
-    <MegaMenuContainer style={{ ...style }}>
+    <MegaMenuContainer
+      className={isMenuShrunk === true ? "shrunk" : ""}
+      style={{ ...style }}
+    >
       {/* Shop By */}
       <Wrapper flex activeClass shiftRight className={hideMenuOne}>
         <div className="linklist-container">

@@ -29,6 +29,9 @@ const SearchContainer = styled(animated.div)`
   border-bottom: 1px solid #ccc;
   z-index: 400;
   ${media.medium`top: 129px;`}
+  &.shrunk {
+    ${media.medium`top: 100px;`}
+  }
   .ais-SearchBox {
     max-width: 100%;
 
@@ -119,7 +122,7 @@ const Hits = ({ hits }) => {
 };
 const CustomHits = connectHits(Hits);
 
-const Search = ({ style, isSearchOpen }) => {
+const Search = ({ style, isSearchOpen, isMenuShrunk }) => {
   const [searchActive, setSearchActive] = useState(false);
   const inputEl = useRef(null);
   console.log("search is ", isSearchOpen);
@@ -145,7 +148,11 @@ const Search = ({ style, isSearchOpen }) => {
       }}
     >
       <Configure distinct />
-      <SearchContainer ref={inputEl} style={{ ...style }}>
+      <SearchContainer
+        className={isMenuShrunk ? "shrunk" : ""}
+        ref={inputEl}
+        style={{ ...style }}
+      >
         <Wrapper>
           <SearchBox />
         </Wrapper>

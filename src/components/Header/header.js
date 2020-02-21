@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTransition } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
@@ -29,6 +29,26 @@ const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
 
+  &.shrink {
+    .logo-container {
+      a {
+        overflow: hidden;
+        position: relative;
+        max-height: 30px;
+
+        svg {
+          transform: translate3d(0px, -37px, 0px);
+          path {
+            &.hide-on-shrink {
+              opacity: 0;
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
   > .wrapper-container-one {
     padding: 10px 0;
   }
@@ -39,9 +59,12 @@ const HeaderContainer = styled.header`
 
     a {
       display: inline-block;
+      max-height: 65px;
       svg {
+        ${TransitionMixin(".25s")}
         max-width: 120px;
         max-height: 55px;
+
         ${media.medium`max-width: 140px;max-height: 65px;`}
       }
     }
@@ -148,7 +171,7 @@ const HeaderContainer = styled.header`
         width: 100%;
         text-align: center;
         top: auto;
-        ${media.medium`bottom: 13px;`}
+        ${media.medium`bottom: 15px;`}
       }
 
       svg {
@@ -174,10 +197,10 @@ const Header = ({ siteTitle }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [megaMenuIndex, setMegaMenuIndex] = useState(-1);
 
+  const [isMenuShrunk, setIsMenuShrunk] = useState(false);
+
   // Pass down to <MegaMenu />
   const [menuOneImageIndex, setMenuOneImageIndex] = useState(0);
-
-  const inputEl = useRef(null);
 
   const transitions = useTransition(isCartOpen, null, {
     from: { transform: "translate3d(100%, 0, 0)" },
@@ -246,9 +269,20 @@ const Header = ({ siteTitle }) => {
       setIsSearchOpen(false);
     }
   }
+
+  useEffect(() => {
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > 70) {
+        setIsMenuShrunk(true);
+      } else {
+        setIsMenuShrunk(false);
+      }
+    });
+  }, []);
   return (
     <div role="group" onMouseLeave={closeMegaMenu}>
-      <HeaderContainer>
+      {/* <div role="group"></div> */}
+      <HeaderContainer className={isMenuShrunk === true ? "shrink" : ""}>
         <TopBar />
         <Wrapper align flex activeClass>
           <div className="search-container">
@@ -334,7 +368,14 @@ const Header = ({ siteTitle }) => {
 
       {searchTransitions.map(({ item, key, props }) => {
         return (
-          item && <Search key={key} style={props} isSearchOpen={isSearchOpen} />
+          item && (
+            <Search
+              key={key}
+              style={props}
+              isMenuShrunk={isMenuShrunk}
+              isSearchOpen={isSearchOpen}
+            />
+          )
         );
       })}
 
@@ -357,6 +398,7 @@ const Header = ({ siteTitle }) => {
         return (
           item && (
             <MegaMenu
+              isMenuShrunk={isMenuShrunk}
               megaMenuIndex={megaMenuIndex}
               setMenuOneImageIndex={setMenuOneImageIndex}
               menuOneImageIndex={menuOneImageIndex}

@@ -201,6 +201,20 @@ export const query = graphql`
         }
       }
     }
+    seoImages: allFile(
+      filter: { relativeDirectory: { eq: "seo-images" }, name: { eq: $handle } }
+    ) {
+      edges {
+        node {
+          id
+          childImageSharp {
+            original {
+              src
+            }
+          }
+        }
+      }
+    }
     allShopifyCollection(filter: { handle: { eq: $handle } }) {
       edges {
         node {

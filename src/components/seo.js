@@ -5,12 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ description, lang, meta, title, children }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -23,9 +23,9 @@ function SEO({ description, lang, meta, title }) {
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.siteMetadata.description;
 
   return (
     <Helmet
@@ -68,21 +68,41 @@ function SEO({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
-  )
+    >
+      {children}
+    </Helmet>
+  );
 }
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
+};
 
-export default SEO
+export default SEO;
+
+// <!-- COMMON TAGS -->
+// <meta charset="utf-8">
+// <title>Title Value</title>
+// <!-- Search Engine -->
+// <meta name="description" content="Page value">
+// <meta name="image" content="image value">
+// <!-- Schema.org for Google -->
+// <meta itemprop="name" content="Title Value">
+// <meta itemprop="description" content="Page value">
+// <meta itemprop="image" content="image value">
+// <!-- Open Graph general (Facebook, Pinterest & Google+) -->
+// <meta name="og:title" content="Title Value">
+// <meta name="og:description" content="Page value">
+// <meta name="og:image" content="image value">
+// <meta name="og:url" content="web site value">
+// <meta name="og:site_name" content="site name">
+// <meta name="og:type" content="website"></meta>

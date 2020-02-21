@@ -6,6 +6,7 @@ import AddToCart from "./add-to-cart";
 
 const AddonProductContainer = styled.div`
   margin-top: 40px;
+  order: 5;
   .inner-wrap {
     h4 {
       text-transform: uppercase;
@@ -77,6 +78,7 @@ const AddonProduct = ({ product, tags, firstProductVariantId }) => {
           sizeId={firstProductVariantId}
           sizeIdTwo={addonSelectedSize}
           childProductSize={childProductSize}
+          addon={true}
         />
       </div>
     </AddonProductContainer>

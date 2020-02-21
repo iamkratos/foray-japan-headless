@@ -270,7 +270,7 @@ const ProductPageContainer = styled.section`
       .add-to-cart-container {
         margin-top: 20px;
         ${media.medium`margin-top: 40px;`}
-        order: 5;
+        order: 6;
         .inner-wrap {
           button {
             background-color: #000;
@@ -319,6 +319,8 @@ const ProductPage = ({ data }) => {
   const [currentSizeSet, setCurrentSizeSet] = useState([]);
   const [sizeId, setSizeId] = useState();
   const [userSize, setUserSize] = useState();
+  const [availableSizes, setAvailableSizes] = useState(0);
+
   const scrollContainer = useRef(null);
   const [isThereAnAddonProduct, setAnAddonProduct] = useState(false);
 
@@ -509,6 +511,15 @@ const ProductPage = ({ data }) => {
   }
   // console.log("addon product", isThereAnAddonProduct);
 
+  let availSizes = [];
+  currentSizeSet.map(size => {
+    if (size.availableForSale) {
+      availSizes.push(true);
+    }
+  });
+
+  console.log("avail sizes", availSizes);
+
   return (
     <Layout>
       <SEO title={product.title} />
@@ -603,6 +614,7 @@ const ProductPage = ({ data }) => {
                     {currentSizeSet.length > 0 &&
                       currentSizeSet.map((size, index) => {
                         let isAvailable = size.availableForSale;
+
                         let sizeText = size.selectedOptions[1]
                           ? size.selectedOptions[1].value
                           : size.selectedOptions[0].value;
@@ -631,9 +643,16 @@ const ProductPage = ({ data }) => {
                   firstProductVariantId={sizeId}
                   product={product}
                   tags={product.tags}
+                  availSizes={availSizes.length}
+                  addon={true}
                 />
               ) : (
-                <AddToCart sizeId={sizeId} />
+                <AddToCart
+                  availSizes={availSizes.length}
+                  availableSizesCount={availableSizes}
+                  sizeId={sizeId}
+                  addon={false}
+                />
               )}
             </div>
           </div>
