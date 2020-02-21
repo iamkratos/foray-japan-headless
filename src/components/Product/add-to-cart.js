@@ -10,7 +10,6 @@ const AddToCart = ({
   availSizes,
   addon,
 }) => {
-  console.log("add to cart check", sizeId, sizeIdTwo);
   const { addProductToCart, addMultipleProductsToCart } = useContext(
     StoreContext
   );

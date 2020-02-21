@@ -107,18 +107,20 @@ const CollectionPage = ({ data }) => {
   return (
     <Layout>
       <SEO title={collection.title}>
-        {/* <meta
+        <meta
           name="og:image"
           content={
-            window.location.host + data.seoImage.childImageSharp.original.src
+            window.location.host +
+            data.seoImage.edges[0].node.childImageSharp.original.src
           }
         />
         <meta
           name="image"
           content={
-            window.location.host + data.seoImage.childImageSharp.original.src
+            window.location.host +
+            data.seoImage.edges[0].node.childImageSharp.original.src
           }
-        /> */}
+        />
       </SEO>
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (
@@ -216,12 +218,13 @@ export const query = graphql`
         }
       }
     }
-    seoImages: allFile(
-      filter: { relativeDirectory: { eq: "seo-images" }, name: { eq: $handle } }
+    seoImage: allFile(
+      filter: { relativeDirectory: { eq: "seoImages" }, name: { eq: $handle } }
     ) {
       edges {
         node {
           id
+          name
           childImageSharp {
             original {
               src

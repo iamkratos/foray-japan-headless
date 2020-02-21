@@ -60,7 +60,7 @@ const IndexPage = () => {
           }
         }
       }
-      seoImage: file(relativePath: { eq: "seo-images/home-page.jpg" }) {
+      seoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
         childImageSharp {
           original {
             src
