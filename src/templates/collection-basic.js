@@ -91,8 +91,10 @@ const CollectionPage = ({ data }) => {
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
 
+  let windowObject;
   useEffect(() => {
     setFilteredProducts(collection.products);
+    windowObject = window;
   }, []);
 
   function handleResetFilters() {
