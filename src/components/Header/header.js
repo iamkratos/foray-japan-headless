@@ -135,20 +135,20 @@ const HeaderContainer = styled.header`
       button {
         background-color: transparent;
         border: none;
-        height: 30px;
+        height: 40px;
         position: relative;
       }
 
       sup {
         position: absolute;
-        bottom: 8px;
+        bottom: 17px;
         left: 0;
         font-weight: bold;
         font-size: 12px;
         width: 100%;
         text-align: center;
         top: auto;
-        ${media.medium`bottom: 5px;`}
+        ${media.medium`bottom: 13px;`}
       }
 
       svg {

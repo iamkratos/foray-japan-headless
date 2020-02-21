@@ -45,7 +45,7 @@ const TriGridContainer = styled.section`
       .overlay-content {
         h3 {
           color: #fff;
-          font-size: 21px;
+          font-size: 24px;
           margin: 0px;
           ${media.medium`font-size: 40px;`}
         }

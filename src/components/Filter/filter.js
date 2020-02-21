@@ -302,6 +302,10 @@ const ProductFilter = ({
 
   let finalColors = [];
   products.map(product => {
+    let isProductAddon = product.title.includes("Add On") ? true : false;
+    if (isProductAddon) {
+      return;
+    }
     product.variants.map(variants => {
       // -- Filter Duplicate Colors
       variants.selectedOptions.map(option => {
@@ -313,6 +317,14 @@ const ProductFilter = ({
   });
 
   finalColors = finalColors.filter(onlyUnique);
+  finalColors = finalColors.filter(
+    item =>
+      item !== "Rosso Red" &&
+      item !== "Left" &&
+      item !== "Right" &&
+      item !== "BW"
+  );
+
   // console.log(finalColors);
 
   // 2. Find all unique sizes
@@ -352,6 +364,7 @@ const ProductFilter = ({
         if (option.name === "Color") {
           option.values.map(value => {
             let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
+            // console.log(handlizedValue, handlelizedFilterColor);
             if (handlizedValue === handlelizedFilterColor) {
               filteredProductValues.push(value);
             }

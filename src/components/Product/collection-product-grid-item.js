@@ -204,7 +204,7 @@ const ProductGridItem = ({
   function checkTooltipText() {
     // check for glove product
     if (
-      currentProductImages &&
+      currentProductImages[0] &&
       currentProductImages[0].altText &&
       !currentProductImages[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentProductImages[0].altText

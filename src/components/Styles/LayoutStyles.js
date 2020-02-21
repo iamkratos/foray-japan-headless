@@ -57,6 +57,134 @@ const LayoutContainer = styled.div`
         display: inline-block;
         margin: 2px 5px;
 
+        &.maroon {
+          order: 1;
+        }
+        &.berry {
+          order: 2;
+        }
+        &.red {
+          order: 3;
+        }
+        &.fuxia {
+          order: 3;
+        }
+        &.coral {
+          order: 4;
+        }
+        &.new-bordeaux {
+          order: 4;
+        }
+        &.ruby-wine {
+          order: 5;
+        }
+        &.eggplant-pink {
+          order: 6;
+        }
+        &.mauve {
+          order: 7;
+        }
+        &.new-mosto-flamingo-venere {
+          order: 7;
+        }
+        &.pink {
+          order: 8;
+        }
+        &.flamingo {
+          order: 9;
+        }
+        &.rose-gold {
+          order: 10;
+        }
+        &.coral {
+          order: 10;
+        }
+        &.tomato {
+          order: 11;
+        }
+        &.perf-papaya {
+          order: 12;
+        }
+        &.limone {
+          order: 13;
+        }
+        &.army-navy {
+          order: 14;
+        }
+        &.military-green {
+          order: 15;
+        }
+        &.teal {
+          order: 16;
+        }
+        &.nb {
+          order: 16;
+        }
+        &.twilight {
+          order: 17;
+        }
+        &.blue-black-twill {
+          order: 18;
+        }
+        &.navy {
+          order: 19;
+        }
+        &.amparo-blue {
+          order: 20;
+        }
+        &.blue-chambray {
+          order: 21;
+        }
+        &.acqua {
+          order: 22;
+        }
+        &.light-blue {
+          order: 23;
+        }
+        &.blue-pavone {
+          order: 24;
+        }
+        &.baja-blue {
+          order: 25;
+        }
+        &.charcoal-black {
+          order: 26;
+        }
+        &.grey-marl {
+          order: 26;
+        }
+        &.grey {
+          order: 27;
+        }
+        &.grey-chambray {
+          order: 28;
+        }
+        &.dove-grey {
+          order: 29;
+        }
+        &.grey-stripe {
+          order: 30;
+        }
+
+        &.bw {
+          order: 39;
+        }
+        &.nero-black {
+          order: 40;
+        }
+        &.black {
+          order: 41;
+        }
+        &.black-splatter-print {
+          order: 42;
+        }
+        &.bright-white {
+          order: 43;
+        }
+        &.white {
+          order: 44;
+        }
+
         .color-btn-container {
           height: 20px;
           width: 20px;
@@ -80,6 +208,13 @@ const LayoutContainer = styled.div`
           &.berry {
             background-color: #781327;
           }
+          &.new-mosto-flamingo-venere {
+            background-image: linear-gradient(
+              90deg,
+              #ed818f 50%,
+              #29101f 50%
+            ) !important;
+          }
           &.grey-chambray {
             background-color: #928ca1;
           }
@@ -100,6 +235,10 @@ const LayoutContainer = styled.div`
           &.white,
           &.marl {
             background-color: #fff;
+          }
+
+          &.grey-stripe {
+            background-color: #b9b7c4;
           }
           &.navy,
           &.twilight,
@@ -140,7 +279,7 @@ const LayoutContainer = styled.div`
               #182d6d 50%
             ) !important;
           }
-          &.papaya {
+          &.perf-papaya {
             background-color: #ffb014 !important;
           }
           &.charcoal-black {

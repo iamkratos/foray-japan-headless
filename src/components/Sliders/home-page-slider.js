@@ -34,6 +34,7 @@ const SlideContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
     ${media.medium`display: none;`}
 
     .overlay-content {
@@ -52,7 +53,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1-new.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -125,7 +126,7 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to="/collections/graphic-floral-collection">
+          <Link to="/collections/dream-weaver">
             <Img
               className="desktop-only"
               fluid={data.slideOne.childImageSharp.fluid}
@@ -136,13 +137,13 @@ const HomePageSlider = () => {
             />
             <div className="mobile-overlay">
               <div className="overlay-content">
-                <h2>Graphic Floral</h2>
+                <h2>Dream Weaver</h2>
               </div>
             </div>
           </Link>
         </SlideContainer>
         <SlideContainer>
-          <Link to="/collections/graphic-floral-collection">
+          <Link to="/collections/dream-weaver">
             <Img
               className="desktop-only"
               fluid={data.slideTwo.childImageSharp.fluid}
@@ -153,13 +154,13 @@ const HomePageSlider = () => {
             />
             <div className="mobile-overlay">
               <div className="overlay-content">
-                <h2>Graphic Floral</h2>
+                <h2>Dream Weaver</h2>
               </div>
             </div>
           </Link>
         </SlideContainer>
         <SlideContainer>
-          <Link to="/collections/graphic-floral-collection">
+          <Link to="/collections/dream-weaver">
             <Img
               className="desktop-only"
               fluid={data.slideThree.childImageSharp.fluid}
@@ -170,7 +171,7 @@ const HomePageSlider = () => {
             />
             <div className="mobile-overlay">
               <div className="overlay-content">
-                <h2>Graphic Floral</h2>
+                <h2>Dream Weaver</h2>
               </div>
             </div>
           </Link>

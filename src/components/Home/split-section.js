@@ -54,7 +54,7 @@ const SplitSection = () => {
         </div>
         <div className="right-container">
           <div className="inner-wrap">
-            <Link>
+            <Link to="/pages/corporate">
               <Img fluid={data.rightImage.childImageSharp.fluid} />
             </Link>
           </div>

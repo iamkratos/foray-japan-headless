@@ -7,6 +7,7 @@ const TopBarContainer = styled.div`
   background-color: #000;
   padding: 13px 0 10px;
   display: none;
+  text-align: center;
   ${media.medium`display: block;`}
   p {
     margin: 0px;

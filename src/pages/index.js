@@ -68,7 +68,10 @@ const IndexPage = () => {
   // console.log(products);
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO
+        title="Home"
+        description="Foray Golf is THE Authority for Women's Fashion Golf Apparel. Designed in New York made in the USA, Foray Golf uniquely offers stylish options for the course."
+      />
       <HomePageSlider />
       <HomePageProductSlider products={products} />
       <TriGridSection />

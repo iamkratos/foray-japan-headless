@@ -20,7 +20,6 @@ const ProductGridContainer = styled.section`
   }
 `;
 const BannerContainer = styled.section`
-  padding-bottom: 30px;
   ${media.medium`padding-bottom: 30px;`}
 
   &.no-pad-bottom {
@@ -158,6 +157,12 @@ const CollectionPage = ({ data }) => {
             )}
             <Wrapper flex>
               {filteredProducts.map((product, index) => {
+                let isProductAddon = product.title.includes("Add On")
+                  ? true
+                  : false;
+                if (isProductAddon) {
+                  return;
+                }
                 return (
                   <LazyLoad key={index} height={200}>
                     <CollectionProductGridItem
