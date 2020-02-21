@@ -60,7 +60,7 @@ const IndexPage = () => {
           }
         }
       }
-      seoImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+      seoImage: file(relativePath: { eq: "seo-images/home-page.jpg" }) {
         childImageSharp {
           original {
             src
@@ -70,7 +70,7 @@ const IndexPage = () => {
     }
   `);
 
-  // console.log(data);
+  console.log(data);
   let products = data.allShopifyCollection.edges[0].node.products;
   // console.log(products);
   return (
@@ -78,7 +78,20 @@ const IndexPage = () => {
       <SEO
         title="Home"
         description="Foray Golf is THE Authority for Women's Fashion Golf Apparel. Designed in New York made in the USA, Foray Golf uniquely offers stylish options for the course."
-      />
+      >
+        <meta
+          name="og:image"
+          content={
+            window.location.host + data.seoImage.childImageSharp.original.src
+          }
+        />
+        <meta
+          name="image"
+          content={
+            window.location.host + data.seoImage.childImageSharp.original.src
+          }
+        />
+      </SEO>
       <HomePageSlider />
       <HomePageProductSlider products={products} />
       <TriGridSection />

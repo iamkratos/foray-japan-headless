@@ -36,7 +36,8 @@ const BannerContainer = styled.section`
   }
 
   .mobile-only {
-    ${media.medium`display: none;`}
+    margin-bottom: 30px;
+    ${media.medium`display: none; margin-bottom: 0px;`}
   }
 
   .title-container {
@@ -102,9 +103,23 @@ const CollectionPage = ({ data }) => {
     setCurrentColorTooltip("");
     setFilteredProducts(collection.products);
   }
+  console.log("collection data", data);
   return (
     <Layout>
-      <SEO title={collection.title} />
+      <SEO title={collection.title}>
+        {/* <meta
+          name="og:image"
+          content={
+            window.location.host + data.seoImage.childImageSharp.original.src
+          }
+        />
+        <meta
+          name="image"
+          content={
+            window.location.host + data.seoImage.childImageSharp.original.src
+          }
+        /> */}
+      </SEO>
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (
         <BannerContainer

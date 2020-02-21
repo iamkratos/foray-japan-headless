@@ -32,16 +32,26 @@ const HeaderContainer = styled.header`
   &.shrink {
     .logo-container {
       a {
-        overflow: hidden;
-        position: relative;
-        max-height: 30px;
+        ${media.medium`max-height: 30px;position: relative;overflow: hidden;`}
 
         svg {
-          transform: translate3d(0px, -37px, 0px);
+          ${media.medium`transform: translate3d(0px, -37px, 0px);`}
           path {
             &.hide-on-shrink {
-              opacity: 0;
-              display: none;
+              ${media.medium`opacity: 0;`}
+            }
+          }
+        }
+      }
+    }
+    .link-container {
+      nav {
+        ul {
+          li {
+            a {
+              &::after {
+                margin: 0px auto 0px;
+              }
             }
           }
         }
