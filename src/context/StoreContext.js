@@ -78,7 +78,6 @@ export const StoreProvider = ({ children }) => {
       const currentCheckoutId = isBrowser
         ? localStorage.getItem("checkout_id")
         : null;
-      console.log(currentCheckoutId, "currentCheckoutId");
 
       let newCheckout = null;
 
@@ -91,9 +90,7 @@ export const StoreProvider = ({ children }) => {
         localStorage.setItem("checkout_id", newCheckout.id);
       }
       // Set checkout to state
-      console.log("new checkout is", newCheckout);
       setCheckout(newCheckout);
-      console.log("checkout set", checkout);
     } catch (e) {
       console.log(e.message);
     }
@@ -102,7 +99,6 @@ export const StoreProvider = ({ children }) => {
   // NOTE: newCheckout is dif here than the function above
   const addProductToCart = async variantId => {
     try {
-      console.log("added");
       const lineItems = [
         {
           variantId,
@@ -130,7 +126,6 @@ export const StoreProvider = ({ children }) => {
     childProductSize
   ) => {
     try {
-      console.log("added", variantIdTwo);
       const lineItems = [
         {
           variantId: variantIdOne,
@@ -144,12 +139,10 @@ export const StoreProvider = ({ children }) => {
           quantity: 1,
         },
       ];
-      console.log(client.checkout);
       const newCheckout = await client.checkout.addLineItems(
         checkout.id,
         lineItems
       );
-      console.log(newCheckout.webUrl);
       setCheckout(newCheckout);
       if (!isCartOpen) {
         toggleCartOpen();

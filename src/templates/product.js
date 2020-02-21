@@ -518,7 +518,7 @@ const ProductPage = ({ data }) => {
     }
   });
 
-  console.log("avail sizes", availSizes);
+  // console.log("avail sizes", availSizes);
 
   return (
     <Layout>
