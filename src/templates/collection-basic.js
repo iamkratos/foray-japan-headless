@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { graphql } from "gatsby";
 import LazyLoad from "react-lazyload";
+import { window } from "browser-monads";
 
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
@@ -91,12 +92,6 @@ const CollectionPage = ({ data }) => {
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
 
-  let windowObject;
-  useEffect(() => {
-    setFilteredProducts(collection.products);
-    windowObject = window;
-  }, []);
-
   function handleResetFilters() {
     setFilterColor("");
     setFilterSize("");
@@ -105,24 +100,29 @@ const CollectionPage = ({ data }) => {
     setCurrentColorTooltip("");
     setFilteredProducts(collection.products);
   }
+
   console.log("collection data", data);
   return (
     <Layout>
       <SEO title={collection.title}>
-        <meta
-          name="og:image"
-          content={
-            window.location.host +
-            data.seoImage.edges[0].node.childImageSharp.original.src
-          }
-        />
-        <meta
-          name="image"
-          content={
-            window.location.host +
-            data.seoImage.edges[0].node.childImageSharp.original.src
-          }
-        />
+        {data.seoImage.edges[0] && (
+          <>
+            <meta
+              name="og:image"
+              content={
+                window.location.host +
+                data.seoImage.edges[0].node.childImageSharp.original.src
+              }
+            />
+            <meta
+              name="image"
+              content={
+                window.location.host +
+                data.seoImage.edges[0].node.childImageSharp.original.src
+              }
+            />
+          </>
+        )}
       </SEO>
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (

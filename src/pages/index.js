@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useStaticQuery, graphql } from "gatsby";
+import { window } from "browser-monads";
 
 import SEO from "../components/seo";
 import HomePageSlider from "../components/Sliders/home-page-slider";
@@ -73,30 +74,30 @@ const IndexPage = () => {
   console.log(data);
   let products = data.allShopifyCollection.edges[0].node.products;
 
-  let windowObj;
-  useEffect(() => {
-    return () => {
-      windowObj = window;
-    };
-  }, []);
   return (
     <Layout>
       <SEO
         title="Home"
         description="Foray Golf is THE Authority for Women's Fashion Golf Apparel. Designed in New York made in the USA, Foray Golf uniquely offers stylish options for the course."
       >
-        <meta
-          name="og:image"
-          content={
-            windowObj.location.host + data.seoImage.childImageSharp.original.src
-          }
-        />
-        <meta
-          name="image"
-          content={
-            windowObj.location.host + data.seoImage.childImageSharp.original.src
-          }
-        />
+        {data.seoImage.childImageSharp && (
+          <>
+            <meta
+              name="og:image"
+              content={
+                window.location.host +
+                data.seoImage.childImageSharp.original.src
+              }
+            />
+            <meta
+              name="image"
+              content={
+                window.location.host +
+                data.seoImage.childImageSharp.original.src
+              }
+            />
+          </>
+        )}
       </SEO>
       <HomePageSlider />
       <HomePageProductSlider products={products} />
