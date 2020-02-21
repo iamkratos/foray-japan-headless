@@ -263,6 +263,15 @@ const MegaMenu = ({
           }
         }
       }
+      finalSale: file(
+        relativePath: { eq: "menu-items/collections/final-sale.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
@@ -359,6 +368,11 @@ const MegaMenu = ({
       title: "Accessories",
       url: "/collections/accessories",
       image: data.accessoriesImage.childImageSharp.fluid,
+    },
+    {
+      title: "Final Sale",
+      url: "/collections/final-sale",
+      image: data.finalSale.childImageSharp.fluid,
     },
     {
       title: "View All",

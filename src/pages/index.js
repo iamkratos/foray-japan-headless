@@ -72,7 +72,13 @@ const IndexPage = () => {
 
   console.log(data);
   let products = data.allShopifyCollection.edges[0].node.products;
-  // console.log(products);
+
+  let windowObj;
+  useEffect(() => {
+    return () => {
+      windowObj = window;
+    };
+  }, []);
   return (
     <Layout>
       <SEO
@@ -82,13 +88,13 @@ const IndexPage = () => {
         <meta
           name="og:image"
           content={
-            window.location.host + data.seoImage.childImageSharp.original.src
+            windowObj.location.host + data.seoImage.childImageSharp.original.src
           }
         />
         <meta
           name="image"
           content={
-            window.location.host + data.seoImage.childImageSharp.original.src
+            windowObj.location.host + data.seoImage.childImageSharp.original.src
           }
         />
       </SEO>
