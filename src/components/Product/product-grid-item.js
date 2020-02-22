@@ -398,6 +398,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                     // console.log("case x", currentColor);
                     return (
                       <Img
+                        key={index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
@@ -413,6 +414,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                   if (index < 2) {
                     return (
                       <Img
+                        key={index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}

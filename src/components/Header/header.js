@@ -247,6 +247,8 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0 },
   });
 
+  console.log("checkout", checkout);
+
   const qty = checkout.lineItems.reduce((total, item) => {
     return total + item.quantity;
   }, 0);
