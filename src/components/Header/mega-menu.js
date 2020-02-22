@@ -169,7 +169,7 @@ const MegaMenu = ({
       }
       # Collections
       graphicFloral: file(
-        relativePath: { eq: "menu-items/collections/graphic-floral-new.jpg" }
+        relativePath: { eq: "menu-items/collections/graphic-floral-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -177,7 +177,7 @@ const MegaMenu = ({
           }
         }
       }
-      dluxe: file(relativePath: { eq: "menu-items/collections/d-luxe.jpg" }) {
+      dluxe: file(relativePath: { eq: "menu-items/collections/d-luxe-1.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
@@ -185,7 +185,7 @@ const MegaMenu = ({
         }
       }
       winterFloom: file(
-        relativePath: { eq: "menu-items/collections/winter-floom.jpg" }
+        relativePath: { eq: "menu-items/collections/winter-floom-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -194,7 +194,7 @@ const MegaMenu = ({
         }
       }
       mercuryRising: file(
-        relativePath: { eq: "menu-items/collections/mercury-rising.jpg" }
+        relativePath: { eq: "menu-items/collections/mercury-rising-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -203,7 +203,7 @@ const MegaMenu = ({
         }
       }
       sunDaze: file(
-        relativePath: { eq: "menu-items/collections/sun-daze.jpg" }
+        relativePath: { eq: "menu-items/collections/sun-daze-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -229,7 +229,7 @@ const MegaMenu = ({
           }
         }
       }
-      core: file(relativePath: { eq: "menu-items/collections/core.jpg" }) {
+      core: file(relativePath: { eq: "menu-items/collections/core-1.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 960) {
             ...GatsbyImageSharpFluid
@@ -237,7 +237,7 @@ const MegaMenu = ({
         }
       }
       laceEscape: file(
-        relativePath: { eq: "menu-items/collections/lace-escape.jpeg" }
+        relativePath: { eq: "menu-items/collections/lace-escape-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -246,7 +246,7 @@ const MegaMenu = ({
         }
       }
       floomOfficial: file(
-        relativePath: { eq: "menu-items/collections/floom.jpg" }
+        relativePath: { eq: "menu-items/collections/floom-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -255,7 +255,7 @@ const MegaMenu = ({
         }
       }
       rockstud: file(
-        relativePath: { eq: "menu-items/collections/rockstud.jpg" }
+        relativePath: { eq: "menu-items/collections/rockstud-1.jpg" }
       ) {
         childImageSharp {
           fluid(maxWidth: 960) {
@@ -272,11 +272,25 @@ const MegaMenu = ({
           }
         }
       }
+      dreamWeaver: file(
+        relativePath: { eq: "menu-items/collections/dream-weaver-1.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Dream Weaver",
+      url: "/collections/dream-weaver",
+      image: data.dreamWeaver.childImageSharp.fluid,
+    },
     {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
@@ -453,7 +467,7 @@ const MegaMenu = ({
                 ))}
               </ul>
               <ul>
-                {collectionLinks.slice(6, 12).map((link, index) => (
+                {collectionLinks.slice(6, 13).map((link, index) => (
                   <li>
                     <Link
                       onMouseEnter={() => handleMenuItemHover(index + 6)}

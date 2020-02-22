@@ -91,6 +91,14 @@ const Footer = () => {
             <h4>Shop Collections</h4>
             <ul>
               <li>
+                <Link to="/collections/dream-weaver">Dream Weaver</Link>
+              </li>
+              <li>
+                <Link to="/collections/graphic-floral-collection">
+                  Graphic Floral
+                </Link>
+              </li>
+              <li>
                 <Link to="/collections/d-luxe">D-Luxe</Link>
               </li>
               <li>
@@ -101,9 +109,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/collections/sun-daze">Sun Daze</Link>
-              </li>
-              <li>
-                <Link to="/collections/power-pleats">Power Pleats</Link>
               </li>
             </ul>
           </div>
@@ -144,7 +149,7 @@ const Footer = () => {
                 <Link to="/pages/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <Link to="/pages/term-of-use">Terms of Use</Link>
+                <Link to="/pages/terms-of-use">Terms of Use</Link>
               </li>
               <li>
                 <Link to="/pages/returns-exchange-policy">

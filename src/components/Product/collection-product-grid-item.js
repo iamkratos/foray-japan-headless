@@ -241,6 +241,7 @@ const ProductGridItem = ({
                   if (index < 2) {
                     return (
                       <Img
+                        alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
@@ -255,6 +256,7 @@ const ProductGridItem = ({
                   if (index < 2) {
                     return (
                       <Img
+                        alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}

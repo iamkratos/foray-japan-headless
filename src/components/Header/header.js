@@ -287,6 +287,7 @@ const Header = ({ siteTitle }) => {
       } else {
         setIsMenuShrunk(false);
       }
+      return;
     });
   }, []);
   return (

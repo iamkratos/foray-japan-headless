@@ -101,27 +101,31 @@ const CollectionPage = ({ data }) => {
     setFilteredProducts(collection.products);
   }
 
+  useEffect(() => {
+    setFilteredProducts(collection.products);
+  }, []);
+
   console.log("collection data", data);
   return (
     <Layout>
       <SEO title={collection.title}>
         {data.seoImage.edges[0] && (
-          <>
-            <meta
-              name="og:image"
-              content={
-                window.location.host +
-                data.seoImage.edges[0].node.childImageSharp.original.src
-              }
-            />
-            <meta
-              name="image"
-              content={
-                window.location.host +
-                data.seoImage.edges[0].node.childImageSharp.original.src
-              }
-            />
-          </>
+          <meta
+            name="og:image"
+            content={
+              window.location.host +
+              data.seoImage.edges[0].node.childImageSharp.original.src
+            }
+          />
+        )}
+        {data.seoImage.edges[0] && (
+          <meta
+            name="image"
+            content={
+              window.location.host +
+              data.seoImage.edges[0].node.childImageSharp.original.src
+            }
+          />
         )}
       </SEO>
       {collection.image &&
