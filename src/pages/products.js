@@ -75,7 +75,6 @@ const CollectionsIndex = () => {
       edge.node.title !== "Home Page"
   );
 
-  console.log(collections);
   return (
     <Layout>
       <SEO title="All Collections" />
@@ -103,7 +102,6 @@ const CollectionGridItemContainer = styled.div`
 `;
 
 const CollectionGridItem = ({ collection }) => {
-  console.log(collection);
   return (
     <CollectionGridItemContainer>
       <div className="inner-wrap">

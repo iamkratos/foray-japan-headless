@@ -34,6 +34,9 @@ const HeaderContainer = styled.header`
   }
 
   &.shrink {
+    &.instagram-styles {
+      top: 40px;
+    }
     .logo-container {
       a {
         ${media.medium`max-height: 30px;position: relative;overflow: hidden;`}
@@ -399,6 +402,7 @@ const Header = ({ siteTitle }) => {
         return (
           item && (
             <MobileMenu
+              isMenuShrunk={isMenuShrunk}
               isInstagramBrowser={isInstagramBrowser}
               key={key}
               style={props}
