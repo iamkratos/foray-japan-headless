@@ -503,7 +503,6 @@ const ProductGridItem = ({ product, filterColor }) => {
 
                   return (
                     <li key={i}>
-                      ``
                       <button
                         className={`color-btn-container ${colorHandle}`}
                         onClick={() => handleColorChange(color)}
