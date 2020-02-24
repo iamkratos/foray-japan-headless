@@ -6,7 +6,7 @@ import { window } from "browser-monads";
 import Wrapper from "../components/org/Wrapper";
 import Layout from "../components/layout";
 import styled from "styled-components";
-import { TransitionMixin, media } from "../components/helpers";
+import { media } from "../components/helpers";
 import Img from "gatsby-image";
 import CollectionProductGridItem from "../components/Product/collection-product-grid-item";
 import SEO from "../components/seo";
