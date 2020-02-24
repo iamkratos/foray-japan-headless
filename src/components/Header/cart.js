@@ -280,11 +280,8 @@ const Cart = ({ style }) => {
       }
     }
   `);
-
+  console.log(checkout);
   let allDresses = data.allShopifyCollection.edges[0].node.products;
-  let checkOutItems = checkout.lineItems.filter(
-    item => !item.title.includes("Sneaky Pocket Short")
-  );
 
   function handleRemoveAll(item) {
     // If the product is a dress, search for addon tag, then remove that product
@@ -435,7 +432,13 @@ const Cart = ({ style }) => {
                                   "variant " + option.name.toLowerCase()
                                 }
                               >
-                                <span className="label">{option.name}:</span>{" "}
+                                <span className="label">
+                                  {option.value === "Left" ||
+                                  option.value === "Right"
+                                    ? "Glove"
+                                    : option.name}
+                                  :
+                                </span>{" "}
                                 <span className="value">{option.value}</span>
                               </p>
                             );
@@ -501,7 +504,10 @@ const Cart = ({ style }) => {
             <div className="btn-container">
               <a
                 className={checkout.lineItems.length === 0 ? "disabled" : ""}
-                href={checkout.webUrl}
+                href={checkout.webUrl.replace(
+                  "https://foray-golf-dev.myshopify.com",
+                  "https://ar.foraygolf.com"
+                )}
               >
                 {checkout.lineItems.length === 0
                   ? "No items in cart"

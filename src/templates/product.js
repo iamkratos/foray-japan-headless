@@ -608,7 +608,13 @@ const ProductPage = ({ data }) => {
               />
               {finalColors.length > 0 && (
                 <div className="variant-selector-container color-container">
-                  <h4>Select Color</h4>
+                  <h4>
+                    {currentSizeSet.length > 0 &&
+                    (currentSizeSet[0].selectedOptions[0].value === "Left" ||
+                      currentSizeSet[0].selectedOptions[0].value === "Right")
+                      ? "Select Glove"
+                      : "Select Color"}
+                  </h4>
                   <div className="inner-wrap">
                     <ul className="colors" onMouseLeave={checkTooltipText}>
                       {finalColors.map((color, i) => {
