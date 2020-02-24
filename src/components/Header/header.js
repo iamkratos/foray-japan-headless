@@ -50,7 +50,7 @@ const HeaderContainer = styled.header`
           li {
             a {
               &::after {
-                margin: 0px auto 0px;
+                ${media.medium`margin: 0px auto 0px;`}
               }
             }
           }
