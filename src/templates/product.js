@@ -166,6 +166,10 @@ const ProductPageContainer = styled.section`
           }
         }
 
+        b {
+          display: block;
+        }
+
         br {
           display: none;
         }

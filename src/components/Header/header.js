@@ -293,6 +293,7 @@ const Header = ({ siteTitle }) => {
   }
 
   useEffect(() => {
+    console.log(window);
     window.addEventListener("scroll", function() {
       if (window.scrollY > 70) {
         setIsMenuShrunk(true);
