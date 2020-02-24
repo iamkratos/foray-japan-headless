@@ -202,8 +202,8 @@ const MobileMenu = ({ style }) => {
               </span>
             </a>
             <ul className={dropdownIndex === 0 ? "active" : ""}>
-              {shopByLinks.map(link => (
-                <li>
+              {shopByLinks.map((link, index) => (
+                <li key={index}>
                   <Wrapper>
                     <Link to={link.url}>{link.title}</Link>
                   </Wrapper>
@@ -221,8 +221,8 @@ const MobileMenu = ({ style }) => {
               </span>
             </a>
             <ul className={dropdownIndex === 1 ? "active" : ""}>
-              {collectionLinks.map(link => (
-                <li>
+              {collectionLinks.map((link, index) => (
+                <li key={index}>
                   <Wrapper>
                     <Link to={link.url}>{link.title}</Link>
                   </Wrapper>

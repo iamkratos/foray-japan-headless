@@ -419,7 +419,7 @@ const LayoutContainer = styled.div`
    */
 
   .hamburger {
-    padding: 0;
+    padding: 0 5px;
     display: inline-block;
     cursor: pointer;
     transition-property: opacity, filter;
@@ -436,6 +436,12 @@ const LayoutContainer = styled.div`
   }
   .hamburger:hover {
     opacity: 0.7;
+  }
+  .hamburger {
+    &:active,
+    &:focus {
+      outline: 0;
+    }
   }
   .hamburger.is-active:hover {
     opacity: 0.7;

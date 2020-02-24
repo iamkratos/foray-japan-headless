@@ -87,6 +87,10 @@ const HeaderContainer = styled.header`
       button {
         background-color: transparent;
         border: none;
+        &:active,
+        &:focus {
+          outline: 0;
+        }
         svg {
           height: 25px;
           width: 25px;
@@ -132,6 +136,12 @@ const HeaderContainer = styled.header`
             font-size: 11px;
             letter-spacing: 0.1em;
             position: relative;
+
+            &.sale {
+              color: red;
+              font-weight: bold !important;
+              font-size: 14px !important;
+            }
 
             &:after {
               content: " ";
@@ -353,7 +363,9 @@ const Header = ({ siteTitle }) => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">Final Sale</a>
+                  <a className="sale" href="/collections/final-sale">
+                    Final Sale
+                  </a>
                 </li>
               </ul>
             </nav>
