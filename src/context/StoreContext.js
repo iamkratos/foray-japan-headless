@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import Client from "shopify-buy";
+import { document } from "browser-monads";
 
 const client = Client.buildClient({
   domain: "foray-golf-dev.myshopify.com",
@@ -34,9 +35,11 @@ export const StoreProvider = ({ children }) => {
 
   const toggleCartOpen = () => {
     setCartOpen(!isCartOpen);
+    document.querySelector("html").classList.add("frozen");
   };
   const toggleCartClose = () => {
     setCartOpen(false);
+    document.querySelector("html").classList.remove("frozen");
   };
 
   // This handles all color filtering. Only use for Filters

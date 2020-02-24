@@ -15,15 +15,14 @@ const CartContainer = styled(animated.section)`
   background-color: #fff;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   z-index: 1000;
-  padding: 20px 20px 30px 30px;
+  padding: 20px 0px 30px 0px;
   ${media.medium`width: 35%;`}
 
   > .inner-wrap {
     max-height: 90vh;
     overflow-y: scroll;
-    padding-bottom: 40px;
-    ${media.medium`max-height: 100%; overflow-y:auto;padding-bottom: 0px;
-`}
+    padding: 0px 20px 60px 30px;
+    ${media.medium`max-height: 100%; overflow-y:auto;padding-bottom: 0px;`}
   }
   .title-container {
     display: flex;
@@ -84,7 +83,7 @@ const CartContainer = styled(animated.section)`
   .cart-items-container {
     overflow-y: scroll;
     max-height: 69vh;
-    min-height: 69vh;
+    min-height: 39vh;
     border-bottom: 1px solid #ccc;
 
     .cart-item-container {
@@ -257,6 +256,7 @@ const Cart = ({ style }) => {
   const {
     isCartOpen,
     toggleCartOpen,
+    toggleCartClose,
     checkout,
     removeProductFromCart,
     removeMultipleProductsFromCart,
@@ -408,7 +408,7 @@ const Cart = ({ style }) => {
         <div className="title-container">
           <h3>Your Cart</h3>
           <div className="btn-container">
-            <button onClick={toggleCartOpen}>
+            <button onClick={toggleCartClose}>
               <X />
               {/* <span>Close</span> */}
             </button>

@@ -121,7 +121,6 @@ const FriendsOfForay = ({ page }) => {
       }
     }
   `);
-  console.log(data);
   return (
     <Layout>
       <SEO title={page.title} />
