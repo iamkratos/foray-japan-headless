@@ -30,7 +30,7 @@ const HeaderContainer = styled.header`
   width: 100%;
 
   &.instagram-styles {
-    padding-top: 20px;
+    padding-top: 40px;
   }
 
   &.shrink {
