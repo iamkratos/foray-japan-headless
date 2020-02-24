@@ -536,10 +536,13 @@ const ProductPage = ({ data }) => {
     <Layout>
       <SEO
         title={product.title}
-        description={product.description
-          .split(" ")
-          .slice(0, 160)
-          .join(" ")}
+        description={
+          product.description &&
+          product.description
+            .split(" ")
+            .slice(0, 160)
+            .join(" ")
+        }
       >
         <meta
           name="og:image"

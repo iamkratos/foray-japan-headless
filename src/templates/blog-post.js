@@ -36,10 +36,13 @@ const BlogPostContainer = ({ data }) => {
     <Layout>
       <SEO
         title={post.title}
-        description={post.content
-          .split(" ")
-          .slice(0, 160)
-          .join(" ")}
+        description={
+          post.content &&
+          post.content
+            .split(" ")
+            .slice(0, 160)
+            .join(" ")
+        }
       >
         <meta name="og:image" content={window.location.host + fallbackImg} />
         <meta name="image" content={window.location.host + fallbackImg} />

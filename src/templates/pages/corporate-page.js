@@ -134,10 +134,13 @@ const CorporatePage = ({ page, fallbackImg }) => {
     <Layout>
       <SEO
         title={page.title}
-        description={page.bodySummary
-          .split(" ")
-          .slice(0, 160)
-          .join(" ")}
+        description={
+          page.bodySummary &&
+          page.bodySummary
+            .split(" ")
+            .slice(0, 160)
+            .join(" ")
+        }
       >
         <meta name="og:image" content={window.location.host + fallbackImg} />
         <meta name="image" content={window.location.host + fallbackImg} />
