@@ -17,6 +17,12 @@ const CartContainer = styled(animated.section)`
   z-index: 1000;
   padding: 20px 20px 30px 30px;
   ${media.medium`width: 35%;`}
+
+  > .inner-wrap {
+    max-height: 90vh;
+    overflow-y: scroll;
+    ${media.medium`max-height: 100%; overflow-y:auto;`}
+  }
   .title-container {
     display: flex;
     align-items: center;
@@ -396,106 +402,110 @@ const Cart = ({ style }) => {
 
   return (
     <CartContainer style={{ ...style }}>
-      <div className="title-container">
-        <h3>Your Cart</h3>
-        <div className="btn-container">
-          <button onClick={toggleCartOpen}>
-            <X />
-            {/* <span>Close</span> */}
-          </button>
+      <div className="inner-wrap">
+        <div className="title-container">
+          <h3>Your Cart</h3>
+          <div className="btn-container">
+            <button onClick={toggleCartOpen}>
+              <X />
+              {/* <span>Close</span> */}
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="cart-items-container">
-        {checkout.lineItems.length > 0 ? (
-          checkout.lineItems.map(item => {
-            return (
-              <div className="cart-item-container" key={item.id}>
-                <div className="inner-wrap">
-                  <div className="image-container">
-                    <img src={item.variant.image.src} alt="" />
-                  </div>
-                  <div className="content-container">
-                    <div className="inner-wrap">
-                      <div className="left-container">
-                        <h4>{item.title}</h4>
-                        {item.variant.selectedOptions.map((option, index) => {
-                          return (
-                            <p
-                              key={index}
-                              className={"variant " + option.name.toLowerCase()}
-                            >
-                              <span className="label">{option.name}:</span>{" "}
-                              <span className="value">{option.value}</span>
-                            </p>
-                          );
-                        })}
-                        <p>
-                          <span className="label">Qty:</span>{" "}
-                          <span className="value">{item.quantity}</span>
-                        </p>
+        <div className="cart-items-container">
+          {checkout.lineItems.length > 0 ? (
+            checkout.lineItems.map(item => {
+              return (
+                <div className="cart-item-container" key={item.id}>
+                  <div className="inner-wrap">
+                    <div className="image-container">
+                      <img src={item.variant.image.src} alt="" />
+                    </div>
+                    <div className="content-container">
+                      <div className="inner-wrap">
+                        <div className="left-container">
+                          <h4>{item.title}</h4>
+                          {item.variant.selectedOptions.map((option, index) => {
+                            return (
+                              <p
+                                key={index}
+                                className={
+                                  "variant " + option.name.toLowerCase()
+                                }
+                              >
+                                <span className="label">{option.name}:</span>{" "}
+                                <span className="value">{option.value}</span>
+                              </p>
+                            );
+                          })}
+                          <p>
+                            <span className="label">Qty:</span>{" "}
+                            <span className="value">{item.quantity}</span>
+                          </p>
 
-                        <div className="right-container">
+                          <div className="right-container">
+                            {!item.title.includes("Add On") && (
+                              <p className="price">${item.variant.price}</p>
+                            )}
+                          </div>
                           {!item.title.includes("Add On") && (
-                            <p className="price">${item.variant.price}</p>
+                            <div className="action-buttons">
+                              <button
+                                className="decrement"
+                                onClick={() =>
+                                  handleUpdateQuantity(item, item.quantity - 1)
+                                }
+                              >
+                                -
+                              </button>
+                              <button
+                                className="increment"
+                                onClick={() =>
+                                  handleUpdateQuantity(item, item.quantity + 1)
+                                }
+                              >
+                                +
+                              </button>
+                              <button
+                                className="remove-all"
+                                onClick={() => handleRemoveAll(item)}
+                              >
+                                Remove All
+                              </button>
+                            </div>
                           )}
                         </div>
-                        {!item.title.includes("Add On") && (
-                          <div className="action-buttons">
-                            <button
-                              className="decrement"
-                              onClick={() =>
-                                handleUpdateQuantity(item, item.quantity - 1)
-                              }
-                            >
-                              -
-                            </button>
-                            <button
-                              className="increment"
-                              onClick={() =>
-                                handleUpdateQuantity(item, item.quantity + 1)
-                              }
-                            >
-                              +
-                            </button>
-                            <button
-                              className="remove-all"
-                              onClick={() => handleRemoveAll(item)}
-                            >
-                              Remove All
-                            </button>
-                          </div>
-                        )}
                       </div>
                     </div>
                   </div>
                 </div>
+              );
+            })
+          ) : (
+            <div className="no-item-container">
+              <div className="inner-wrap">
+                <p>There are no items in your cart.</p>
               </div>
-            );
-          })
-        ) : (
-          <div className="no-item-container">
-            <div className="inner-wrap">
-              <p>There are no items in your cart.</p>
             </div>
-          </div>
-        )}
-      </div>
-      <div className="cart-summary-container">
-        <div className="inner-wrap">
-          <h2>
-            <span>Total:</span>{" "}
-            <span className="right">${checkout.totalPrice}</span>
-          </h2>
-          <p>Shipping, taxes, and discounts calculated at checkout.</p>
-          <div className="btn-container">
-            <a
-              className={checkout.lineItems.length === 0 ? "disabled" : ""}
-              href={checkout.webUrl}
-            >
-              {checkout.lineItems.length === 0
-                ? "No items in cart"
-                : " Check Out"}
-            </a>
+          )}
+        </div>
+        <div className="cart-summary-container">
+          <div className="inner-wrap">
+            <h2>
+              <span>Total:</span>{" "}
+              <span className="right">${checkout.totalPrice}</span>
+            </h2>
+            <p>Shipping, taxes, and discounts calculated at checkout.</p>
+            <div className="btn-container">
+              <a
+                className={checkout.lineItems.length === 0 ? "disabled" : ""}
+                href={checkout.webUrl}
+              >
+                {checkout.lineItems.length === 0
+                  ? "No items in cart"
+                  : " Check Out"}
+              </a>
+            </div>
           </div>
         </div>
       </div>
