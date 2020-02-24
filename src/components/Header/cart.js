@@ -21,7 +21,9 @@ const CartContainer = styled(animated.section)`
   > .inner-wrap {
     max-height: 90vh;
     overflow-y: scroll;
-    ${media.medium`max-height: 100%; overflow-y:auto;`}
+    padding-bottom: 40px;
+    ${media.medium`max-height: 100%; overflow-y:auto;padding-bottom: 0px;
+`}
   }
   .title-container {
     display: flex;
