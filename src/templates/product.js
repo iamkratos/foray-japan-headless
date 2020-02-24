@@ -314,7 +314,7 @@ const ProductPageContainer = styled.section`
 
 const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
-  console.log(product);
+  // console.log(product);
 
   // console.log(product);
   function createMarkup() {
