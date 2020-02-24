@@ -48,14 +48,20 @@ const SplitSection = () => {
         <div className="left-container">
           <div className="inner-wrap">
             <Link to="/pages/friends-of-foray">
-              <Img fluid={data.leftImage.childImageSharp.fluid} />
+              <Img
+                alt="Join Team Foray"
+                fluid={data.leftImage.childImageSharp.fluid}
+              />
             </Link>
           </div>
         </div>
         <div className="right-container">
           <div className="inner-wrap">
             <Link to="/pages/corporate">
-              <Img fluid={data.rightImage.childImageSharp.fluid} />
+              <Img
+                alt="Corporate and Wholesale"
+                fluid={data.rightImage.childImageSharp.fluid}
+              />
             </Link>
           </div>
         </div>

@@ -85,7 +85,7 @@ exports.createPages = async ({ graphql, boundActionCreators }) => {
   // Blog Posts
   blogPosts.data.allShopifyArticle.edges.forEach(node => {
     const link = node.node.url.replace(
-      "https://www.foraygolf.com/blogs/teamforaygolf/",
+      "https://ar.foraygolf.com/blogs/teamforaygolf/",
       ""
     );
     createPage({

@@ -27,6 +27,8 @@ function SEO({ description, lang, meta, title, children }) {
 
   const metaDescription = description || site.siteMetadata.description;
 
+  console.log(metaDescription);
+
   return (
     <Helmet
       htmlAttributes={{
@@ -69,6 +71,8 @@ function SEO({ description, lang, meta, title, children }) {
         },
       ].concat(meta)}
     >
+      <meta name="description" content={metaDescription} />
+
       {children}
     </Helmet>
   );

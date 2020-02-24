@@ -12,11 +12,26 @@ const StandardPage = ({ data }) => {
     page.handle === "privacy-policy" ||
     page.handle === "returns-exchange-policy"
   ) {
-    return <BasicPage page={page} />;
+    return (
+      <BasicPage
+        fallbackImg={data.fallbackSeoImage.childImageSharp.original.src}
+        page={page}
+      />
+    );
   } else if (page.handle === "corporate") {
-    return <CorporatePage page={page} />;
+    return (
+      <CorporatePage
+        fallbackImg={data.fallbackSeoImage.childImageSharp.original.src}
+        page={page}
+      />
+    );
   } else if (page.handle === "friends-of-foray") {
-    return <FriendsOfForay page={page} />;
+    return (
+      <FriendsOfForay
+        fallbackImg={data.fallbackSeoImage.childImageSharp.original.src}
+        page={page}
+      />
+    );
   } else {
     return <h1>{page.title}</h1>;
   }
@@ -30,6 +45,14 @@ export const query = graphql`
         url
         handle
         body
+        bodySummary
+      }
+    }
+    fallbackSeoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
+      childImageSharp {
+        original {
+          src
+        }
       }
     }
   }

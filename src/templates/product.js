@@ -314,6 +314,7 @@ const ProductPageContainer = styled.section`
 
 const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
+  console.log(product);
 
   // console.log(product);
   function createMarkup() {
@@ -535,10 +536,10 @@ const ProductPage = ({ data }) => {
     <Layout>
       <SEO
         title={product.title}
-        description={
-          product.description &&
-          product.description.replace(/^(.{6}[^\s]*).*/, "$1")
-        }
+        description={product.description
+          .split(" ")
+          .slice(0, 160)
+          .join(" ")}
       >
         <meta
           name="og:image"

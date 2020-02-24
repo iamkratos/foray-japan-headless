@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { window } from "browser-monads";
 
 import SEO from "../../components/seo";
 import Layout from "../../components/layout";
@@ -24,13 +25,22 @@ const BasicPageContainer = styled.section`
   }
 `;
 
-const BasicPage = ({ page }) => {
+const BasicPage = ({ page, fallbackImg }) => {
   function createMarkup() {
     return { __html: page.body };
   }
   return (
     <Layout>
-      <SEO title={page.title} />
+      <SEO
+        title={page.title}
+        description={page.bodySummary
+          .split(" ")
+          .slice(0, 160)
+          .join(" ")}
+      >
+        <meta name="og:image" content={window.location.host + fallbackImg} />
+        <meta name="image" content={window.location.host + fallbackImg} />
+      </SEO>
       <BasicPageContainer>
         <Wrapper>
           <div className="title-container">

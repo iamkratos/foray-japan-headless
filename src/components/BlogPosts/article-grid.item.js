@@ -49,7 +49,7 @@ const ArticleGridItemContainer = styled.article`
 `;
 
 const ArticleGridItem = ({ article }) => {
-  const link = article.url.replace("https://www.foraygolf.com", "");
+  const link = article.url.replace("https://ar.foraygolf.com", "");
   return (
     <ArticleGridItemContainer>
       <div className="inner-wrap">

@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
+import { window } from "browser-monads";
 
 import SEO from "../components/seo";
 import Layout from "../components/layout";
@@ -27,12 +28,22 @@ const BlogPostContainerStyles = styled.section`
 
 const BlogPostContainer = ({ data }) => {
   const post = data.allShopifyArticle.nodes[0];
+  const fallbackImg = data.fallbackSeoImage.childImageSharp.original.src;
   function createMarkup() {
     return { __html: post.contentHtml };
   }
   return (
     <Layout>
-      <SEO title={post.title} />
+      <SEO
+        title={post.title}
+        description={post.content
+          .split(" ")
+          .slice(0, 160)
+          .join(" ")}
+      >
+        <meta name="og:image" content={window.location.host + fallbackImg} />
+        <meta name="image" content={window.location.host + fallbackImg} />
+      </SEO>
       <BlogPostContainerStyles>
         <div className="title-container">
           <Wrapper>
@@ -54,8 +65,16 @@ export const query = graphql`
     allShopifyArticle(filter: { url: { eq: $link } }) {
       nodes {
         title
+        content
         contentHtml
         url
+      }
+    }
+    fallbackSeoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
+      childImageSharp {
+        original {
+          src
+        }
       }
     }
   }

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { useStaticQuery, graphql } from "gatsby";
+import { window } from "browser-monads";
 
 import SEO from "../../components/seo";
 import Layout from "../../components/layout";
@@ -106,7 +107,7 @@ const CorporatePageContainer = styled.section`
   }
 `;
 
-const CorporatePage = ({ page }) => {
+const CorporatePage = ({ page, fallbackImg }) => {
   const data = useStaticQuery(graphql`
     query {
       banner: file(relativePath: { eq: "pages/corporate.jpg" }) {
@@ -131,7 +132,16 @@ const CorporatePage = ({ page }) => {
 
   return (
     <Layout>
-      <SEO title={page.title} />
+      <SEO
+        title={page.title}
+        description={page.bodySummary
+          .split(" ")
+          .slice(0, 160)
+          .join(" ")}
+      >
+        <meta name="og:image" content={window.location.host + fallbackImg} />
+        <meta name="image" content={window.location.host + fallbackImg} />
+      </SEO>
       <CorporatePageContainer>
         <div className="banner-container">
           <div className="desktop-only">

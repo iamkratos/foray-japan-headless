@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
+import { window } from "browser-monads";
 
 import Layout from "../../components/layout";
 import Wrapper from "../../components/org/Wrapper";
@@ -60,8 +61,8 @@ const BlogIndexPage = () => {
           </div>
 
           <Wrapper className="blog-index-wrapper">
-            {articles.map(article => {
-              return <ArticleGridItem article={article.node} />;
+            {articles.map((article, index) => {
+              return <ArticleGridItem key={index} article={article.node} />;
             })}
           </Wrapper>
         </Wrapper>

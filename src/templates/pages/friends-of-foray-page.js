@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
+import { window } from "browser-monads";
 
 import Layout from "../../components/layout";
 import SEO from "../../components/seo";
@@ -100,7 +101,7 @@ const FriendsOfForayContainer = styled.section`
     }
   }
 `;
-const FriendsOfForay = ({ page }) => {
+const FriendsOfForay = ({ page, fallbackImg }) => {
   const data = useStaticQuery(graphql`
     query {
       desktopImage: file(relativePath: { eq: "pages/friends-of-foray.jpg" }) {
@@ -123,7 +124,16 @@ const FriendsOfForay = ({ page }) => {
   `);
   return (
     <Layout>
-      <SEO title={page.title} />
+      <SEO
+        title={page.title}
+        description={page.bodySummary
+          .split(" ")
+          .slice(0, 160)
+          .join(" ")}
+      >
+        <meta name="og:image" content={window.location.host + fallbackImg} />
+        <meta name="image" content={window.location.host + fallbackImg} />
+      </SEO>
       <FriendsOfForayContainer>
         <BannerContainer>
           <Img
