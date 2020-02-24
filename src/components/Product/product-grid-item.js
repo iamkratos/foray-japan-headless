@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import { window } from "browser-monads";
 
 import Img from "gatsby-image";
 import { TransitionMixin, media } from "../helpers";

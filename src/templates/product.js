@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { graphql } from "gatsby";
 import Img from "gatsby-image";
+import { window } from "browser-monads";
+import styled from "styled-components";
 
 import Wrapper from "../components/org/Wrapper";
 import SEO from "../components/seo";
 import Layout from "../components/layout";
-import styled from "styled-components";
 import { TransitionMixin, media } from "../components/helpers";
 import AddonProduct from "../components/Product/addon-product";
 import AddToCart from "../components/Product/add-to-cart";
@@ -532,7 +533,25 @@ const ProductPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={product.title} />
+      <SEO
+        title={product.title}
+        description={product.description.replace(/^(.{6}[^\s]*).*/, "$1")}
+      >
+        <meta
+          name="og:image"
+          content={
+            window.location.host +
+            data.fallbackSeoImage.childImageSharp.original.src
+          }
+        />
+        <meta
+          name="image"
+          content={
+            window.location.host +
+            data.fallbackSeoImage.childImageSharp.original.src
+          }
+        />
+      </SEO>
       <ProductPageContainer>
         <Wrapper className="single-product-grid" flex>
           <div className="product-images-container">
@@ -674,6 +693,13 @@ const ProductPage = ({ data }) => {
 
 export const query = graphql`
   query($handle: String!) {
+    fallbackSeoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
+      childImageSharp {
+        original {
+          src
+        }
+      }
+    }
     allShopifyProduct(filter: { handle: { eq: $handle } }) {
       edges {
         node {

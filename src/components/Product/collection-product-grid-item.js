@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useState, useEffect } from "react";
-import styled from "styled-components";
 import { Link } from "gatsby";
+import { window } from "browser-monads";
 
 import Img from "gatsby-image";
 
