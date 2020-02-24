@@ -320,9 +320,9 @@ const ProductFilter = ({
   finalColors = finalColors.filter(
     item =>
       item !== "Rosso Red" &&
+      item !== "Nero Black" &&
       item !== "Left" &&
-      item !== "Right" &&
-      item !== "BW"
+      item !== "Right"
   );
 
   // console.log(finalColors);
@@ -615,7 +615,6 @@ const ProductFilter = ({
 
   // this for monitoring the tooltip
   function handleColorFilterReset() {
-    console.log(currentColorTooltip, tooltipColor);
     if (currentColorTooltip !== tooltipColor) {
       setTootipColor(currentColorTooltip);
     }

@@ -47,7 +47,7 @@ const SplitSection = () => {
       <Wrapper className="split-section-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="inner-wrap">
-            <Link>
+            <Link to="/pages/friends-of-foray">
               <Img fluid={data.leftImage.childImageSharp.fluid} />
             </Link>
           </div>

@@ -91,6 +91,7 @@ const CollectionPage = ({ data }) => {
   const [filterFeature, setFilterFeature] = useState("");
   const [currentColorTooltip, setCurrentColorTooltip] = useState("");
   const [tooltipColor, setTootipColor] = useState("");
+  const [collectionMetaImage, setCollectionMetaImage] = useState([]);
 
   function handleResetFilters() {
     setFilterColor("");
@@ -103,31 +104,35 @@ const CollectionPage = ({ data }) => {
 
   useEffect(() => {
     setFilteredProducts(collection.products);
+    // Setup Fallback SEO Image
+    if (data.seoImage.edges[0]) {
+      setCollectionMetaImage(
+        data.seoImage.edges[0].node.childImageSharp.original.src
+      );
+    } else {
+      setCollectionMetaImage(
+        data.fallbackSeoImage.childImageSharp.original.src
+      );
+    }
   }, []);
 
-  console.log("collection data", data);
   return (
     <Layout>
       <SEO title={collection.title}>
-        {data.seoImage.edges[0] && (
+        {collectionMetaImage !== "" && (
           <meta
             name="og:image"
-            content={
-              window.location.host +
-              data.seoImage.edges[0].node.childImageSharp.original.src
-            }
+            content={window.location.host + collectionMetaImage}
           />
         )}
-        {data.seoImage.edges[0] && (
+        {collectionMetaImage !== "" && (
           <meta
             name="image"
-            content={
-              window.location.host +
-              data.seoImage.edges[0].node.childImageSharp.original.src
-            }
+            content={window.location.host + collectionMetaImage}
           />
         )}
       </SEO>
+
       {collection.image &&
       collection.image.localFile.childImageSharp != null ? (
         <BannerContainer
@@ -236,6 +241,14 @@ export const query = graphql`
               src
             }
           }
+        }
+      }
+    }
+
+    fallbackSeoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
+      childImageSharp {
+        original {
+          src
         }
       }
     }

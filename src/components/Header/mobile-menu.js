@@ -116,10 +116,6 @@ const MobileMenu = ({ style }) => {
       url: "/collections/sun-daze",
     },
     {
-      title: "Power Pleats",
-      url: "/collections/power-pleats",
-    },
-    {
       title: "America",
       url: "/collections/america",
     },
@@ -237,12 +233,16 @@ const MobileMenu = ({ style }) => {
         </li>
         <li>
           <Wrapper>
-            <Link to="/collections/graphic-floral-collection">
+            <a
+              rel="noreferrer"
+              target="_blank"
+              href="https://www.instagram.com/foraygolfusa/"
+            >
               #TeamForayGolf
               <span>
                 <ChevronRight />
               </span>
-            </Link>
+            </a>
           </Wrapper>
         </li>
       </ul>

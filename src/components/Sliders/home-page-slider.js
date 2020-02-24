@@ -111,7 +111,6 @@ const HomePageSlider = () => {
       }
     }
   `);
-  console.log("data", data);
   var settings = {
     dots: false,
     fade: true,

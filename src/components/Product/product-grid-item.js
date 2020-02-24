@@ -457,7 +457,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                         <li key={i}>
                           <button
                             disabled={!isAvailable}
-                            class={isAvailable ? "" : "disabled "}
+                            className={isAvailable ? "" : "disabled "}
                             onClick={() => addProductToCart(size.shopifyId)}
                           >
                             {sizeText}
@@ -490,7 +490,7 @@ const ProductGridItem = ({ product, filterColor }) => {
               )}
             </div>
             <div className="color-container">
-              <ul class="colors" onMouseLeave={checkTooltipText}>
+              <ul className="colors" onMouseLeave={checkTooltipText}>
                 {finalColors.map((color, i) => {
                   let colorHandle = color
                     .replace(/\s+/g, "-")
@@ -503,6 +503,7 @@ const ProductGridItem = ({ product, filterColor }) => {
 
                   return (
                     <li key={i}>
+                      ``
                       <button
                         className={`color-btn-container ${colorHandle}`}
                         onClick={() => handleColorChange(color)}

@@ -1,9 +1,9 @@
 import { Link } from "gatsby";
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useTransition } from "react-spring";
+import { window } from "browser-monads";
 
 import Wrapper from "../org/Wrapper";
-
 import TopBar from "./top-bar";
 import styled from "styled-components";
 import Logo from "../../images/logo.inline.svg";
@@ -247,7 +247,7 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0 },
   });
 
-  console.log("checkout", checkout);
+  // console.log("checkout", checkout);
 
   const qty = checkout.lineItems.reduce((total, item) => {
     return total + item.quantity;
@@ -321,9 +321,7 @@ const Header = ({ siteTitle }) => {
             <nav>
               <ul>
                 <li>
-                  <Link to="/collections/graphic-floral-collection">
-                    New Arrivals
-                  </Link>
+                  <Link to="/collections/dream-weaver">New Arrivals</Link>
                 </li>
                 <li>
                   <a

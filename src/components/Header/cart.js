@@ -418,19 +418,20 @@ const Cart = ({ style }) => {
                     <div className="inner-wrap">
                       <div className="left-container">
                         <h4>{item.title}</h4>
-                        {item.variant.selectedOptions.map(option => {
+                        {item.variant.selectedOptions.map((option, index) => {
                           return (
                             <p
+                              key={index}
                               className={"variant " + option.name.toLowerCase()}
                             >
-                              <span class="label">{option.name}:</span>{" "}
+                              <span className="label">{option.name}:</span>{" "}
                               <span className="value">{option.value}</span>
                             </p>
                           );
                         })}
                         <p>
-                          <span class="label">Qty:</span>{" "}
-                          <span class="value">{item.quantity}</span>
+                          <span className="label">Qty:</span>{" "}
+                          <span className="value">{item.quantity}</span>
                         </p>
 
                         <div className="right-container">

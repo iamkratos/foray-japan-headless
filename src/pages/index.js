@@ -71,7 +71,6 @@ const IndexPage = () => {
     }
   `);
 
-  console.log(data);
   let products = data.allShopifyCollection.edges[0].node.products;
 
   return (

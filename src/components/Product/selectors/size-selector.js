@@ -37,7 +37,6 @@ const SizeSelector = ({
     let sizeText = size.selectedOptions[1]
       ? size.selectedOptions[1].value
       : size.selectedOptions[0].value;
-    console.log(size);
     setAddonSelectedSize(size.shopifyId);
     setChildProductSize(size.selectedOptions[1].value);
   }
@@ -52,12 +51,12 @@ const SizeSelector = ({
             let sizeText = size.selectedOptions[1]
               ? size.selectedOptions[1].value
               : size.selectedOptions[0].value;
-            console.log(
-              "size",
-              sizeText === size.selectedOptions[1].value,
-              sizeText,
-              size.selectedOptions[1].value
-            );
+            // console.log(
+            //   "size",
+            //   sizeText === size.selectedOptions[1].value,
+            //   sizeText,
+            //   size.selectedOptions[1].value
+            // );
             return (
               <li key={index}>
                 <button

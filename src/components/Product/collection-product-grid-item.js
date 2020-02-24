@@ -171,9 +171,23 @@ const ProductGridItem = ({
 
     setSizes(availableSizesArray);
 
-    (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
-      ? setHoverColor(availableSizesArray[0].image.altText)
-      : setHoverColor(product.images[0].altText);
+    // (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
+    //   ? setHoverColor(availableSizesArray[0].image.altText)
+    //   : setHoverColor(product.images[0].altText);
+    if (
+      (filterColor !== "" && filterColor !== undefined) ||
+      availableSizesArray[0]
+    ) {
+      if (selectedColor === "bw") {
+        setHoverColor("B&W");
+      } else if (selectedColor === "nb") {
+        setHoverColor("N&B");
+      } else {
+        setHoverColor(availableSizesArray[0].image.altText);
+      }
+    } else {
+      setHoverColor(product.images[0].altText);
+    }
   }
 
   // Quick Shop Hover Over
@@ -210,10 +224,24 @@ const ProductGridItem = ({
       hoverColor != currentProductImages[0].altText
     ) {
       // console.log("current color is", currentColor[0].altText);
-      setHoverColor(currentProductImages[0].altText);
+      if (currentProductImages[0].altText.toLowerCase().includes("bw")) {
+        setHoverColor("B&W");
+      } else {
+        setHoverColor(currentProductImages[0].altText);
+      }
     } else {
       // console.log("baby", sizes);
       sizes && setHoverColor(sizes[0].selectedOptions[0].value);
+    }
+  }
+
+  function handleColorButtonHover(color) {
+    if (color === "BW") {
+      setHoverColor("B&W");
+    } else if (color === "NB") {
+      setHoverColor("N&B");
+    } else {
+      setHoverColor(color);
     }
   }
 
@@ -241,6 +269,7 @@ const ProductGridItem = ({
                   if (index < 2) {
                     return (
                       <Img
+                        key={index}
                         alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
@@ -256,6 +285,7 @@ const ProductGridItem = ({
                   if (index < 2) {
                     return (
                       <Img
+                        key={index}
                         alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
@@ -288,14 +318,14 @@ const ProductGridItem = ({
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
-                    sizes.map(size => {
+                    sizes.map((size, index) => {
                       let isAvailable = size.availableForSale;
                       let sizeText = size.selectedOptions[1]
                         ? size.selectedOptions[1].value
                         : size.selectedOptions[0].value;
 
                       return (
-                        <li>
+                        <li key={index}>
                           <button
                             disabled={!isAvailable}
                             className={isAvailable ? "" : "disabled "}
@@ -343,11 +373,11 @@ const ProductGridItem = ({
                   // console.log("glove color", color);
 
                   return (
-                    <li>
+                    <li key={i}>
                       <button
                         className={`color-btn-container ${colorHandle}`}
                         onClick={() => handleColorChange(color)}
-                        onMouseEnter={() => setHoverColor(color)}
+                        onMouseEnter={() => handleColorButtonHover(color)}
                       ></button>
                     </li>
                   );
@@ -355,9 +385,6 @@ const ProductGridItem = ({
               </ul>
             </div>
           </div>
-          {/* <button onClick={() => addProductToCart(firstVariant.shopifyId)}>
-            Add to Cart
-          </button> */}
         </div>
       </div>
     </ProductStyles>

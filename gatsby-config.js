@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `Foray Golf`,
     description: `Foray Golf is THE Authority for Women's Fashion Golf Apparel. Designed in New York made in the USA, Foray Golf uniquely offers stylish options for the course.`,
-    author: `Sam Davidoff`,
+    author: `Foray Golf`,
+    siteUrl: `https://foraygolf.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -77,6 +78,12 @@ module.exports = {
         anonymize: true,
         // Setting this parameter is also optional
         respectDNT: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        sitemapSize: 5000,
       },
     },
     // To learn more, visit: https://gatsby.dev/offline // this (optional) plugin enables Progressive Web App + Offline functionality

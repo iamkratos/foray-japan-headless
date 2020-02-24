@@ -433,7 +433,13 @@ const ProductPage = ({ data }) => {
 
   function handleColorClick(color) {
     handleVariantChange(color);
-    setHoverColor(color);
+    if (color === "BW") {
+      setHoverColor("B&W");
+    } else if (color === "NB") {
+      setHoverColor("N&B");
+    } else {
+      setHoverColor(color);
+    }
   }
 
   // const [colorVariants, setColorVariants] = useState();

@@ -128,7 +128,7 @@ const CorporatePage = ({ page }) => {
   function createMarkup() {
     return { __html: page.body };
   }
-  console.log(data);
+
   return (
     <Layout>
       <SEO title={page.title} />

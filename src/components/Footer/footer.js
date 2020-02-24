@@ -139,12 +139,12 @@ const Footer = () => {
           <div className="inner-wrap">
             <h4>About</h4>
             <ul>
-              <li>
+              {/* <li>
                 <Link to="/collections/tops">Who We Are</Link>
               </li>
               <li>
                 <Link to="/collections/bottoms">Technology</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/pages/privacy-policy">Privacy Policy</Link>
               </li>
@@ -172,19 +172,19 @@ const Footer = () => {
             <h4>More Info</h4>
             <ul>
               <li>
-                <Link to="/collections/tops">Press</Link>
+                <Link to="/pages/press">Press</Link>
               </li>
               <li>
-                <Link to="/collections/bottoms">Friends of Foray</Link>
+                <Link to="/pages/friends-of-foray">Friends of Foray</Link>
               </li>
               <li>
-                <Link to="/collections/outerwear">TeamForayGolf</Link>
+                <Link to="/blogs/teamforaygolf">TeamForayGolf</Link>
               </li>
               <li>
                 <Link to="/pages/corporate">Corporate &amp; Wholesale</Link>
               </li>
               <li>
-                <Link to="/collections/accessories">Contact Us</Link>
+                <a href="mailto:contact@foraygolf.com">Contact Us</a>
               </li>
             </ul>
           </div>

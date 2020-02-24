@@ -169,9 +169,9 @@ const HomePageProductSlider = ({ products }) => {
         <div className="product-slider-container">
           <div className="inner-wrap">
             <Slider ref={sliderEl} {...settings} style={{ marginBottom: 0 }}>
-              {products.map(product => {
+              {products.map((product, index) => {
                 return (
-                  <SlideContainer>
+                  <SlideContainer key={index}>
                     <ProductGridItem product={product} />
                   </SlideContainer>
                 );

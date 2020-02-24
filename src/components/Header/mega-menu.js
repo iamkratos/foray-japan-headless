@@ -316,11 +316,11 @@ const MegaMenu = ({
       url: "/collections/sun-daze",
       image: data.sunDaze.childImageSharp.fluid,
     },
-    {
-      title: "Power Pleats",
-      url: "/collections/power-pleats",
-      image: data.powerPleats.childImageSharp.fluid,
-    },
+    // {
+    //   title: "Power Pleats",
+    //   url: "/collections/power-pleats",
+    //   image: data.powerPleats.childImageSharp.fluid,
+    // },
     {
       title: "America",
       url: "/collections/america",
@@ -416,7 +416,7 @@ const MegaMenu = ({
             <h4>Shop By</h4>
             <ul>
               {shopByLinks.map((link, index) => (
-                <li>
+                <li key={index}>
                   <Link
                     onMouseEnter={() => handleMenuItemHover(index)}
                     to={link.url}
@@ -433,6 +433,7 @@ const MegaMenu = ({
             if (link.image != null) {
               return (
                 <ImageContainer
+                  key={index}
                   ref={mainMenuImage}
                   className={
                     menuOneImageIndex === index
@@ -456,7 +457,7 @@ const MegaMenu = ({
             <div className="list-container">
               <ul>
                 {collectionLinks.slice(0, 6).map((link, index) => (
-                  <li>
+                  <li key={index}>
                     <Link
                       onMouseEnter={() => handleMenuItemHover(index)}
                       to={link.url}
@@ -468,7 +469,7 @@ const MegaMenu = ({
               </ul>
               <ul>
                 {collectionLinks.slice(6, 13).map((link, index) => (
-                  <li>
+                  <li key={index}>
                     <Link
                       onMouseEnter={() => handleMenuItemHover(index + 6)}
                       to={link.url}
@@ -486,6 +487,7 @@ const MegaMenu = ({
             if (link.image != null) {
               return (
                 <ImageContainer
+                  key={index}
                   ref={mainMenuImage}
                   className={
                     menuOneImageIndex === index

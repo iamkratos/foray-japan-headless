@@ -92,7 +92,6 @@ const SearchMessageContainer = styled.div`
 `;
 
 const Hits = ({ hits }) => {
-  console.log("all hits", hits);
   // Filter out duplicates
   function removeDuplicates(originalArray, prop) {
     var newArray = [];
@@ -125,12 +124,9 @@ const CustomHits = connectHits(Hits);
 const Search = ({ style, isSearchOpen, isMenuShrunk }) => {
   const [searchActive, setSearchActive] = useState(false);
   const inputEl = useRef(null);
-  console.log("search is ", isSearchOpen);
 
   useEffect(() => {
-    isSearchOpen === true
-      ? inputEl.current.querySelector("input").focus()
-      : console.log("not open");
+    isSearchOpen === true && inputEl.current.querySelector("input").focus();
   }, []);
 
   return (
@@ -158,7 +154,7 @@ const Search = ({ style, isSearchOpen, isMenuShrunk }) => {
         </Wrapper>
 
         {searchActive ? (
-          <CustomHits transformItems={items => console.log("yooo", items)} />
+          <CustomHits />
         ) : (
           <SearchMessageContainer>
             <h4>Start typing to make your golf dreams come true</h4>

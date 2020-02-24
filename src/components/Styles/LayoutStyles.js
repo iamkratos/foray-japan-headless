@@ -10,7 +10,7 @@ const LayoutContainer = styled.div`
     ${media.medium`margin-top: 129px;`}
 
     > main {
-      min-height: 100vh;
+      min-height: 80vh;
     }
   }
   /* slick */

@@ -2,9 +2,9 @@ import React from "react";
 import { graphql } from "gatsby";
 import BasicPage from "./pages/basic-page";
 import CorporatePage from "./pages/corporate-page";
+import FriendsOfForay from "./pages/friends-of-foray-page";
 
 const StandardPage = ({ data }) => {
-  console.log(data);
   const page = data.allShopifyPage.nodes[0];
   if (
     page.handle === "terms-of-use" ||
@@ -15,6 +15,8 @@ const StandardPage = ({ data }) => {
     return <BasicPage page={page} />;
   } else if (page.handle === "corporate") {
     return <CorporatePage page={page} />;
+  } else if (page.handle === "friends-of-foray") {
+    return <FriendsOfForay page={page} />;
   } else {
     return <h1>{page.title}</h1>;
   }
