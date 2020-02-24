@@ -535,7 +535,10 @@ const ProductPage = ({ data }) => {
     <Layout>
       <SEO
         title={product.title}
-        description={product.description.replace(/^(.{6}[^\s]*).*/, "$1")}
+        description={
+          product.description &&
+          product.description.replace(/^(.{6}[^\s]*).*/, "$1")
+        }
       >
         <meta
           name="og:image"
@@ -723,6 +726,7 @@ export const query = graphql`
             }
           }
           descriptionHtml
+          description
           variants {
             availableForSale
             id
