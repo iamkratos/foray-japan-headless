@@ -18,6 +18,10 @@ const MobileMenuContainer = styled(animated.div)`
   overflow-y: scroll;
   padding-bottom: 20px;
 
+  &.instagram-styles {
+    top: calc(123px);
+  }
+
   p {
     text-align: center;
     font-weight: bold;
@@ -92,7 +96,7 @@ const MobileMenuContainer = styled(animated.div)`
   }
 `;
 
-const MobileMenu = ({ style }) => {
+const MobileMenu = ({ style, isInstagramBrowser }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
@@ -185,7 +189,10 @@ const MobileMenu = ({ style }) => {
   }
 
   return (
-    <MobileMenuContainer style={{ ...style }}>
+    <MobileMenuContainer
+      className={isInstagramBrowser ? "instagram-styles" : ""}
+      style={{ ...style }}
+    >
       <ul>
         <li>
           <Wrapper>

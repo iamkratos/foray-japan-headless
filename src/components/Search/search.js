@@ -32,6 +32,9 @@ const SearchContainer = styled(animated.div)`
   &.shrunk {
     ${media.medium`top: 100px;`}
   }
+  &.instagram-styles {
+    top: 123px;
+  }
   .ais-SearchBox {
     max-width: 100%;
 
@@ -121,7 +124,7 @@ const Hits = ({ hits }) => {
 };
 const CustomHits = connectHits(Hits);
 
-const Search = ({ style, isSearchOpen, isMenuShrunk }) => {
+const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
   const [searchActive, setSearchActive] = useState(false);
   const inputEl = useRef(null);
 
@@ -145,7 +148,13 @@ const Search = ({ style, isSearchOpen, isMenuShrunk }) => {
     >
       <Configure distinct />
       <SearchContainer
-        className={isMenuShrunk ? "shrunk" : ""}
+        className={
+          isMenuShrunk
+            ? "shrunk "
+            : "" && isInstagramBrowser
+            ? "instagram-styles"
+            : ""
+        }
         ref={inputEl}
         style={{ ...style }}
       >

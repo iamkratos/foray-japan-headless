@@ -396,7 +396,15 @@ const Header = ({ siteTitle }) => {
       </HeaderContainer>
 
       {moibleMenutransitions.map(({ item, key, props }) => {
-        return item && <MobileMenu key={key} style={props} />;
+        return (
+          item && (
+            <MobileMenu
+              isInstagramBrowser={isInstagramBrowser}
+              key={key}
+              style={props}
+            />
+          )
+        );
       })}
 
       {transitions.map(({ item, key, props }) => {
