@@ -166,6 +166,10 @@ const MobileMenu = ({ style }) => {
       url: "/collections/accessories",
     },
     {
+      title: "Final Sale",
+      url: "/collections/final-sale",
+    },
+    {
       title: "View All",
       url: "/collections/all",
     },
