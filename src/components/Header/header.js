@@ -29,6 +29,10 @@ const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
 
+  &.instagram-styles {
+    padding-top: 20px;
+  }
+
   &.shrink {
     .logo-container {
       a {
@@ -294,10 +298,10 @@ const Header = ({ siteTitle }) => {
   }
 
   useEffect(() => {
-    // if (navigator.userAgent.match(/instagram/i)) {
-    //   // here apply the fixes
-    //   setIsInstagramBrowser(true);
-    // }
+    if (window.navigator.userAgent.match(/instagram/i)) {
+      // here apply the fixes
+      setIsInstagramBrowser(true);
+    }
     window.addEventListener("scroll", function() {
       if (window.scrollY > 70) {
         setIsMenuShrunk(true);
@@ -310,7 +314,12 @@ const Header = ({ siteTitle }) => {
   return (
     <div role="group" onMouseLeave={closeMegaMenu}>
       {/* <div role="group"></div> */}
-      <HeaderContainer className={isMenuShrunk === true ? "shrink " : ""}>
+      <HeaderContainer
+        className={
+          (isMenuShrunk === true ? "shrink " : "") &&
+          (isInstagramBrowser === true ? "instagram-styles" : "")
+        }
+      >
         <TopBar />
         <Wrapper align flex activeClass>
           <div className="search-container">
