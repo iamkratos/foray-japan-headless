@@ -185,7 +185,7 @@ const MobileMenu = ({ style }) => {
       <ul>
         <li>
           <Wrapper>
-            <Link to="/collections/graphic-floral-collection">
+            <Link to="/collections/dream-weaver">
               New Arrivals
               <span>
                 <ChevronRight />
