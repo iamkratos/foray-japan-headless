@@ -49,6 +49,7 @@ const ProductGridItem = ({
 
   // Handle Color Change
   const [currentProductImages, setCurrentProductImages] = useState([]);
+  const [currentPrice, setCurrentPrice] = useState();
 
   function sortImagesAltText(color) {
     let imageArray = [];
@@ -188,6 +189,10 @@ const ProductGridItem = ({
     } else {
       setHoverColor(product.images[0].altText);
     }
+
+    // set price
+    console.log(availableSizesArray);
+    setCurrentPrice(availableSizesArray[0].price);
   }
 
   // Quick Shop Hover Over
@@ -351,7 +356,7 @@ const ProductGridItem = ({
           <div className="inner-wrap">
             <div className="title-container">
               <h4>{product.title}</h4>
-              <p>${parseFloat(product.priceRange.maxVariantPrice.amount)}</p>
+              <p>${parseFloat(currentPrice)}</p>
               {hoverColor !== null ? (
                 <div className="tooltip-container">
                   <div className="inner-wrap">{hoverColor}</div>

@@ -19,8 +19,8 @@ const CartContainer = styled(animated.section)`
   ${media.medium`width: 35%;`}
 
   > .inner-wrap {
-    /* max-height: 90vh;
-    overflow-y: scroll; */
+    max-height: 90vh;
+    overflow-y: scroll;
     padding: 0px 20px 60px 30px;
     ${media.medium`max-height: 100%; overflow-y:auto;padding-bottom: 0px;`}
   }

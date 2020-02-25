@@ -295,6 +295,7 @@ export const query = graphql`
             title
             variants {
               availableForSale
+              price
               selectedOptions {
                 name
                 value

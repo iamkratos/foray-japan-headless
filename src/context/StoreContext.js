@@ -36,10 +36,12 @@ export const StoreProvider = ({ children }) => {
   const toggleCartOpen = () => {
     setCartOpen(!isCartOpen);
     document.querySelector("html").classList.add("frozen");
+    document.querySelector("body").classList.add("frozen");
   };
   const toggleCartClose = () => {
     setCartOpen(false);
     document.querySelector("html").classList.remove("frozen");
+    document.querySelector("body").classList.remove("frozen");
   };
 
   // This handles all color filtering. Only use for Filters

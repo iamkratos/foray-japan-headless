@@ -326,6 +326,7 @@ const ProductPage = ({ data }) => {
   const [sizeId, setSizeId] = useState();
   const [userSize, setUserSize] = useState();
   const [availableSizes, setAvailableSizes] = useState(0);
+  const [currentPrice, setCurrentPrice] = useState();
 
   const scrollContainer = useRef(null);
   const [isThereAnAddonProduct, setAnAddonProduct] = useState(false);
@@ -416,6 +417,10 @@ const ProductPage = ({ data }) => {
       }
       // setSizeId(newSizesArray[0] ? newSizesArray[0].shopifyId : "");
     }
+
+    // Set variant price
+
+    setCurrentPrice(newSizesArray[0].price);
   }
 
   // Color Organizer
@@ -623,9 +628,7 @@ const ProductPage = ({ data }) => {
             <div className="inner-wrap">
               <div className="title-container">
                 <h1>{product.title}</h1>
-                <p className="price">
-                  ${parseFloat(product.priceRange.maxVariantPrice.amount)}
-                </p>
+                <p className="price">${parseFloat(currentPrice)}</p>
               </div>
               <div
                 className="description-container"
