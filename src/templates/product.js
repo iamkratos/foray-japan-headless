@@ -464,9 +464,21 @@ const ProductPage = ({ data }) => {
           .includes("right")) &&
       hoverColor != currentImageSet[0].altText
     ) {
-      setHoverColor(currentImageSet[0].altText);
+      console.log("case 1", currentImageSet[0].altText);
+
+      if (currentImageSet[0].altText === "BW") {
+        setHoverColor("B&W");
+        console.log("case 2");
+      } else if (currentImageSet[0].altText === "NB") {
+        setHoverColor("N&B");
+        console.log("case 3");
+      } else {
+        setHoverColor(currentImageSet[0].altText);
+        console.log("case 4");
+      }
     } else {
       setHoverColor(currentSizeSet[0].selectedOptions[0].value);
+      console.log("case 4");
     }
   }
 
@@ -531,6 +543,16 @@ const ProductPage = ({ data }) => {
   });
 
   // console.log("avail sizes", availSizes);
+
+  function handleColorButtonHover(color) {
+    if (color === "BW") {
+      setHoverColor("B&W");
+    } else if (color === "NB") {
+      setHoverColor("N&B");
+    } else {
+      setHoverColor(color);
+    }
+  }
 
   return (
     <Layout>
@@ -631,7 +653,7 @@ const ProductPage = ({ data }) => {
                         return (
                           <li key={i}>
                             <button
-                              onMouseEnter={() => setHoverColor(color)}
+                              onMouseEnter={() => handleColorButtonHover(color)}
                               onClick={() => handleColorClick(color)}
                               className={`color-btn-container ${colorHandle}`}
                             ></button>

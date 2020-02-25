@@ -378,8 +378,22 @@ const ProductFilter = ({
     });
 
     setFilteredProducts(filteredProducts);
-    setTootipColor(filterFullTitle);
+
     setCurrentColorTooltip(filterFullTitle);
+
+    console.log(filterFullTitle);
+
+    if (filterFullTitle === "BW") {
+      setTootipColor("B&W");
+      setCurrentColorTooltip("B&W");
+    } else if (filterFullTitle === "NB") {
+      setTootipColor("N&B");
+      setCurrentColorTooltip("N&B");
+    } else {
+      setCurrentColorTooltip(filterFullTitle);
+      setTootipColor(filterFullTitle);
+    }
+
     setFilterSize("");
     setFilterFeature("");
   }
@@ -610,7 +624,13 @@ const ProductFilter = ({
   }
 
   function handleColorFilterHover(color) {
-    setTootipColor(color);
+    if (color === "BW") {
+      setTootipColor("B&W");
+    } else if (color === "NB") {
+      setTootipColor("N&B");
+    } else {
+      setTootipColor(color);
+    }
   }
 
   // this for monitoring the tooltip

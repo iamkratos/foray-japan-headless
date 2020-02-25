@@ -19,7 +19,7 @@ const MobileMenuContainer = styled(animated.div)`
   padding-bottom: 20px;
 
   &.instagram-styles.shrunk {
-    top: calc(123px);
+    top: 123px;
   }
 
   p {

@@ -19,8 +19,8 @@ const CartContainer = styled(animated.section)`
   ${media.medium`width: 35%;`}
 
   > .inner-wrap {
-    max-height: 90vh;
-    overflow-y: scroll;
+    /* max-height: 90vh;
+    overflow-y: scroll; */
     padding: 0px 20px 60px 30px;
     ${media.medium`max-height: 100%; overflow-y:auto;padding-bottom: 0px;`}
   }
@@ -82,9 +82,10 @@ const CartContainer = styled(animated.section)`
   }
   .cart-items-container {
     overflow-y: scroll;
-    max-height: 69vh;
+    max-height: 62vh;
     min-height: 39vh;
     border-bottom: 1px solid #ccc;
+    ${media.medium`max-height: 69vh;`}
 
     .cart-item-container {
       margin-bottom: 30px;
@@ -425,6 +426,15 @@ const Cart = ({ style }) => {
                         <div className="left-container">
                           <h4>{item.title}</h4>
                           {item.variant.selectedOptions.map((option, index) => {
+                            // check if special characters
+                            let finalColor;
+                            if (option.value === "BW") {
+                              finalColor = "B&W";
+                            } else if (option.value === "NB") {
+                              finalColor = "N&B";
+                            } else {
+                              finalColor = option.value;
+                            }
                             return (
                               <p
                                 key={index}
@@ -439,7 +449,7 @@ const Cart = ({ style }) => {
                                     : option.name}
                                   :
                                 </span>{" "}
-                                <span className="value">{option.value}</span>
+                                <span className="value">{finalColor}</span>
                               </p>
                             );
                           })}
