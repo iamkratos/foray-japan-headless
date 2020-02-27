@@ -122,13 +122,13 @@ const CollectionPage = ({ data }) => {
         {collectionMetaImage !== "" && (
           <meta
             name="og:image"
-            content={window.location.host + collectionMetaImage}
+            content={window.location.origin + collectionMetaImage}
           />
         )}
         {collectionMetaImage !== "" && (
           <meta
             name="image"
-            content={window.location.host + collectionMetaImage}
+            content={window.location.origin + collectionMetaImage}
           />
         )}
       </SEO>

@@ -80,22 +80,23 @@ const IndexPage = () => {
         description="Foray Golf is THE Authority for Women's Fashion Golf Apparel. Designed in New York made in the USA, Foray Golf uniquely offers stylish options for the course."
       >
         {data.seoImage.childImageSharp && (
-            <meta
-              name="og:image"
-              content={
-                window.location.host +
-                data.seoImage.childImageSharp.original.src
-              }
-            />
-          ) && (
-            <meta
-              name="image"
-              content={
-                window.location.host +
-                data.seoImage.childImageSharp.original.src
-              }
-            />
-          )}
+          <meta
+            name="og:image"
+            content={
+              window.location.origin +
+              data.seoImage.childImageSharp.original.src
+            }
+          />
+        )}
+        {data.seoImage.childImageSharp && (
+          <meta
+            name="image"
+            content={
+              window.location.origin +
+              data.seoImage.childImageSharp.original.src
+            }
+          />
+        )}
       </SEO>
       <HomePageSlider />
       <HomePageProductSlider products={products} />

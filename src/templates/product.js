@@ -574,14 +574,14 @@ const ProductPage = ({ data }) => {
         <meta
           name="og:image"
           content={
-            window.location.host +
+            window.location.origin +
             data.fallbackSeoImage.childImageSharp.original.src
           }
         />
         <meta
           name="image"
           content={
-            window.location.host +
+            window.location.origin +
             data.fallbackSeoImage.childImageSharp.original.src
           }
         />

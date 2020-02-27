@@ -142,8 +142,8 @@ const CorporatePage = ({ page, fallbackImg }) => {
             .join(" ")
         }
       >
-        <meta name="og:image" content={window.location.host + fallbackImg} />
-        <meta name="image" content={window.location.host + fallbackImg} />
+        <meta name="og:image" content={window.location.origin + fallbackImg} />
+        <meta name="image" content={window.location.origin + fallbackImg} />
       </SEO>
       <CorporatePageContainer>
         <div className="banner-container">
