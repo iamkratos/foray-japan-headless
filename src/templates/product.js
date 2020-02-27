@@ -469,21 +469,21 @@ const ProductPage = ({ data }) => {
           .includes("right")) &&
       hoverColor != currentImageSet[0].altText
     ) {
-      console.log("case 1", currentImageSet[0].altText);
+      // console.log("case 1", currentImageSet[0].altText);
 
       if (currentImageSet[0].altText === "BW") {
         setHoverColor("B&W");
-        console.log("case 2");
+        // console.log("case 2");
       } else if (currentImageSet[0].altText === "NB") {
         setHoverColor("N&B");
-        console.log("case 3");
+        // console.log("case 3");
       } else {
         setHoverColor(currentImageSet[0].altText);
-        console.log("case 4");
+        // console.log("case 4");
       }
     } else {
       setHoverColor(currentSizeSet[0].selectedOptions[0].value);
-      console.log("case 4");
+      // console.log("case 4");
     }
   }
 

@@ -7,6 +7,7 @@ const SizeSelector = ({
   setAddonSelectedSize,
   setChildProductSize,
   childProductSize,
+  availSizes,
 }) => {
   // 1. Sort for variants that have the indicator in them
   let indicator = variantIndicator;
@@ -57,10 +58,11 @@ const SizeSelector = ({
             //   sizeText,
             //   size.selectedOptions[1].value
             // );
+            console.log(availSizes, isAvailable);
             return (
               <li key={index}>
                 <button
-                  disabled={!isAvailable}
+                  disabled={!isAvailable || availSizes === 0}
                   className={
                     isAvailable && size.shopifyId === addonSelectedSize
                       ? "active"

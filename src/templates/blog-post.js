@@ -6,6 +6,7 @@ import { window } from "browser-monads";
 import SEO from "../components/seo";
 import Layout from "../components/layout";
 import Wrapper from "../components/org/Wrapper";
+import { media } from "../components/helpers";
 
 const BlogPostContainerStyles = styled.section`
   padding: 40px 0;
@@ -18,7 +19,7 @@ const BlogPostContainerStyles = styled.section`
     }
   }
   .single-post-container {
-    max-width: 800px;
+    ${media.medium`max-width: 800px;`}
 
     iframe {
       margin: 0 auto;

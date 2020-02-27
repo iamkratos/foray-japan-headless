@@ -184,14 +184,14 @@ const ProductGridItem = ({
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
       } else {
-        setHoverColor(availableSizesArray[0].image.altText);
+        setHoverColor(selectedColor);
+        console.log("baby 001", selectedColor);
       }
     } else {
-      setHoverColor(product.images[0].altText);
+      setHoverColor(selectedColor);
     }
 
     // set price
-    console.log(availableSizesArray);
     setCurrentPrice(availableSizesArray[0].price);
   }
 
@@ -236,7 +236,7 @@ const ProductGridItem = ({
       }
     } else {
       // console.log("baby", sizes);
-      sizes && setHoverColor(sizes[0].selectedOptions[0].value);
+      sizes && setHoverColor(currentProductImages[0].altText);
     }
   }
 
@@ -357,7 +357,7 @@ const ProductGridItem = ({
             <div className="title-container">
               <h4>{product.title}</h4>
               <p>${parseFloat(currentPrice)}</p>
-              {hoverColor !== null ? (
+              {hoverColor !== undefined && hoverColor.length > 0 ? (
                 <div className="tooltip-container">
                   <div className="inner-wrap">{hoverColor}</div>
                 </div>

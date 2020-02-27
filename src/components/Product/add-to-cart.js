@@ -16,7 +16,7 @@ const AddToCart = ({
   return (
     <div className="add-to-cart-container">
       <div className="inner-wrap">
-        {addon === true ? (
+        {addon === true && availSizes > 0 ? (
           <button
             className={
               sizeIdTwo !== undefined && sizeIdTwo === "" ? "disabled" : ""
