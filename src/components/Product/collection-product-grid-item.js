@@ -185,7 +185,6 @@ const ProductGridItem = ({
         setHoverColor("N&B");
       } else {
         setHoverColor(selectedColor);
-        console.log("baby 001", selectedColor);
       }
     } else {
       setHoverColor(selectedColor);
