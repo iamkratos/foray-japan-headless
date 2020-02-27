@@ -134,6 +134,7 @@ const CollectionPage = ({ data }) => {
       </SEO>
 
       {collection.image &&
+      collection.image.localFile &&
       collection.image.localFile.childImageSharp != null ? (
         <BannerContainer
           className={mobileCollectionImage === null ? "no-pad-bottom" : ""}

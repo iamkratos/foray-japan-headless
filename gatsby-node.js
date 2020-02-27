@@ -1,7 +1,10 @@
 const path = require("path");
 
-exports.createPages = async ({ graphql, boundActionCreators }) => {
+exports.createPages = async ({ graphql, boundActionCreators, actions }) => {
   const { createPage } = boundActionCreators;
+  const { createRedirect } = actions;
+  console.log("create", createRedirect);
+
   const productPages = await graphql(`
     {
       allShopifyProduct {

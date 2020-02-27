@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -21,8 +22,8 @@ module.exports = {
         shopName: `foray-golf-dev`,
         accessToken: `5b871ba787e3d8597fcba89d138305fa`,
         verbose: true,
-        paginationSize: 50,
-        timeout: 200000000,
+        paginationSize: 25,
+        timeout: 2000000000,
       },
     },
 
