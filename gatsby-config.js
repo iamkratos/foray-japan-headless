@@ -22,7 +22,7 @@ module.exports = {
         shopName: `foray-golf-dev`,
         accessToken: `5b871ba787e3d8597fcba89d138305fa`,
         verbose: true,
-        paginationSize: 25,
+        paginationSize: 50,
         timeout: 2000000000,
       },
     },

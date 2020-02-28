@@ -53,7 +53,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1-new.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1-n.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -62,7 +62,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideTwo: file(relativePath: { eq: "slides/slide-2.jpg" }) {
+      slideTwo: file(relativePath: { eq: "slides/slide-2-n.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -71,7 +71,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideThree: file(relativePath: { eq: "slides/slide-3.jpg" }) {
+      slideThree: file(relativePath: { eq: "slides/slide-3-n.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -80,7 +80,9 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
+      slideOneMobile: file(
+        relativePath: { eq: "slides/mobile-slide-1-n.jpg" }
+      ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -89,7 +91,9 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideTwoMobile: file(relativePath: { eq: "slides/mobile-slide-2.jpg" }) {
+      slideTwoMobile: file(
+        relativePath: { eq: "slides/mobile-slide-2-n.jpg" }
+      ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -99,7 +103,7 @@ const HomePageSlider = () => {
         }
       }
       slideThreeMobile: file(
-        relativePath: { eq: "slides/mobile-slide-3.jpg" }
+        relativePath: { eq: "slides/mobile-slide-3-n.jpg" }
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
