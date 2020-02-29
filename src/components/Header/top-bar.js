@@ -8,6 +8,7 @@ const TopBarContainer = styled.div`
   padding: 13px 0 10px;
   display: none;
   text-align: center;
+  height: 34px;
   ${media.medium`display: block;`}
   p {
     margin: 0px;
@@ -25,7 +26,7 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            <p>FREE GROUND SHIPPING ON ALL ORDERS & FREE RETURNS</p>
+            {/* <p>FREE GROUND SHIPPING ON ALL ORDERS & FREE RETURNS</p> */}
           </div>
           <div className="right-container"></div>
         </Wrapper>

@@ -172,22 +172,23 @@ const ProductGridItem = ({
 
     setSizes(availableSizesArray);
 
-    // (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
-    //   ? setHoverColor(availableSizesArray[0].image.altText)
-    //   : setHoverColor(product.images[0].altText);
+    console.log(selectedColor);
+    let formatedColor = selectedColor ? selectedColor.replace(/-/g, " ") : "";
     if (
       (filterColor !== "" && filterColor !== undefined) ||
       availableSizesArray[0]
     ) {
+      console.log("case 1");
       if (selectedColor === "bw") {
         setHoverColor("B&W");
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
       } else {
-        setHoverColor(selectedColor);
+        setHoverColor(formatedColor);
       }
     } else {
-      setHoverColor(selectedColor);
+      console.log("case 2");
+      setHoverColor(formatedColor);
     }
 
     // set price
@@ -270,7 +271,7 @@ const ProductGridItem = ({
               ? currentProductImages.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
                   // console.log("first variant", firstVariant, image);
-                  if (index < 2) {
+                  if (index < 2 && image.localFile) {
                     return (
                       <Img
                         key={index}
@@ -286,7 +287,7 @@ const ProductGridItem = ({
               : product.images.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
                   // console.log("first variant", firstVariant, image);
-                  if (index < 2) {
+                  if (index < 2 && image.localFile) {
                     return (
                       <Img
                         key={index}
