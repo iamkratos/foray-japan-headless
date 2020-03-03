@@ -172,7 +172,6 @@ const ProductGridItem = ({
 
     setSizes(availableSizesArray);
 
-    console.log(selectedColor);
     let formatedColor = selectedColor ? selectedColor.replace(/-/g, " ") : "";
     if (
       (filterColor !== "" && filterColor !== undefined) ||

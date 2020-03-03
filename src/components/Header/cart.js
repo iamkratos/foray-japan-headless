@@ -281,7 +281,6 @@ const Cart = ({ style }) => {
       }
     }
   `);
-  console.log(checkout);
   let allDresses = data.allShopifyCollection.edges[0].node.products;
 
   function handleRemoveAll(item) {

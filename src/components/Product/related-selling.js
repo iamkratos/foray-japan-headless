@@ -43,7 +43,6 @@ const RelatedSelling = ({ tags, allProducts }) => {
       relatedProductTags.map(tag => {
         let formattedTag = tag.substring(2).replace("addon-rp-", "");
         let position = parseFloat(tag.slice(0, 1) - 1);
-        console.log(formattedTag, position);
         if (product.handle === formattedTag) {
           // relatedProducts.push(product);
           // relatedProducts.push(product);
@@ -53,7 +52,6 @@ const RelatedSelling = ({ tags, allProducts }) => {
   });
 
   // let relatedProducts = allProducts.filter(product);
-  console.log("tags", relatedProducts, relatedProductTags);
   return (
     <RelatedSellingContainer
       className={relatedProductTags.length > 0 ? "" : "hide"}

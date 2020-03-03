@@ -381,8 +381,6 @@ const ProductFilter = ({
 
     setCurrentColorTooltip(filterFullTitle);
 
-    console.log(filterFullTitle);
-
     if (filterFullTitle === "BW") {
       setTootipColor("B&W");
       setCurrentColorTooltip("B&W");
