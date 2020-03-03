@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
+
+import { useAllProductsQuery } from "../../queries/all-products";
 
 import ProductGridItem from "../Product/product-grid-item";
 import Wrapper from "../org/Wrapper";
@@ -32,26 +35,22 @@ const RelatedSellingContainer = styled.section`
   }
 `;
 
-const RelatedSelling = ({ tags, allProducts }) => {
-  // const [relatedProducts, setRelatedProducts] = useState([]);
+const RelatedSelling = ({ tags }) => {
+  const { edges } = useAllProductsQuery();
   let relatedProductTags = tags.filter(tag => tag.includes("addon-rp-"));
   let relatedProducts = [];
-  allProducts.map(productNode => {
+  edges.map(productNode => {
     let product = productNode.node;
-    // console.log(product);
     product.tags.length > 0 &&
       relatedProductTags.map(tag => {
         let formattedTag = tag.substring(2).replace("addon-rp-", "");
         let position = parseFloat(tag.slice(0, 1) - 1);
         if (product.handle === formattedTag) {
-          // relatedProducts.push(product);
-          // relatedProducts.push(product);
           relatedProducts.splice(position, 0, product);
         }
       });
   });
 
-  // let relatedProducts = allProducts.filter(product);
   return (
     <RelatedSellingContainer
       className={relatedProductTags.length > 0 ? "" : "hide"}
@@ -62,8 +61,8 @@ const RelatedSelling = ({ tags, allProducts }) => {
         </div>
       </Wrapper>
       <Wrapper className="related-products-wrapper">
-        {relatedProducts.slice(0, 3).map(product => {
-          return <ProductGridItem product={product} />;
+        {relatedProducts.slice(0, 3).map((product, index) => {
+          return <ProductGridItem key={index} product={product} />;
         })}
       </Wrapper>
     </RelatedSellingContainer>

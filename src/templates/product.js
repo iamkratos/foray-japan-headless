@@ -560,6 +560,11 @@ const ProductPage = ({ data }) => {
     }
   }
 
+  // Don't render related products if there aren't any
+  let relatedProductTags = product.tags.filter(tag =>
+    tag.includes("addon-rp-")
+  );
+
   return (
     <Layout>
       <SEO
@@ -726,10 +731,9 @@ const ProductPage = ({ data }) => {
           </div>
         </Wrapper>
 
-        <RelatedSelling
-          tags={product.tags}
-          allProducts={data.allProducts.edges}
-        />
+        {relatedProductTags.length > 0 && (
+          <RelatedSelling tags={product.tags} />
+        )}
       </ProductPageContainer>
     </Layout>
   );
@@ -744,45 +748,7 @@ export const query = graphql`
         }
       }
     }
-    allProducts: allShopifyProduct {
-      edges {
-        node {
-          id
-          handle
-          title
-          tags
-          images {
-            altText
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 500, quality: 95) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-          }
-          variants {
-            availableForSale
-            id
-            shopifyId
-            image {
-              originalSrc
-              altText
-            }
-            price
-            selectedOptions {
-              name
-              value
-            }
-          }
-        }
-      }
-    }
+
     allShopifyProduct(filter: { handle: { eq: $handle } }) {
       edges {
         node {
