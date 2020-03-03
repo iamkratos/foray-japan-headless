@@ -25,6 +25,9 @@ const RelatedSellingContainer = styled.section`
 
     > div {
       flex: 0 0 33%;
+      > .inner-wrap {
+        ${media.medium`max-width: 90%;`}
+      }
     }
   }
 `;
