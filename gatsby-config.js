@@ -19,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-source-shopify`,
       options: {
-        shopName: `foray-golf-dev`,
+        shopName: `ar.foraygolf.com`,
         accessToken: `5b871ba787e3d8597fcba89d138305fa`,
         verbose: true,
         paginationSize: 50,

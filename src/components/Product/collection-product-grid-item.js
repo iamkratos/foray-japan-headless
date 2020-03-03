@@ -178,7 +178,6 @@ const ProductGridItem = ({
       (filterColor !== "" && filterColor !== undefined) ||
       availableSizesArray[0]
     ) {
-      console.log("case 1");
       if (selectedColor === "bw") {
         setHoverColor("B&W");
       } else if (selectedColor === "nb") {
@@ -187,7 +186,6 @@ const ProductGridItem = ({
         setHoverColor(formatedColor);
       }
     } else {
-      console.log("case 2");
       setHoverColor(formatedColor);
     }
 

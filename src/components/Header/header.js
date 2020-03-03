@@ -305,6 +305,7 @@ const Header = ({ siteTitle }) => {
       // here apply the fixes
       setIsInstagramBrowser(true);
     }
+
     window.addEventListener("scroll", function() {
       if (window.scrollY > 70) {
         setIsMenuShrunk(true);
@@ -319,7 +320,7 @@ const Header = ({ siteTitle }) => {
       {/* <div role="group"></div> */}
       <HeaderContainer
         className={
-          (isMenuShrunk === true ? "shrink " : "") &&
+          (isMenuShrunk === true ? "shrink " : "") ||
           (isInstagramBrowser === true ? "instagram-styles" : "")
         }
       >

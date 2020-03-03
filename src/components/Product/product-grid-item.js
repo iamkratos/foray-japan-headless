@@ -307,12 +307,6 @@ const ProductGridItem = ({ product, filterColor }) => {
       }
     }
 
-    // setHoverColor(
-    //   availableSizesArray[0] &&
-    //     availableSizesArray[0].images[0] &&
-    //     availableSizesArray[0].images[0].altText
-    // );
-
     setSizes(availableSizesArray);
 
     (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
@@ -341,19 +335,11 @@ const ProductGridItem = ({ product, filterColor }) => {
     // Define whether quick shop should show
     // console.log("filter changed");
 
-    filterColor !== ""
+    filterColor !== "" && filterColor !== undefined
       ? handleColorChange(filterColor)
       : handleColorChange(product.images[0].altText);
 
-    if (
-      product.images[0].altText &&
-      product.images[0].altText.toLowerCase().includes("left")
-    ) {
-      setHoverColor("Left");
-    } else {
-      // setHoverColor(product.images[0].altText);
-      // console.log("magic here", sizes);
-    }
+    setHoverColor(product.images[0].altText);
 
     if (window.innerWidth < 992) {
       setShowQuickShop(true);

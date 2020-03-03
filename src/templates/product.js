@@ -10,6 +10,7 @@ import Layout from "../components/layout";
 import { TransitionMixin, media } from "../components/helpers";
 import AddonProduct from "../components/Product/addon-product";
 import AddToCart from "../components/Product/add-to-cart";
+import RelatedSelling from "../components/Product/related-selling";
 
 const ProductPageContainer = styled.section`
   padding: 20px 0 40px;
@@ -724,6 +725,11 @@ const ProductPage = ({ data }) => {
             </div>
           </div>
         </Wrapper>
+
+        <RelatedSelling
+          tags={product.tags}
+          allProducts={data.allProducts.edges}
+        />
       </ProductPageContainer>
     </Layout>
   );
@@ -735,6 +741,45 @@ export const query = graphql`
       childImageSharp {
         original {
           src
+        }
+      }
+    }
+    allProducts: allShopifyProduct {
+      edges {
+        node {
+          id
+          handle
+          title
+          tags
+          images {
+            altText
+            localFile {
+              childImageSharp {
+                fluid(maxWidth: 500, quality: 95) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          priceRange {
+            maxVariantPrice {
+              amount
+            }
+          }
+          variants {
+            availableForSale
+            id
+            shopifyId
+            image {
+              originalSrc
+              altText
+            }
+            price
+            selectedOptions {
+              name
+              value
+            }
+          }
         }
       }
     }
