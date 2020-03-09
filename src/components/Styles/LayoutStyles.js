@@ -237,6 +237,10 @@ const LayoutContainer = styled.div`
             background-color: #fff;
           }
 
+          &.blue {
+            background-color: #425b95;
+          }
+
           &.grey-stripe {
             background-color: #b9b7c4;
           }

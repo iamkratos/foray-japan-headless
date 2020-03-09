@@ -460,6 +460,7 @@ const ProductPage = ({ data }) => {
     // Glove Logic
     if (
       currentImageSet[0] &&
+      currentImageSet[0].altText &&
       (!currentImageSet[0].altText
         .toLowerCase()
         .trim()
@@ -491,17 +492,18 @@ const ProductPage = ({ data }) => {
   useEffect(() => {
     tagCheck(product.tags);
     handleVariantChange(product.images[0].altText);
-    if (
-      product.images[0].altText &&
-      product.images[0].altText
-        .toLowerCase()
-        .trim()
-        .includes("left")
-    ) {
-      setHoverColor("Left");
-    } else {
-      setHoverColor(product.images[0].altText);
-    }
+    // if (
+    //   product.images[0].altText &&
+    //   product.images[0].altText
+    //     .toLowerCase()
+    //     .trim()
+    //     .includes("left")
+    // ) {
+    //   setHoverColor("Left");
+    // } else {
+    //   setHoverColor(product.images[0].altText);
+    // }
+    setHoverColor(product.images[0].altText);
 
     // Loop through all variants to check if they're avail
     for (let i = 0; i < product.variants.length; i++) {
@@ -602,7 +604,10 @@ const ProductPage = ({ data }) => {
                     return (
                       <button key={index} onClick={() => swapMainImage(index)}>
                         {image.localFile.childImageSharp && (
-                          <Img fluid={image.localFile.childImageSharp.fluid} />
+                          <Img
+                            alt={image.altText}
+                            fluid={image.localFile.childImageSharp.fluid}
+                          />
                         )}
                       </button>
                     );
