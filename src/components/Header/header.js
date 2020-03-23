@@ -349,7 +349,7 @@ const Header = ({ siteTitle }) => {
             <nav>
               <ul>
                 <li>
-                  <Link to="/collections/dream-weaver">New Arrivals</Link>
+                  <Link to="/collections/incognito">New Arrivals</Link>
                 </li>
                 <li>
                   <a
