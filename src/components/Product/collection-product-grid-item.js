@@ -14,12 +14,6 @@ const ProductGridItem = ({
   setFilterColor,
   filteredProducts,
 }) => {
-  const {
-    addProductToCart,
-    colorHandlize,
-    colorHandlizeAndReplaceSimilarColors,
-  } = useContext(StoreContext);
-
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
 
@@ -32,6 +26,14 @@ const ProductGridItem = ({
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
+
+  const {
+    addProductToCart,
+    colorHandlize,
+    colorHandlizeAndReplaceSimilarColors,
+  } = useContext(StoreContext);
+
+  const [variantURL, setVariantURL] = useState("");
 
   //  Filter Color Buttons
 
@@ -72,6 +74,11 @@ const ProductGridItem = ({
     setCurrentProductImages(imageArray);
   }
 
+  // updates product url with variant so it's preloaded -- temp until variant names modified
+  function updateProductURL(color) {
+    // setVariantURL(color);
+  }
+
   function handleColorChange(color) {
     // If there are multiple colors, set up the color/size switcher
     if (color) {
@@ -79,6 +86,9 @@ const ProductGridItem = ({
       sortImagesAltText(color);
       // Sort sizes
       handleSizesSort(colorHandlize(color));
+
+      // update url
+      updateProductURL(colorHandlize(color));
     } else {
       if (product.images[0]) {
         // Variant-less products don't have alt text
@@ -263,7 +273,11 @@ const ProductGridItem = ({
           onMouseEnter={handleHoverIn}
           onMouseLeave={handleHoverOut}
         >
-          <Link to={`/products/${product.handle}`}>
+          <Link
+            to={`/products/${product.handle}${
+              variantURL !== "" ? "?color=" + variantURL : ""
+            }`}
+          >
             {currentProductImages.length > 0
               ? currentProductImages.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
@@ -342,7 +356,12 @@ const ProductGridItem = ({
               </div>
             ) : (
               <div className="inner-wrap">
-                <Link className="view-dress" to={`/products/${product.handle}`}>
+                <Link
+                  className="view-dress"
+                  to={`/products/${product.handle}${
+                    variantURL !== "" ? "?color=" + variantURL : ""
+                  }`}
+                >
                   View Product
                 </Link>
               </div>

@@ -281,11 +281,25 @@ const MegaMenu = ({
           }
         }
       }
+      incognito: file(
+        relativePath: { eq: "menu-items/collections/incognito-1.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Incognito",
+      url: "/collections/incognito",
+      image: data.incognito.childImageSharp.fluid,
+    },
     {
       title: "Dream Weaver",
       url: "/collections/dream-weaver",
@@ -316,11 +330,6 @@ const MegaMenu = ({
       url: "/collections/sun-daze",
       image: data.sunDaze.childImageSharp.fluid,
     },
-    // {
-    //   title: "Power Pleats",
-    //   url: "/collections/power-pleats",
-    //   image: data.powerPleats.childImageSharp.fluid,
-    // },
     {
       title: "America",
       url: "/collections/america",

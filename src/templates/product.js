@@ -11,6 +11,7 @@ import { TransitionMixin, media } from "../components/helpers";
 import AddonProduct from "../components/Product/addon-product";
 import AddToCart from "../components/Product/add-to-cart";
 import RelatedSelling from "../components/Product/related-selling";
+import { StoreContext } from "../context/StoreContext";
 
 const ProductPageContainer = styled.section`
   padding: 20px 0 40px;
@@ -332,6 +333,8 @@ const ProductPage = ({ data }) => {
   const scrollContainer = useRef(null);
   const [isThereAnAddonProduct, setAnAddonProduct] = useState(false);
 
+  const { reverseColorHandlize } = useContext(StoreContext);
+
   function handleVariantChange(color) {
     // 1. Sort Variant Images
     let newImageArray = [];
@@ -389,12 +392,13 @@ const ProductPage = ({ data }) => {
     if (userSize != null) {
       // console.log("there is a size ", userSize, newSizesArray);
 
-      // -- loop thru existing sizes select
+      // -- loop thru existing sizes, select first available
       newSizesArray.map(variant => {
         let isVariantAvailable = variant.availableForSale;
         variant.selectedOptions.map(option => {
           if (option.value == userSize) {
             if (isVariantAvailable) {
+              console.log("is this running");
               setSizeId(variant.shopifyId);
             } else {
               for (let i = 0; i < newSizesArray.length; i++) {
@@ -409,14 +413,13 @@ const ProductPage = ({ data }) => {
       });
     } else {
       // console.log("there is not a size ", userSize);
-
       for (let i = 0; i < newSizesArray.length; i++) {
         if (newSizesArray[i].availableForSale == true) {
+          // console.log("bonus round", newSizesArray[i]);
           setSizeId(newSizesArray[i].shopifyId);
           break;
         }
       }
-      // setSizeId(newSizesArray[0] ? newSizesArray[0].shopifyId : "");
     }
 
     // Set variant price
@@ -444,6 +447,7 @@ const ProductPage = ({ data }) => {
   const [hoverColor, setHoverColor] = useState("none");
 
   function handleColorClick(color) {
+    console.log(color);
     handleVariantChange(color);
     if (color === "BW") {
       setHoverColor("B&W");
@@ -491,28 +495,18 @@ const ProductPage = ({ data }) => {
 
   useEffect(() => {
     tagCheck(product.tags);
-    handleVariantChange(product.images[0].altText);
-    // if (
-    //   product.images[0].altText &&
-    //   product.images[0].altText
-    //     .toLowerCase()
-    //     .trim()
-    //     .includes("left")
-    // ) {
-    //   setHoverColor("Left");
-    // } else {
-    //   setHoverColor(product.images[0].altText);
-    // }
-    setHoverColor(product.images[0].altText);
 
-    // Loop through all variants to check if they're avail
-    for (let i = 0; i < product.variants.length; i++) {
-      if (product.variants[i].availableForSale == true) {
-        setSizeId(product.variants[i].shopifyId);
-        break;
-      }
+    // check for variant in url
+    let IsVariantInURL = window.location.search.includes("?color=");
+    if (IsVariantInURL) {
+      let variantValue = window.location.search.replace("?color=", "");
+      variantValue = reverseColorHandlize(variantValue);
+      handleVariantChange(variantValue);
+      setHoverColor(variantValue);
+    } else {
+      handleVariantChange(product.images[0].altText);
+      setHoverColor(product.images[0].altText);
     }
-    // setSize(product.variants[0] ? product.variants[0].shopifyId : "");
   }, []);
 
   finalColors = finalColors.filter(onlyUnique);
@@ -784,6 +778,7 @@ export const query = graphql`
             shopifyId
             image {
               originalSrc
+              altText
             }
             price
             selectedOptions {

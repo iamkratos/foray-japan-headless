@@ -54,6 +54,16 @@ export const StoreProvider = ({ children }) => {
       .toLowerCase();
     return alteredColor;
   };
+  const reverseColorHandlize = colorHandle => {
+    function toTitleCase(str) {
+      return str.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+    }
+    let alteredColor = colorHandle.replace(/-/g, " ");
+    alteredColor = toTitleCase(alteredColor);
+    return alteredColor;
+  };
 
   const colorHandlizeAndReplaceSimilarColors = colorInNormalText => {
     let alteredColor = colorInNormalText
@@ -242,6 +252,7 @@ export const StoreProvider = ({ children }) => {
         isCartOpen,
         toggleCartClose,
         colorHandlize,
+        reverseColorHandlize,
         colorHandlizeAndReplaceSimilarColors,
       }}
     >
