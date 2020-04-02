@@ -204,6 +204,10 @@ const ProductGridItem = ({ product, filterColor }) => {
   // Handle Color Change
   const [currentColor, setCurrentColor] = useState([]);
 
+  function updateProductURL(color) {
+    setVariantURL(color);
+  }
+
   function handleColorChange(color) {
     // If there are multiple colors, set up the color/size switcher
     if (color) {
@@ -224,20 +228,19 @@ const ProductGridItem = ({ product, filterColor }) => {
         }
       });
 
-      filterColor === undefined &&
-        // setHoverColor(filterCondition);
-        setHoverColor("yeesss");
-
       setCurrentColor(imageArray);
 
       // Sort sizes
       handleSizesSort(colorHandlize(color));
+
+      updateProductURL(colorHandlize(color));
     } else {
       handleSizesSort();
     }
   }
 
   const [sizes, setSizes] = useState([]);
+  const [variantURL, setVariantURL] = useState("");
 
   function handleSizesSort(selectedColor) {
     // console.log("selected color is", selectedColor);
@@ -377,7 +380,11 @@ const ProductGridItem = ({ product, filterColor }) => {
           onMouseEnter={handleHoverIn}
           onMouseLeave={handleHoverOut}
         >
-          <Link to={`/products/${product.handle}`}>
+          <Link
+            to={`/products/${product.handle}${
+              variantURL !== "" ? "?color=" + variantURL : ""
+            }`}
+          >
             {currentColor.length > 0
               ? currentColor.map((image, index) => {
                   // fetchInventoryQuantities();

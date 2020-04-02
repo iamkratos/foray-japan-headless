@@ -329,11 +329,12 @@ const ProductPage = ({ data }) => {
   const [userSize, setUserSize] = useState();
   const [availableSizes, setAvailableSizes] = useState(0);
   const [currentPrice, setCurrentPrice] = useState();
+  const [variantURL, setVariantURL] = useState("");
 
   const scrollContainer = useRef(null);
   const [isThereAnAddonProduct, setAnAddonProduct] = useState(false);
 
-  const { reverseColorHandlize } = useContext(StoreContext);
+  const { reverseColorHandlize, colorHandlize } = useContext(StoreContext);
 
   function handleVariantChange(color) {
     // 1. Sort Variant Images
@@ -343,10 +344,7 @@ const ProductPage = ({ data }) => {
         if (
           color &&
           image.altText &&
-          image.altText
-            .toLowerCase()
-            .trim()
-            .includes(color.toLowerCase().trim())
+          colorHandlize(image.altText).includes(colorHandlize(color))
         ) {
           return newImageArray.push(image);
         }
@@ -363,9 +361,8 @@ const ProductPage = ({ data }) => {
       color = color.includes("Left") ? "Left" : color;
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          if (
-            option.value.toLowerCase().trim() === color.toLowerCase().trim()
-          ) {
+          console.log(colorHandlize(option.value), colorHandlize(color));
+          if (colorHandlize(option.value) === colorHandlize(color)) {
             newSizesArray.push(variant);
           }
         });
@@ -387,7 +384,8 @@ const ProductPage = ({ data }) => {
     // 3. Set Image Index To First Image and scroll up
     setMainImageIndex(0);
     scrollContainer.current.scrollTop = 0;
-    // 4. Select old size variant
+
+    // 5. Select old size variant
 
     if (userSize != null) {
       // console.log("there is a size ", userSize, newSizesArray);
@@ -456,7 +454,14 @@ const ProductPage = ({ data }) => {
     } else {
       setHoverColor(color);
     }
+    window.history.pushState(
+      "page2",
+      "Title",
+      "?color=" + colorHandlize(color)
+    );
   }
+
+  // 4. Update URL
 
   // const [colorVariants, setColorVariants] = useState();
 
@@ -502,7 +507,13 @@ const ProductPage = ({ data }) => {
       let variantValue = window.location.search.replace("?color=", "");
       variantValue = reverseColorHandlize(variantValue);
       handleVariantChange(variantValue);
-      setHoverColor(variantValue);
+      setHoverColor(
+        variantValue.toLowerCase() === "bw"
+          ? "B&W"
+          : variantValue.toLowerCase() === "nb"
+          ? "N&B"
+          : variantValue
+      );
     } else {
       handleVariantChange(product.images[0].altText);
       setHoverColor(product.images[0].altText);

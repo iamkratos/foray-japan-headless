@@ -58,11 +58,11 @@ const ProductGridItem = ({
 
     if (color) {
       imageArray = [];
-      let filterColorCondition = color.replace(/\s+/g, "-").toLowerCase();
+      let filterColorCondition = colorHandlize(color);
       product.images.map(image => {
-        let altTextCheck =
-          image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
+        let altTextCheck = image.altText && colorHandlize(image.altText);
 
+        console.log(altTextCheck, filterColorCondition);
         if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
           imageArray.push(image);
         } else {
@@ -76,7 +76,7 @@ const ProductGridItem = ({
 
   // updates product url with variant so it's preloaded -- temp until variant names modified
   function updateProductURL(color) {
-    // setVariantURL(color);
+    setVariantURL(color);
   }
 
   function handleColorChange(color) {
@@ -89,7 +89,9 @@ const ProductGridItem = ({
 
       // update url
       updateProductURL(colorHandlize(color));
+      console.log("case 1", color);
     } else {
+      console.log("case 2");
       if (product.images[0]) {
         // Variant-less products don't have alt text
         if (product.images[0].altText) {
