@@ -62,7 +62,7 @@ const ProductGridItem = ({
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
-        console.log(altTextCheck, filterColorCondition);
+        // console.log(altTextCheck, filterColorCondition);
         if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
           imageArray.push(image);
         } else {
@@ -89,9 +89,7 @@ const ProductGridItem = ({
 
       // update url
       updateProductURL(colorHandlize(color));
-      console.log("case 1", color);
     } else {
-      console.log("case 2");
       if (product.images[0]) {
         // Variant-less products don't have alt text
         if (product.images[0].altText) {

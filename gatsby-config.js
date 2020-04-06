@@ -17,6 +17,15 @@ module.exports = {
     },
 
     {
+      resolve: `gatsby-source-google-sheets`,
+      options: {
+        spreadsheetId: `1jM_ZzwgpPmO58wwZOToZOSZUtGGkuIQqzI63gZMkbFM`,
+        worksheetTitle: `Reviews`,
+        credentials: require(`./review_credentials.json`),
+      },
+    },
+
+    {
       resolve: `gatsby-source-shopify`,
       options: {
         shopName: `ar.foraygolf.com`,

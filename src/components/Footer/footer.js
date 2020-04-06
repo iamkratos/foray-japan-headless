@@ -157,7 +157,10 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a rel="noreferrer" href="http://returns.foraygolf.com/">
+                <a
+                  rel="noopener noreferrer"
+                  href="http://returns.foraygolf.com/"
+                >
                   Returns
                 </a>
               </li>
@@ -195,7 +198,7 @@ const Footer = () => {
             <ul>
               <li>
                 <a
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   target="_blank"
                   href="https://www.instagram.com/foraygolfusa/"
                 >
@@ -204,7 +207,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   target="_blank"
                   href="https://www.facebook.com/FORAYGOLF"
                 >
@@ -213,7 +216,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   target="_blank"
                   href="https://twitter.com/foraygolf"
                 >

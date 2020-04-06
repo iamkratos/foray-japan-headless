@@ -232,6 +232,9 @@ const LayoutContainer = styled.div`
           &.military-green {
             background-color: #65825f !important;
           }
+          &.thyme {
+            background-color: #65825f !important;
+          }
           &.white,
           &.marl {
             background-color: #fff;
@@ -239,6 +242,9 @@ const LayoutContainer = styled.div`
 
           &.blue {
             background-color: #425b95;
+          }
+          &.oxford-tan {
+            background-color: #e8d0c7;
           }
 
           &.grey-stripe {

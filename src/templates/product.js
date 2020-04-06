@@ -11,6 +11,7 @@ import { TransitionMixin, media } from "../components/helpers";
 import AddonProduct from "../components/Product/addon-product";
 import AddToCart from "../components/Product/add-to-cart";
 import RelatedSelling from "../components/Product/related-selling";
+import ProductReviews from "../components/Product/product-reviews";
 import { StoreContext } from "../context/StoreContext";
 
 const ProductPageContainer = styled.section`
@@ -318,7 +319,7 @@ const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
   // console.log(product);
 
-  // console.log(product);
+  console.log(data);
   function createMarkup() {
     return { __html: product.descriptionHtml };
   }
@@ -744,6 +745,13 @@ const ProductPage = ({ data }) => {
         {relatedProductTags.length > 0 && (
           <RelatedSelling tags={product.tags} />
         )}
+
+        {/* <ProductReviews
+          productID={product.shopifyId}
+          productName={product.title}
+          productHandle={product.handle}
+          reviews={data.allGoogleSheetReviewsRow.nodes}
+        /> */}
       </ProductPageContainer>
     </Layout>
   );
@@ -762,6 +770,7 @@ export const query = graphql`
     allShopifyProduct(filter: { handle: { eq: $handle } }) {
       edges {
         node {
+          shopifyId
           id
           handle
           title
@@ -798,6 +807,17 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    allGoogleSheetReviewsRow(filter: { producthandle: { eq: $handle } }) {
+      nodes {
+        reviewername
+        stars
+        revieweremail
+        productname
+        productid
+        reviewbody
+        reviewtitle
       }
     }
   }

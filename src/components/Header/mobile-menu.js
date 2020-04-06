@@ -153,9 +153,18 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       title: "Bottoms",
       url: "/collections/bottoms",
     },
+
     {
-      title: "Outerwear",
-      url: "/collections/outerwear",
+      title: "Layering",
+      url: "/collections/layering",
+    },
+    {
+      title: "Sweaters",
+      url: "/collections/sweaters",
+    },
+    {
+      title: "Jackets",
+      url: "/collections/jackets",
     },
     {
       title: "Dresses",

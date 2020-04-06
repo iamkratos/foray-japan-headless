@@ -124,6 +124,33 @@ const MegaMenu = ({
           }
         }
       }
+      jacketsImage: file(
+        relativePath: { eq: "menu-items/shop-by/jackets-1.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      layeringImage: file(
+        relativePath: { eq: "menu-items/shop-by/layering-1.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      sweatersImage: file(
+        relativePath: { eq: "menu-items/shop-by/sweaters-1.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       outerwearImage: file(
         relativePath: { eq: "menu-items/shop-by/outerwear-1.jpg" }
       ) {
@@ -367,15 +394,27 @@ const MegaMenu = ({
       url: "/collections/tops",
       image: data.topsImage.childImageSharp.fluid,
     },
+
     {
       title: "Bottoms",
       url: "/collections/bottoms",
       image: data.bottomsImage.childImageSharp.fluid,
     },
+
     {
-      title: "Outerwear",
-      url: "/collections/outerwear",
-      image: data.outerwearImage.childImageSharp.fluid,
+      title: "Layering",
+      url: "/collections/layering",
+      image: data.layeringImage.childImageSharp.fluid,
+    },
+    {
+      title: "Sweaters",
+      url: "/collections/sweaters",
+      image: data.sweatersImage.childImageSharp.fluid,
+    },
+    {
+      title: "Jackets",
+      url: "/collections/jackets",
+      image: data.jacketsImage.childImageSharp.fluid,
     },
     {
       title: "Dresses",
@@ -423,18 +462,32 @@ const MegaMenu = ({
         <div className="linklist-container">
           <div className="inner-wrap">
             <h4>Shop By</h4>
-            <ul>
-              {shopByLinks.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    onMouseEnter={() => handleMenuItemHover(index)}
-                    to={link.url}
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="list-container">
+              <ul>
+                {shopByLinks.slice(0, 5).map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      onMouseEnter={() => handleMenuItemHover(index)}
+                      to={link.url}
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul>
+                {shopByLinks.slice(5, 10).map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      onMouseEnter={() => handleMenuItemHover(index + 5)}
+                      to={link.url}
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
         <div className="image-container">
@@ -454,6 +507,7 @@ const MegaMenu = ({
                 </ImageContainer>
               );
             }
+            return null;
           })}
         </div>
       </Wrapper>
@@ -508,6 +562,7 @@ const MegaMenu = ({
                 </ImageContainer>
               );
             }
+            return null;
           })}
         </div>
       </Wrapper>

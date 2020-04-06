@@ -304,7 +304,7 @@ const ProductFilter = ({
   products.map(product => {
     let isProductAddon = product.title.includes("Add On") ? true : false;
     if (isProductAddon) {
-      return;
+      return null;
     }
     product.variants.map(variants => {
       // -- Filter Duplicate Colors
@@ -312,8 +312,11 @@ const ProductFilter = ({
         if (option.name === "Color") {
           finalColors.push(option.value);
         }
+        return null;
       });
+      return null;
     });
+    return null;
   });
 
   finalColors = finalColors.filter(onlyUnique);
@@ -337,8 +340,11 @@ const ProductFilter = ({
         if (option.name === "Size") {
           finalSizes.push(option.value);
         }
+        return null;
       });
+      return null;
     });
+    return null;
   });
   finalSizes = finalSizes.filter(onlyUnique);
 

@@ -21,6 +21,7 @@
     "gatsby-plugin-sitemap": "^2.2.27",
     "gatsby-plugin-styled-components": "^3.1.17",
     "gatsby-source-filesystem": "^2.1.46",
+    "gatsby-source-google-sheets": "^1.1.1",
     "gatsby-source-shopify": "^3.0.40",
     "gatsby-source-shopify2": "^2.0.7",
     "gatsby-transformer-sharp": "^2.3.12",

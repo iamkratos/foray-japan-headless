@@ -4,7 +4,7 @@ import { animated } from "react-spring";
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin, media } from "../helpers";
 import X from "../../images/x.inline.svg";
-import { useStaticQuery, graphql, Link } from "gatsby";
+import { useStaticQuery, graphql } from "gatsby";
 
 const CartContainer = styled(animated.section)`
   position: fixed;
@@ -255,8 +255,6 @@ const CartContainer = styled(animated.section)`
 
 const Cart = ({ style }) => {
   const {
-    isCartOpen,
-    toggleCartOpen,
     toggleCartClose,
     checkout,
     removeProductFromCart,
@@ -307,12 +305,12 @@ const Cart = ({ style }) => {
           if (tag.includes("addon-shorts-")) {
             addonProductColor = tag.replace("addon-shorts-", "");
           }
+          return null;
         });
 
       // console.log("the addon product is", addonProductColor);
 
       // Find checkout item
-      let addonProduct;
       checkout.lineItems.map(lineItem => {
         if (
           lineItem.title.includes("Add On") &&
@@ -347,6 +345,8 @@ const Cart = ({ style }) => {
             updateMultipleQuantitiesInCart(updatedLineItems);
           }
         }
+
+        return null;
       });
     } else {
       removeProductFromCart(item.id);
@@ -372,6 +372,7 @@ const Cart = ({ style }) => {
           if (tag.includes("addon-shorts-")) {
             addonProductColor = tag.replace("addon-shorts-", "");
           }
+          return null;
         });
 
       checkout.lineItems.map(lineItem => {
@@ -393,6 +394,7 @@ const Cart = ({ style }) => {
           ];
           updateMultipleQuantitiesInCart(lineItemsArray);
         }
+        return null;
       });
     } else {
       updateQuantityInCart(item, newQuantity);

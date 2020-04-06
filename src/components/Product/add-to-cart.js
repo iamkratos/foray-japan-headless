@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
 
 import { StoreContext } from "../../context/StoreContext";
 
@@ -31,11 +30,11 @@ const AddToCart = ({
           </button>
         ) : (
           <button
-            className={availSizes == 0 ? "disabled" : ""}
-            disabled={availSizes == 0 ? true : false}
+            className={availSizes === 0 ? "disabled" : ""}
+            disabled={availSizes === 0 ? true : false}
             onClick={() => addProductToCart(sizeId)}
           >
-            {availSizes == 0 ? "Sold Out" : "Add To Cart"}
+            {availSizes === 0 ? "Sold Out" : "Add To Cart"}
           </button>
         )}
       </div>

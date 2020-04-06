@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useTransition } from "react-spring";
 import { window } from "browser-monads";
 
