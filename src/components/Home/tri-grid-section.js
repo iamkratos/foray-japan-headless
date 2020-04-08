@@ -57,7 +57,7 @@ const TriGridContainer = styled.section`
 const TriGridSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      leftImage: file(relativePath: { eq: "home/left-n.jpg" }) {
+      leftImage: file(relativePath: { eq: "home/left-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -66,7 +66,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageOne: file(relativePath: { eq: "home/right-1-n.jpg" }) {
+      rightImageOne: file(relativePath: { eq: "home/right-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -75,7 +75,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageTwo: file(relativePath: { eq: "home/right-2-n.jpg" }) {
+      rightImageTwo: file(relativePath: { eq: "home/right-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -92,11 +92,11 @@ const TriGridSection = () => {
       <Wrapper className="tri-grid-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="image-container">
-            <Link to="/collections/dream-weaver">
+            <Link to="/collections/incognito">
               <Img fluid={data.leftImage.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Dream Weaver</h3>
+                  <h3>Incognito</h3>
                 </div>
               </div>
             </Link>
@@ -104,21 +104,21 @@ const TriGridSection = () => {
         </div>
         <div className="right-container">
           <div className="image-container">
-            <Link to="/collections/graphic-floral-collection">
+            <Link to="/collections/dream-weaver">
               <Img fluid={data.rightImageOne.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Graphic Floral</h3>
+                  <h3>Dream Weaver</h3>
                 </div>
               </div>
             </Link>
           </div>
           <div className="image-container">
-            <Link to="/collections/d-luxe">
+            <Link to="/collections/graphic-floral-collection">
               <Img fluid={data.rightImageTwo.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>D-Luxe</h3>
+                  <h3>Graphic Floral</h3>
                 </div>
               </div>
             </Link>

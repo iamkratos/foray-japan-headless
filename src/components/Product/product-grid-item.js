@@ -312,11 +312,38 @@ const ProductGridItem = ({ product, filterColor }) => {
 
     setSizes(availableSizesArray);
 
-    (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
-      ? setHoverColor(availableSizesArray[0].image.altText)
-      : setHoverColor(product.images[0].altText);
+    let formatedColor = selectedColor ? selectedColor.replace(/-/g, " ") : "";
+    console.log(selectedColor);
+    if (
+      (filterColor !== "" && filterColor !== undefined) ||
+      availableSizesArray[0]
+    ) {
+      if (selectedColor === "bw") {
+        setHoverColor("B&W");
+      } else if (selectedColor === "nb") {
+        setHoverColor("N&B");
+      } else {
+        setHoverColor(formatedColor);
+      }
+    } else {
+      setHoverColor(formatedColor);
+    }
+
+    // (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
+    //   ? setHoverColor(availableSizesArray[0].image.altText)
+    //   : setHoverColor(product.images[0].altText);
 
     // console.log("the sizes are", sizes, availableSizesArray.length);
+  }
+
+  function handleColorButtonHover(color) {
+    if (color === "BW") {
+      setHoverColor("B&W");
+    } else if (color === "NB") {
+      setHoverColor("N&B");
+    } else {
+      setHoverColor(color);
+    }
   }
 
   // Quick Shop Hover Over
@@ -351,16 +378,25 @@ const ProductGridItem = ({ product, filterColor }) => {
 
   function checkTooltipText() {
     // check for glove product
+    //
+
     if (
       currentColor[0] &&
+      currentColor[0].altText &&
       !currentColor[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentColor[0].altText
     ) {
       // console.log("current color is", currentColor[0].altText);
-      setHoverColor(currentColor[0].altText);
+      if (currentColor[0].altText.toLowerCase().includes("bw")) {
+        setHoverColor("B&W");
+      } else if (currentColor[0].altText.toLowerCase().includes("nb")) {
+        setHoverColor("N&B");
+      } else {
+        setHoverColor(currentColor[0].altText);
+      }
     } else {
       // console.log("baby", sizes);
-      sizes && setHoverColor(sizes[0].selectedOptions[0].value);
+      sizes && setHoverColor(currentColor[0].altText);
     }
   }
 
@@ -500,7 +536,7 @@ const ProductGridItem = ({ product, filterColor }) => {
                       <button
                         className={`color-btn-container ${colorHandle}`}
                         onClick={() => handleColorChange(color)}
-                        onMouseEnter={() => setHoverColor(color)}
+                        onMouseEnter={() => handleColorButtonHover(color)}
                       ></button>
                     </li>
                   );

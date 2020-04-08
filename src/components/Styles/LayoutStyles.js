@@ -282,6 +282,13 @@ const LayoutContainer = styled.div`
               #000 50%
             ) !important;
           }
+          &.oatmeal {
+            background-image: linear-gradient(
+              90deg,
+              #fff 50%,
+              #f1d4cb 50%
+            ) !important;
+          }
           &.nb {
             background-image: linear-gradient(
               90deg,

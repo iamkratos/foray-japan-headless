@@ -238,6 +238,8 @@ const ProductGridItem = ({
       // console.log("current color is", currentColor[0].altText);
       if (currentProductImages[0].altText.toLowerCase().includes("bw")) {
         setHoverColor("B&W");
+      } else if (currentProductImages[0].altText.toLowerCase().includes("nb")) {
+        setHoverColor("N&B");
       } else {
         setHoverColor(currentProductImages[0].altText);
       }

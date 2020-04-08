@@ -317,11 +317,25 @@ const MegaMenu = ({
           }
         }
       }
+      inTheFold: file(
+        relativePath: { eq: "menu-items/collections/in-the-fold.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "In The Fold",
+      url: "/collections/in-the-fold",
+      image: data.inTheFold.childImageSharp.fluid,
+    },
     {
       title: "Incognito",
       url: "/collections/incognito",
@@ -377,11 +391,7 @@ const MegaMenu = ({
       url: "/collections/floom-official",
       image: data.floomOfficial.childImageSharp.fluid,
     },
-    {
-      title: "Rockstud",
-      url: "/collections/rockstud",
-      image: data.rockstud.childImageSharp.fluid,
-    },
+
     {
       title: "View All",
       url: "/collections/all",

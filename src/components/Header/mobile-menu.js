@@ -100,6 +100,14 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "In The Fold",
+      url: "/collections/in-the-fold",
+    },
+    {
+      title: "Incognito",
+      url: "/collections/incognito",
+    },
+    {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
     },
@@ -135,10 +143,7 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       title: "Floom Official",
       url: "/collections/floom-official",
     },
-    {
-      title: "Rockstud",
-      url: "/collections/rockstud",
-    },
+
     {
       title: "View All",
       url: "/collections/all",
@@ -211,7 +216,7 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       <ul>
         <li>
           <Wrapper>
-            <Link to="/collections/dream-weaver">
+            <Link to={collectionLinks[0].url}>
               New Arrivals
               <span>
                 <ChevronRight />
