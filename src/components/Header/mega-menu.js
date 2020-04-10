@@ -463,6 +463,8 @@ const MegaMenu = ({
 
   let hideMenuOne = megaMenuIndex === 0 ? "" : "hide";
   let hideMenuTwo = megaMenuIndex === 1 ? "" : "hide";
+
+  let collectionMenuIndex = 4;
   return (
     <MegaMenuContainer
       className={isMenuShrunk === true ? "shrunk" : ""}
@@ -530,22 +532,26 @@ const MegaMenu = ({
             <h4>New</h4>
             <div className="list-container">
               <ul>
-                {collectionLinks.slice(0, 4).map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      onMouseEnter={() => handleMenuItemHover(index)}
-                      to={link.url}
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
+                {collectionLinks
+                  .slice(0, collectionMenuIndex)
+                  .map((link, index) => (
+                    <li key={index}>
+                      <Link
+                        onMouseEnter={() => handleMenuItemHover(index)}
+                        to={link.url}
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
               <ul>
                 {collectionLinks.slice(4, 13).map((link, index) => (
                   <li key={index}>
                     <Link
-                      onMouseEnter={() => handleMenuItemHover(index + 4)}
+                      onMouseEnter={() =>
+                        handleMenuItemHover(index + collectionMenuIndex)
+                      }
                       to={link.url}
                     >
                       {link.title}

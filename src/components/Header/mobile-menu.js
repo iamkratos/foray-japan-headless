@@ -104,6 +104,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       url: "/collections/in-the-fold",
     },
     {
+      title: "Core 2.0",
+      url: "/collections/core-2-0-collection",
+    },
+    {
       title: "Incognito",
       url: "/collections/incognito",
     },
@@ -111,18 +115,18 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
     },
-    {
-      title: "D-Luxe",
-      url: "/collections/d-luxe",
-    },
+    // {
+    //   title: "D-Luxe",
+    //   url: "/collections/d-luxe",
+    // },
     {
       title: "Winter Floom",
       url: "/collections/winter-floom",
     },
-    {
-      title: "Mercury Rising",
-      url: "/collections/mercury-rising",
-    },
+    // {
+    //   title: "Mercury Rising",
+    //   url: "/collections/mercury-rising",
+    // },
     {
       title: "Sun Daze",
       url: "/collections/sun-daze",
@@ -131,18 +135,14 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       title: "America",
       url: "/collections/america",
     },
-    {
-      title: "Core 2.0",
-      url: "/collections/core-2-0-collection",
-    },
-    {
-      title: "Lace Escape",
-      url: "/collections/lace-escape",
-    },
-    {
-      title: "Floom Official",
-      url: "/collections/floom-official",
-    },
+    // {
+    //   title: "Lace Escape",
+    //   url: "/collections/lace-escape",
+    // },
+    // {
+    //   title: "Floom Official",
+    //   url: "/collections/floom-official",
+    // },
 
     {
       title: "View All",
