@@ -263,11 +263,26 @@ const LayoutContainer = styled.div`
           &.red {
             background-color: #c92c2f;
           }
+          &.charcoal---black {
+            background-color: #4e4440;
+          }
+          &.hunter-green {
+            background-color: #298229;
+          }
           &.tomato {
             background-color: tomato;
           }
           &.coral {
             background-color: #fe0a43 !important;
+          }
+          &.red-brick {
+            background-color: #a52e2e;
+          }
+          &.heather-silver {
+            background-color: silver;
+          }
+          &.heather-navy {
+            background-color: #3a6396;
           }
           &.white-w-navy-trim {
             background-color: #fff !important;

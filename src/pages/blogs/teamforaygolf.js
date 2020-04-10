@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
-import { window } from "browser-monads";
 
 import Layout from "../../components/layout";
 import Wrapper from "../../components/org/Wrapper";

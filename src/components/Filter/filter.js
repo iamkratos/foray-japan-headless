@@ -362,7 +362,7 @@ const ProductFilter = ({
   finalFeatureTags = finalFeatureTags.filter(onlyUnique);
 
   function filterByColor(handlelizedFilterColor, filterFullTitle) {
-    console.log(handlelizedFilterColor);
+    // console.log(handlelizedFilterColor);
     setFilterColor(handlelizedFilterColor);
     let filteredProducts = [];
     products.map(product => {

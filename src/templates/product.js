@@ -319,7 +319,7 @@ const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
   // console.log(product);
 
-  console.log(data);
+  // console.log(data);
   function createMarkup() {
     return { __html: product.descriptionHtml };
   }
@@ -601,6 +601,17 @@ const ProductPage = ({ data }) => {
         />
       </SEO>
       <ProductPageContainer>
+        <Wrapper>
+          {/* <nav className="breadcrub-container">
+            <ul>
+              <li>
+                <a href={`/collections/${product.productType}`}>
+                  {product.productType}
+                </a>
+              </li>
+            </ul>
+          </nav> */}
+        </Wrapper>
         <Wrapper className="single-product-grid" flex>
           <div className="product-images-container">
             <div className="thumbnail-container">
@@ -775,6 +786,7 @@ export const query = graphql`
           handle
           title
           tags
+          productType
           images {
             altText
             localFile {

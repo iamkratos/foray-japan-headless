@@ -3,10 +3,13 @@ import styled from "styled-components";
 
 import Star from "../../images/star.inline.svg";
 import Wrapper from "../org/Wrapper";
+import { TransitionMixin } from "../helpers";
 
 const ExistingProductReviewsContainer = styled.div`
   background-color: #000;
   padding: 40px 0;
+  position: relative;
+  margin-top: 40px;
   .title-wrapper {
     > .title-container {
       margin-bottom: 30px;
@@ -17,6 +20,40 @@ const ExistingProductReviewsContainer = styled.div`
         margin: 0;
         color: #fff;
       }
+    }
+  }
+  .btn-container {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    button {
+      -webkit-appearance: none;
+      border: none;
+      background-color: #fff;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 12px;
+      padding: 20px;
+      border: 1px solid #fff;
+      border-bottom: none;
+      line-height: 1;
+      ${TransitionMixin(".25s")}
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+    }
+  }
+  .no-reviews-container {
+    padding: 20px 0 70px;
+    h4 {
+      color: #fff;
+      margin: 0;
+      text-align: center;
+      font-size: 16px;
     }
   }
 `;
@@ -59,44 +96,53 @@ const ReviewContainer = styled.div`
   }
 `;
 
-const ExistingProductReviews = ({ reviews }) => {
+const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
   return (
     <ExistingProductReviewsContainer>
       <Wrapper className="title-wrapper">
         <div className="title-container">
           <h4>Reviews</h4>
         </div>
-
         <Wrapper>
-          {reviews.map(review => {
-            let stars = [];
-            for (let i = 0; i < review.stars; i++) {
-              stars.push(i);
-            }
-            console.log(stars);
-            return (
-              <ReviewContainer>
-                <div className="inner-wrap">
-                  <div className="title-container">
-                    <div className="stars-container">
-                      {stars.map(star => (
-                        <Star key={star} />
-                      ))}
+          {reviews.length > 0 ? (
+            reviews.map(review => {
+              let stars = [];
+              for (let i = 0; i < review.stars; i++) {
+                stars.push(i);
+              }
+              return (
+                <ReviewContainer>
+                  <div className="inner-wrap">
+                    <div className="title-container">
+                      <div className="stars-container">
+                        {stars.map(star => (
+                          <Star key={star} />
+                        ))}
+                      </div>
+                      <h4>{review.reviewtitle}</h4>
                     </div>
-                    <h4>{review.reviewtitle}</h4>
+                    <div className="body-container">
+                      <p>{review.reviewbody}</p>
+                      <p>
+                        <strong>{review.reviewername}</strong>
+                      </p>
+                    </div>
                   </div>
-                  <div className="body-container">
-                    <p>{review.reviewbody}</p>
-                    <p>
-                      <strong>{review.reviewername}</strong>
-                    </p>
-                  </div>
-                </div>
-              </ReviewContainer>
-            );
-          })}
+                </ReviewContainer>
+              );
+            })
+          ) : (
+            <div className="no-reviews-container">
+              <h4>There are no reviews on this product yet.</h4>
+            </div>
+          )}
         </Wrapper>
       </Wrapper>
+      <div className="btn-container">
+        <button onClick={() => setIsCreateReviewOpen(true)}>
+          Leave a Review
+        </button>
+      </div>
     </ExistingProductReviewsContainer>
   );
 };

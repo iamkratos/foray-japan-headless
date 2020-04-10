@@ -47,6 +47,7 @@ export const StoreProvider = ({ children }) => {
   // This handles all color filtering. Only use for Filters
   const colorHandlize = colorInNormalText => {
     let alteredColor = colorInNormalText
+      .replace(" / ", "-")
       .replace(/\s+/g, "-")
       .replace(/\{/g, "")
       .replace(/\//g, "-")

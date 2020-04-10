@@ -337,6 +337,11 @@ const MegaMenu = ({
       image: data.inTheFold.childImageSharp.fluid,
     },
     {
+      title: "Core 2.0",
+      url: "/collections/core-2-0-collection",
+      image: data.core.childImageSharp.fluid,
+    },
+    {
       title: "Incognito",
       url: "/collections/incognito",
       image: data.incognito.childImageSharp.fluid,
@@ -351,21 +356,21 @@ const MegaMenu = ({
       url: "/collections/graphic-floral-collection",
       image: data.graphicFloral.childImageSharp.fluid,
     },
-    {
-      title: "D-Luxe",
-      url: "/collections/d-luxe",
-      image: data.dluxe.childImageSharp.fluid,
-    },
+    // {
+    //   title: "D-Luxe",
+    //   url: "/collections/d-luxe",
+    //   image: data.dluxe.childImageSharp.fluid,
+    // },
     {
       title: "Winter Floom",
       url: "/collections/winter-floom",
       image: data.winterFloom.childImageSharp.fluid,
     },
-    {
-      title: "Mercury Rising",
-      url: "/collections/mercury-rising",
-      image: data.mercuryRising.childImageSharp.fluid,
-    },
+    // {
+    //   title: "Mercury Rising",
+    //   url: "/collections/mercury-rising",
+    //   image: data.mercuryRising.childImageSharp.fluid,
+    // },
     {
       title: "Sun Daze",
       url: "/collections/sun-daze",
@@ -376,21 +381,17 @@ const MegaMenu = ({
       url: "/collections/america",
       image: data.america.childImageSharp.fluid,
     },
-    {
-      title: "Core 2.0",
-      url: "/collections/core-2-0-collection",
-      image: data.core.childImageSharp.fluid,
-    },
-    {
-      title: "Lace Escape",
-      url: "/collections/lace-escape",
-      image: data.laceEscape.childImageSharp.fluid,
-    },
-    {
-      title: "Floom Official",
-      url: "/collections/floom-official",
-      image: data.floomOfficial.childImageSharp.fluid,
-    },
+
+    // {
+    //   title: "Lace Escape",
+    //   url: "/collections/lace-escape",
+    //   image: data.laceEscape.childImageSharp.fluid,
+    // },
+    // {
+    //   title: "Floom Official",
+    //   url: "/collections/floom-official",
+    //   image: data.floomOfficial.childImageSharp.fluid,
+    // },
 
     {
       title: "View All",
@@ -529,7 +530,7 @@ const MegaMenu = ({
             <h4>New</h4>
             <div className="list-container">
               <ul>
-                {collectionLinks.slice(0, 6).map((link, index) => (
+                {collectionLinks.slice(0, 4).map((link, index) => (
                   <li key={index}>
                     <Link
                       onMouseEnter={() => handleMenuItemHover(index)}
@@ -541,7 +542,7 @@ const MegaMenu = ({
                 ))}
               </ul>
               <ul>
-                {collectionLinks.slice(6, 13).map((link, index) => (
+                {collectionLinks.slice(4, 13).map((link, index) => (
                   <li key={index}>
                     <Link
                       onMouseEnter={() => handleMenuItemHover(index + 6)}

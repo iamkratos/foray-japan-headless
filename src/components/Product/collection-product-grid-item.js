@@ -59,6 +59,7 @@ const ProductGridItem = ({
     if (color) {
       imageArray = [];
       let filterColorCondition = colorHandlize(color);
+      console.log("image filter condition", filterColorCondition);
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 

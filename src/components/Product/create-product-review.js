@@ -1,46 +1,91 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { animated } from "react-spring";
 
 import Wrapper from "../org/Wrapper";
-import Star from "../../images/star.inline.svg";
-import { TransitionMixin } from "../helpers";
+import X from "../../images/x.inline.svg";
+import { TransitionMixin, media } from "../helpers";
 
-const CreateProductReviewContainer = styled.div`
-  .title-container {
-    text-align: center;
-    margin-bottom: 30px;
-
-    h3 {
-      font-size: 14px;
-      text-transform: uppercase;
-      margin: 0;
-      letter-spacing: 1px;
-    }
+const CreateProductReviewContainer = styled(animated.div)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  .modal-background {
+    background-color: rgba(0, 0, 0, 0.85);
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100%;
   }
-  .form-container {
-    form {
-      max-width: 650px;
-      margin: 0 auto;
-      border-radius: 4px;
 
-      .form-title {
-        text-align: right;
-        h4 {
-          background-color: #000;
-          border-radius: 4px;
-          margin: 0;
-          line-height: 1;
-          color: #fff;
-          text-align: center;
-          text-transform: uppercase;
-          padding: 10px;
-          margin-bottom: 0px;
-          font-size: 13px;
-          font-weight: bold;
-          display: inline-block;
-        }
+  .modal-content {
+    z-index: 2000;
+    flex: 1;
+    max-width: 90vw;
+    margin: 0 auto;
+    ${media.medium`max-width: 650px;`}
+  }
+
+  .form-container {
+    border-radius: 4px;
+    background-color: #fff;
+    position: relative;
+    padding: 20px;
+    border: 1px solid #fff;
+    .confirmation-container {
+      text-align: center;
+      padding: 40px 0;
+
+      h4 {
+        margin-bottom: 0px;
+      }
+    }
+    .form-title {
+      text-align: right;
+      h4 {
+        background-color: #000;
+        border-radius: 4px;
+        margin: 0;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 10px;
+        margin-bottom: 0px;
+        font-size: 13px;
+        font-weight: bold;
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
 
+      .close-btn {
+        position: absolute;
+        top: -50px;
+        right: -100px;
+
+        button {
+          -webkit-appearance: none;
+          background-color: transparent;
+          color: #fff;
+          border: none;
+          line-height: 1;
+
+          svg {
+            height: 40px;
+            width: 40px;
+          }
+        }
+      }
+    }
+    form {
+      margin-bottom: 0px;
       .mini-label {
         display: block;
         text-transform: uppercase;
@@ -54,6 +99,9 @@ const CreateProductReviewContainer = styled.div`
         margin-bottom: 20px;
         display: flex;
         flex-wrap: wrap;
+        &:last-child {
+          margin-bottom: 0px;
+        }
 
         > label {
           display: block;
@@ -215,8 +263,15 @@ const CreateProductReviewContainer = styled.div`
   }
 `;
 
-const CreateProductReview = ({ productID, productName, productHandle }) => {
+const CreateProductReview = ({
+  productID,
+  productName,
+  productHandle,
+  style,
+  setIsCreateReviewOpen,
+}) => {
   const [stars, setStars] = useState(0);
+  const [isReviewComplete, setIsReviewComplete] = useState(false);
 
   function handleReviewSubmit(e) {
     e.preventDefault();
@@ -225,143 +280,163 @@ const CreateProductReview = ({ productID, productName, productHandle }) => {
 
     console.log(e.target);
     fetch(scriptURL, { method: "POST", body: new FormData(e.target) })
-      .then(response => console.log("Success!", response))
+      .then(response => {
+        console.log("Success!", response);
+        setIsReviewComplete(true);
+        setTimeout(function() {
+          setIsCreateReviewOpen(false);
+        }, 5000);
+      })
       .catch(error => console.error("Error!", error.message));
   }
 
   return (
-    <CreateProductReviewContainer>
-      <Wrapper>
-        <div className="title-container">
-          <h3>Reviews</h3>
-        </div>
+    <CreateProductReviewContainer style={{ ...style }}>
+      <div
+        className="modal-background"
+        onClick={() => setIsCreateReviewOpen(false)}
+      ></div>
+
+      <Wrapper className="modal-content">
         <div className="form-container">
-          <form onSubmit={e => handleReviewSubmit(e)}>
-            <div className="form-title">
-              <h4>New Review</h4>
+          <div className="form-title">
+            <h4>New Review</h4>
+            <div className="close-btn">
+              <button onClick={() => setIsCreateReviewOpen(false)}>
+                <X />
+              </button>
             </div>
-            <div className="input-container hidden">
-              <input name="productID" type="text" value={productID} />
+          </div>
+          {isReviewComplete && (
+            <div className="confirmation-container">
+              <h4>Thanks for submitting your review!</h4>
             </div>
-            <div className="input-container hidden">
-              <input name="productName" type="text" value={productName} />
-            </div>
-            <div className="input-container hidden">
-              <input name="productHandle" type="text" value={productHandle} />
-            </div>
-            <div className="input-container hidden">
-              <input name="approved" type="text" value="no" />
-            </div>
-            <div className="input-container mb-sm">
-              <label class="stars" htmlFor="stars">
-                <span className="mini-label">Stars</span>
-                <input
-                  className="hidden"
-                  type="text"
-                  name="stars"
-                  value={stars}
-                />
-                <div class="radio-stars">
+          )}
+          {!isReviewComplete && (
+            <form onSubmit={e => handleReviewSubmit(e)}>
+              <div className="input-container hidden">
+                <input name="productID" type="text" value={productID} />
+              </div>
+              <div className="input-container hidden">
+                <input name="productName" type="text" value={productName} />
+              </div>
+              <div className="input-container hidden">
+                <input name="productHandle" type="text" value={productHandle} />
+              </div>
+              <div className="input-container hidden">
+                <input name="approved" type="text" value="no" />
+              </div>
+              <div className="input-container mb-sm">
+                <label class="stars" htmlFor="stars">
+                  <span className="mini-label">Stars</span>
                   <input
-                    class="sr-only"
-                    id="radio-5"
-                    name="radio-stars"
-                    type="radio"
-                    value="5"
+                    className="hidden"
+                    type="text"
+                    name="stars"
+                    value={stars}
                   />
-                  <label
-                    className={
-                      "radio-star " + (stars > 0 && stars > 4 ? "active" : "")
-                    }
-                    for="radio-5"
-                    onClick={() => setStars(5)}
-                  >
-                    5
-                  </label>
-                  <input
-                    checked=""
-                    class="sr-only"
-                    id="radio-4"
-                    name="radio-star"
-                    type="radio"
-                    value="4"
-                  />
-                  <label
-                    className={
-                      "radio-star " + (stars > 0 && stars > 3 ? "active" : "")
-                    }
-                    for="radio-4"
-                    onClick={() => setStars(4)}
-                  >
-                    4
-                  </label>
-                  <input
-                    class="sr-only"
-                    id="radio-3"
-                    name="radio-star"
-                    type="radio"
-                    value="3"
-                  />
-                  <label
-                    className={
-                      "radio-star " + (stars > 0 && stars > 2 ? "active" : "")
-                    }
-                    for="radio-3"
-                    onClick={() => setStars(3)}
-                  >
-                    3
-                  </label>
-                  <input
-                    class="sr-only"
-                    id="radio-2"
-                    name="radio-star"
-                    type="radio"
-                    value="2"
-                  />
-                  <label
-                    className={
-                      "radio-star " + (stars > 0 && stars > 1 ? "active" : "")
-                    }
-                    for="radio-2"
-                    onClick={() => setStars(2)}
-                  >
-                    2
-                  </label>
-                  <input
-                    class="sr-only"
-                    id="radio-1"
-                    name="radio-star"
-                    type="radio"
-                    value="1"
-                  />
-                  <label
-                    className={
-                      "radio-star " + (stars > 0 && stars > 0 ? "active" : "")
-                    }
-                    for="radio-1"
-                    onClick={() => setStars(1)}
-                  >
-                    1
-                  </label>
-                </div>
-              </label>
-            </div>
-            <div className="input-container">
-              <label htmlFor="email">Email</label>
-              <input name="email" required type="email" />
-            </div>
-            <div className="input-container">
-              <label htmlFor="name">Review Title</label>
-              <input name="reviewTitle" required type="text" />
-            </div>
-            <div className="input-container">
-              <label htmlFor="reviewBody">Review Body</label>
-              <textarea required name="reviewBody"></textarea>
-            </div>
-            <div className="input-container">
-              <button type="submit">Submit</button>
-            </div>
-          </form>
+                  <div class="radio-stars">
+                    <input
+                      class="sr-only"
+                      id="radio-5"
+                      name="radio-stars"
+                      type="radio"
+                      value="5"
+                    />
+                    <label
+                      className={
+                        "radio-star " + (stars > 0 && stars > 4 ? "active" : "")
+                      }
+                      for="radio-5"
+                      onClick={() => setStars(5)}
+                    >
+                      5
+                    </label>
+                    <input
+                      checked=""
+                      class="sr-only"
+                      id="radio-4"
+                      name="radio-star"
+                      type="radio"
+                      value="4"
+                    />
+                    <label
+                      className={
+                        "radio-star " + (stars > 0 && stars > 3 ? "active" : "")
+                      }
+                      for="radio-4"
+                      onClick={() => setStars(4)}
+                    >
+                      4
+                    </label>
+                    <input
+                      class="sr-only"
+                      id="radio-3"
+                      name="radio-star"
+                      type="radio"
+                      value="3"
+                    />
+                    <label
+                      className={
+                        "radio-star " + (stars > 0 && stars > 2 ? "active" : "")
+                      }
+                      for="radio-3"
+                      onClick={() => setStars(3)}
+                    >
+                      3
+                    </label>
+                    <input
+                      class="sr-only"
+                      id="radio-2"
+                      name="radio-star"
+                      type="radio"
+                      value="2"
+                    />
+                    <label
+                      className={
+                        "radio-star " + (stars > 0 && stars > 1 ? "active" : "")
+                      }
+                      for="radio-2"
+                      onClick={() => setStars(2)}
+                    >
+                      2
+                    </label>
+                    <input
+                      class="sr-only"
+                      id="radio-1"
+                      name="radio-star"
+                      type="radio"
+                      value="1"
+                    />
+                    <label
+                      className={
+                        "radio-star " + (stars > 0 && stars > 0 ? "active" : "")
+                      }
+                      for="radio-1"
+                      onClick={() => setStars(1)}
+                    >
+                      1
+                    </label>
+                  </div>
+                </label>
+              </div>
+              <div className="input-container">
+                <label htmlFor="email">Email</label>
+                <input name="email" required type="email" />
+              </div>
+              <div className="input-container">
+                <label htmlFor="name">Review Title</label>
+                <input name="reviewTitle" required type="text" />
+              </div>
+              <div className="input-container">
+                <label htmlFor="reviewBody">Review Body</label>
+                <textarea required name="reviewBody"></textarea>
+              </div>
+              <div className="input-container">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          )}
         </div>
       </Wrapper>
     </CreateProductReviewContainer>
