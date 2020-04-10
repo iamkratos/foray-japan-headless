@@ -545,7 +545,7 @@ const MegaMenu = ({
                 {collectionLinks.slice(4, 13).map((link, index) => (
                   <li key={index}>
                     <Link
-                      onMouseEnter={() => handleMenuItemHover(index + 6)}
+                      onMouseEnter={() => handleMenuItemHover(index + 4)}
                       to={link.url}
                     >
                       {link.title}
