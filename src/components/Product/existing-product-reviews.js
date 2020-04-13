@@ -45,6 +45,13 @@ const ExistingProductReviewsContainer = styled.div`
         background-color: #000;
         color: #fff;
       }
+
+      &:active,
+      &:focus {
+        background-color: #000;
+        color: #fff;
+        outline: 0;
+      }
     }
   }
   .no-reviews-container {
@@ -105,13 +112,13 @@ const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
         </div>
         <Wrapper>
           {reviews.length > 0 ? (
-            reviews.map(review => {
+            reviews.map((review, index) => {
               let stars = [];
               for (let i = 0; i < review.stars; i++) {
                 stars.push(i);
               }
               return (
-                <ReviewContainer>
+                <ReviewContainer key={index}>
                   <div className="inner-wrap">
                     <div className="title-container">
                       <div className="stars-container">

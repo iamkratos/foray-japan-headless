@@ -421,6 +421,10 @@ const CreateProductReview = ({
                 </label>
               </div>
               <div className="input-container">
+                <label htmlFor="email">Name</label>
+                <input name="text" required type="name" />
+              </div>
+              <div className="input-container">
                 <label htmlFor="email">Email</label>
                 <input name="email" required type="email" />
               </div>

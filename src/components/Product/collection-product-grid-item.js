@@ -63,13 +63,17 @@ const ProductGridItem = ({
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
-        // console.log(altTextCheck, filterColorCondition);
+        console.log(altTextCheck, filterColorCondition);
         if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
+          console.log("yes");
           imageArray.push(image);
         } else {
+          console.log("not hitting");
         }
       });
     }
+
+    console.log(imageArray);
 
     // setCurrentColor(imageArray);
     setCurrentProductImages(imageArray);
@@ -90,6 +94,8 @@ const ProductGridItem = ({
 
       // update url
       updateProductURL(colorHandlize(color));
+
+      console.log(currentProductImages);
     } else {
       if (product.images[0]) {
         // Variant-less products don't have alt text
@@ -145,7 +151,7 @@ const ProductGridItem = ({
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        // console.log("case a");
+        console.log("case a", selectedColor);
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
@@ -285,7 +291,11 @@ const ProductGridItem = ({
               ? currentProductImages.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
                   // console.log("first variant", firstVariant, image);
-                  if (index < 2 && image.localFile) {
+                  if (
+                    index < 2 &&
+                    image.localFile &&
+                    image.localFile.childImageSharp
+                  ) {
                     return (
                       <Img
                         key={index}

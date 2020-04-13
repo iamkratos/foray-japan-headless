@@ -362,7 +362,7 @@ const ProductPage = ({ data }) => {
       color = color.includes("Left") ? "Left" : color;
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log(colorHandlize(option.value), colorHandlize(color));
+          // console.log(colorHandlize(option.value), colorHandlize(color));
           if (colorHandlize(option.value) === colorHandlize(color)) {
             newSizesArray.push(variant);
           }
@@ -397,7 +397,7 @@ const ProductPage = ({ data }) => {
         variant.selectedOptions.map(option => {
           if (option.value == userSize) {
             if (isVariantAvailable) {
-              console.log("is this running");
+              // console.log("is this running");
               setSizeId(variant.shopifyId);
             } else {
               for (let i = 0; i < newSizesArray.length; i++) {
@@ -446,7 +446,7 @@ const ProductPage = ({ data }) => {
   const [hoverColor, setHoverColor] = useState("none");
 
   function handleColorClick(color) {
-    console.log(color);
+    // console.log(color);
     handleVariantChange(color);
     if (color === "BW") {
       setHoverColor("B&W");
@@ -757,12 +757,12 @@ const ProductPage = ({ data }) => {
           <RelatedSelling tags={product.tags} />
         )}
 
-        {/* <ProductReviews
+        <ProductReviews
           productID={product.shopifyId}
           productName={product.title}
           productHandle={product.handle}
           reviews={data.allGoogleSheetReviewsRow.nodes}
-        /> */}
+        />
       </ProductPageContainer>
     </Layout>
   );
