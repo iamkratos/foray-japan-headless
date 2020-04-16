@@ -112,6 +112,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       url: "/collections/incognito",
     },
     {
+      title: "Dream Weaver",
+      url: "/collections/dream-weaver",
+    },
+    {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
     },
