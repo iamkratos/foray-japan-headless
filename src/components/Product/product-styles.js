@@ -147,7 +147,7 @@ const ProductGridItemContainer = styled.div`
           span {
             opacity: 0.5;
             position: relative;
-            margin-right: 3px;
+            margin-right: 5px;
 
             &::after {
               content: " ";
