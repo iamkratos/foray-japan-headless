@@ -295,6 +295,7 @@ export const query = graphql`
             tags
             title
             variants {
+              compareAtPrice
               availableForSale
               price
               selectedOptions {

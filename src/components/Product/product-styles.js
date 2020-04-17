@@ -143,6 +143,22 @@ const ProductGridItemContainer = styled.div`
           font-size: 13px;
           color: #777;
           margin-bottom: 0px;
+
+          span {
+            opacity: 0.5;
+            position: relative;
+            margin-right: 3px;
+
+            &::after {
+              content: " ";
+              position: absolute;
+              top: 5.5px;
+              left: 0;
+              width: 100%;
+              background: #777;
+              height: 1px;
+            }
+          }
         }
       }
       .color-container {
