@@ -12,9 +12,7 @@ const defaultValues = {
   toggleCartOpen: () => {},
   toggleCartClose: () => {},
   cart: [],
-  addProductToCart: () => {
-    console.log("boo!");
-  },
+  addProductToCart: () => {},
   removeProductFromCart: () => {},
   formatMoney: value => {
     var num = "$" + value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
@@ -112,10 +110,12 @@ export const StoreProvider = ({ children }) => {
         // If id exists, fetch checkout from Shopify
         newCheckout = await client.checkout.fetch(currentCheckoutId);
         // console.log("context case 1");
-        if (newCheckout.completedAt) {
+        if (newCheckout && newCheckout.completedAt) {
           newCheckout = await getNewId();
           // console.log("context case 2");
         }
+        console.log("case 1");
+        setCheckout(newCheckout);
       } else {
         // If id does not, create new checkout
         // console.log("context case 3");
@@ -123,23 +123,27 @@ export const StoreProvider = ({ children }) => {
         if (isBrowser) {
           localStorage.setItem("checkout_id", newCheckout.id);
         }
+        console.log("case 2");
+        setCheckout(newCheckout);
       }
       // Set checkout to state
-      setCheckout(newCheckout);
     } catch (e) {
       console.log(e.message);
+      localStorage.removeItem("checkout_id");
     }
   };
 
   // NOTE: newCheckout is dif here than the function above
   const addProductToCart = async variantId => {
     try {
+      console.log("checkout", checkout);
       const lineItems = [
         {
           variantId,
           quantity: 1,
         },
       ];
+      console.log("new checkout", checkout.id, lineItems);
       const newCheckout = await client.checkout.addLineItems(
         checkout.id,
         lineItems

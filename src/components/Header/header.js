@@ -265,11 +265,13 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0 },
   });
 
-  // console.log("checkout", checkout);
+  console.log("checkout", checkout);
 
-  const qty = checkout.lineItems.reduce((total, item) => {
-    return total + item.quantity;
-  }, 0);
+  const qty =
+    checkout &&
+    checkout.lineItems.reduce((total, item) => {
+      return total + item.quantity;
+    }, 0);
 
   function triggerMegaMenu(menu) {
     if (!isMegaMenuOpen) {
