@@ -140,9 +140,23 @@ const ProductPageContainer = styled.section`
             color: #848484;
             font-size: 15px;
             letter-spacing: 0.7px;
-
             line-height: 1;
             ${media.medium`font-size: 17px;border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;padding: 15px 0;`}
+
+            span {
+              opacity: 0.5;
+              position: relative;
+              margin-right: 7px;
+              &::after {
+                content: " ";
+                position: absolute;
+                top: 6px;
+                left: 0;
+                width: 100%;
+                background: #777;
+                height: 1px;
+              }
+            }
           }
         }
       }
@@ -330,6 +344,7 @@ const ProductPage = ({ data }) => {
   const [userSize, setUserSize] = useState();
   const [availableSizes, setAvailableSizes] = useState(0);
   const [currentPrice, setCurrentPrice] = useState();
+  const [compareAtPrice, setCompareAtPrice] = useState();
   const [variantURL, setVariantURL] = useState("");
 
   const scrollContainer = useRef(null);
@@ -424,6 +439,7 @@ const ProductPage = ({ data }) => {
     // Set variant price
 
     setCurrentPrice(newSizesArray[0].price);
+    setCompareAtPrice(newSizesArray[0].compareAtPrice);
   }
 
   // Color Organizer
@@ -656,7 +672,10 @@ const ProductPage = ({ data }) => {
             <div className="inner-wrap">
               <div className="title-container">
                 <h1>{product.title}</h1>
-                <p className="price">${parseFloat(currentPrice)}</p>
+                <p className="price">
+                  {compareAtPrice && <span>${compareAtPrice}</span>}$
+                  {parseFloat(currentPrice)}
+                </p>
               </div>
               <div
                 className="description-container"
@@ -806,6 +825,7 @@ export const query = graphql`
           description
           variants {
             availableForSale
+            compareAtPrice
             id
             shopifyId
             image {

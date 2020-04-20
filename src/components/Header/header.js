@@ -265,8 +265,6 @@ const Header = ({ siteTitle }) => {
     leave: { opacity: 0 },
   });
 
-  console.log("checkout", checkout);
-
   const qty =
     checkout &&
     checkout.lineItems.reduce((total, item) => {
@@ -316,6 +314,13 @@ const Header = ({ siteTitle }) => {
       }
       return;
     });
+
+    return () => {
+      // clean up
+      window.removeEventListener("scroll", function() {
+        return;
+      });
+    };
   }, []);
   return (
     <div role="group" onMouseLeave={closeMegaMenu}>

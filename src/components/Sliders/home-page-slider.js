@@ -16,6 +16,12 @@ import { media } from "../helpers";
 
 const SlideContainer = styled.div`
   position: relative;
+
+  a {
+    display: block;
+    z-index: 10;
+    position: relative;
+  }
   .desktop-only {
     display: none;
     ${media.medium`display: block;`}
@@ -53,11 +59,11 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
-          fluid(maxWidth: 1920) {
+          fluid(maxWidth: 1920, quality: 100) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -80,9 +86,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideOneMobile: file(
-        relativePath: { eq: "slides/mobile-slide-1-1.jpg" }
-      ) {
+      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -132,7 +136,7 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`collections/${currentBannerSlideURL}`}>
+          <Link to={`collections/for-the-kids`}>
             <Img
               className="desktop-only"
               fluid={data.slideOne.childImageSharp.fluid}
@@ -141,11 +145,11 @@ const HomePageSlider = () => {
               className="mobile-only"
               fluid={data.slideOneMobile.childImageSharp.fluid}
             />
-            <div className="mobile-overlay">
+            {/* <div className="mobile-overlay">
               <div className="overlay-content">
                 <h2>Dream Weaver</h2>
               </div>
-            </div>
+            </div> */}
           </Link>
         </SlideContainer>
         <SlideContainer>
@@ -158,11 +162,11 @@ const HomePageSlider = () => {
               className="mobile-only"
               fluid={data.slideTwoMobile.childImageSharp.fluid}
             />
-            <div className="mobile-overlay">
+            {/* <div className="mobile-overlay">
               <div className="overlay-content">
                 <h2>Dream Weaver</h2>
               </div>
-            </div>
+            </div> */}
           </Link>
         </SlideContainer>
         <SlideContainer>
@@ -175,11 +179,11 @@ const HomePageSlider = () => {
               className="mobile-only"
               fluid={data.slideThreeMobile.childImageSharp.fluid}
             />
-            <div className="mobile-overlay">
+            {/* <div className="mobile-overlay">
               <div className="overlay-content">
                 <h2>Dream Weaver</h2>
               </div>
-            </div>
+            </div> */}
           </Link>
         </SlideContainer>
       </Slider>

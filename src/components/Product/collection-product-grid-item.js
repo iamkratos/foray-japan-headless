@@ -60,21 +60,18 @@ const ProductGridItem = ({
     if (color) {
       imageArray = [];
       let filterColorCondition = colorHandlize(color);
-      console.log("image filter condition", filterColorCondition);
+      // console.log("image filter condition", filterColorCondition);
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
-        console.log(altTextCheck, filterColorCondition);
+        // console.log(altTextCheck, filterColorCondition);
         if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
-          console.log("yes");
           imageArray.push(image);
         } else {
-          console.log("not hitting");
+          return;
         }
       });
     }
-
-    console.log(imageArray);
 
     // setCurrentColor(imageArray);
     setCurrentProductImages(imageArray);
@@ -96,7 +93,7 @@ const ProductGridItem = ({
       // update url
       updateProductURL(colorHandlize(color));
 
-      console.log(currentProductImages);
+      // console.log(currentProductImages);
     } else {
       if (product.images[0]) {
         // Variant-less products don't have alt text
@@ -152,7 +149,7 @@ const ProductGridItem = ({
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        console.log("case a", selectedColor);
+        // console.log("case a", selectedColor);
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
@@ -207,7 +204,6 @@ const ProductGridItem = ({
     }
 
     // set price
-    console.log("price", availableSizesArray[0]);
     setCurrentPrice(availableSizesArray[0].price);
     setCurrentCompareAtPrice(availableSizesArray[0].compareAtPrice);
   }
@@ -390,7 +386,7 @@ const ProductGridItem = ({
               <h4>{product.title}</h4>
               <p>
                 {currentCompareAtPrice ? (
-                  <span>{currentCompareAtPrice}</span>
+                  <span>${currentCompareAtPrice}</span>
                 ) : (
                   ``
                 )}{" "}

@@ -114,7 +114,7 @@ export const StoreProvider = ({ children }) => {
           newCheckout = await getNewId();
           // console.log("context case 2");
         }
-        console.log("case 1");
+
         setCheckout(newCheckout);
       } else {
         // If id does not, create new checkout
@@ -123,7 +123,7 @@ export const StoreProvider = ({ children }) => {
         if (isBrowser) {
           localStorage.setItem("checkout_id", newCheckout.id);
         }
-        console.log("case 2");
+
         setCheckout(newCheckout);
       }
       // Set checkout to state
