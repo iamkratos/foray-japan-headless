@@ -497,7 +497,7 @@ const ProductPage = ({ data }) => {
           .includes("right")) &&
       hoverColor != currentImageSet[0].altText
     ) {
-      // console.log("case 1", currentImageSet[0].altText);
+      console.log("loaded");
 
       if (currentImageSet[0].altText === "BW") {
         setHoverColor("B&W");
