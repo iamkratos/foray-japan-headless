@@ -57,7 +57,7 @@ const TriGridContainer = styled.section`
 const TriGridSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      leftImage: file(relativePath: { eq: "home/left-1.jpg" }) {
+      leftImage: file(relativePath: { eq: "home/left-1-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.

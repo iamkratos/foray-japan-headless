@@ -59,7 +59,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -71,7 +71,7 @@ const HomePageSlider = () => {
       slideTwo: file(relativePath: { eq: "slides/slide-2-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
+
           fluid(maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
@@ -80,16 +80,18 @@ const HomePageSlider = () => {
       slideThree: file(relativePath: { eq: "slides/slide-3-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
+
           fluid(maxWidth: 1920) {
             ...GatsbyImageSharpFluid
           }
         }
       }
-      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
+      slideOneMobile: file(
+        relativePath: { eq: "slides/mobile-slide-1-1.jpg" }
+      ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
+
           fluid(maxWidth: 450) {
             ...GatsbyImageSharpFluid
           }
@@ -100,7 +102,7 @@ const HomePageSlider = () => {
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
+
           fluid(maxWidth: 450) {
             ...GatsbyImageSharpFluid
           }
@@ -111,7 +113,7 @@ const HomePageSlider = () => {
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
-          # Makes it trivial to update as your page's design changes.
+
           fluid(maxWidth: 450) {
             ...GatsbyImageSharpFluid
           }
