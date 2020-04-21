@@ -526,7 +526,7 @@ const ProductPage = ({ data }) => {
       if (variantValue.includes("&")) {
         variantValue = variantValue.split("&")[0];
       }
-      console.log(variantValue);
+      // console.log(variantValue);
       variantValue = reverseColorHandlize(variantValue);
       handleVariantChange(variantValue);
       setHoverColor(
