@@ -104,6 +104,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       url: "/collections/in-the-fold",
     },
     {
+      title: "$72 for Kids",
+      url: "/collections/for-the-kids",
+    },
+    {
       title: "Core 2.0",
       url: "/collections/core-2-0-collection",
     },

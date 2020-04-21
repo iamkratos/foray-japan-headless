@@ -3,6 +3,8 @@ import Wrapper from "../org/Wrapper";
 import styled from "styled-components";
 import { media } from "../helpers";
 
+import { Link } from "gatsby";
+
 const TopBarContainer = styled.div`
   background-color: #000;
   padding: 13px 0 10px;
@@ -13,10 +15,15 @@ const TopBarContainer = styled.div`
   p {
     margin: 0px;
     color: #fff;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     font-family: "Nexa";
     line-height: 1;
+
+    a {
+      color: #fff;
+      margin-left: 5px;
+    }
   }
 `;
 
@@ -26,7 +33,10 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            {/* <p>FREE GROUND SHIPPING ON ALL ORDERS & FREE RETURNS</p> */}
+            <p>
+              Shop For a Cause: Youth On Course
+              <Link to="/collections/for-the-kids">$72 for Kids</Link>
+            </p>
           </div>
           <div className="right-container"></div>
         </Wrapper>
