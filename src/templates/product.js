@@ -520,8 +520,13 @@ const ProductPage = ({ data }) => {
 
     // check for variant in url
     let IsVariantInURL = window.location.search.includes("?color=");
+
     if (IsVariantInURL) {
       let variantValue = window.location.search.replace("?color=", "");
+      if (variantValue.includes("&")) {
+        variantValue = variantValue.split("&")[0];
+      }
+      console.log(variantValue);
       variantValue = reverseColorHandlize(variantValue);
       handleVariantChange(variantValue);
       setHoverColor(
