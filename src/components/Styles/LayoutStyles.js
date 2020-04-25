@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { TransitionMixin, media } from "../helpers";
 
+// colors
+import camo from "../../images/colors/camo-1.png";
+
 const LayoutContainer = styled.div`
   /* layout */
   .main-content-container {
@@ -215,12 +218,37 @@ const LayoutContainer = styled.div`
               #29101f 50%
             ) !important;
           }
+          &.amparo-blue-navy {
+            background-image: linear-gradient(
+              90deg,
+              #3434b1 50%,
+              #2b61c5 50%
+            ) !important;
+          }
           &.grey-chambray {
             background-color: #928ca1;
           }
 
           &.blue-chambray {
             background-color: #5b87c9;
+          }
+
+          &.navy-stripe-print {
+            background: repeating-linear-gradient(
+              180deg,
+              #606dbc,
+              #606dbc 1px,
+              #46529a 1px,
+              #465298 4px
+            );
+          }
+
+          &.wg {
+            background-image: linear-gradient(
+              90deg,
+              #fff 50%,
+              #506575 50%
+            ) !important;
           }
           &.eggplant-pink {
             background-color: #b55580 !important;
@@ -245,6 +273,10 @@ const LayoutContainer = styled.div`
           }
           &.oxford-tan {
             background-color: #e8d0c7;
+          }
+
+          &.camo {
+            background-image: url(${camo});
           }
 
           &.grey-stripe {

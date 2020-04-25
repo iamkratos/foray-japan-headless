@@ -360,7 +360,7 @@ const ProductPage = ({ data }) => {
         if (
           color &&
           image.altText &&
-          colorHandlize(image.altText).includes(colorHandlize(color))
+          colorHandlize(image.altText) === colorHandlize(color)
         ) {
           return newImageArray.push(image);
         }

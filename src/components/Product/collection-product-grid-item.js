@@ -65,7 +65,7 @@ const ProductGridItem = ({
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
         // console.log(altTextCheck, filterColorCondition);
-        if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
+        if (altTextCheck && altTextCheck === filterColorCondition) {
           imageArray.push(image);
         } else {
           return;
