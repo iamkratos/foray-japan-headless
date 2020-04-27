@@ -178,6 +178,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
                 </label>
                 <label htmlFor="email">
                   <input
+                    required
                     placeholder="Email"
                     type="email"
                     className="form-control"

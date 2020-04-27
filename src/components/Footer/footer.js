@@ -189,6 +189,15 @@ const Footer = () => {
               <li>
                 <a href="mailto:contact@foraygolf.com">Contact Us</a>
               </li>
+              <li>
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="https://wholesale.foraygolf.com/"
+                >
+                  B2B Partner Login
+                </a>
+              </li>
             </ul>
           </div>
         </div>

@@ -190,6 +190,7 @@ const CorporatePage = ({ page, fallbackImg }) => {
                       type="email"
                       className="form-control"
                       name="email"
+                      required
                     />
                   </label>
                 </div>
@@ -211,6 +212,7 @@ const CorporatePage = ({ page, fallbackImg }) => {
                       className="form-control"
                       name="club"
                       placeholder="Club/Organization/Charity"
+                      required
                     />
                   </label>
                 </div>
@@ -221,6 +223,7 @@ const CorporatePage = ({ page, fallbackImg }) => {
                       name="inquiry"
                       className="form-control"
                       cols="30"
+                      required
                       rows="10"
                     />
                   </label>
