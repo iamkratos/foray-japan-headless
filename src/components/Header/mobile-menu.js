@@ -101,7 +101,7 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const collectionLinks = [
     {
       title: "Day Glo",
-      url: "/collections/in-the-fold",
+      url: "/collections/day-glo",
     },
     {
       title: "In The Fold",
