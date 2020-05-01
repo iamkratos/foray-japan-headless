@@ -69,7 +69,7 @@ const SliderContainer = styled.div`
     position: relative;
     top: -40px;
 
-    ${media.medium`top: 0; right: -20px;margin: 19vh 0 0; display: none`}
+    ${media.medium`top: 0; right: -20px;margin: 19vh 0 0;`}
 
     .inner-wrap {
       display: flex;
