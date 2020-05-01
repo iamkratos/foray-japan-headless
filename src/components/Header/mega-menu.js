@@ -326,11 +326,23 @@ const MegaMenu = ({
           }
         }
       }
+      dayGlo: file(relativePath: { eq: "menu-items/collections/day-glo.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Day Glo",
+      url: "/collections/day-glo",
+      image: data.dayGlo.childImageSharp.fluid,
+    },
     {
       title: "In The Fold",
       url: "/collections/in-the-fold",

@@ -100,12 +100,12 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
-      title: "In The Fold",
+      title: "Day Glo",
       url: "/collections/in-the-fold",
     },
     {
-      title: "$72 for Kids",
-      url: "/collections/for-the-kids",
+      title: "In The Fold",
+      url: "/collections/in-the-fold",
     },
     {
       title: "Core 2.0",

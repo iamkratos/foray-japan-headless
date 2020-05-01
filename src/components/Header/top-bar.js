@@ -33,10 +33,10 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            <p>
+            {/* <p>
               Shop For a Cause: Youth On Course
               <Link to="/collections/for-the-kids">$72 for Kids</Link>
-            </p>
+            </p> */}
           </div>
           <div className="right-container"></div>
         </Wrapper>
