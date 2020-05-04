@@ -388,22 +388,6 @@ const MegaMenu = ({
       url: "/collections/sun-daze",
       image: data.sunDaze.childImageSharp.fluid,
     },
-    {
-      title: "America",
-      url: "/collections/america",
-      image: data.america.childImageSharp.fluid,
-    },
-
-    // {
-    //   title: "Lace Escape",
-    //   url: "/collections/lace-escape",
-    //   image: data.laceEscape.childImageSharp.fluid,
-    // },
-    // {
-    //   title: "Floom Official",
-    //   url: "/collections/floom-official",
-    //   image: data.floomOfficial.childImageSharp.fluid,
-    // },
 
     {
       title: "View All",

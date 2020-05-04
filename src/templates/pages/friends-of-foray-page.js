@@ -165,7 +165,11 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               className="form"
             >
               <input name="bot-field" type="hidden" />
-              <input type="hidden" name="form-name" value="corporate-page" />
+              <input
+                type="hidden"
+                name="form-name"
+                value="friends-of-foray-page"
+              />
               <div className="input-wrap split">
                 <label htmlFor="name">
                   <input
