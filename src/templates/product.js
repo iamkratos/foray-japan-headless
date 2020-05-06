@@ -331,7 +331,7 @@ const ProductPageContainer = styled.section`
 
 const ProductPage = ({ data }) => {
   let product = data.allShopifyProduct.edges[0].node;
-  console.log(product);
+  // console.log(product);
 
   // console.log(data);
   function createMarkup() {
@@ -373,13 +373,13 @@ const ProductPage = ({ data }) => {
     setCurrentImageSet(newImageArray);
     // 2. Sort Sizes and Check That They're Available
     let newSizesArray = [];
-    console.log(color);
+    // console.log(color);
     if (color != null) {
       color = color.includes("Left") ? "Left" : color;
       product.variants.map(variant => {
         variant.selectedOptions.map(option => {
-          console.log("case 1");
-          console.log(colorHandlize(option.value), colorHandlize(color));
+          // console.log("case 1");
+          // console.log(colorHandlize(option.value), colorHandlize(color));
           // the second parameter accounts for gift cards
           if (
             colorHandlize(option.value) === colorHandlize(color) ||
@@ -401,7 +401,7 @@ const ProductPage = ({ data }) => {
         });
       });
     }
-    console.log("array", newSizesArray);
+    // console.log("array", newSizesArray);
     setCurrentSizeSet(newSizesArray);
     // 3. Set Image Index To First Image and scroll up
     setMainImageIndex(0);

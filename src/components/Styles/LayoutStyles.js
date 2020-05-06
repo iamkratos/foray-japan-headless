@@ -383,6 +383,12 @@ const LayoutContainer = styled.div`
           &.navy {
             background-color: #3434b1;
           }
+          &.enthusiasmo {
+            background-color: #ecbbc3;
+          }
+          &.yellow {
+            background-color: #fff01f;
+          }
 
           &.heather {
             background-color: grey;
