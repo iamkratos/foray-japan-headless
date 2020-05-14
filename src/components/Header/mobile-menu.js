@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "America 2.0",
+      url: "/collections/america-2-0",
+    },
+    {
       title: "Day Glo",
       url: "/collections/day-glo",
     },
@@ -123,34 +127,11 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
     },
-    // {
-    //   title: "D-Luxe",
-    //   url: "/collections/d-luxe",
-    // },
+
     {
       title: "Winter Floom",
       url: "/collections/winter-floom",
     },
-    // {
-    //   title: "Mercury Rising",
-    //   url: "/collections/mercury-rising",
-    // },
-    {
-      title: "Sun Daze",
-      url: "/collections/sun-daze",
-    },
-    {
-      title: "America",
-      url: "/collections/america",
-    },
-    // {
-    //   title: "Lace Escape",
-    //   url: "/collections/lace-escape",
-    // },
-    // {
-    //   title: "Floom Official",
-    //   url: "/collections/floom-official",
-    // },
 
     {
       title: "View All",

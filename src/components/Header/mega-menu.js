@@ -333,11 +333,25 @@ const MegaMenu = ({
           }
         }
       }
+      americaTwo: file(
+        relativePath: { eq: "menu-items/collections/america-2-0.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "America 2.0",
+      url: "/collections/america-2-0",
+      image: data.americaTwo.childImageSharp.fluid,
+    },
     {
       title: "Day Glo",
       url: "/collections/day-glo",
@@ -377,16 +391,6 @@ const MegaMenu = ({
       title: "Winter Floom",
       url: "/collections/winter-floom",
       image: data.winterFloom.childImageSharp.fluid,
-    },
-    // {
-    //   title: "Mercury Rising",
-    //   url: "/collections/mercury-rising",
-    //   image: data.mercuryRising.childImageSharp.fluid,
-    // },
-    {
-      title: "Sun Daze",
-      url: "/collections/sun-daze",
-      image: data.sunDaze.childImageSharp.fluid,
     },
 
     {
