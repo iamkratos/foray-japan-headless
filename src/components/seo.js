@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
@@ -26,6 +26,16 @@ function SEO({ description, lang, meta, title, children }) {
   );
 
   const metaDescription = description || site.siteMetadata.description;
+
+  useEffect(() => {
+    const omnisend = window.omnisend || [];
+    omnisend.push(["accountID", "xxxx"]);
+    omnisend.push(["track", "$pageViewed"]);
+
+    return () => {
+      return;
+    };
+  }, []);
 
   return (
     <Helmet
@@ -70,7 +80,7 @@ function SEO({ description, lang, meta, title, children }) {
       ].concat(meta)}
     >
       <meta name="description" content={metaDescription} />
-
+      <script src="https://omnisrc.com/inshop/launcher-v2.js"></script>
       {children}
     </Helmet>
   );

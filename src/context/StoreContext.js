@@ -106,10 +106,10 @@ export const StoreProvider = ({ children }) => {
 
       let newCheckout = null;
 
-      if (currentCheckoutId) {
+      if (currentCheckoutId !== null) {
         // If id exists, fetch checkout from Shopify
         newCheckout = await client.checkout.fetch(currentCheckoutId);
-        // console.log("context case 1");
+        console.log("context case 1");
         if (newCheckout && newCheckout.completedAt) {
           newCheckout = await getNewId();
           // console.log("context case 2");
@@ -118,7 +118,7 @@ export const StoreProvider = ({ children }) => {
         setCheckout(newCheckout);
       } else {
         // If id does not, create new checkout
-        // console.log("context case 3");
+        console.log("context case 3");
         newCheckout = await client.checkout.create();
         if (isBrowser) {
           localStorage.setItem("checkout_id", newCheckout.id);

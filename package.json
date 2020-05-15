@@ -8,7 +8,7 @@
     "algoliasearch": "^3.35.1",
     "babel-plugin-styled-components": "^1.10.6",
     "browser-monads": "^1.0.0",
-    "gatsby": "^2.18.12",
+    "gatsby": "^2.21.30",
     "gatsby-image": "^2.2.38",
     "gatsby-plugin-google-analytics": "^2.1.35",
     "gatsby-plugin-intercom": "^0.1.4",
@@ -48,7 +48,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
