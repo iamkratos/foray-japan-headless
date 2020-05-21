@@ -59,7 +59,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -68,7 +68,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideTwo: file(relativePath: { eq: "slides/slide-2-1.jpg" }) {
+      slideTwo: file(relativePath: { eq: "slides/slide-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -77,7 +77,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideThree: file(relativePath: { eq: "slides/slide-3-1.jpg" }) {
+      slideThree: file(relativePath: { eq: "slides/slide-3.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -86,17 +86,8 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
-        childImageSharp {
-          # Specify the image processing specifications right in the query.
-
-          fluid(maxWidth: 450) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      slideTwoMobile: file(
-        relativePath: { eq: "slides/mobile-slide-2-1.jpg" }
+      slideOneMobile: file(
+        relativePath: { eq: "slides/mobile-slide-1-1.jpg" }
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
@@ -106,8 +97,17 @@ const HomePageSlider = () => {
           }
         }
       }
+      slideTwoMobile: file(relativePath: { eq: "slides/mobile-slide-2.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       slideThreeMobile: file(
-        relativePath: { eq: "slides/mobile-slide-3-1.jpg" }
+        relativePath: { eq: "slides/mobile-slide-3.jpg" }
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
@@ -130,7 +130,7 @@ const HomePageSlider = () => {
     nextArrow: <SlickArrow to="next" />,
   };
 
-  let currentBannerSlideURL = "america-2-0";
+  let currentBannerSlideURL = "the-oddyesey";
 
   return (
     <SliderContainer>

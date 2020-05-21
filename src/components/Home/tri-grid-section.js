@@ -57,7 +57,7 @@ const TriGridContainer = styled.section`
 const TriGridSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      leftImage: file(relativePath: { eq: "home/left-1-1.jpg" }) {
+      leftImage: file(relativePath: { eq: "home/left-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -66,7 +66,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageOne: file(relativePath: { eq: "home/right-1.jpg" }) {
+      rightImageOne: file(relativePath: { eq: "home/right-1-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -75,7 +75,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageTwo: file(relativePath: { eq: "home/right-2.jpg" }) {
+      rightImageTwo: file(relativePath: { eq: "home/right-2-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -92,11 +92,11 @@ const TriGridSection = () => {
       <Wrapper className="tri-grid-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="image-container">
-            <Link to="/collections/day-glo">
+            <Link to="/collections/america-2-0">
               <Img fluid={data.leftImage.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Day Glo</h3>
+                  <h3>America 2.0</h3>
                 </div>
               </div>
             </Link>
@@ -104,21 +104,21 @@ const TriGridSection = () => {
         </div>
         <div className="right-container">
           <div className="image-container">
-            <Link to="/collections/in-the-fold">
+            <Link to="/collections/day-glo">
               <Img fluid={data.rightImageOne.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>In The Fold</h3>
+                  <h3>Day Glo</h3>
                 </div>
               </div>
             </Link>
           </div>
           <div className="image-container">
-            <Link to="/collections/incognito">
+            <Link to="/collections/in-the-fold">
               <Img fluid={data.rightImageTwo.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Incognito</h3>
+                  <h3>In The Fold</h3>
                 </div>
               </div>
             </Link>

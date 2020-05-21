@@ -342,11 +342,25 @@ const MegaMenu = ({
           }
         }
       }
+      theOddyesey: file(
+        relativePath: { eq: "menu-items/collections/the-oddyesey.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "The Oddyesey",
+      url: "/collections/the-oddyesey",
+      image: data.theOddyesey.childImageSharp.fluid,
+    },
     {
       title: "America 2.0",
       url: "/collections/america-2-0",
@@ -382,11 +396,6 @@ const MegaMenu = ({
       url: "/collections/graphic-floral-collection",
       image: data.graphicFloral.childImageSharp.fluid,
     },
-    // {
-    //   title: "D-Luxe",
-    //   url: "/collections/d-luxe",
-    //   image: data.dluxe.childImageSharp.fluid,
-    // },
     {
       title: "Winter Floom",
       url: "/collections/winter-floom",
