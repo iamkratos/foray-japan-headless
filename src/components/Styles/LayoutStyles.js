@@ -346,6 +346,9 @@ const LayoutContainer = styled.div`
           &.perf-papaya {
             background-color: #ffb014 !important;
           }
+          &.papaya {
+            background-color: #ffb014 !important;
+          }
           &.charcoal-black {
             background-color: #383234 !important;
           }
