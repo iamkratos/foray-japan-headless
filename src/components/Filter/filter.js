@@ -132,7 +132,8 @@ const FilterContainer = styled.div`
 
         li {
           list-style: none;
-          margin: 2px 5px;
+          margin: 2px 4px;
+          ${media.xxl`margin: 2px 5px;`}
 
           &.size-xxs {
             order: 1;
@@ -347,6 +348,13 @@ const ProductFilter = ({
     return null;
   });
   finalSizes = finalSizes.filter(onlyUnique);
+  finalSizes = finalSizes.filter(
+    item =>
+      item !== "$50 Foray Golf Gift Card" &&
+      item !== "$100 Foray Golf Gift Card" &&
+      item !== "$250 Foray Golf Gift Card" &&
+      item !== "$500 Foray Golf Gift Card"
+  );
 
   // 2. Find all unique feature tags
   let finalFeatureTags = [];
