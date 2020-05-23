@@ -82,7 +82,9 @@ const MegaMenuContainer = styled(animated.div)`
     flex: 1;
     position: relative;
     min-height: 310px;
-    ${media.xl`min-height: 430px;`}
+    ${media.laptop`min-height: 330px;`}
+    ${media.xl`min-height: 420px;`}
+    ${media.xxl`min-height: 430px;`}
   }
 `;
 

@@ -3,6 +3,7 @@
 import { css } from "styled-components";
 
 export const sizes = {
+  xxl: 1800,
   xl: 1600,
   laptop: 1440,
   large: 1200,
