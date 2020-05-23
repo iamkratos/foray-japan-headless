@@ -68,8 +68,9 @@ const SliderContainer = styled.div`
     margin: 20px 0;
     position: relative;
     top: -40px;
+    display: none;
 
-    ${media.medium`top: 0; right: -20px;margin: 19vh 0 0;`}
+    ${media.medium`display: block; top: 0; right: -20px;margin: 19vh 0 0;`}
 
     .inner-wrap {
       display: flex;
@@ -143,9 +144,7 @@ const HomePageProductSlider = ({ products }) => {
     responsive: [
       {
         breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-        },
+        settings: "unslick",
       },
     ],
   };

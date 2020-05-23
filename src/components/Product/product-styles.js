@@ -104,6 +104,16 @@ const ProductGridItemContainer = styled.div`
 
               &.disabled {
                 opacity: 0.5;
+                position: relative;
+                &::after {
+                  content: " ";
+                  border-top: 1px solid #000;
+                  transform: rotate(-45deg);
+                  position: absolute;
+                  width: 100%;
+                  right: 0;
+                  top: 9px;
+                }
                 &:hover {
                   opacity: 0.5;
                   cursor: not-allowed;

@@ -17,7 +17,7 @@ const ProductGridItemContainer = styled.div`
   }
   .image-container {
     position: relative;
-    max-height: 420px;
+    max-height: 100%;
     overflow-y: hidden;
     ${media.medium`max-height: 100%;`}
     .image-1 {
@@ -100,6 +100,16 @@ const ProductGridItemContainer = styled.div`
               ${TransitionMixin(".25s")}
               &.disabled {
                 opacity: 0.5;
+                position: relative;
+                &::after {
+                  content: " ";
+                  border-top: 1px solid #000;
+                  transform: rotate(-45deg);
+                  position: absolute;
+                  width: 100%;
+                  right: 0;
+                  top: 9px;
+                }
                 &:hover {
                   opacity: 0.5;
                   cursor: not-allowed;

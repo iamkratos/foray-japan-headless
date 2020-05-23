@@ -34,7 +34,7 @@
     "react-instantsearch-dom": "^6.1.0",
     "react-intercom": "^1.0.15",
     "react-lazyload": "^2.6.5",
-    "react-slick": "^0.25.2",
+    "react-slick": "^0.26.0",
     "react-spring": "^8.0.27",
     "shopify-buy": "^2.7.0",
     "slick-carousel": "^1.8.1",

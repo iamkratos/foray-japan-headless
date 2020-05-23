@@ -272,6 +272,18 @@ const ProductPageContainer = styled.section`
                 }
                 &.disabled {
                   opacity: 0.5;
+                  position: relative;
+                  &::after {
+                    content: " ";
+                    border-top: 1px solid #777;
+
+                    transform: rotate(138deg);
+                    position: absolute;
+                    width: 80%;
+                    left: 11%;
+                    right: 70%;
+                    top: 13px;
+                  }
                   &:hover {
                     opacity: 0.5;
                     cursor: not-allowed;
