@@ -263,6 +263,8 @@ const Cart = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
 
+  console.log(checkout);
+
   const data = useStaticQuery(graphql`
     query {
       allShopifyCollection(filter: { title: { eq: "Dresses" } }) {

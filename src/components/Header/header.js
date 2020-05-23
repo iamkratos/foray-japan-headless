@@ -29,9 +29,6 @@ const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
 
-  &.instagram-styles {
-    padding-top: 40px;
-  }
 
   &.shrink {
     &.instagram-styles {
