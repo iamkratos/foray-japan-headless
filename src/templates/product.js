@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { graphql } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
 import styled from "styled-components";
@@ -534,6 +534,11 @@ const ProductPage = ({ data }) => {
   }
 
   useEffect(() => {
+    // Make sure product isn't an add on
+    if (product.title.includes("Add On")) {
+      navigate("/");
+    }
+
     tagCheck(product.tags);
 
     // check for variant in url
