@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby";
 
 import Header from "./Header/header";
 import Footer from "./Footer/footer";
+import Popup from "./optin-popup";
 import "./layout.css";
 import LayoutStyles from "./Styles/LayoutStyles";
 
@@ -33,6 +34,7 @@ const Layout = ({ children }) => {
           <main>{children}</main>
           <Footer />
         </div>
+        <Popup />
       </LayoutStyles>
     </>
   );

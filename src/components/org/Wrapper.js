@@ -26,6 +26,9 @@ const WrapperWrap = styled.div`
     display: flex;
     flex-wrap: wrap;
   }
+  &.block-flex {
+    ${media.medium`display: flex;flex-wrap: wrap;`}
+  }
   &.align {
     align-items: center;
   }
@@ -56,6 +59,7 @@ export default class Wrapper extends Component {
     const {
       size,
       children,
+      blockFlex,
       flex,
       shiftRight,
       align,
@@ -103,6 +107,9 @@ export default class Wrapper extends Component {
     }
     if (hide != null) {
       classes.push("hide");
+    }
+    if (blockFlex != null) {
+      classes.push("block-flex");
     }
 
     classes = classes.join(" ");
