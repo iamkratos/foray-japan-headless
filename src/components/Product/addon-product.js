@@ -46,7 +46,6 @@ const AddonProduct = ({ product, tags, firstProductVariantId, availSizes }) => {
   const [addonProductColor, setAddonProductColor] = useState("");
   const [addonSelectedSize, setAddonSelectedSize] = useState("");
   const [childProductSize, setChildProductSize] = useState("");
-  // const [childProductSize, setChildProductSize] = useState("");
   let isThereAnAddonProduct = false;
   useEffect(() => {
     tagCheck(tags);
