@@ -278,7 +278,6 @@ const CreateProductReview = ({
     const scriptURL =
       "https://script.google.com/macros/s/AKfycbyGzNk67ITM6UMp29uDcEVLZExQLyL3E2E-6tnvCVjZojPr4As/exec";
 
-    console.log(e.target);
     fetch(scriptURL, { method: "POST", body: new FormData(e.target) })
       .then(response => {
         console.log("Success!", response);

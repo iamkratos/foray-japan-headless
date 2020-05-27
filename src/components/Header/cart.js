@@ -263,7 +263,7 @@ const Cart = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
 
-  console.log(checkout);
+  // console.log(checkout);
 
   const data = useStaticQuery(graphql`
     query {

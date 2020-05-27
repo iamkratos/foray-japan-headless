@@ -144,6 +144,7 @@ const PopupContainer = styled.div`
                     color: #000;
                     display: block;
                     ${media.medium`display: none;`}
+                    
                     &:hover {
                       background-color: #000;
                       color: #fff;
@@ -184,6 +185,7 @@ const Popup = () => {
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormShowing, setIsFormShowing] = useState(true);
+  const [hasFormSubmitted, setHasFormSubmitted] = useState(false);
 
   const buttonRef = useRef(null);
 
@@ -227,27 +229,31 @@ const Popup = () => {
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    // put btn in loading state
-    buttonRef.current.classList.add("submitting");
-    buttonRef.current.textContent = "Submitting";
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbyFmQxY12jqI4ujogrK7hSN8W7-g95lOVSuFyGG7nRPEzj2WTo/exec";
+    if (!hasFormSubmitted) {
+      setHasFormSubmitted(true);
 
-    fetch(scriptURL, { method: "POST", body: new FormData(e.target) })
-      .then(response => {
-        if (response.status === 200) {
-          // show confirmation message
-          setIsFormShowing(false);
-          //  store token to prevent repeat popup on someone who has already submitted the form
-          setTimeout(function() {
-            setIsPopupOpen(false);
-          }, 4000);
+      // put btn in loading state
+      buttonRef.current.classList.add("submitting");
+      buttonRef.current.textContent = "Submitting";
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbyFmQxY12jqI4ujogrK7hSN8W7-g95lOVSuFyGG7nRPEzj2WTo/exec";
 
-          localStorage.setItem("popupClosed", "completed");
-        }
-        console.log("Success!", response.status);
-      })
-      .catch(error => console.error("Error!", error.message));
+      fetch(scriptURL, { method: "POST", body: new FormData(e.target) })
+        .then(response => {
+          if (response.status === 200) {
+            // show confirmation message
+            setIsFormShowing(false);
+            //  store token to prevent repeat popup on someone who has already submitted the form
+            setTimeout(function() {
+              setIsPopupOpen(false);
+            }, 4000);
+
+            localStorage.setItem("popupClosed", "completed");
+          }
+          console.log("Success!", response.status);
+        })
+        .catch(error => console.error("Error!", error.message));
+    }
   }
 
   return (
