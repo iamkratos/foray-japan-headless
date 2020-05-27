@@ -169,7 +169,7 @@ export const StoreProvider = ({ children }) => {
           variantId: variantIdOne,
           quantity: 1,
           customAttributes: [
-            { key: "childProductSize", value: childProductSize },
+            { key: "Add On Product Size", value: childProductSize },
           ],
         },
         {
