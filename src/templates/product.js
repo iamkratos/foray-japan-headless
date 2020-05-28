@@ -413,6 +413,7 @@ const ProductPage = ({ data }) => {
         });
       });
     }
+    newSizesArray = newSizesArray.filter(onlyUnique);
     // console.log("array", newSizesArray);
     setCurrentSizeSet(newSizesArray);
     // 3. Set Image Index To First Image and scroll up

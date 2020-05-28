@@ -60,12 +60,12 @@ const ProductGridItem = ({
     if (color) {
       imageArray = [];
       let filterColorCondition = colorHandlize(color);
-      // console.log("image filter condition", filterColorCondition);
+      console.log("image filter condition", filterColorCondition);
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
         // console.log(altTextCheck, filterColorCondition);
-        if (altTextCheck && altTextCheck === filterColorCondition) {
+        if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
           imageArray.push(image);
         } else {
           return;
@@ -100,8 +100,8 @@ const ProductGridItem = ({
         if (product.images[0].altText) {
           const oldColor =
             product.images[0].altText &&
-            colorHandlizeAndReplaceSimilarColors(product.images[0].altText);
-
+            colorHandlize(product.images[0].altText);
+          console.log("old color", oldColor);
           // Set color images
           sortImagesAltText(oldColor);
           // Sort sizes
@@ -149,11 +149,15 @@ const ProductGridItem = ({
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        // console.log("case a", selectedColor);
+        console.log("case a", product.title, selectedColor);
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
-            if (handlizedColor.includes(selectedColor)) {
+            // if the color matches or includes the filter condition
+            if (
+              handlizedColor === selectedColor ||
+              handlizedColor.includes(selectedColor)
+            ) {
               availableSizesArray.push(variant);
             }
           });

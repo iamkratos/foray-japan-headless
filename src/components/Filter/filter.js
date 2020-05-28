@@ -380,7 +380,7 @@ const ProductFilter = ({
           option.values.map(value => {
             let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
             // console.log(handlizedValue, handlelizedFilterColor);
-            if (handlizedValue === handlelizedFilterColor) {
+            if (handlizedValue.includes(handlelizedFilterColor)) {
               filteredProductValues.push(value);
             }
           });
