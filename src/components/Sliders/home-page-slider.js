@@ -59,7 +59,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -86,9 +86,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideOneMobile: file(
-        relativePath: { eq: "slides/mobile-slide-1-1.jpg" }
-      ) {
+      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -136,7 +134,7 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`collections/${currentBannerSlideURL}`}>
+          <Link to={`collections/birds-in-paradise`}>
             <Img
               className="desktop-only"
               fluid={data.slideOne.childImageSharp.fluid}

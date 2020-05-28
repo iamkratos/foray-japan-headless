@@ -91,6 +91,11 @@ const Footer = () => {
             <h4>Shop Collections</h4>
             <ul>
               <li>
+                <Link to="/collections/birds-in-paradise">
+                  Birds In Paradise
+                </Link>
+              </li>
+              <li>
                 <Link to="/collections/the-oddyesey">The Oddyesey</Link>
               </li>
               <li>
@@ -104,9 +109,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/collections/incognito">Incognito</Link>
-              </li>
-              <li>
-                <Link to="/collections/dream-weaver">Dream Weaver</Link>
               </li>
             </ul>
           </div>

@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "Birds In Paradise",
+      url: "/collections/birds-in-paradise",
+    },
+    {
       title: "The Oddyesey",
       url: "/collections/the-oddyesey",
     },

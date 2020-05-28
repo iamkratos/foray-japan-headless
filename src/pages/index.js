@@ -20,6 +20,7 @@ const IndexPage = () => {
               id
               handle
               title
+              tags
               images {
                 altText
                 localFile {

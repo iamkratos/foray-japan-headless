@@ -413,7 +413,7 @@ const ProductGridItem = ({ product, filterColor }) => {
   let showQuickShopText = true;
   product.tags &&
     product.tags.map(tag => {
-      if (tag == "NO-QS") {
+      if (tag === "NO-QS") {
         showQuickShopText = false;
       }
     });

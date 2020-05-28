@@ -353,11 +353,25 @@ const MegaMenu = ({
           }
         }
       }
+      birdsInParadise: file(
+        relativePath: { eq: "menu-items/collections/birds-in-paradise.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Birds In Paradise",
+      url: "/collections/birds-in-paradise",
+      image: data.birdsInParadise.childImageSharp.fluid,
+    },
     {
       title: "The Oddyesey",
       url: "/collections/the-oddyesey",
@@ -392,16 +406,6 @@ const MegaMenu = ({
       title: "Dream Weaver",
       url: "/collections/dream-weaver",
       image: data.dreamWeaver.childImageSharp.fluid,
-    },
-    {
-      title: "Graphic Floral",
-      url: "/collections/graphic-floral-collection",
-      image: data.graphicFloral.childImageSharp.fluid,
-    },
-    {
-      title: "Winter Floom",
-      url: "/collections/winter-floom",
-      image: data.winterFloom.childImageSharp.fluid,
     },
 
     {
