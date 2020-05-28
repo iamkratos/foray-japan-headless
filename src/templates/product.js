@@ -13,6 +13,7 @@ import AddToCart from "../components/Product/add-to-cart";
 import RelatedSelling from "../components/Product/related-selling";
 import ProductReviews from "../components/Product/product-reviews";
 import { StoreContext } from "../context/StoreContext";
+import X from "../images/x.inline.svg";
 
 const ProductPageContainer = styled.section`
   padding: 20px 0 40px;
@@ -262,6 +263,7 @@ const ProductPageContainer = styled.section`
                 padding: 8px 10px;
                 margin: 0;
                 background-color: transparent;
+                position: relative;
                 ${TransitionMixin(".25s")}
                 &.active {
                   border-color: #000;
@@ -284,6 +286,9 @@ const ProductPageContainer = styled.section`
                     right: 70%;
                     top: 13px;
                   }
+                  svg {
+                    display: none;
+                  }
                   &:hover {
                     opacity: 0.5;
                     cursor: not-allowed;
@@ -295,6 +300,23 @@ const ProductPageContainer = styled.section`
 
                 &:hover {
                   border-color: #000;
+                }
+
+                svg {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  stroke-width: 1px;
+                  display: none;
+                  stroke: #999;
+
+                  line {
+                    &:nth-child(2) {
+                      display: none;
+                    }
+                  }
                 }
               }
             }
@@ -774,6 +796,7 @@ const ProductPage = ({ data }) => {
                               onClick={() => handleSizeChange(size)}
                             >
                               {sizeText}
+                              <X />
                             </button>
                           </li>
                         );

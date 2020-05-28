@@ -149,19 +149,30 @@ const ProductGridItem = ({
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        console.log("case a", product.title, selectedColor);
+        // console.log("case a", product.title, selectedColor);
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
-            // if the color matches or includes the filter condition
-            if (
-              handlizedColor === selectedColor ||
-              handlizedColor.includes(selectedColor)
-            ) {
+            // if the color matches the filter condition
+            if (handlizedColor === selectedColor) {
               availableSizesArray.push(variant);
             }
           });
         });
+
+        // If there are no results initially, then look for ones including the color
+        if (availableSizesArray.length < 1) {
+          product.variants.map(variant => {
+            variant.selectedOptions.map(option => {
+              let handlizedColor = colorHandlize(option.value);
+              // if the color includes the filter condition
+              if (handlizedColor.includes(selectedColor)) {
+                availableSizesArray.push(variant);
+              }
+            });
+          });
+        }
+
         // console.log("sizes here", availableSizesArray);
       } else {
         // console.log("case b");
