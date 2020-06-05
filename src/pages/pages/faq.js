@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { window } from "browser-monads";
 import SEO from "../../components/seo";
 
+import returnsImg from "../../images/packing-slip.jpg";
 import shippingImg from "../../images/shipping.png";
 import Wrapper from "../../components/org/Wrapper";
 import Layout from "../../components/layout";
@@ -46,6 +47,7 @@ const returns = [
             <li><strong>STEP 2:</strong> Locate both of the following in order to start the return: <br/>
             – Your 4-digit Order Number, found at the top of your email confirmation or on your packing slip<br/>
             – The email address that was used to place the order <br/>
+            <img style="max-width: 650px;display: block; width: 100%;" src="${returnsImg}" alt=""/>
             In the case of gift orders or if you are unable to locate the above, please reach out to <a href="mailto:contact@foraygolf.com">contact@foraygolf.com</a></li>
             <li><strong>STEP 3:</strong> Follow the brief instructions, identifying which pieces you would like to send back, as well as reason codes for return. 
             Please note you CANNOT request an EXCHANGE in the “notes section” of your return; unfortunately, due to the limited-edition nature of our product, exchanges are not possible; please see our exchange policy above.</li>
