@@ -139,12 +139,6 @@ const Footer = () => {
           <div className="inner-wrap">
             <h4>About</h4>
             <ul>
-              {/* <li>
-                <Link to="/collections/tops">Who We Are</Link>
-              </li>
-              <li>
-                <Link to="/collections/bottoms">Technology</Link>
-              </li> */}
               <li>
                 <Link to="/pages/privacy-policy">Privacy Policy</Link>
               </li>
@@ -152,9 +146,7 @@ const Footer = () => {
                 <Link to="/pages/terms-of-use">Terms of Use</Link>
               </li>
               <li>
-                <Link to="/pages/returns-exchange-policy">
-                  Shipping &amp; Exchanges
-                </Link>
+                <Link to="/pages/faq#shipping">Shipping &amp; Exchanges</Link>
               </li>
               <li>
                 <a
@@ -166,6 +158,9 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/pages/sizing">Sizing</Link>
+              </li>
+              <li>
+                <Link to="/pages/faq">FAQ</Link>
               </li>
             </ul>
           </div>
