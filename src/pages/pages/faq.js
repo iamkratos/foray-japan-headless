@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { window } from "browser-monads";
 import SEO from "../../components/seo";
 
+import shippingImg from "../../images/shipping.png";
 import Wrapper from "../../components/org/Wrapper";
 import Layout from "../../components/layout";
 import X from "../../images/x.inline.svg";
@@ -112,7 +113,7 @@ const shipping = [
                 <li>
                     <strong>Domestic Shipping:</strong><br/>
                     <ul>
-                        <li>The majority of Ground orders deliver within 3-4 days of ship date— please reference the below map for a more detailed estimate. Expedited shipping options are available.</li>
+                        <li>The majority of Ground orders deliver within 3-4 days of ship date— please reference the below map for a more detailed estimate. Expedited shipping options are available. <br/> <br/> <img src="${shippingImg}" alt=""/></li>
                     </ul>
                 </li>
                 <li>
