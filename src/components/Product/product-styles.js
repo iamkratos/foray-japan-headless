@@ -100,12 +100,13 @@ const ProductGridItemContainer = styled.div`
               background-color: transparent;
               line-height: 1;
               color: #000;
+              position: relative;
               ${TransitionMixin(".25s")}
 
               &.disabled {
                 opacity: 0.5;
                 position: relative;
-                &::after {
+                /* &::after {
                   content: " ";
                   border-top: 1px solid #000;
                   transform: rotate(-45deg);
@@ -113,6 +114,10 @@ const ProductGridItemContainer = styled.div`
                   width: 100%;
                   right: 0;
                   top: 9px;
+                } */
+
+                svg {
+                  display: block;
                 }
                 &:hover {
                   opacity: 0.5;
@@ -125,6 +130,22 @@ const ProductGridItemContainer = styled.div`
                 color: #fff;
                 background-color: #000;
                 cursor: pointer;
+              }
+              svg {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                right: 0;
+                top: 0;
+                stroke-width: 2px;
+                display: none;
+                stroke: #000;
+
+                line {
+                  &:nth-child(2) {
+                    display: none;
+                  }
+                }
               }
             }
           }

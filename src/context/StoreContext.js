@@ -66,6 +66,7 @@ export const StoreProvider = ({ children }) => {
 
   const colorHandlizeAndReplaceSimilarColors = colorInNormalText => {
     let alteredColor = colorInNormalText
+      .replace(" / ", "-")
       .replace("Rosso ", "")
       .replace("Nero ", "")
       .replace(/\s+/g, "-")

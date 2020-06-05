@@ -44,6 +44,7 @@ const PressPage = () => {
           <div className="logo-grid">
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/holiday-golf-gifts-2018-for-golfers-who-travel"
               >
@@ -56,6 +57,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/trendy-new-golf-apparel-on-display-in-las-vegas"
               >
@@ -68,6 +70,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/coolest-things-at-the-pga-fashion-show-and-project-golf"
               >
@@ -80,6 +83,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/nightly-business-report-june-15-2018"
               >
@@ -92,6 +96,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.golfdigest.com/story/6-up-and-coming-golf-clothing-brands-you-havent-heard-of-yet-but-should"
               >
@@ -104,6 +109,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="http://www.nylon.com.sg/2017/10/fashion-spread-helter-skelter.html"
               >
@@ -116,6 +122,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/finally-something-truly-new-in-women-s-golf-fashion"
               >
@@ -128,6 +135,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="http://www.golfchannel.com/video/shocking-sassy-morning-drive-product-picks/"
               >
@@ -140,6 +148,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="http://www.refinery29.com/trendy-holiday-gift-guide#slide-23"
               >
@@ -152,6 +161,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/articles?preview_key=70871bd2c595f176d3d5f1a4e663b6d0"
               >
@@ -164,6 +174,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/episode-7-megan-lamothe-itsallforay"
               >
@@ -176,6 +187,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/golf-digest-former-victorias-secret-employees-started-their-own-golf-clothing-company"
               >
@@ -188,6 +200,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/millennials-breathing-new-life-into-the-stodgy-game-of-golf-and-heres-how-the-industry-is-responding"
               >
@@ -200,6 +213,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/foray-golfs-functional-meets-fashionable-womens-performance-apparel-tees-up-at-two-local-shops"
               >
@@ -212,6 +226,7 @@ const PressPage = () => {
             </div>
             <div className="logo">
               <a
+                rel="noreferrer"
                 target="_blank"
                 href="https://www.foraygolf.com/blogs/teamforaygolf/former-victoria-s-secret-executive-starts-foray-golf-to-sell-direct-to-consumers"
               >

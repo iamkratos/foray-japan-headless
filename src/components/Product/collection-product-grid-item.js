@@ -7,6 +7,7 @@ import Img from "gatsby-image";
 import { StoreContext } from "../../context/StoreContext";
 
 import ProductStyles from "./product-styles";
+import X from "../../images/x.inline.svg";
 
 const ProductGridItem = ({
   product,
@@ -60,7 +61,7 @@ const ProductGridItem = ({
     if (color) {
       imageArray = [];
       let filterColorCondition = colorHandlize(color);
-      console.log("image filter condition", filterColorCondition);
+      // console.log("image filter condition", filterColorCondition);
       product.images.map(image => {
         let altTextCheck = image.altText && colorHandlize(image.altText);
 
@@ -101,7 +102,7 @@ const ProductGridItem = ({
           const oldColor =
             product.images[0].altText &&
             colorHandlize(product.images[0].altText);
-          console.log("old color", oldColor);
+          // console.log("old color", oldColor);
           // Set color images
           sortImagesAltText(oldColor);
           // Sort sizes
@@ -212,7 +213,10 @@ const ProductGridItem = ({
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
       } else {
-        setHoverColor(formatedColor);
+        // if the image has alt text, show that in the tooltip
+        availableSizesArray[0].image.altText
+          ? setHoverColor(availableSizesArray[0].image.altText)
+          : setHoverColor(formatedColor);
       }
     } else {
       setHoverColor(formatedColor);
@@ -375,6 +379,7 @@ const ProductGridItem = ({
                             onClick={() => addProductToCart(size.shopifyId)}
                           >
                             {sizeText}
+                            <X />
                           </button>
                         </li>
                       );
