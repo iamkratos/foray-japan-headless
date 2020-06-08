@@ -17,7 +17,7 @@ const returns = [
             <ul>
                 <li>If you're having second thoughts about your gear— don’t worry—we’ll take it back. You have 30 days from the delivery date to return your items.</li>
                 <li>All returns must be unworn, intact merchandise with all tags in its original packaging. If returning a multi-item set, all pieces must be received in good condition to be considered for a full return.</li>
-                <li>Once a return is requested, the must be shipped within SEVEN (7) DAYS. If you do not ship your return within this time period, your order may be eligible for store credit only.</li>
+                <li>Once a return is requested, the return item(s) must be shipped within SEVEN (7) DAYS. If you do not ship your return item(s) within this time period, your order may be eligible for store credit only.</li>
                 <li>Domestic (United States) flat rate return shipping fee of $7.50 will be deducted from your refund amount. </li>
                 <li>FINAL SALE ITEMS CANNOT BE RETURNED OR EXCHANGED. Please note all items discounted over 40% are considered final sale and are labeled as “Final Sale” on their product page. </li>
                 <li>Please keep this in mind BEFORE making a purchase—if you have questions about the product selection or sizing please reach out to customer service for assistance prior to finalizing your order.</li>

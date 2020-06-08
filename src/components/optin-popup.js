@@ -32,24 +32,20 @@ const PopupContainer = styled.div`
       .popup-wrapper {
         position: relative;
         .close-btn-container {
-          position: absolute;
-          right: -5vw;
-          top: -5vh;
-          display: none;
-          ${media.medium`display: block;`}
+          background-color: #000;
+          
+          ${media.medium`display: block;position: absolute;right: -5vw;top: -5vh; background-color: transparent;`}
 
           button {
             background-color: transparent;
             box-shadow: none;
             -webkit-appearance: none;
-            border: 1px solid #fff;
             line-height: 1;
-            border-radius: 50%;
-            height: 55px;
-            width: 55px;
+            width: 100%;
+            border: none;
             display: flex;
             justify-content: center;
-            padding: 7px;
+            ${media.medium`border-radius: 50%; border: 1px solid #fff;height: 55px;width: 55px; padding: 7px;`}
 
             &:active, &:focus {
               outline: 0;
@@ -83,17 +79,19 @@ const PopupContainer = styled.div`
             padding: 25px;
             ${media.medium`padding: 0 30px;`}
             h3 {
-              font-size: 28px;
+              font-size: 21px;
               margin-bottom: 10px;
+            ${media.medium`font-size: 28px;`}
             }
             p {
-              font-size: 17px;
+              font-size: 15px;
               color: #777;
               font-family: Helvetica Neue, -apple-system, BlinkMacSystemFont,
                 Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
                 Droid Sans, Helvetica Neue, sans-serif;
               line-height: 1.5;
               margin-bottom: 15px;
+              ${media.medium`font-size: 17px;`}
             }
 
             .form-container {
