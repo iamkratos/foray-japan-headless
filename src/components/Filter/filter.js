@@ -456,10 +456,10 @@ const ProductFilter = ({
         // console.log("triggered", sizeFilteredProducts, filteredProducts);
       } else {
         // 2. No color selected so sort thru the first available variant of collection products
-        // console.log(
-        //   "no color selectd, so just go thru sizes",
-        //   handlelizedFilterSize
-        // );
+        console.log(
+          "no color selectd, so just go thru sizes",
+          handlelizedFilterSize
+        );
 
         let sizeFilteredProducts = [];
         collection.products.map(product => {
@@ -473,9 +473,15 @@ const ProductFilter = ({
             let doesProductHaveColor = variant.selectedOptions[1]
               ? true
               : false;
+
             if (index === 0 && doesProductHaveColor) {
               initialSizeFilterCondition = variant.selectedOptions[0].value;
             }
+
+            console.log(
+              "initial size filter condition",
+              initialSizeFilterCondition
+            );
 
             // if it doesn;t have a color
 
@@ -503,6 +509,12 @@ const ProductFilter = ({
                 initialSizeFilterCondition === variant.selectedOptions[0].value
                   ? true
                   : false;
+
+              console.log(
+                isVariantAvailable,
+                doesVariantHaveSize,
+                doesVariantColorMatchFirstVariant
+              );
 
               if (
                 isVariantAvailable &&
