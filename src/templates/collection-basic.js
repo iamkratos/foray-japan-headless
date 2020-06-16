@@ -78,7 +78,7 @@ const Spacer = styled.div`
 
 const CollectionContainer = styled.section``;
 
-const CollectionPage = ({ data }) => {
+const CollectionPage = ({ data, location }) => {
   const collection =
     data.allShopifyCollection.edges[0] &&
     data.allShopifyCollection.edges[0].node;
@@ -93,17 +93,14 @@ const CollectionPage = ({ data }) => {
   const [tooltipColor, setTootipColor] = useState("");
   const [collectionMetaImage, setCollectionMetaImage] = useState([]);
 
-  function handleResetFilters() {
-    setFilterColor("");
-    setFilterSize("");
-    setTootipColor("");
-    setFilterFeature("");
-    setCurrentColorTooltip("");
-    setFilteredProducts(collection.products);
-  }
+  // NEW
+  const [currentFilters, setCurrentFilters] = useState({
+    color: null,
+    size: null,
+    feature: null,
+  });
 
   useEffect(() => {
-    setFilteredProducts(collection.products);
     // Setup Fallback SEO Image
     if (data.seoImage.edges[0]) {
       setCollectionMetaImage(
@@ -113,6 +110,42 @@ const CollectionPage = ({ data }) => {
       setCollectionMetaImage(
         data.fallbackSeoImage.childImageSharp.original.src
       );
+    }
+
+    // Check url for filter conditions
+    let urlFilterObject = {
+      color: null,
+      size: null,
+      feature: null,
+    };
+
+    // If there is no params in the url, load all collection products
+    if (location.search.includes("color")) {
+      let color = location.search.split("color=")[1].split("&")[0];
+      urlFilterObject.color = color;
+    }
+    if (location.search.includes("size")) {
+      let size = location.search.split("size=")[1].split("&")[0];
+      urlFilterObject.size = size;
+    }
+    // special: we add Features_
+    if (location.search.includes("feature")) {
+      let feature = location.search.split("feature=")[1].split("&")[0];
+      console.log("feature stack", "features_" + feature);
+      urlFilterObject.feature = "features_" + feature;
+    }
+
+    if (
+      urlFilterObject.color === null &&
+      urlFilterObject.size === null &&
+      urlFilterObject.feature === null
+    ) {
+      setFilteredProducts(collection.products);
+    } else {
+      setCurrentFilters({
+        ...currentFilters,
+        ...urlFilterObject,
+      });
     }
   }, []);
 
@@ -163,6 +196,9 @@ const CollectionPage = ({ data }) => {
       <CollectionContainer>
         <Wrapper flex>
           <ProductFilter
+            location={location}
+            currentFilters={currentFilters}
+            setCurrentFilters={setCurrentFilters}
             setFilterColor={setFilterColor}
             filterColor={filterColor}
             filterSize={filterSize}
@@ -171,7 +207,6 @@ const CollectionPage = ({ data }) => {
             setFilteredProducts={setFilteredProducts}
             collection={collection}
             products={collection.products}
-            handleResetFilters={handleResetFilters}
             tooltipColor={tooltipColor}
             setTootipColor={setTootipColor}
             currentColorTooltip={currentColorTooltip}
@@ -195,6 +230,7 @@ const CollectionPage = ({ data }) => {
                 return (
                   <LazyLoad key={index} height={200}>
                     <CollectionProductGridItem
+                      currentFilters={currentFilters}
                       product={product}
                       filterColor={filterColor}
                       setFilterColor={setFilterColor}

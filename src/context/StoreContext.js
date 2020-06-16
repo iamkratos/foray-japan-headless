@@ -53,14 +53,41 @@ export const StoreProvider = ({ children }) => {
       .toLowerCase();
     return alteredColor;
   };
+
   const reverseColorHandlize = colorHandle => {
     function toTitleCase(str) {
       return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
     }
-    let alteredColor = colorHandle.replace(/-/g, " ");
-    alteredColor = toTitleCase(alteredColor);
+
+    // This for girls dresses
+    let alteredColor;
+    if (colorHandle) {
+      if (colorHandle.includes("4-5-y")) {
+        alteredColor = "4-5 Y";
+      } else if (colorHandle.includes("2-3-y")) {
+        alteredColor = "2-3 Y";
+      } else if (colorHandle.includes("6-7-y")) {
+        alteredColor = "6-7 Y";
+      } else if (colorHandle.includes("8-9-y")) {
+        alteredColor = "8-9 Y";
+      } else if (colorHandle.includes("bw")) {
+        alteredColor = "B&W";
+      } else if (colorHandle.includes("nb")) {
+        alteredColor = "N&B";
+      } else if (colorHandle.includes("blue-black-twill")) {
+        alteredColor = "Blue/Black Twill";
+      } else if (colorHandle.includes("new-mosto-flamingo-venere")) {
+        alteredColor = "New Mosto/Flamingo/Venere";
+      } else if (colorHandle.includes("black-splatter-print")) {
+        alteredColor = "Black/Splatter Print";
+      } else {
+        alteredColor = colorHandle.replace(/-/g, " ");
+        alteredColor = toTitleCase(alteredColor);
+      }
+    }
+
     return alteredColor;
   };
 

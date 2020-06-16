@@ -1,273 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { window } from "browser-monads";
 import { StoreContext } from "../../context/StoreContext";
-import styled from "styled-components";
-
-import { TransitionMixin, media } from "../helpers";
-
-const FilterContainer = styled.div`
-  flex: 1;
-  position: fixed;
-  left: 0;
-  top: calc(100% - 50px);
-  width: 100%;
-  z-index: 900;
-  background-color: #fff;
-  transform: translate3d(0px, 0%, 0px);
-  height: 80vh;
-  ${TransitionMixin(".25s")}
-  ${media.medium`z-index: 100; position: static; height: 100%; `}
-
-  &.active {
-    transform: translate3d(0px, -60%, 0px);
-  }
-
-  > .inner-wrap {
-    max-width: 90vw;
-    margin: 0 auto;
-
-    .scroll-container {
-      max-height: 44vh;
-      overflow-y: scroll;
-      margin-top: 10px;
-      padding-bottom: 10px;
-
-      ${media.medium`max-height: 100%; overflow-y: initial;margin-top: 0px;padding-bottom: 0px;`}
-      &::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #f5f5f5;
-      }
-
-      &::-webkit-scrollbar {
-        width: 5px;
-        background-color: #f5f5f5;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        background-color: #000000;
-        /* border: 2px solid #555555; */
-      }
-    }
-  }
-
-  .filter-mobile-trigger {
-    height: 50px;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    ${media.medium`display: none;`}
-
-    button {
-      color: #fff;
-      font-weight: bold;
-      width: 100%;
-      height: 100%;
-      -webkit-appearance: none;
-      background-color: #000;
-    }
-  }
-
-  .color-container {
-    .colors {
-      display: flex;
-      flex-wrap: wrap;
-      ${media.medium`margin-left: -6px;`}
-    }
-  }
-
-  .current-filter {
-    margin-bottom: 40px;
-    .title-container {
-      padding: 20px 0 0;
-      ${media.medium`padding: 0;`}
-      h1 {
-        font-size: 16px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin: 0 0 20px;
-        padding-bottom: 5px;
-        border-bottom: 2px solid #ccc;
-        display: inline-block;
-      }
-    }
-    button {
-      display: block;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 11px;
-      border: none;
-      box-shadow: none;
-      padding: 0px;
-      color: #fff;
-      background-color: #fff;
-      background-color: #000;
-      padding: 6px 10px 5px;
-      border-radius: 4px;
-      line-height: 1;
-    }
-  }
-
-  .filter-title {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 12px;
-    margin-bottom: 10px;
-  }
-
-  .color-filter-container {
-    margin-bottom: 10px;
-
-    ${media.medium`margin-bottom: 50px;`}
-  }
-
-  .size-filter-container {
-    .size-container {
-      .sizes {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0;
-        padding: 0px;
-        ${media.medium`margin: 0 0 0 -6px;`}
-
-        li {
-          list-style: none;
-          margin: 2px 4px;
-          ${media.xxl`margin: 2px 5px;`}
-
-          &.size-xxs {
-            order: 1;
-          }
-
-          &.size-xs {
-            order: 2;
-          }
-
-          &.size-s {
-            order: 3;
-          }
-
-          &.size-m {
-            order: 4;
-          }
-
-          &.size-l {
-            order: 5;
-          }
-          &.size-xl {
-            order: 6;
-          }
-          &.size-0 {
-            order: 7;
-          }
-          &.size-2 {
-            order: 8;
-          }
-          &.size-4 {
-            order: 9;
-          }
-          &.size-6 {
-            order: 10;
-          }
-          &.size-8 {
-            order: 11;
-          }
-          &.size-10 {
-            order: 12;
-          }
-          &.size-12 {
-            order: 13;
-          }
-          &.size-14 {
-            order: 14;
-          }
-          &.size-xs-s {
-            order: 15;
-          }
-          &.size-m-l {
-            order: 16;
-          }
-          &.size-os {
-            order: 17;
-          }
-          &.size-o-s {
-            order: 18;
-          }
-          &.size-2-3-y {
-            order: 19;
-          }
-          &.size-4-5-y {
-            order: 20;
-          }
-          &.size-6-7-y {
-            order: 21;
-          }
-          &.size-8-9-y {
-            order: 22;
-          }
-          button {
-            border: 1px solid #000;
-            padding: 0px;
-            font-weight: bold;
-            font-size: 12px;
-            line-height: 1;
-            padding: 5px;
-            min-width: 64px;
-            background-color: #fff;
-            -webkit-appearance: none;
-            ${TransitionMixin(".25s")}
-            ${media.xl`min-width: 82px;`}
-
-            &.active, &:hover {
-              background-color: #000;
-              color: #fff;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .tags-container {
-    margin-top: 50px;
-    .features-container {
-      .features {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0;
-        padding: 0px;
-        list-style: none;
-        ${media.medium`margin: 0 0 0 -6px;`}
-        li {
-          margin: 2px 5px 7px;
-          flex: 0 0 45%;
-
-          button {
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-size: 10px;
-            border: 1px solid #000;
-            background-color: transparent;
-            border-radius: 24px;
-            line-height: 1;
-            padding: 6px 5px 5px;
-            width: 100%;
-            ${TransitionMixin(".25s")}
-
-            &.active,
-            &:hover {
-              background-color: #000;
-              color: #fff;
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import FilterStyles from "./filter-styles";
+import X from "../../images/x.inline.svg";
 
 const ProductFilter = ({
+  setCurrentFilters,
+  currentFilters,
   products,
   filterColor,
   setFilterColor,
@@ -275,7 +14,6 @@ const ProductFilter = ({
   setFilterSize,
   filteredProducts,
   setFilteredProducts,
-  handleResetFilters,
   setTootipColor,
   tooltipColor,
   collection,
@@ -283,14 +21,17 @@ const ProductFilter = ({
   setCurrentColorTooltip,
   filterFeature,
   setFilterFeature,
+  location,
 }) => {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
-  const { colorHandlize, colorHandlizeAndReplaceSimilarColors } = useContext(
-    StoreContext
-  );
+  function min_of_three(x, y, z) {
+    return Math.min(x, y, z);
+  }
+
+  const { colorHandlize, reverseColorHandlize } = useContext(StoreContext);
 
   // Mobile Fitler
   const [toggleMobileFilter, setToggleMobileFilter] = useState(false);
@@ -369,283 +110,304 @@ const ProductFilter = ({
 
   finalFeatureTags = finalFeatureTags.filter(onlyUnique);
 
-  function filterByColor(handlelizedFilterColor, filterFullTitle) {
-    // console.log(handlelizedFilterColor);
-    setFilterColor(handlelizedFilterColor);
-    let filteredProducts = [];
-    products.map(product => {
-      let filteredProductValues = [];
-      product.options.map(option => {
-        if (option.name === "Color") {
-          option.values.map(value => {
-            let handlizedValue = colorHandlizeAndReplaceSimilarColors(value);
-            // console.log(handlizedValue, handlelizedFilterColor);
-            if (handlizedValue.includes(handlelizedFilterColor)) {
-              filteredProductValues.push(value);
+  function filterByParams(filters) {
+    const { color, size, feature } = filters;
+    console.log("params", color, size, feature);
+
+    // If no params are selected, show all products as no filters are selected
+    if (color === null && size === null && feature === null) {
+      console.log("filter reset");
+      setFilteredProducts(products);
+      return;
+    }
+
+    // The golden array
+    let paramsFilteredProducts = [];
+
+    // other arrays
+    let paramsFilteredProductsColorStage = [];
+    let paramsFilteredProductsSizeStage = [];
+    let paramsFilteredProductsFeatureStage = [];
+
+    // 1. Color
+    if (color !== null) {
+      products.map(product => {
+        let doesProductHaveColor;
+        let doesProductHaveFilterColor = false;
+
+        // 1a. Check if products has a color variant, only check first variant of product
+        product.variants.map((variant, index) => {
+          if (index === 0) {
+            doesProductHaveColor = variant.selectedOptions.length > 1;
+          }
+
+          // 1b. If the product has a color, check if it has the same as the filter condition
+          if (doesProductHaveColor && doesProductHaveFilterColor !== true) {
+            doesProductHaveFilterColor =
+              colorHandlize(variant.selectedOptions[0].value) === color;
+          }
+        });
+
+        // 1c. If there is a size,
+        // we should check that the color variant has it, and is available
+        let doesProductHaveColorAndSizeAvailable = false;
+        if (doesProductHaveFilterColor === true && size !== null) {
+          product.variants.map(variant => {
+            console.log(
+              colorHandlize(variant.selectedOptions[0].value),
+              color,
+              colorHandlize(variant.selectedOptions[1].value.toLowerCase()),
+              size
+            );
+            if (
+              colorHandlize(variant.selectedOptions[0].value) === color &&
+              colorHandlize(variant.selectedOptions[1].value) === size &&
+              variant.availableForSale
+            ) {
+              doesProductHaveColorAndSizeAvailable = true;
+              console.log(true, variant);
             }
           });
         }
-      });
 
-      if (filteredProductValues.length > 0) {
-        filteredProducts.push(product);
+        // 1d. If there is a feature,
+        // we should check that the color variant has it, and is available
+        let doesProductHaveColorAndFeatureAvailable = false;
+        if (doesProductHaveFilterColor === true && feature !== null) {
+          product.tags.map(tag => {
+            if (tag.toLowerCase() === feature) {
+              doesProductHaveColorAndFeatureAvailable = true;
+            }
+          });
+        }
+
+        // console.log(doesProductHaveColor, doesProductHaveColorAndSizeAvailable);
+
+        if (size === null && feature === null) {
+          if (doesProductHaveFilterColor) {
+            paramsFilteredProductsColorStage.push(product);
+          }
+        } else if (size !== null) {
+          if (
+            doesProductHaveFilterColor &&
+            doesProductHaveColorAndSizeAvailable
+          ) {
+            paramsFilteredProductsColorStage.push(product);
+          }
+        } else if (feature !== null) {
+          if (
+            doesProductHaveFilterColor &&
+            doesProductHaveColorAndFeatureAvailable
+          ) {
+            paramsFilteredProductsColorStage.push(product);
+          }
+        }
+      });
+    }
+
+    // 2. Size
+    if (size !== null) {
+      // 2a. If no color filter has been set, set filteredProducts to all collection products.
+      // Also make a new array to push new products to: new
+
+      let startingArray = [];
+
+      startingArray =
+        paramsFilteredProductsColorStage.length === 0
+          ? products
+          : paramsFilteredProductsColorStage;
+
+      startingArray.map(product => {
+        let sizeVariant;
+        let doesProductHaveFilterSize = false;
+        let doesProductHaveColor = false;
+        product.variants.map((variant, index) => {
+          // check if product has color to understand the selectedOptions target
+          if (index === 0) {
+            sizeVariant = variant.selectedOptions.length > 1 ? 1 : 0;
+          }
+
+          // then check if the variant size matches the filter size and is available
+
+          if (
+            colorHandlize(variant.selectedOptions[sizeVariant].value) ===
+              size &&
+            variant.availableForSale &&
+            doesProductHaveFilterSize !== true
+          ) {
+            doesProductHaveFilterSize = true;
+          }
+        });
+
+        // 2c. If there is a color,
+        // we should check that the color variant has it, and is available
+        let doesProductHaveColorAndSizeAvailable = false;
+        if (doesProductHaveFilterSize === true && color !== null) {
+          product.variants.map(variant => {
+            if (
+              colorHandlize(variant.selectedOptions[0].value) === color &&
+              variant.selectedOptions[1].value.toLowerCase() === size &&
+              variant.availableForSale
+            ) {
+              doesProductHaveColorAndSizeAvailable = true;
+            }
+          });
+        }
+
+        // 2d. If there is a feature,
+        // we should check that the color variant has it, and is available
+        let doesProductHaveSizeAndFeatureAvailable = false;
+        if (doesProductHaveFilterSize === true && feature !== null) {
+          product.tags.map(tag => {
+            if (tag.toLowerCase() === feature) {
+              doesProductHaveSizeAndFeatureAvailable = true;
+            }
+          });
+        }
+
+        // Final if statement to check for color
+        if (color === null && feature === null) {
+          if (doesProductHaveFilterSize) {
+            paramsFilteredProductsSizeStage.push(product);
+          }
+        } else if (color !== null) {
+          if (
+            doesProductHaveFilterSize &&
+            doesProductHaveColorAndSizeAvailable
+          ) {
+            paramsFilteredProductsSizeStage.push(product);
+          }
+        } else if (feature !== null) {
+          if (
+            doesProductHaveFilterSize &&
+            doesProductHaveSizeAndFeatureAvailable
+          ) {
+            paramsFilteredProductsSizeStage.push(product);
+          }
+        }
+      });
+    }
+
+    if (feature !== null) {
+      // 3a. If no color or size filter has been set, set filteredProducts to all collection products.
+      // Also make a new array to push new products to
+
+      let startingArray = [];
+
+      if (paramsFilteredProductsSizeStage.length > 0 || color != null) {
+        console.log("case 1");
+        startingArray = paramsFilteredProductsSizeStage;
+      } else if (paramsFilteredProductsColorStage.length > 0 || size != null) {
+        console.log("case 2");
+        startingArray = paramsFilteredProductsColorStage;
+      } else {
+        console.log("case 3");
+        startingArray = products;
+      }
+
+      startingArray.map(product => {
+        let doesProductHaveTag = false;
+
+        product.tags.map(tag => {
+          if (tag.toLowerCase() === feature) {
+            doesProductHaveTag = true;
+          }
+        });
+
+        if (doesProductHaveTag) {
+          paramsFilteredProductsFeatureStage.push(product);
+        }
+      });
+    }
+
+    // TODO: setup trigger based on whether there is one or more null value
+    let filtersActive = 0;
+    let filtersNameActive = [];
+    Object.entries(currentFilters).map(([key, value]) => {
+      if (value !== null) {
+        filtersActive = filtersActive + 1;
+        filtersNameActive.push(key);
       }
     });
 
-    setFilteredProducts(filteredProducts);
-
-    setCurrentColorTooltip(filterFullTitle);
-
-    if (filterFullTitle === "BW") {
-      setTootipColor("B&W");
-      setCurrentColorTooltip("B&W");
-    } else if (filterFullTitle === "NB") {
-      setTootipColor("N&B");
-      setCurrentColorTooltip("N&B");
+    console.log("filters active", filtersActive, filtersNameActive);
+    // handles one filter being active
+    if (filtersActive === 1) {
+      if (filtersNameActive[0] === "color") {
+        console.log("color only");
+        setFilteredProducts(paramsFilteredProductsColorStage);
+      } else if (filtersNameActive[0] === "size") {
+        console.log("size only", paramsFilteredProductsSizeStage);
+        setFilteredProducts(paramsFilteredProductsSizeStage);
+      } else if (filtersNameActive[0] === "feature") {
+        console.log("feature only", paramsFilteredProductsFeatureStage);
+        setFilteredProducts(paramsFilteredProductsFeatureStage);
+      }
     } else {
-      setCurrentColorTooltip(filterFullTitle);
-      setTootipColor(filterFullTitle);
-    }
+      console.log(
+        "multi values",
+        paramsFilteredProductsColorStage,
+        paramsFilteredProductsSizeStage,
+        paramsFilteredProductsFeatureStage
+      );
 
-    setFilterSize("");
-    setFilterFeature("");
+      function crossCheck() {
+        // see which products have duplicates
+        let superArray = [
+          ...paramsFilteredProductsColorStage,
+          ...paramsFilteredProductsSizeStage,
+          ...paramsFilteredProductsFeatureStage,
+        ];
+
+        if (superArray.length === 0) {
+          setFilteredProducts([]);
+        } else if (superArray.length === 1) {
+          setFilteredProducts(superArray);
+        } else {
+          superArray.map(product => {
+            // 1. Find duplicates, they should match the amount of filter conditions
+            console.log("super", superArray);
+            let duplicates = superArray.filter(
+              arrayProduct => arrayProduct.handle === product.handle
+            );
+
+            console.log("unique", duplicates);
+
+            if (duplicates.length === filtersActive) {
+              paramsFilteredProducts.push(product);
+            }
+          });
+
+          const uniqueProducts = Array.from(
+            new Set(paramsFilteredProducts.map(a => a.handle))
+          ).map(handle => {
+            return paramsFilteredProducts.find(a => a.handle === handle);
+          });
+
+          setFilteredProducts(uniqueProducts);
+        }
+      }
+
+      crossCheck();
+    }
+  }
+
+  function filterByColor(handlelizedFilterColor) {
+    setCurrentFilters({ ...currentFilters, color: handlelizedFilterColor });
   }
 
   function filterBySize(handlelizedFilterSize, colorFilter) {
-    let sizeFilteredProducts = [];
-    setFilterSize(handlelizedFilterSize);
-    setFilterColor(colorFilter);
-
-    let productsToFilter = products;
-
-    productsToFilter.map(product => {
-      let filteredProductSizeValues = [];
-
-      // 1. If there is a color filter, check if the product has that first
-      if (colorFilter && (colorFilter !== "" || colorFilter !== undefined)) {
-        let doesProductHaveColor = false;
-        product.options[0].values.map(colorVariant => {
-          if (
-            colorHandlizeAndReplaceSimilarColors(colorVariant) === colorFilter
-          ) {
-            doesProductHaveColor = true;
-          }
-        });
-        if (doesProductHaveColor) {
-          product.variants.map(variant => {
-            let handlizedColor = colorFilter;
-            let handlizedFilterSize = handlelizedFilterSize;
-            let handlizedVariantColor = colorHandlizeAndReplaceSimilarColors(
-              variant.selectedOptions[0].value
-            );
-            let handlizedVariantSize = colorHandlizeAndReplaceSimilarColors(
-              variant.selectedOptions[1].value
-            );
-
-            if (
-              variant.availableForSale &&
-              handlizedVariantColor.includes(handlizedColor) &&
-              handlizedVariantSize === handlizedFilterSize
-            ) {
-              sizeFilteredProducts.push(product);
-            }
-          });
-          setFilteredProducts(sizeFilteredProducts);
-        }
-
-        // console.log("triggered", sizeFilteredProducts, filteredProducts);
-      } else {
-        // 2. No color selected so sort thru the first available variant of collection products
-        console.log(
-          "no color selectd, so just go thru sizes",
-          handlelizedFilterSize
-        );
-
-        let sizeFilteredProducts = [];
-        collection.products.map(product => {
-          // check within variant to see if it's available and has the size
-
-          let sizeFilteredValues = [];
-          let initialSizeFilterCondition;
-          product.variants.map((variant, index) => {
-            // set filter condition so it only checks the first variant color
-            // -- check if it has color
-            let doesProductHaveColor = variant.selectedOptions[1]
-              ? true
-              : false;
-
-            if (index === 0 && doesProductHaveColor) {
-              initialSizeFilterCondition = variant.selectedOptions[0].value;
-            }
-
-            console.log(
-              "initial size filter condition",
-              initialSizeFilterCondition
-            );
-
-            // if it doesn;t have a color
-
-            if (!doesProductHaveColor) {
-              let isVariantAvailable = variant.availableForSale;
-              let doesVariantHaveSize =
-                colorHandlizeAndReplaceSimilarColors(
-                  variant.selectedOptions[0].value
-                ) === handlelizedFilterSize
-                  ? true
-                  : false;
-
-              if (isVariantAvailable && doesVariantHaveSize) {
-                sizeFilteredValues.push(true);
-              }
-            } else {
-              let isVariantAvailable = variant.availableForSale;
-              let doesVariantHaveSize =
-                colorHandlizeAndReplaceSimilarColors(
-                  variant.selectedOptions[1].value
-                ) === handlelizedFilterSize
-                  ? true
-                  : false;
-              let doesVariantColorMatchFirstVariant =
-                initialSizeFilterCondition === variant.selectedOptions[0].value
-                  ? true
-                  : false;
-
-              console.log(
-                isVariantAvailable,
-                doesVariantHaveSize,
-                doesVariantColorMatchFirstVariant
-              );
-
-              if (
-                isVariantAvailable &&
-                doesVariantHaveSize &&
-                doesVariantColorMatchFirstVariant
-              ) {
-                sizeFilteredValues.push(true);
-              }
-            }
-          });
-          if (sizeFilteredValues.length > 0) {
-            sizeFilteredProducts.push(product);
-          }
-        });
-        setFilteredProducts(sizeFilteredProducts);
-      }
+    setCurrentFilters({
+      ...currentFilters,
+      size: handlelizedFilterSize.split(" ")[0],
     });
-    setFilterFeature("");
   }
 
-  function handleTagFilter(tagName) {
-    setFilterFeature(tagName);
-    // 1. There is a color + size
-
-    let filteredFeatureProducts = [];
-    products.map(product => {
-      // -- color check
-      let doesProductHaveColor = false;
-      if (filterColor !== "" && filterColor !== undefined) {
-        product.options[0].values.map(colorVariant => {
-          if (
-            colorHandlizeAndReplaceSimilarColors(colorVariant) === filterColor
-          ) {
-            doesProductHaveColor = true;
-          }
-        });
-      } else {
-        // console.log("no color selected yet");
-      }
-
-      // -- size check
-      let doesProductHaveSize;
-      if (filterSize && (filterSize !== "" || filterSize !== undefined)) {
-        let initialSizeFilterCondition;
-
-        product.variants.map((variant, index) => {
-          if (index === 0 && doesProductHaveColor) {
-            initialSizeFilterCondition = variant.selectedOptions[0].value;
-          }
-          let doesVariantHaveSize = variant.selectedOptions[1]
-            ? colorHandlizeAndReplaceSimilarColors(
-                variant.selectedOptions[1].value
-              ) === filterSize
-            : colorHandlizeAndReplaceSimilarColors(
-                variant.selectedOptions[0].value
-              ) === filterSize;
-
-          let isVariantAvailable = variant.availableForSale;
-
-          let doesVariantColorMatchFirstVariant = doesProductHaveColor
-            ? initialSizeFilterCondition === variant.selectedOptions[0].value
-            : true;
-
-          if (variant.selectedOptions[1]) {
-            if (
-              doesVariantHaveSize &&
-              doesVariantColorMatchFirstVariant &&
-              isVariantAvailable
-            ) {
-              doesProductHaveSize = true;
-            }
-          } else {
-            if (doesVariantHaveSize && isVariantAvailable) {
-              doesProductHaveSize = true;
-            }
-          }
-        });
-      }
-
-      // -- tag check
-      let doesProductHaveTag = false;
-      product.tags.map(tag => {
-        if (tag === tagName) {
-          doesProductHaveTag = true;
-        }
-      });
-
-      // console.log("pre-tag filter check", filterColor, filterSize);
-
-      // Size + Color
-
-      if (
-        filterSize !== undefined &&
-        filterSize !== "" &&
-        filterColor !== undefined &&
-        filterColor !== ""
-      ) {
-        // console.log("case 1", doesProductHaveSize, doesProductHaveTag);
-        if (doesProductHaveColor && doesProductHaveTag && doesProductHaveSize) {
-          filteredFeatureProducts.push(product);
-        }
-      }
-
-      // Color
-      if (filterColor && (filterSize === undefined || filterSize === "")) {
-        // console.log("case 2");
-        if (doesProductHaveColor && doesProductHaveTag) {
-          filteredFeatureProducts.push(product);
-        }
-      }
-      // Size
-      if (filterSize && (filterColor === undefined || filterColor === "")) {
-        // console.log("case 3", doesProductHaveSize, doesProductHaveTag);
-        if (doesProductHaveSize && doesProductHaveTag) {
-          filteredFeatureProducts.push(product);
-        }
-      }
-
-      // Just the tags
-      if (
-        (filterSize === undefined || filterSize === "") &&
-        (filterColor === undefined || filterColor === "")
-      ) {
-        // console.log("case 4", doesProductHaveSize);
-        if (doesProductHaveTag) {
-          filteredFeatureProducts.push(product);
-        }
-      }
+  function filterBytag(tagName) {
+    setCurrentFilters({
+      ...currentFilters,
+      feature: tagName.toLowerCase(),
     });
-
-    setFilteredProducts(filteredFeatureProducts);
   }
 
   function handleColorFilterHover(color) {
@@ -665,8 +427,66 @@ const ProductFilter = ({
     }
   }
 
+  // remove filter condition
+
+  function removeFilterCondition(condition, key) {
+    setCurrentFilters({
+      ...currentFilters,
+      [key]: null,
+    });
+  }
+
+  // reset button
+  function handleResetFilters() {
+    setCurrentFilters({
+      ...currentFilters,
+      color: null,
+      size: null,
+      feature: null,
+    });
+    setFilteredProducts(collection.products);
+  }
+
+  function setFilterURL(params) {
+    let urlArray = [];
+    Object.entries(params).map(([key, value]) => {
+      if (value !== null) {
+        let newValue = value;
+
+        if (value.includes("features_")) {
+          newValue = value.replace("features_", "");
+        }
+
+        urlArray.push(key + "=" + newValue);
+      }
+    });
+
+    if (urlArray.length > 0) {
+      let finalURL;
+      urlArray.map((param, index) => {
+        if (index === 0) {
+          finalURL = "?" + param;
+        } else {
+          finalURL = finalURL + "&" + param;
+        }
+
+        window.history.pushState("page2", "Title", finalURL);
+      });
+    } else {
+      window.history.pushState("page2", "Title", location.pathname);
+      console.log("location", location);
+    }
+  }
+
+  useEffect(() => {
+    // When we update the filters, we update the products + the url
+    filterByParams(currentFilters);
+    setFilterURL(currentFilters);
+    console.log("current filters updated");
+  }, [currentFilters]);
+
   return (
-    <FilterContainer className={toggleMobileFilter ? "active" : ""}>
+    <FilterStyles className={toggleMobileFilter ? "active" : ""}>
       <div className="filter-mobile-trigger">
         <button onClick={handleMobileFilterToggle}>
           {toggleMobileFilter ? "Close" : "Filter"}
@@ -679,7 +499,34 @@ const ProductFilter = ({
               <h1>{collection.title}</h1>
             </div>
             <div className="inner-wrap">
-              <button onClick={handleResetFilters}>Remove All Filters</button>
+              <ul>
+                {Object.entries(currentFilters).map(([key, value]) => {
+                  console.log(key, value);
+                  let isThereAValue = value !== null;
+                  let updatedTerm =
+                    isThereAValue && reverseColorHandlize(value);
+                  updatedTerm =
+                    isThereAValue && updatedTerm.replace("Features_", "");
+
+                  return (
+                    isThereAValue && (
+                      <li>
+                        <button
+                          onClick={() => removeFilterCondition(value, key)}
+                        >
+                          {updatedTerm}
+                          <span>
+                            <X />
+                          </span>
+                        </button>
+                      </li>
+                    )
+                  );
+                })}
+              </ul>
+              <button className="clear" onClick={handleResetFilters}>
+                Remove All Filters
+              </button>
             </div>
           </div>
           {finalColors.length > 0 && (
@@ -732,7 +579,7 @@ const ProductFilter = ({
                         onClick={() => filterBySize(size, filterColor)}
                         value={size}
                         className={
-                          filterSize == size
+                          currentFilters.size === size
                             ? "size-btn-container active " + size
                             : "size-btn-container " + size
                         }
@@ -757,10 +604,12 @@ const ProductFilter = ({
                     return (
                       <li key={index} className={"feature-" + feature}>
                         <button
-                          onClick={() => handleTagFilter(regularCaseFeature)}
+                          onClick={() => filterBytag(regularCaseFeature)}
                           value={feature}
                           className={
-                            filterFeature === regularCaseFeature
+                            currentFilters.feature &&
+                            currentFilters.feature.replace("features_", "") ===
+                              feature.toLowerCase()
                               ? "tag-btn-container active"
                               : "tag-btn-container"
                           }
@@ -776,7 +625,7 @@ const ProductFilter = ({
           )}
         </div>
       </div>
-    </FilterContainer>
+    </FilterStyles>
   );
 };
 

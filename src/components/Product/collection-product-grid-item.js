@@ -14,6 +14,7 @@ const ProductGridItem = ({
   filterColor,
   setFilterColor,
   filteredProducts,
+  currentFilters,
 }) => {
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
@@ -248,8 +249,7 @@ const ProductGridItem = ({
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
     }
-    // console.log("current color", currentColor, filterColor);
-    handleColorChange(filterColor);
+    handleColorChange(currentFilters.color);
   }, [filteredProducts]);
 
   function checkTooltipText() {
