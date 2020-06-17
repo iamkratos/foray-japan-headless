@@ -27,10 +27,6 @@ const ProductFilter = ({
     return self.indexOf(value) === index;
   }
 
-  function min_of_three(x, y, z) {
-    return Math.min(x, y, z);
-  }
-
   const { colorHandlize, reverseColorHandlize } = useContext(StoreContext);
 
   // Mobile Fitler
@@ -112,11 +108,10 @@ const ProductFilter = ({
 
   function filterByParams(filters) {
     const { color, size, feature } = filters;
-    console.log("params", color, size, feature);
+    // console.log("params", color, size, feature);
 
     // If no params are selected, show all products as no filters are selected
     if (color === null && size === null && feature === null) {
-      console.log("filter reset");
       setFilteredProducts(products);
       return;
     }
@@ -295,13 +290,13 @@ const ProductFilter = ({
       let startingArray = [];
 
       if (paramsFilteredProductsSizeStage.length > 0 || color != null) {
-        console.log("case 1");
+        // console.log("case 1");
         startingArray = paramsFilteredProductsSizeStage;
       } else if (paramsFilteredProductsColorStage.length > 0 || size != null) {
-        console.log("case 2");
+        // console.log("case 2");
         startingArray = paramsFilteredProductsColorStage;
       } else {
-        console.log("case 3");
+        // console.log("case 3");
         startingArray = products;
       }
 

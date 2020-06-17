@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
-import { graphql, navigate } from "gatsby";
+import { graphql, navigate, Link } from "gatsby";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
 import styled from "styled-components";
@@ -115,7 +115,10 @@ const ProductPageContainer = styled.section`
 
       .title-container {
         order: 1;
-        flex: 1 1 50%;
+        flex: 1 1 100%;
+        margin-bottom: 10px;
+
+        ${media.medium`flex: 1 1 50%;margin-bottom: 0px;`}
         h1 {
           color: #000;
           margin: 0 0 10px;
@@ -129,7 +132,7 @@ const ProductPageContainer = styled.section`
           Helvetica Neue, sans-serif; */
           color: #4a4a4a;
           font-size: 14px;
-          margin: 0 0 10px;
+          margin: 0;
           font-weight: 400;
           line-height: 1.5;
           &:last-child {
@@ -142,7 +145,8 @@ const ProductPageContainer = styled.section`
             font-size: 15px;
             letter-spacing: 0.7px;
             line-height: 1;
-            ${media.medium`font-size: 17px;border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;padding: 15px 0;`}
+
+            ${media.medium`font-size: 17px;`}
 
             span {
               opacity: 0.5;
@@ -157,6 +161,30 @@ const ProductPageContainer = styled.section`
                 background: #777;
                 height: 1px;
               }
+            }
+          }
+        }
+        .price-container {
+          display: flex;
+          align-items: center;
+          ${media.medium`border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;padding: 15px 0;`}
+          p {
+            flex: 1;
+          }
+          .btn-container {
+            a {
+              background-color: #fff;
+              border: 1px solid #ccc;
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: 11px;
+              letter-spacing: 1px;
+              min-width: 100px;
+              text-decoration: none;
+              border-radius: 54px;
+              line-height: 1;
+              padding: 7px 9px;
+              color: #777;
             }
           }
         }
@@ -211,8 +239,14 @@ const ProductPageContainer = styled.section`
             ${media.medium`display: block;`}
           }
 
+          .inner-wrap {
+            text-align: left;
+          }
+
           ul {
             &.colors {
+              text-align: left;
+              margin-left: -5px;
               li {
                 margin-bottom: 0px;
 
@@ -232,7 +266,7 @@ const ProductPageContainer = styled.section`
           }
         }
         &.sizes {
-          order: 4;
+          order: 2;
           margin-top: 20px;
           h4 {
             text-transform: uppercase;
@@ -640,6 +674,16 @@ const ProductPage = ({ data }) => {
     tag.includes("addon-rp-")
   );
 
+  // Mark final sale products
+  let isProductFinalSale = false;
+
+  product.tags.map(tag => {
+    if (tag.toLowerCase() === "final_sale") {
+      isProductFinalSale = true;
+    }
+    return;
+  });
+
   return (
     <Layout>
       <SEO
@@ -668,17 +712,6 @@ const ProductPage = ({ data }) => {
         />
       </SEO>
       <ProductPageContainer>
-        <Wrapper>
-          {/* <nav className="breadcrub-container">
-            <ul>
-              <li>
-                <a href={`/collections/${product.productType}`}>
-                  {product.productType}
-                </a>
-              </li>
-            </ul>
-          </nav> */}
-        </Wrapper>
         <Wrapper className="single-product-grid" flex>
           <div className="product-images-container">
             <div className="thumbnail-container">
@@ -723,10 +756,22 @@ const ProductPage = ({ data }) => {
             <div className="inner-wrap">
               <div className="title-container">
                 <h1>{product.title}</h1>
-                <p className="price">
-                  {compareAtPrice && <span>${compareAtPrice}</span>}$
-                  {parseFloat(currentPrice)}
-                </p>
+                <div className="price-container">
+                  <p className="price">
+                    {compareAtPrice && <span>${compareAtPrice}</span>}$
+                    {parseFloat(currentPrice)}
+                  </p>
+                  {isProductFinalSale && (
+                    <div className="btn-container">
+                      <a
+                        href={window.location.origin + "/pages/faq#returns#fs"}
+                        target="_blank"
+                      >
+                        Final Sale
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
               <div
                 className="description-container"

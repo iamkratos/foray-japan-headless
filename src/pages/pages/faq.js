@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { window } from "browser-monads";
 import SEO from "../../components/seo";
@@ -98,7 +98,7 @@ const returns = [
     answer: `   
             <ul>
                 <li>All discounts over 40% are considered FINAL SALE and will be labeled so on the product page. </li>
-                <li>FINAL SALE ITEMS CANNOT BE RETURNED OR EXCHANGED. </li>
+                <li><strong>FINAL SALE ITEMS CANNOT BE RETURNED OR EXCHANGED. </strong></li>
                 <li>Please keep this in mind BEFORE making a purchase—if you have questions about the product selection or sizing please reach out to customer service for assistance prior to finalizing your order.</li>
             </ul>
 
@@ -163,7 +163,7 @@ const orderQuestions = [
   {
     question: "Can I cancel my order?",
     answer: `   
-                <p>To cancel your order, please reach out to us at contact@foraygolf.com within 15 minutes of placing your order. We will do our best to address immediately.</p>
+                <p>To cancel your order, please reach out to us at <a href="mailto:contact@foraygolf.com">contact@foraygolf.com</a> within 15 minutes of placing your order. We will do our best to address immediately.</p>
             `,
   },
   {
@@ -408,6 +408,8 @@ const FAQ = ({ location }) => {
     window.history.pushState("page2", "Title", "#" + name);
   }
 
+  let isFinalSaleOpen;
+  isFinalSaleOpen = location.hash.includes("#fs") === true ? true : false;
   useEffect(() => {
     if (location.hash !== "") {
       let menuName = location.hash.replace("#", "").toLowerCase();
@@ -430,6 +432,7 @@ const FAQ = ({ location }) => {
       setWhichMenuIsActive(1);
     }
   }, []);
+
   return (
     <Layout>
       <SEO title="Frequently Asked Questions" />
@@ -532,7 +535,14 @@ const FAQ = ({ location }) => {
               }
             >
               {returns.map((item, index) => {
-                return <AccItem key={index} item={item} />;
+                console.log("returns: ", returns.length, "index: ", index);
+                return (
+                  <AccItem
+                    key={index}
+                    item={item}
+                    isFsOpen={returns.length === index + 1 && isFinalSaleOpen}
+                  />
+                );
               })}
             </div>
             {/* shipping */}
@@ -606,14 +616,25 @@ const FAQ = ({ location }) => {
 
 const AccItemContainer = styled.div``;
 
-const AccItem = ({ item }) => {
+const AccItem = ({ item, isFsOpen }) => {
   const [isItemActive, setIsItemActive] = useState(false);
+  const fsRef = useRef(null);
 
   function createBodyMarkup() {
     return { __html: item.answer };
   }
+
+  useEffect(() => {
+    if (isFsOpen === true) {
+      setTimeout(() => {
+        fsRef.current.scrollIntoView({ behavior: "smooth" });
+      }, 1000);
+      setIsItemActive(true);
+    }
+  }, []);
+
   return (
-    <AccItemContainer>
+    <AccItemContainer ref={fsRef}>
       <div className="acc-item">
         <div className={isItemActive ? "acc-header active" : "acc-header"}>
           <button onClick={() => setIsItemActive(!isItemActive)}>
