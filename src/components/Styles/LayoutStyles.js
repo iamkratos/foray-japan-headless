@@ -4,6 +4,7 @@ import { TransitionMixin, media } from "../helpers";
 
 // colors
 import camo from "../../images/colors/camo-1.png";
+import floral from "../../images/colors/floral.png";
 
 const LayoutContainer = styled.div`
   /* layout */
@@ -277,6 +278,11 @@ const LayoutContainer = styled.div`
 
           &.camo {
             background-image: url(${camo});
+          }
+
+          &.floral {
+            background-image: url(${floral});
+            background-size: cover;
           }
 
           &.grey-stripe {
