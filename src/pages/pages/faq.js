@@ -408,8 +408,10 @@ const FAQ = ({ location }) => {
     window.history.pushState("page2", "Title", "#" + name);
   }
 
-  let isFinalSaleOpen;
-  isFinalSaleOpen = location.hash.includes("#fs") === true ? true : false;
+  let isFinalSaleOpen = location.hash.includes("#fs") === true ? true : false;
+  let isRequestReturnOpen =
+    location.hash.includes("#rr") === true ? true : false;
+
   useEffect(() => {
     if (location.hash !== "") {
       let menuName = location.hash.replace("#", "").toLowerCase();
@@ -541,6 +543,7 @@ const FAQ = ({ location }) => {
                     key={index}
                     item={item}
                     isFsOpen={returns.length === index + 1 && isFinalSaleOpen}
+                    isRequestReturnOpen={index === 2 && isRequestReturnOpen}
                   />
                 );
               })}
@@ -616,9 +619,10 @@ const FAQ = ({ location }) => {
 
 const AccItemContainer = styled.div``;
 
-const AccItem = ({ item, isFsOpen }) => {
+const AccItem = ({ item, isFsOpen, isRequestReturnOpen }) => {
   const [isItemActive, setIsItemActive] = useState(false);
   const fsRef = useRef(null);
+  const returnRef = useRef(null);
 
   function createBodyMarkup() {
     return { __html: item.answer };
@@ -630,11 +634,28 @@ const AccItem = ({ item, isFsOpen }) => {
         fsRef.current.scrollIntoView({ behavior: "smooth" });
       }, 1000);
       setIsItemActive(true);
+    } else if (isRequestReturnOpen) {
+      console.log("return open");
+      setTimeout(() => {
+        returnRef.current.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+        });
+      }, 1000);
+      setIsItemActive(true);
     }
   }, []);
 
   return (
-    <AccItemContainer ref={fsRef}>
+    <AccItemContainer
+      ref={
+        isFsOpen === true
+          ? fsRef
+          : isRequestReturnOpen === true
+          ? returnRef
+          : null
+      }
+    >
       <div className="acc-item">
         <div className={isItemActive ? "acc-header active" : "acc-header"}>
           <button onClick={() => setIsItemActive(!isItemActive)}>

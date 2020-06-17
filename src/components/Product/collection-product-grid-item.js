@@ -97,6 +97,7 @@ const ProductGridItem = ({
 
       // console.log(currentProductImages);
     } else {
+      updateProductURL(null);
       if (product.images[0]) {
         // Variant-less products don't have alt text
         if (product.images[0].altText) {
@@ -173,6 +174,37 @@ const ProductGridItem = ({
               }
             });
           });
+        }
+
+        // If there are no results after checking variants, then check if the product has the color tag
+        // If it does have the tag, run through the first set of variants
+        if (availableSizesArray.length < 1) {
+          let doesProductHaveColorTag = false;
+          product.tags.map(tag => {
+            let updatedTag = tag.replace("Color_", "");
+            updatedTag = colorHandlize(updatedTag);
+            if (updatedTag === selectedColor) {
+              doesProductHaveColorTag = true;
+            }
+          });
+
+          if (doesProductHaveColorTag) {
+            let newFilterCondition = product.images[0].altText
+              ? colorHandlize(product.images[0].altText)
+              : null;
+            // if it's equal to null, there is only one color
+            if (newFilterCondition !== null) {
+              product.variants.map(variant => {
+                variant.selectedOptions.map(option => {
+                  let handlizedColor = colorHandlize(option.value);
+                  // if the color includes the filter condition
+                  if (handlizedColor.includes(newFilterCondition)) {
+                    availableSizesArray.push(variant);
+                  }
+                });
+              });
+            }
+          }
         }
 
         // console.log("sizes here", availableSizesArray);
@@ -255,7 +287,7 @@ const ProductGridItem = ({
   function checkTooltipText() {
     // check for glove product
     if (
-      currentProductImages[0] &&
+      currentProductImages.length > 0 &&
       currentProductImages[0].altText &&
       !currentProductImages[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentProductImages[0].altText
@@ -269,8 +301,10 @@ const ProductGridItem = ({
         setHoverColor(currentProductImages[0].altText);
       }
     } else {
-      // console.log("baby", sizes);
-      sizes && setHoverColor(currentProductImages[0].altText);
+      // console.log("baby", currentFilters);
+      sizes && currentProductImages[0]
+        ? setHoverColor(currentProductImages[0].altText)
+        : setHoverColor(product.images[0].altText);
     }
   }
 
@@ -302,7 +336,9 @@ const ProductGridItem = ({
         >
           <Link
             to={`/products/${product.handle}${
-              variantURL !== "" ? "?color=" + variantURL : ""
+              variantURL !== "" && variantURL !== null
+                ? "?color=" + variantURL
+                : ""
             }`}
           >
             {currentProductImages.length > 0

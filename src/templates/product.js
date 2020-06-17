@@ -433,6 +433,13 @@ const ProductPage = ({ data }) => {
           return newImageArray.push(image);
         }
       });
+
+      // if no images come up for a color url, load all images
+      if (newImageArray.length === 0) {
+        product.images.map(image => {
+          newImageArray.push(image);
+        });
+      }
     } else {
       product.images.map(image => {
         newImageArray.push(image);
@@ -457,6 +464,37 @@ const ProductPage = ({ data }) => {
           }
         });
       });
+
+      if (newSizesArray.length === 0) {
+        let doesProductHaveColorTag = false;
+        product.tags.map(tag => {
+          let updatedTag = tag.replace("Color_", "");
+          updatedTag = colorHandlize(updatedTag);
+          if (updatedTag === colorHandlize(color)) {
+            doesProductHaveColorTag = true;
+          }
+        });
+
+        if (doesProductHaveColorTag) {
+          let newFilterCondition = product.images[0].altText
+            ? colorHandlize(product.images[0].altText)
+            : null;
+          // if it's equal to null, there is only one color
+          if (newFilterCondition !== null) {
+            product.variants.map(variant => {
+              variant.selectedOptions.map(option => {
+                let handlizedColor = colorHandlize(option.value);
+                // if the color includes the filter condition
+                if (handlizedColor.includes(newFilterCondition)) {
+                  newSizesArray.push(variant);
+                }
+              });
+            });
+          }
+        }
+      }
+
+      // fallback: push all variants
       if (newSizesArray.length === 0) {
         product.variants.map(variant => {
           newSizesArray.push(variant);
@@ -546,7 +584,7 @@ const ProductPage = ({ data }) => {
     } else {
       setHoverColor(color);
     }
-    window.history.pushState(
+    window.history.replaceState(
       "page2",
       "Title",
       "?color=" + colorHandlize(color)
@@ -572,8 +610,6 @@ const ProductPage = ({ data }) => {
           .includes("right")) &&
       hoverColor != currentImageSet[0].altText
     ) {
-      console.log("loaded");
-
       if (currentImageSet[0].altText === "BW") {
         setHoverColor("B&W");
         // console.log("case 2");

@@ -143,24 +143,35 @@ const ProductFilter = ({
           }
         });
 
+        // 1e. Search tags for Color_ to include in color
+        // we should check that the color variant has it, and is available
+        let doesProductHaveColorTag = false;
+        product.tags.map(tag => {
+          let updatedTag = tag.replace("Color_", "");
+          updatedTag = colorHandlize(updatedTag);
+          if (tag.toLowerCase() === color) {
+            doesProductHaveColorTag = true;
+          }
+        });
+
         // 1c. If there is a size,
         // we should check that the color variant has it, and is available
         let doesProductHaveColorAndSizeAvailable = false;
-        if (doesProductHaveFilterColor === true && size !== null) {
+        if (
+          (doesProductHaveFilterColor === true ||
+            doesProductHaveColorTag === true) &&
+          size !== null
+        ) {
           product.variants.map(variant => {
-            console.log(
-              colorHandlize(variant.selectedOptions[0].value),
-              color,
-              colorHandlize(variant.selectedOptions[1].value.toLowerCase()),
-              size
-            );
             if (
-              colorHandlize(variant.selectedOptions[0].value) === color &&
-              colorHandlize(variant.selectedOptions[1].value) === size &&
+              (colorHandlize(variant.selectedOptions[0].value) === color ||
+                doesProductHaveColorTag) &&
+              (colorHandlize(variant.selectedOptions[0].value) === size ||
+                (variant.selectedOptions[1] &&
+                  colorHandlize(variant.selectedOptions[1].value) === size)) &&
               variant.availableForSale
             ) {
               doesProductHaveColorAndSizeAvailable = true;
-              console.log(true, variant);
             }
           });
         }
@@ -168,7 +179,11 @@ const ProductFilter = ({
         // 1d. If there is a feature,
         // we should check that the color variant has it, and is available
         let doesProductHaveColorAndFeatureAvailable = false;
-        if (doesProductHaveFilterColor === true && feature !== null) {
+        if (
+          (doesProductHaveFilterColor === true ||
+            doesProductHaveColorTag === true) &&
+          feature !== null
+        ) {
           product.tags.map(tag => {
             if (tag.toLowerCase() === feature) {
               doesProductHaveColorAndFeatureAvailable = true;
@@ -176,22 +191,20 @@ const ProductFilter = ({
           });
         }
 
-        // console.log(doesProductHaveColor, doesProductHaveColorAndSizeAvailable);
-
         if (size === null && feature === null) {
-          if (doesProductHaveFilterColor) {
+          if (doesProductHaveFilterColor || doesProductHaveColorTag) {
             paramsFilteredProductsColorStage.push(product);
           }
         } else if (size !== null) {
           if (
-            doesProductHaveFilterColor &&
+            (doesProductHaveFilterColor || doesProductHaveColorTag) &&
             doesProductHaveColorAndSizeAvailable
           ) {
             paramsFilteredProductsColorStage.push(product);
           }
         } else if (feature !== null) {
           if (
-            doesProductHaveFilterColor &&
+            (doesProductHaveFilterColor || doesProductHaveColorTag) &&
             doesProductHaveColorAndFeatureAvailable
           ) {
             paramsFilteredProductsColorStage.push(product);
@@ -199,6 +212,11 @@ const ProductFilter = ({
         }
       });
     }
+
+    // console.log(
+    //   "paramsFilteredProductsColorStage",
+    //   paramsFilteredProductsColorStage
+    // );
 
     // 2. Size
     if (size !== null) {
@@ -247,6 +265,15 @@ const ProductFilter = ({
               doesProductHaveColorAndSizeAvailable = true;
             }
           });
+
+          // check tags for color
+          product.tags.map(tag => {
+            let updatedTag = tag.replace("Color_", "");
+            updatedTag = colorHandlize(updatedTag);
+            if (tag.toLowerCase() === color) {
+              doesProductHaveColorAndSizeAvailable = true;
+            }
+          });
         }
 
         // 2d. If there is a feature,
@@ -262,10 +289,12 @@ const ProductFilter = ({
 
         // Final if statement to check for color
         if (color === null && feature === null) {
+          console.log("case 1", product.title);
           if (doesProductHaveFilterSize) {
             paramsFilteredProductsSizeStage.push(product);
           }
         } else if (color !== null) {
+          console.log("case 2", product.title);
           if (
             doesProductHaveFilterSize &&
             doesProductHaveColorAndSizeAvailable
@@ -283,20 +312,22 @@ const ProductFilter = ({
       });
     }
 
+    // console.log(
+    //   "paramsFilteredProductsSizeStage",
+    //   paramsFilteredProductsSizeStage
+    // );
+
     if (feature !== null) {
       // 3a. If no color or size filter has been set, set filteredProducts to all collection products.
       // Also make a new array to push new products to
 
       let startingArray = [];
 
-      if (paramsFilteredProductsSizeStage.length > 0 || color != null) {
-        // console.log("case 1");
+      if (paramsFilteredProductsSizeStage.length > 0 || size != null) {
         startingArray = paramsFilteredProductsSizeStage;
       } else if (paramsFilteredProductsColorStage.length > 0 || size != null) {
-        // console.log("case 2");
         startingArray = paramsFilteredProductsColorStage;
       } else {
-        // console.log("case 3");
         startingArray = products;
       }
 
@@ -325,7 +356,7 @@ const ProductFilter = ({
       }
     });
 
-    console.log("filters active", filtersActive, filtersNameActive);
+    // console.log("filters active", filtersActive, filtersNameActive);
     // handles one filter being active
     if (filtersActive === 1) {
       if (filtersNameActive[0] === "color") {
@@ -339,12 +370,12 @@ const ProductFilter = ({
         setFilteredProducts(paramsFilteredProductsFeatureStage);
       }
     } else {
-      console.log(
-        "multi values",
-        paramsFilteredProductsColorStage,
-        paramsFilteredProductsSizeStage,
-        paramsFilteredProductsFeatureStage
-      );
+      // console.log(
+      //   "multi values",
+      //   paramsFilteredProductsColorStage,
+      //   paramsFilteredProductsSizeStage,
+      //   paramsFilteredProductsFeatureStage
+      // );
 
       function crossCheck() {
         // see which products have duplicates
@@ -361,12 +392,12 @@ const ProductFilter = ({
         } else {
           superArray.map(product => {
             // 1. Find duplicates, they should match the amount of filter conditions
-            console.log("super", superArray);
+            // console.log("super", superArray);
             let duplicates = superArray.filter(
               arrayProduct => arrayProduct.handle === product.handle
             );
 
-            console.log("unique", duplicates);
+            // console.log("unique", duplicates);
 
             if (duplicates.length === filtersActive) {
               paramsFilteredProducts.push(product);
@@ -465,11 +496,10 @@ const ProductFilter = ({
           finalURL = finalURL + "&" + param;
         }
 
-        window.history.pushState("page2", "Title", finalURL);
+        window.history.replaceState("page2", "Title", finalURL);
       });
     } else {
-      window.history.pushState("page2", "Title", location.pathname);
-      console.log("location", location);
+      window.history.replaceState("page2", "Title", location.pathname);
     }
   }
 
@@ -496,7 +526,6 @@ const ProductFilter = ({
             <div className="inner-wrap">
               <ul>
                 {Object.entries(currentFilters).map(([key, value]) => {
-                  console.log(key, value);
                   let isThereAValue = value !== null;
                   let updatedTerm =
                     isThereAValue && reverseColorHandlize(value);
