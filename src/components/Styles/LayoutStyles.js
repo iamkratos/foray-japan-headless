@@ -23,13 +23,16 @@ const LayoutContainer = styled.div`
     content: "";
   }
   .slick-next {
-    right: 0;
     z-index: 10;
+    right: auto;
+    left: 50px;
+    ${media.medium`right: 0; left: auto;`}
   }
   .slick-prev {
     left: auto;
     z-index: 10;
-    right: 40px;
+    right: auto;
+    ${media.medium`right: 40px;`}
   }
 
   .slick-arrow {

@@ -361,7 +361,7 @@ const Header = ({ siteTitle }) => {
             <nav>
               <ul>
                 <li>
-                  <Link to="/collections/birds-in-paradise">New Arrivals</Link>
+                  <Link to="/collections/hot-house">New Arrivals</Link>
                 </li>
                 <li>
                   <a

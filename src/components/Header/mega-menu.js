@@ -362,11 +362,25 @@ const MegaMenu = ({
           }
         }
       }
+      hotHouse: file(
+        relativePath: { eq: "menu-items/collections/hot-house.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Hot House",
+      url: "/collections/hot-house",
+      image: data.hotHouse.childImageSharp.fluid,
+    },
     {
       title: "Birds In Paradise",
       url: "/collections/birds-in-paradise",
@@ -401,11 +415,6 @@ const MegaMenu = ({
       title: "Incognito",
       url: "/collections/incognito",
       image: data.incognito.childImageSharp.fluid,
-    },
-    {
-      title: "Dream Weaver",
-      url: "/collections/dream-weaver",
-      image: data.dreamWeaver.childImageSharp.fluid,
     },
 
     {

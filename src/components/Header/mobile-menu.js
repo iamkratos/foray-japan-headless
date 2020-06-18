@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "Hot House",
+      url: "/collections/hot-house",
+    },
+    {
       title: "Birds In Paradise",
       url: "/collections/birds-in-paradise",
     },
@@ -134,11 +138,6 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
     {
       title: "Graphic Floral",
       url: "/collections/graphic-floral-collection",
-    },
-
-    {
-      title: "Winter Floom",
-      url: "/collections/winter-floom",
     },
 
     {
