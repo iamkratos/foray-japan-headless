@@ -213,10 +213,10 @@ const ProductFilter = ({
       });
     }
 
-    console.log(
-      "paramsFilteredProductsColorStage",
-      paramsFilteredProductsColorStage
-    );
+    // console.log(
+    //   "paramsFilteredProductsColorStage",
+    //   paramsFilteredProductsColorStage
+    // );
 
     // 2. Size
     if (size !== null) {
@@ -289,12 +289,12 @@ const ProductFilter = ({
 
         // Final if statement to check for color and feature
         if (color === null && feature === null) {
-          console.log("case 1", product.title);
+          // console.log("case 1", product.title);
           if (doesProductHaveFilterSize) {
             paramsFilteredProductsSizeStage.push(product);
           }
         } else if (color !== null) {
-          console.log("case 2", product.title);
+          // console.log("case 2", product.title);
           if (
             doesProductHaveFilterSize &&
             doesProductHaveColorAndSizeAvailable
@@ -302,7 +302,7 @@ const ProductFilter = ({
             paramsFilteredProductsSizeStage.push(product);
           }
         } else if (feature !== null) {
-          console.log("case 3", product.title);
+          // console.log("case 3", product.title);
           if (
             doesProductHaveFilterSize &&
             doesProductHaveSizeAndFeatureAvailable
@@ -326,13 +326,10 @@ const ProductFilter = ({
 
       if (paramsFilteredProductsSizeStage.length > 0 || size != null) {
         startingArray = paramsFilteredProductsSizeStage;
-        console.log("error 1");
-      } else if (paramsFilteredProductsColorStage.length > 0 || size != null) {
+      } else if (paramsFilteredProductsColorStage.length > 0 || color != null) {
         startingArray = paramsFilteredProductsColorStage;
-        console.log("error 2");
       } else {
         startingArray = products;
-        console.log("error 3", startingArray);
       }
 
       startingArray.map(product => {
@@ -344,8 +341,6 @@ const ProductFilter = ({
             doesProductHaveTag = true;
           }
         });
-
-        console.log("error 4", doesProductHaveTag, size, color);
 
         // check size
         let doesProductHaveFilterSize = false;
@@ -377,9 +372,16 @@ const ProductFilter = ({
           product.variants.map(variant => {
             if (
               colorHandlize(variant.selectedOptions[0].value) === color &&
-              variant.selectedOptions[1].value.toLowerCase() === size &&
               variant.availableForSale
             ) {
+              doesProductHaveColorAvailable = true;
+            }
+          });
+          // --- check color tags
+          product.tags.map(tag => {
+            let updatedTag = tag.replace("Color_", "");
+            updatedTag = colorHandlize(updatedTag);
+            if (tag.toLowerCase() === color) {
               doesProductHaveColorAvailable = true;
             }
           });
@@ -387,17 +389,17 @@ const ProductFilter = ({
 
         // Final if statement to check for color and size
         if (color === null && size === null) {
-          console.log("case 1", product.title);
+          // console.log("case 1", product.title);
           if (doesProductHaveTag) {
             paramsFilteredProductsFeatureStage.push(product);
           }
         } else if (color !== null) {
-          console.log("case 2", product.title);
+          // console.log("case 2", product.title);
           if (doesProductHaveTag && doesProductHaveColorAvailable) {
             paramsFilteredProductsFeatureStage.push(product);
           }
         } else if (size !== null) {
-          console.log("case 3", product.title);
+          // console.log("case 3", product.title);
           if (doesProductHaveTag && doesProductHaveFilterSize) {
             paramsFilteredProductsFeatureStage.push(product);
           }
@@ -593,7 +595,7 @@ const ProductFilter = ({
 
                   return (
                     isThereAValue && (
-                      <li>
+                      <li key={value}>
                         <button
                           onClick={() => removeFilterCondition(value, key)}
                         >
