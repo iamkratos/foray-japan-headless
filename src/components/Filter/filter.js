@@ -213,10 +213,10 @@ const ProductFilter = ({
       });
     }
 
-    // console.log(
-    //   "paramsFilteredProductsColorStage",
-    //   paramsFilteredProductsColorStage
-    // );
+    console.log(
+      "paramsFilteredProductsColorStage",
+      paramsFilteredProductsColorStage
+    );
 
     // 2. Size
     if (size !== null) {
@@ -287,7 +287,7 @@ const ProductFilter = ({
           });
         }
 
-        // Final if statement to check for color
+        // Final if statement to check for color and feature
         if (color === null && feature === null) {
           console.log("case 1", product.title);
           if (doesProductHaveFilterSize) {
@@ -302,6 +302,7 @@ const ProductFilter = ({
             paramsFilteredProductsSizeStage.push(product);
           }
         } else if (feature !== null) {
+          console.log("case 3", product.title);
           if (
             doesProductHaveFilterSize &&
             doesProductHaveSizeAndFeatureAvailable
@@ -325,23 +326,81 @@ const ProductFilter = ({
 
       if (paramsFilteredProductsSizeStage.length > 0 || size != null) {
         startingArray = paramsFilteredProductsSizeStage;
+        console.log("error 1");
       } else if (paramsFilteredProductsColorStage.length > 0 || size != null) {
         startingArray = paramsFilteredProductsColorStage;
+        console.log("error 2");
       } else {
         startingArray = products;
+        console.log("error 3", startingArray);
       }
 
       startingArray.map(product => {
         let doesProductHaveTag = false;
 
+        // check tag
         product.tags.map(tag => {
           if (tag.toLowerCase() === feature) {
             doesProductHaveTag = true;
           }
         });
 
-        if (doesProductHaveTag) {
-          paramsFilteredProductsFeatureStage.push(product);
+        console.log("error 4", doesProductHaveTag, size, color);
+
+        // check size
+        let doesProductHaveFilterSize = false;
+        if (size !== null) {
+          let sizeVariant;
+          product.variants.map((variant, index) => {
+            // check if product has color to understand the selectedOptions target
+            if (index === 0) {
+              sizeVariant = variant.selectedOptions.length > 1 ? 1 : 0;
+            }
+
+            // then check if the variant size matches the filter size and is available
+
+            if (
+              colorHandlize(variant.selectedOptions[sizeVariant].value) ===
+                size &&
+              variant.availableForSale &&
+              doesProductHaveFilterSize !== true
+            ) {
+              doesProductHaveFilterSize = true;
+            }
+          });
+        }
+
+        // check color
+
+        let doesProductHaveColorAvailable = false;
+        if (color !== null) {
+          product.variants.map(variant => {
+            if (
+              colorHandlize(variant.selectedOptions[0].value) === color &&
+              variant.selectedOptions[1].value.toLowerCase() === size &&
+              variant.availableForSale
+            ) {
+              doesProductHaveColorAvailable = true;
+            }
+          });
+        }
+
+        // Final if statement to check for color and size
+        if (color === null && size === null) {
+          console.log("case 1", product.title);
+          if (doesProductHaveTag) {
+            paramsFilteredProductsFeatureStage.push(product);
+          }
+        } else if (color !== null) {
+          console.log("case 2", product.title);
+          if (doesProductHaveTag && doesProductHaveColorAvailable) {
+            paramsFilteredProductsFeatureStage.push(product);
+          }
+        } else if (size !== null) {
+          console.log("case 3", product.title);
+          if (doesProductHaveTag && doesProductHaveFilterSize) {
+            paramsFilteredProductsFeatureStage.push(product);
+          }
         }
       });
     }
