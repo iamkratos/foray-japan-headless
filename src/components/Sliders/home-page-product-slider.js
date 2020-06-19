@@ -1,13 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
-import ProductGridItem from "../../components/Product/product-grid-item";
-import Wrapper from "../org/Wrapper";
+import { window } from "browser-monads";
 
 // Slick
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import "../../../node_modules/slick-carousel/slick/slick-theme.css";
 
+import ProductGridItem from "../../components/Product/product-grid-item";
+import Wrapper from "../org/Wrapper";
 import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
 import { media, TransitionMixin } from "../helpers";
@@ -125,9 +126,14 @@ const SliderContainer = styled.div`
   }
 `;
 
+const MobileSliderContainer = styled.div``;
+
 const HomePageProductSlider = ({ products }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [updateCount, setUpdateCount] = useState(0);
+
+  // mobile first,
+  const [isSliderMobile, setIsSliderMobile] = useState(true);
   const sliderEl = useRef(null);
 
   var settings = {
@@ -148,6 +154,22 @@ const HomePageProductSlider = ({ products }) => {
       },
     ],
   };
+
+  function checkWindowSize() {
+    // console.log(window.innerWidth);
+    if (window.innerWidth < 1026) {
+      setIsSliderMobile(true);
+    } else {
+      setIsSliderMobile(false);
+    }
+    return;
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", checkWindowSize);
+    return () => window.removeEventListener("resize", checkWindowSize);
+  }, []);
+
   return (
     <SliderContainer>
       <Wrapper className="slider-grid" flex>
@@ -168,15 +190,27 @@ const HomePageProductSlider = ({ products }) => {
         </div>
         <div className="product-slider-container">
           <div className="inner-wrap">
-            <Slider ref={sliderEl} {...settings} style={{ marginBottom: 0 }}>
-              {products.map((product, index) => {
-                return (
-                  <SlideContainer key={index}>
-                    <ProductGridItem product={product} />
-                  </SlideContainer>
-                );
-              })}
-            </Slider>
+            {isSliderMobile === true ? (
+              <MobileSliderContainer>
+                {products.map((product, index) => {
+                  return (
+                    <SlideContainer key={index}>
+                      <ProductGridItem product={product} />
+                    </SlideContainer>
+                  );
+                })}
+              </MobileSliderContainer>
+            ) : (
+              <Slider ref={sliderEl} {...settings} style={{ marginBottom: 0 }}>
+                {products.map((product, index) => {
+                  return (
+                    <SlideContainer key={index}>
+                      <ProductGridItem product={product} />
+                    </SlideContainer>
+                  );
+                })}
+              </Slider>
+            )}
           </div>
         </div>
 
