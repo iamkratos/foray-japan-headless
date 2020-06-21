@@ -166,6 +166,7 @@ const HomePageProductSlider = ({ products }) => {
   }
 
   useEffect(() => {
+    checkWindowSize();
     window.addEventListener("resize", checkWindowSize);
     return () => window.removeEventListener("resize", checkWindowSize);
   }, []);
