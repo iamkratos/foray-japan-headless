@@ -156,7 +156,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
             <p>
               We love growing our team! 20% off for students and teaching pros.
             </p>
-            <form
+            {/* <form
               name="friends-of-foray-page"
               method="POST"
               action="https://manage.kmail-lists.com/subscriptions/subscribe?a=YjDwJK&g=XB3wyi"
@@ -165,17 +165,14 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               className="form"
             >
               <input name="bot-field" type="hidden" />
-              <input
-                type="hidden"
-                name="form-name"
-                value="friends-of-foray-page"
-              />
+              <input type="hidden" name="g" value="XB3wyi" />
+
               <div className="input-wrap split">
                 <label htmlFor="name">
                   <input
                     type="text"
                     className="form-control"
-                    name="name"
+                    name="k2b7fba9b6dca14c27e444bc6bab43584"
                     placeholder="Name"
                     required
                   />
@@ -195,7 +192,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
                   <input
                     type="text"
                     className="form-control"
-                    name="organization"
+                    name="kdb5caa720141e9baac2cb818a7a707ee"
                     placeholder="School | Organization | Course"
                     required
                   />
@@ -204,8 +201,8 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               <div className="input-wrap">
                 <input type="submit" value="Send" />
               </div>
-            </form>
-            {/* <form
+            </form> */}
+            <form
               name="friends-of-foray-page"
               method="POST"
               action="/success"
@@ -253,7 +250,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               <div className="input-wrap">
                 <input type="submit" value="Send" />
               </div>
-            </form> */}
+            </form>
           </div>
         </Wrapper>
       </FriendsOfForayContainer>
