@@ -166,6 +166,7 @@ const HomePageProductSlider = ({ products }) => {
   }
 
   useEffect(() => {
+    // check inital size
     checkWindowSize();
     window.addEventListener("resize", checkWindowSize);
     return () => window.removeEventListener("resize", checkWindowSize);
@@ -181,12 +182,6 @@ const HomePageProductSlider = ({ products }) => {
               <br />
               Arrivals
             </h1>
-            {/* <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-              molestias voluptatem delectus voluptates quam quia aliquid unde
-              nam explicabo, sapiente, voluptate eos accusamus qui ducimus odit
-              quasi labore? Nisi, obcaecati?
-            </p> */}
           </div>
         </div>
         <div className="product-slider-container">

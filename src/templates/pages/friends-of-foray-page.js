@@ -159,7 +159,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
             <form
               name="friends-of-foray-page"
               method="POST"
-              action="/success"
+              action="https://manage.kmail-lists.com/subscriptions/subscribe?a=YjDwJK&g=XB3wyi"
               data-netlify="true"
               data-netlify-honeypot="bot-field"
               className="form"
@@ -205,6 +205,55 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
                 <input type="submit" value="Send" />
               </div>
             </form>
+            {/* <form
+              name="friends-of-foray-page"
+              method="POST"
+              action="/success"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              className="form"
+            >
+              <input name="bot-field" type="hidden" />
+              <input
+                type="hidden"
+                name="form-name"
+                value="friends-of-foray-page"
+              />
+              <div className="input-wrap split">
+                <label htmlFor="name">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    placeholder="Name"
+                    required
+                  />
+                </label>
+                <label htmlFor="email">
+                  <input
+                    required
+                    placeholder="Email"
+                    type="email"
+                    className="form-control"
+                    name="email"
+                  />
+                </label>
+              </div>
+              <div className="input-wrap">
+                <label htmlFor="phone">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="organization"
+                    placeholder="School | Organization | Course"
+                    required
+                  />
+                </label>
+              </div>
+              <div className="input-wrap">
+                <input type="submit" value="Send" />
+              </div>
+            </form> */}
           </div>
         </Wrapper>
       </FriendsOfForayContainer>

@@ -568,7 +568,7 @@ const ProductFilter = ({
     // When we update the filters, we update the products + the url
     filterByParams(currentFilters);
     setFilterURL(currentFilters);
-    console.log("current filters updated");
+    // console.log("current filters updated");
   }, [currentFilters]);
 
   return (
