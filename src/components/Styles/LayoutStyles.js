@@ -388,6 +388,10 @@ const LayoutContainer = styled.div`
             background-color: #da798a;
           }
 
+          &.deep-heather {
+            background-color: #444c50;
+          }
+
           &.peach {
             background-color: pink;
           }
