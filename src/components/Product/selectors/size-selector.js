@@ -52,13 +52,7 @@ const SizeSelector = ({
             let sizeText = size.selectedOptions[1]
               ? size.selectedOptions[1].value
               : size.selectedOptions[0].value;
-            // console.log(
-            //   "size",
-            //   sizeText === size.selectedOptions[1].value,
-            //   sizeText,
-            //   size.selectedOptions[1].value
-            // );
-            console.log(availSizes, isAvailable);
+
             return (
               <li key={index}>
                 <button

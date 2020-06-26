@@ -18,7 +18,7 @@ const AddonProductContainer = styled.div`
 `;
 
 const AddonProduct = ({ product, tags, firstProductVariantId, availSizes }) => {
-  console.log("avaiSizes", availSizes);
+  // console.log("avaiSizes", availSizes);
   const data = useStaticQuery(graphql`
     query {
       allShopifyProduct(
@@ -78,6 +78,7 @@ const AddonProduct = ({ product, tags, firstProductVariantId, availSizes }) => {
         <AddToCart
           sizeId={firstProductVariantId}
           sizeIdTwo={addonSelectedSize}
+          childProductColor={addonProductColor}
           childProductSize={childProductSize}
           addon={true}
           availSizes={availSizes}

@@ -282,7 +282,7 @@ const Cart = ({ style }) => {
     }
   `);
   let allDresses = data.allShopifyCollection.edges[0].node.products;
-
+  console.log("cart", checkout.lineItems);
   function handleRemoveAll(item) {
     // If the product is a dress, search for addon tag, then remove that product
     if (
@@ -291,31 +291,23 @@ const Cart = ({ style }) => {
       !item.title.includes("Girls")
     ) {
       let lineItemsArray = [];
-      let addonProductColor;
       let addonProductSize =
         item.customAttributes[0] && item.customAttributes[0].value;
-      let dressProduct = allDresses.filter(dress => dress.title === item.title);
-      // console.log("the dress product is", addonProductSize, dressProduct);
+      let addonProductColor =
+        item.customAttributes[1] && item.customAttributes[1].value;
+
+      console.log("the dress product is", item);
+      console.log("cart", checkout.lineItems);
 
       // Push initial product to remove array
 
       lineItemsArray.push(item.id);
 
-      // Find addon color variant
-      dressProduct[0] &&
-        dressProduct[0].tags.map(tag => {
-          if (tag.includes("addon-shorts-")) {
-            addonProductColor = tag.replace("addon-shorts-", "");
-          }
-          return null;
-        });
-
-      // console.log("the addon product is", addonProductColor);
-
       // Find checkout item
       checkout.lineItems.map(lineItem => {
         if (
           lineItem.title.includes("Add On") &&
+          lineItem.variant.selectedOptions[0].value === addonProductColor &&
           lineItem.variant.selectedOptions[1].value === addonProductSize
         ) {
           // Get addon item

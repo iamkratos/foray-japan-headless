@@ -189,7 +189,8 @@ export const StoreProvider = ({ children }) => {
   const addMultipleProductsToCart = async (
     variantIdOne,
     variantIdTwo,
-    childProductSize
+    childProductSize,
+    childProductColor
   ) => {
     try {
       const lineItems = [
@@ -198,6 +199,10 @@ export const StoreProvider = ({ children }) => {
           quantity: 1,
           customAttributes: [
             { key: "Add On Product Size", value: childProductSize },
+            {
+              key: "Add On Product Color",
+              value: reverseColorHandlize(childProductColor),
+            },
           ],
         },
         {

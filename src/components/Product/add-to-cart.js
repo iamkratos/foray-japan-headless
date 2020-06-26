@@ -6,6 +6,7 @@ const AddToCart = ({
   sizeId,
   sizeIdTwo,
   childProductSize,
+  childProductColor,
   availSizes,
   addon,
 }) => {
@@ -21,7 +22,12 @@ const AddToCart = ({
               sizeIdTwo !== undefined && sizeIdTwo === "" ? "disabled" : ""
             }
             onClick={() =>
-              addMultipleProductsToCart(sizeId, sizeIdTwo, childProductSize)
+              addMultipleProductsToCart(
+                sizeId,
+                sizeIdTwo,
+                childProductSize,
+                childProductColor
+              )
             }
           >
             {sizeIdTwo !== undefined && sizeIdTwo === ""
