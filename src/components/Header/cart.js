@@ -282,7 +282,6 @@ const Cart = ({ style }) => {
     }
   `);
   let allDresses = data.allShopifyCollection.edges[0].node.products;
-  console.log("cart", checkout.lineItems);
   function handleRemoveAll(item) {
     // If the product is a dress, search for addon tag, then remove that product
     if (
@@ -296,8 +295,8 @@ const Cart = ({ style }) => {
       let addonProductColor =
         item.customAttributes[1] && item.customAttributes[1].value;
 
-      console.log("the dress product is", item);
-      console.log("cart", checkout.lineItems);
+      // console.log("the dress product is", item);
+      // console.log("cart", checkout.lineItems);
 
       // Push initial product to remove array
 
