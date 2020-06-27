@@ -397,6 +397,11 @@ const MegaMenu = ({
       image: data.americaTwo.childImageSharp.fluid,
     },
     {
+      title: "Core 2.0",
+      url: "/collections/core-2-0-collection",
+      image: data.core.childImageSharp.fluid,
+    },
+    {
       title: "Day Glo",
       url: "/collections/day-glo",
       image: data.dayGlo.childImageSharp.fluid,
@@ -406,15 +411,21 @@ const MegaMenu = ({
       url: "/collections/in-the-fold",
       image: data.inTheFold.childImageSharp.fluid,
     },
-    {
-      title: "Core 2.0",
-      url: "/collections/core-2-0-collection",
-      image: data.core.childImageSharp.fluid,
-    },
+
     {
       title: "Incognito",
       url: "/collections/incognito",
       image: data.incognito.childImageSharp.fluid,
+    },
+    {
+      title: "Dream Weaver",
+      url: "/collections/dream-weaver",
+      image: data.dreamWeaver.childImageSharp.fluid,
+    },
+    {
+      title: "Graphic Floral",
+      url: "/collections/graphic-floral-collection",
+      image: data.graphicFloral.childImageSharp.fluid,
     },
 
     {
@@ -488,7 +499,7 @@ const MegaMenu = ({
   let hideMenuOne = megaMenuIndex === 0 ? "" : "hide";
   let hideMenuTwo = megaMenuIndex === 1 ? "" : "hide";
 
-  let collectionMenuIndex = 4;
+  let collectionMenuIndex = 5;
   return (
     <MegaMenuContainer
       className={isMenuShrunk === true ? "shrunk" : ""}
@@ -570,18 +581,20 @@ const MegaMenu = ({
                   ))}
               </ul>
               <ul>
-                {collectionLinks.slice(4, 13).map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      onMouseEnter={() =>
-                        handleMenuItemHover(index + collectionMenuIndex)
-                      }
-                      to={link.url}
-                    >
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
+                {collectionLinks
+                  .slice(collectionMenuIndex, collectionLinks.length)
+                  .map((link, index) => (
+                    <li key={index}>
+                      <Link
+                        onMouseEnter={() =>
+                          handleMenuItemHover(index + collectionMenuIndex)
+                        }
+                        to={link.url}
+                      >
+                        {link.title}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
