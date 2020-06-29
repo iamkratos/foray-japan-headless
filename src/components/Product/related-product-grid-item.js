@@ -1,187 +1,22 @@
-import React, { useContext, useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useContext, useCallback, useState, useEffect } from "react";
 import { Link } from "gatsby";
 import { window } from "browser-monads";
 
 import Img from "gatsby-image";
-import { TransitionMixin, media } from "../helpers";
+
 import { StoreContext } from "../../context/StoreContext";
 
-const ProductGridItemContainer = styled.div`
-  flex: 1 1 100%;
-  margin-bottom: 40px;
-  ${media.medium`flex: 0 0 50%;`}
-  > .inner-wrap {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  .image-container {
-    position: relative;
-    max-height: 100%;
-    overflow-y: hidden;
-    ${media.medium`max-height: 100%;`}
-    .image-1 {
-      position: absolute !important;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      opacity: 0;
-      ${TransitionMixin(".25s")}
-      &.fade-in {
-        opacity: 1;
-      }
-    }
-    &:hover {
-      .quick-shop-container {
-        .inner-wrap {
-          opacity: 1;
-        }
-      }
-    }
-    .quick-shop-container {
-      position: absolute;
-      z-index: 200;
-      bottom: 20px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      .inner-wrap {
-        background-color: #fff;
-        max-width: 300px;
-        margin: 0 auto;
-        padding: 10px 0;
-        border: 1px solid #000;
-        border-radius: 4px;
-        line-height: 1;
-        height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        ${media.medium`opacity: 0;`}
-        ${TransitionMixin(".25s")}
-        .quick-shop-text, .view-dress {
-          font-size: 13px;
-          text-decoration: none;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          margin: 0px;
-          color: #000;
-          border: none;
-          font-weight: bold;
-          -webkit-appearance: none;
-          background-color: #fff;
-          &.hide {
-            display: none;
-          }
-        }
-        ul {
-          &.sizes {
-            display: none;
-            margin: 0px;
-            &.show {
-              display: block;
-            }
-          }
-          li {
-            display: inline-block;
-            margin-bottom: 0px;
-            margin-right: 5px;
-            &:last-child {
-              margin-right: 0px;
-            }
-            button {
-              font-size: 11px;
-              font-weight: bold;
-              border: 1px solid #000;
-              padding: 5px 5px 3px;
-              background-color: transparent;
-              line-height: 1;
-              color: #000;
-              ${TransitionMixin(".25s")}
-              &.disabled {
-                opacity: 0.5;
-                position: relative;
-                &::after {
-                  content: " ";
-                  border-top: 1px solid #000;
-                  transform: rotate(-45deg);
-                  position: absolute;
-                  width: 100%;
-                  right: 0;
-                  top: 9px;
-                }
-                &:hover {
-                  opacity: 0.5;
-                  cursor: not-allowed;
-                  color: #000;
-                  background-color: #fff;
-                }
-              }
-              &:hover {
-                color: #fff;
-                background-color: #000;
-                cursor: pointer;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  .info-container {
-    padding: 20px 0 10px;
-    > .inner-wrap {
-      display: flex;
-      .title-container {
-        flex: 1.5;
-        text-align: left;
-        h4 {
-          font-size: 13px;
-          text-transform: uppercase;
-          font-weight: bold;
-          margin-bottom: 0px;
-        }
-        p {
-          font-weight: bold;
-          font-size: 13px;
-          color: #777;
-          margin-bottom: 0px;
-        }
-      }
-      .color-container {
-        flex: 1;
-        .colors {
-          text-align: right;
-          li {
-            position: relative;
-            margin-bottom: 0px;
-            &:hover {
-              .tooltip-container {
-                opacity: 1;
-              }
-            }
-            button {
-              &:hover {
-                cursor: pointer;
-                transform: scale(1.1);
-              }
-              &:focus,
-              &:visited {
-                transform: scale(1.1);
-                outline: 0;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import ProductStyles from "./product-styles";
+import X from "../../images/x.inline.svg";
 
-const ProductGridItem = ({ product, filterColor }) => {
-  const { addProductToCart, colorHandlize } = useContext(StoreContext);
-  // console.log("filter color", filterColor);
-
+const RelatedProductGridItem = ({
+  product,
+  filterColor,
+  setFilterColor,
+  rpColor,
+  filteredProducts,
+  currentFilters,
+}) => {
   // Hover Over Effect
   const [fadeIn, setFadeIn] = useState(false);
 
@@ -194,7 +29,14 @@ const ProductGridItem = ({ product, filterColor }) => {
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
-  // console.log("top log", product);
+
+  const {
+    addProductToCart,
+    colorHandlize,
+    colorHandlizeAndReplaceSimilarColors,
+  } = useContext(StoreContext);
+
+  const [variantURL, setVariantURL] = useState("");
 
   //  Filter Color Buttons
 
@@ -209,11 +51,36 @@ const ProductGridItem = ({ product, filterColor }) => {
   });
 
   finalColors = finalColors.filter(onlyUnique);
-  //   console.log("final", finalColors);
 
   // Handle Color Change
-  const [currentColor, setCurrentColor] = useState([]);
+  const [currentProductImages, setCurrentProductImages] = useState([]);
+  const [currentPrice, setCurrentPrice] = useState();
+  const [currentCompareAtPrice, setCurrentCompareAtPrice] = useState();
 
+  function sortImagesAltText(color) {
+    let imageArray = [];
+
+    if (color) {
+      imageArray = [];
+      let filterColorCondition = colorHandlize(color);
+      // console.log("image filter condition", filterColorCondition);
+      product.images.map(image => {
+        let altTextCheck = image.altText && colorHandlize(image.altText);
+
+        // console.log(altTextCheck, filterColorCondition);
+        if (altTextCheck && altTextCheck.includes(filterColorCondition)) {
+          imageArray.push(image);
+        } else {
+          return;
+        }
+      });
+    }
+
+    // setCurrentColor(imageArray);
+    setCurrentProductImages(imageArray);
+  }
+
+  // updates product url with variant so it's preloaded -- temp until variant names modified
   function updateProductURL(color) {
     setVariantURL(color);
   }
@@ -222,35 +89,36 @@ const ProductGridItem = ({ product, filterColor }) => {
     // If there are multiple colors, set up the color/size switcher
     if (color) {
       // Set color images
-      let imageArray = [];
-      let filterCondition = color.replace(/\s+/g, "-").toLowerCase();
-      product.images.map(image => {
-        let altTextCheck =
-          image.altText && image.altText.replace(/\s+/g, "-").toLowerCase();
-
-        if (
-          altTextCheck === filterCondition ||
-          (altTextCheck && altTextCheck.includes(filterCondition))
-        ) {
-          imageArray.push(image);
-        } else {
-          return;
-        }
-      });
-
-      setCurrentColor(imageArray);
-
+      sortImagesAltText(color);
       // Sort sizes
       handleSizesSort(colorHandlize(color));
 
+      // update url
       updateProductURL(colorHandlize(color));
+
+      // console.log(currentProductImages);
     } else {
-      handleSizesSort();
+      updateProductURL(null);
+      if (product.images[0]) {
+        // Variant-less products don't have alt text
+        if (product.images[0].altText) {
+          const oldColor =
+            product.images[0].altText &&
+            colorHandlize(product.images[0].altText);
+          // console.log("old color", oldColor);
+          // Set color images
+          sortImagesAltText(oldColor);
+          // Sort sizes
+          handleSizesSort(colorHandlize(oldColor));
+        } else {
+          sortImagesAltText();
+          handleSizesSort();
+        }
+      }
     }
   }
 
   const [sizes, setSizes] = useState([]);
-  const [variantURL, setVariantURL] = useState("");
 
   function handleSizesSort(selectedColor) {
     // console.log("selected color is", selectedColor);
@@ -285,17 +153,64 @@ const ProductGridItem = ({ product, filterColor }) => {
     } else {
       // if product is not a glove, run this
       if (selectedColor) {
-        // console.log("case a");
+        // console.log("case a", product.title, selectedColor);
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
-            if (handlizedColor.includes(selectedColor)) {
+            // if the color matches the filter condition
+            if (handlizedColor === selectedColor) {
               availableSizesArray.push(variant);
             }
           });
         });
+
+        // If there are no results initially, then look for ones including the color
+        if (availableSizesArray.length < 1) {
+          product.variants.map(variant => {
+            variant.selectedOptions.map(option => {
+              let handlizedColor = colorHandlize(option.value);
+              // if the color includes the filter condition
+              if (handlizedColor.includes(selectedColor)) {
+                availableSizesArray.push(variant);
+              }
+            });
+          });
+        }
+
+        // If there are no results after checking variants, then check if the product has the color tag
+        // If it does have the tag, run through the first set of variants
+        if (availableSizesArray.length < 1) {
+          let doesProductHaveColorTag = false;
+          product.tags.map(tag => {
+            let updatedTag = tag.replace("Color_", "");
+            updatedTag = colorHandlize(updatedTag);
+            if (updatedTag === selectedColor) {
+              doesProductHaveColorTag = true;
+            }
+          });
+
+          if (doesProductHaveColorTag) {
+            let newFilterCondition = product.images[0].altText
+              ? colorHandlize(product.images[0].altText)
+              : null;
+            // if it's equal to null, there is only one color
+            if (newFilterCondition !== null) {
+              product.variants.map(variant => {
+                variant.selectedOptions.map(option => {
+                  let handlizedColor = colorHandlize(option.value);
+                  // if the color includes the filter condition
+                  if (handlizedColor.includes(newFilterCondition)) {
+                    availableSizesArray.push(variant);
+                  }
+                });
+              });
+            }
+          }
+        }
+
         // console.log("sizes here", availableSizesArray);
       } else {
+        // console.log("case b");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
@@ -333,17 +248,70 @@ const ProductGridItem = ({ product, filterColor }) => {
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
       } else {
-        setHoverColor(formatedColor);
+        // if the image has alt text, show that in the tooltip
+        availableSizesArray[0].image.altText
+          ? setHoverColor(availableSizesArray[0].image.altText)
+          : setHoverColor(formatedColor);
       }
     } else {
       setHoverColor(formatedColor);
     }
 
-    // (filterColor !== "" && filterColor !== undefined) || availableSizesArray[0]
-    //   ? setHoverColor(availableSizesArray[0].image.altText)
-    //   : setHoverColor(product.images[0].altText);
+    // set price
+    setCurrentPrice(availableSizesArray[0].price);
+    setCurrentCompareAtPrice(availableSizesArray[0].compareAtPrice);
+  }
 
-    // console.log("the sizes are", sizes, availableSizesArray.length);
+  // Quick Shop Hover Over
+  const [showQuickShop, setShowQuickShop] = useState(true);
+
+  function handleQuickShopHoverIn(e) {
+    // console.log("hover in");
+    setShowQuickShop(false);
+  }
+
+  function handleQuickShopHoverOut(e) {
+    setShowQuickShop(true);
+  }
+
+  // -- Hover Color Show Tooltip
+
+  const [hoverColor, setHoverColor] = useState("none");
+
+  useEffect(() => {
+    // Define whether quick shop should show
+    if (window.innerWidth < 992) {
+      setShowQuickShop(true);
+    }
+    if (rpColor !== null) {
+      handleColorChange(rpColor);
+    } else {
+      handleColorChange(product.images[0].altText);
+    }
+  }, []);
+
+  function checkTooltipText() {
+    // check for glove product
+    if (
+      currentProductImages.length > 0 &&
+      currentProductImages[0].altText &&
+      !currentProductImages[0].altText.toLowerCase().includes("left") &&
+      hoverColor != currentProductImages[0].altText
+    ) {
+      // console.log("current color is", currentColor[0].altText);
+      if (currentProductImages[0].altText.toLowerCase().includes("bw")) {
+        setHoverColor("B&W");
+      } else if (currentProductImages[0].altText.toLowerCase().includes("nb")) {
+        setHoverColor("N&B");
+      } else {
+        setHoverColor(currentProductImages[0].altText);
+      }
+    } else {
+      // console.log("baby", currentFilters);
+      sizes && currentProductImages[0]
+        ? setHoverColor(currentProductImages[0].altText)
+        : setHoverColor(product.images[0].altText);
+    }
   }
 
   function handleColorButtonHover(color) {
@@ -356,70 +324,16 @@ const ProductGridItem = ({ product, filterColor }) => {
     }
   }
 
-  // Quick Shop Hover Over
-  const [showQuickShop, setShowQuickShop] = useState(true);
-
-  function handleQuickShopHoverIn(e) {
-    // console.log("hover in");
-    setShowQuickShop(false);
-  }
-  function handleQuickShopHoverOut(e) {
-    setShowQuickShop(true);
-  }
-
-  // -- Hover Color Show Tooltip
-
-  const [hoverColor, setHoverColor] = useState("none");
-
-  useEffect(() => {
-    // Define whether quick shop should show
-    // console.log("filter changed");
-
-    filterColor !== "" && filterColor !== undefined
-      ? handleColorChange(filterColor)
-      : handleColorChange(product.images[0].altText);
-
-    setHoverColor(product.images[0].altText);
-
-    if (window.innerWidth < 992) {
-      setShowQuickShop(true);
-    }
-  }, [filterColor]);
-
-  function checkTooltipText() {
-    // check for glove product
-    //
-
-    if (
-      currentColor[0] &&
-      currentColor[0].altText &&
-      !currentColor[0].altText.toLowerCase().includes("left") &&
-      hoverColor != currentColor[0].altText
-    ) {
-      // console.log("current color is", currentColor[0].altText);
-      if (currentColor[0].altText.toLowerCase().includes("bw")) {
-        setHoverColor("B&W");
-      } else if (currentColor[0].altText.toLowerCase().includes("nb")) {
-        setHoverColor("N&B");
-      } else {
-        setHoverColor(currentColor[0].altText);
-      }
-    } else {
-      // console.log("baby", sizes);
-      sizes && setHoverColor(currentColor[0].altText);
-    }
-  }
-
   let showQuickShopText = true;
   product.tags &&
     product.tags.map(tag => {
-      if (tag === "NO-QS") {
+      if (tag == "NO-QS") {
         showQuickShopText = false;
       }
     });
 
   return (
-    <ProductGridItemContainer>
+    <ProductStyles>
       <div className="inner-wrap">
         <div
           className="image-container"
@@ -428,22 +342,28 @@ const ProductGridItem = ({ product, filterColor }) => {
         >
           <Link
             to={`/products/${product.handle}${
-              variantURL !== "" ? "?color=" + variantURL : ""
+              variantURL !== "" && variantURL !== null
+                ? "?color=" + variantURL
+                : ""
             }`}
           >
-            {currentColor.length > 0
-              ? currentColor.map((image, index) => {
-                  // fetchInventoryQuantities();
-                  if (index < 2) {
-                    // console.log("case x", currentColor);
+            {currentProductImages.length > 0
+              ? currentProductImages.slice(0, 2).map((image, index) => {
+                  // handleSizesSort(firstVariant)
+                  // console.log("first variant", firstVariant, image);
+                  if (
+                    index < 2 &&
+                    image.localFile &&
+                    image.localFile.childImageSharp
+                  ) {
                     return (
                       <Img
-                        key={index}
+                        key={index + 1}
+                        alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
-                        alt={product.title + " Image " + index + 1}
                       />
                     );
                   }
@@ -451,15 +371,15 @@ const ProductGridItem = ({ product, filterColor }) => {
               : product.images.slice(0, 2).map((image, index) => {
                   // handleSizesSort(firstVariant)
                   // console.log("first variant", firstVariant, image);
-                  if (index < 2) {
+                  if (index < 2 && image.localFile) {
                     return (
                       <Img
-                        key={index}
+                        key={index + 1}
+                        alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
                         }`}
                         fluid={image.localFile.childImageSharp.fluid}
-                        alt={product.title + " Image " + index + 1}
                       />
                     );
                   }
@@ -487,20 +407,21 @@ const ProductGridItem = ({ product, filterColor }) => {
                 <ul className={showQuickShop == true ? "sizes" : "sizes show"}>
                   {sizes.length > 0 &&
                     // console.log("updated sizes", sizes) &&
-                    sizes.map((size, i) => {
+                    sizes.map((size, index) => {
                       let isAvailable = size.availableForSale;
                       let sizeText = size.selectedOptions[1]
                         ? size.selectedOptions[1].value
                         : size.selectedOptions[0].value;
 
                       return (
-                        <li key={i}>
+                        <li key={index}>
                           <button
                             disabled={!isAvailable}
                             className={isAvailable ? "" : "disabled "}
                             onClick={() => addProductToCart(size.shopifyId)}
                           >
                             {sizeText}
+                            <X />
                           </button>
                         </li>
                       );
@@ -509,7 +430,12 @@ const ProductGridItem = ({ product, filterColor }) => {
               </div>
             ) : (
               <div className="inner-wrap">
-                <Link className="view-dress" to={`/products/${product.handle}`}>
+                <Link
+                  className="view-dress"
+                  to={`/products/${product.handle}${
+                    variantURL !== "" ? "?color=" + variantURL : ""
+                  }`}
+                >
                   View Product
                 </Link>
               </div>
@@ -520,8 +446,15 @@ const ProductGridItem = ({ product, filterColor }) => {
           <div className="inner-wrap">
             <div className="title-container">
               <h4>{product.title}</h4>
-              <p>${parseFloat(product.priceRange.maxVariantPrice.amount)}</p>
-              {hoverColor !== null ? (
+              <p>
+                {currentCompareAtPrice ? (
+                  <span>${currentCompareAtPrice}</span>
+                ) : (
+                  ``
+                )}{" "}
+                ${parseFloat(currentPrice)}
+              </p>
+              {hoverColor !== undefined && hoverColor.length > 0 ? (
                 <div className="tooltip-container">
                   <div className="inner-wrap">{hoverColor}</div>
                 </div>
@@ -554,12 +487,9 @@ const ProductGridItem = ({ product, filterColor }) => {
               </ul>
             </div>
           </div>
-          {/* <button onClick={() => addProductToCart(firstVariant.shopifyId)}>
-            Add to Cart
-          </button> */}
         </div>
       </div>
-    </ProductGridItemContainer>
+    </ProductStyles>
   );
 };
-export default ProductGridItem;
+export default RelatedProductGridItem;

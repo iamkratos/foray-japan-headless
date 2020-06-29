@@ -353,7 +353,7 @@ const ProductGridItem = ({
                   ) {
                     return (
                       <Img
-                        key={index}
+                        key={index + 1}
                         alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
@@ -369,7 +369,7 @@ const ProductGridItem = ({
                   if (index < 2 && image.localFile) {
                     return (
                       <Img
-                        key={index}
+                        key={index + 1}
                         alt={product.title + " Image " + index}
                         className={`image-${index} ${
                           index == 1 && fadeIn == true ? "fade-in" : ""
