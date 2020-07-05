@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "Current Wave",
+      url: "/collections/current-wave",
+    },
+    {
       title: "Hot House",
       url: "/collections/hot-house",
     },

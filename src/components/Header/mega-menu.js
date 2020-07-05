@@ -371,11 +371,25 @@ const MegaMenu = ({
           }
         }
       }
+      currentWave: file(
+        relativePath: { eq: "menu-items/collections/current-wave.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Current Wave",
+      url: "/collections/current-wave",
+      image: data.currentWave.childImageSharp.fluid,
+    },
     {
       title: "Hot House",
       url: "/collections/hot-house",

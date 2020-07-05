@@ -288,6 +288,8 @@ const RelatedProductGridItem = ({
     } else {
       handleColorChange(product.images[0].altText);
     }
+    // tmp
+    // updateProductURL(null);
   }, []);
 
   function checkTooltipText() {
