@@ -53,7 +53,6 @@ const RelatedSelling = ({ tags }) => {
       });
   });
   relatedProducts = relatedProducts.slice(0, 3);
-  console.log("relate dproducts", relatedProducts);
 
   return (
     <RelatedSellingContainer
@@ -66,12 +65,10 @@ const RelatedSelling = ({ tags }) => {
       </Wrapper>
       <Wrapper className="related-products-wrapper">
         {relatedProducts.map((product, index) => {
-          console.log(index);
           let presetColor = null;
           if (relatedProductTags[index].includes("#")) {
             presetColor = relatedProductTags[index].split("#")[1];
           }
-          console.log("preset", presetColor, relatedProductTags[index]);
           return (
             <RelatedProductGridItem
               key={index}

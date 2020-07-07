@@ -315,8 +315,6 @@ const Cart = ({ style }) => {
     setToteMessage("Tote Added! :)");
   }
 
-  console.log("cart total", isTotalPriceEnoughForTote);
-
   const data = useStaticQuery(graphql`
     query {
       allShopifyCollection(filter: { title: { eq: "Dresses" } }) {
