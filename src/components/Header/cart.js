@@ -309,7 +309,7 @@ const Cart = ({ style }) => {
 
   function addTote() {
     addProductToCart(
-      "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNjg1MTc0OTk1NQ=="
+      "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNzQ2NjMxMzc5NQ=="
     );
     toteRef.current.classList.add("added");
     setToteMessage("Tote Added! :)");
