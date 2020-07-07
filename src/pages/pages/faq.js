@@ -205,6 +205,40 @@ const productQuestions = [
     <p>Yes! We offer digital gift cards from $50-500; purchase one at the following <a href="/products/gift-card-1">link</a> and it will emailed directly to you. Please note that gift cards are non-refundable</p>
         `,
   },
+  {
+    question: "A Free Tote Bag?",
+    answer: `   
+    <p style="margin-bottom: 10px;"><strong>TO REDEEM OFFER:</strong></p>
+    <ul>
+      <li>Add qualifying, in-stock merchandise totaling $77.17 or more (after all discounts are applied) to your shopping bag.</li>
+      <li>A free Foray Golf tote will be added to your bag automatically at checkout (limit one free tote per order).</li>
+      <li>Valid July 7, 2020 through July 14, 2020 at 11:59pm PT. While supplies last.</li>
+    </ul>
+    
+    <br/>
+    
+    <p><strong>OFFER EXCLUDES THE FOLLOWING:</strong></p>
+
+    <ul>
+      <li>Gift cards, shipping and handling, sales taxes, and previous online and in-store purchases do not qualify toward offer eligibility.</li>
+      <li>Presentation of multiple offers will result in the best offer being applied.</li>
+    </ul>
+
+    <br/>
+
+    <p style="margin-bottom: 10px;"><strong>ADDITIONAL OFFER DETAILS:</strong></p>
+
+    <ul>
+      <li>No substitutions.</li>
+      <li>Offer subject to adjustment due to returns, cancellations and exchanges.</li>
+      <li>Orders shipping outside the US may not be eligible; additional taxes and duties may apply.</li>
+      <li>Shipping and handling applies to free product.</li>
+      <li>Offer may be modified or discontinued at any time without notice.</li>
+    </ul>
+
+
+        `,
+  },
 ];
 
 const misc = [
@@ -411,10 +445,14 @@ const FAQ = ({ location }) => {
   let isFinalSaleOpen = location.hash.includes("#fs") === true ? true : false;
   let isRequestReturnOpen =
     location.hash.includes("#rr") === true ? true : false;
+  let isToteOpen = location.hash.includes("#tote") === true ? true : false;
 
   useEffect(() => {
     if (location.hash !== "") {
-      let menuName = location.hash.replace("#", "").toLowerCase();
+      let menuName = location.hash
+        .replace("#", "")
+        .toLowerCase()
+        .split("#")[0];
       if (menuName === "returns") {
         setWhichMenuIsActive(1);
       } else if (menuName === "shipping") {
@@ -581,7 +619,13 @@ const FAQ = ({ location }) => {
               }
             >
               {productQuestions.map((item, index) => {
-                return <AccItem key={index} item={item} />;
+                return (
+                  <AccItem
+                    key={index}
+                    item={item}
+                    isToteOpen={index === 2 && isToteOpen}
+                  />
+                );
               })}
             </div>
 
@@ -619,10 +663,11 @@ const FAQ = ({ location }) => {
 
 const AccItemContainer = styled.div``;
 
-const AccItem = ({ item, isFsOpen, isRequestReturnOpen }) => {
+const AccItem = ({ item, isFsOpen, isRequestReturnOpen, isToteOpen }) => {
   const [isItemActive, setIsItemActive] = useState(false);
   const fsRef = useRef(null);
   const returnRef = useRef(null);
+  const toteRef = useRef(null);
 
   function createBodyMarkup() {
     return { __html: item.answer };
@@ -643,6 +688,15 @@ const AccItem = ({ item, isFsOpen, isRequestReturnOpen }) => {
         });
       }, 1000);
       setIsItemActive(true);
+    } else if (isToteOpen) {
+      console.log("return open");
+      setTimeout(() => {
+        toteRef.current.scrollIntoView({
+          block: "center",
+          behavior: "smooth",
+        });
+      }, 1000);
+      setIsItemActive(true);
     }
   }, []);
 
@@ -653,6 +707,8 @@ const AccItem = ({ item, isFsOpen, isRequestReturnOpen }) => {
           ? fsRef
           : isRequestReturnOpen === true
           ? returnRef
+          : isToteOpen === true
+          ? toteRef
           : null
       }
     >

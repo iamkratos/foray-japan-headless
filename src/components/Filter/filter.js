@@ -150,7 +150,6 @@ const ProductFilter = ({
           let updatedTag = tag.replace("Color_", "");
           updatedTag = colorHandlize(updatedTag);
           if (tag.toLowerCase() === color) {
-            console.log("here", product.title, tag.toLowerCase(), color);
             doesProductHaveColorTag = true;
           }
         });
@@ -193,12 +192,6 @@ const ProductFilter = ({
         }
 
         if (size === null && feature === null) {
-          console.log(
-            "case 1",
-            doesProductHaveFilterColor,
-            doesProductHaveColorTag,
-            product.title
-          );
           if (doesProductHaveFilterColor || doesProductHaveColorTag) {
             paramsFilteredProductsColorStage.push(product);
           }
@@ -220,10 +213,10 @@ const ProductFilter = ({
       });
     }
 
-    console.log(
-      "paramsFilteredProductsColorStage",
-      paramsFilteredProductsColorStage
-    );
+    // console.log(
+    //   "paramsFilteredProductsColorStage",
+    //   paramsFilteredProductsColorStage
+    // );
 
     // 2. Size
     if (size !== null) {
@@ -320,10 +313,10 @@ const ProductFilter = ({
       });
     }
 
-    console.log(
-      "paramsFilteredProductsSizeStage",
-      paramsFilteredProductsSizeStage
-    );
+    // console.log(
+    //   "paramsFilteredProductsSizeStage",
+    //   paramsFilteredProductsSizeStage
+    // );
 
     if (feature !== null) {
       // 3a. If no color or size filter has been set, set filteredProducts to all collection products.
