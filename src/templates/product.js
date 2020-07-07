@@ -656,6 +656,8 @@ const ProductPage = ({ data }) => {
       handleVariantChange(product.images[0].altText);
       setHoverColor(product.images[0].altText);
     }
+
+    console.log(sizeId);
   }, []);
 
   finalColors = finalColors.filter(onlyUnique);

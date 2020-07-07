@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { animated } from "react-spring";
 import { StoreContext } from "../../context/StoreContext";
@@ -86,6 +86,37 @@ const CartContainer = styled(animated.section)`
     min-height: 39vh;
     border-bottom: 1px solid #ccc;
     ${media.medium`max-height: 69vh;`}
+
+    .tote-button {
+      background-color: #fff;
+      color: #000;
+      border: 1px solid #000;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px 0;
+      line-height: 1;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+      ${TransitionMixin(".25s")}
+
+      span {
+        font-size: 10px;
+        margin-left: 10px;
+      }
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+      &.added {
+        background-color: #000;
+        color: #fff;
+        cursor: not-allowed;
+      }
+    }
 
     .cart-item-container {
       margin-bottom: 30px;
@@ -256,6 +287,7 @@ const CartContainer = styled(animated.section)`
 const Cart = ({ style }) => {
   const {
     toggleCartClose,
+    addProductToCart,
     checkout,
     removeProductFromCart,
     removeMultipleProductsFromCart,
@@ -263,7 +295,27 @@ const Cart = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
 
-  // console.log(checkout);
+  const [toteAdded, setToteAdded] = useState(false);
+  const [toteMessage, setToteMessage] = useState(
+    `Add Free Tossed Logo Tote <span>(other discounts cannot be applied)</span>`
+  );
+  const toteRef = useRef(null);
+
+  function toteMessageMarkup() {
+    return { __html: toteMessage };
+  }
+
+  const isTotalPriceEnoughForTote = parseFloat(checkout.totalPrice) > 77.17;
+
+  function addTote() {
+    addProductToCart(
+      "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNjg1MTc0OTk1NQ=="
+    );
+    toteRef.current.classList.add("added");
+    setToteMessage("Tote Added! :)");
+  }
+
+  console.log("cart total", isTotalPriceEnoughForTote);
 
   const data = useStaticQuery(graphql`
     query {
@@ -394,6 +446,24 @@ const Cart = ({ style }) => {
     }
   }
 
+  useEffect(() => {
+    const doesCartAlreadyHaveTote =
+      checkout.lineItems.filter(item => item.title === "Tossed Logo Tote Bag")
+        .length > 0;
+
+    console.log("doesCartAlreadyHaveTote", doesCartAlreadyHaveTote);
+
+    if (doesCartAlreadyHaveTote) {
+      setToteAdded(true);
+      setToteMessage("Tote Added! :)");
+    } else {
+      setToteAdded(false);
+      setToteMessage(
+        `Add Free Tossed Logo Tote <span>(other discounts cannot be applied)</span>`
+      );
+    }
+  }, [checkout.lineItems]);
+
   return (
     <CartContainer style={{ ...style }}>
       <div className="inner-wrap">
@@ -407,6 +477,15 @@ const Cart = ({ style }) => {
           </div>
         </div>
         <div className="cart-items-container">
+          {isTotalPriceEnoughForTote && (
+            <button
+              disabled={toteAdded}
+              className={toteAdded ? "tote-button added" : "tote-button"}
+              onClick={() => addTote()}
+              dangerouslySetInnerHTML={toteMessageMarkup()}
+              ref={toteRef}
+            ></button>
+          )}
           {checkout.lineItems.length > 0 ? (
             checkout.lineItems.map(item => {
               return (
