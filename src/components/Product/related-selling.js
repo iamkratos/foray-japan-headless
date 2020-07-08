@@ -38,7 +38,6 @@ const RelatedSellingContainer = styled.section`
 const RelatedSelling = ({ tags }) => {
   const { edges } = useAllProductsQuery();
   let relatedProductTags = tags.filter(tag => tag.includes("addon-rp-"));
-  console.log(relatedProductTags);
   let relatedProducts = [];
   edges.map(productNode => {
     let product = productNode.node;
