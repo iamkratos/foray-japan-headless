@@ -53,6 +53,9 @@ const RelatedSelling = ({ tags }) => {
   });
   relatedProducts = relatedProducts.slice(0, 3);
 
+  // console.log(relatedProductTags);
+  // console.log(relatedProducts);
+
   return (
     <RelatedSellingContainer
       className={relatedProductTags.length > 0 ? "" : "hide"}
@@ -68,6 +71,7 @@ const RelatedSelling = ({ tags }) => {
           if (relatedProductTags[index].includes("#")) {
             presetColor = relatedProductTags[index].split("#")[1];
           }
+          console.log(presetColor);
           return (
             <RelatedProductGridItem
               key={index}

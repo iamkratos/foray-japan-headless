@@ -35,8 +35,8 @@ export default class TopBar extends Component {
           <div className="left-container">
             <p>
               Happy Birthday Foray — FREE Tossed Logo Tote with purchases over
-              $77.17 (button will appear in cart on qualifying orders; a $45
-              value. Terms and conditions apply).
+              $77.17 (automatically added to qualifying orders on checkout; a
+              $45 value. Terms and conditions apply).
               <Link to="/pages/faq/#product-questions#tote">Details.</Link>
             </p>
           </div>

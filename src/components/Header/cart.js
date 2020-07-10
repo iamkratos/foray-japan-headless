@@ -307,12 +307,10 @@ const Cart = ({ style }) => {
 
   const isTotalPriceEnoughForTote = parseFloat(checkout.totalPrice) > 77.17;
 
-  function addTote() {
-    addProductToCart(
+  async function addTote() {
+    return addProductToCart(
       "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNzQ2NjMxMzc5NQ=="
     );
-    toteRef.current.classList.add("added");
-    setToteMessage("Tote Added! :)");
   }
 
   const data = useStaticQuery(graphql`
@@ -444,23 +442,17 @@ const Cart = ({ style }) => {
     }
   }
 
-  useEffect(() => {
-    const doesCartAlreadyHaveTote =
-      checkout.lineItems.filter(item => item.title === "Tossed Logo Tote Bag")
-        .length > 0;
-
-    console.log("doesCartAlreadyHaveTote", doesCartAlreadyHaveTote);
-
-    if (doesCartAlreadyHaveTote) {
-      setToteAdded(true);
-      setToteMessage("Tote Added! :)");
-    } else {
-      setToteAdded(false);
-      setToteMessage(
-        `Add Free Tossed Logo Tote <span>(other discounts cannot be applied)</span>`
-      );
-    }
-  }, [checkout.lineItems]);
+  async function handleCheckout(e) {
+    e.preventDefault();
+    await addTote().then(() => {
+      setTimeout(() => {
+        window.location.href = checkout.webUrl.replace(
+          "https://foray-golf-dev.myshopify.com",
+          "https://ar.foraygolf.com"
+        );
+      }, 100);
+    });
+  }
 
   return (
     <CartContainer style={{ ...style }}>
@@ -475,15 +467,6 @@ const Cart = ({ style }) => {
           </div>
         </div>
         <div className="cart-items-container">
-          {isTotalPriceEnoughForTote && (
-            <button
-              disabled={toteAdded}
-              className={toteAdded ? "tote-button added" : "tote-button"}
-              onClick={() => addTote()}
-              dangerouslySetInnerHTML={toteMessageMarkup()}
-              ref={toteRef}
-            ></button>
-          )}
           {checkout.lineItems.length > 0 ? (
             checkout.lineItems.map(item => {
               return (
@@ -585,10 +568,7 @@ const Cart = ({ style }) => {
             <div className="btn-container">
               <a
                 className={checkout.lineItems.length === 0 ? "disabled" : ""}
-                href={checkout.webUrl.replace(
-                  "https://foray-golf-dev.myshopify.com",
-                  "https://ar.foraygolf.com"
-                )}
+                onClick={e => handleCheckout(e)}
               >
                 {checkout.lineItems.length === 0
                   ? "No items in cart"
