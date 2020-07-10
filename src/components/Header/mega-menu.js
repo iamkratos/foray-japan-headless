@@ -406,14 +406,14 @@ const MegaMenu = ({
       image: data.theOddyesey.childImageSharp.fluid,
     },
     {
-      title: "America 2.0",
-      url: "/collections/america-2-0",
-      image: data.americaTwo.childImageSharp.fluid,
-    },
-    {
       title: "Core 2.0",
       url: "/collections/core-2-0-collection",
       image: data.core.childImageSharp.fluid,
+    },
+    {
+      title: "America 2.0",
+      url: "/collections/america-2-0",
+      image: data.americaTwo.childImageSharp.fluid,
     },
     {
       title: "Day Glo",

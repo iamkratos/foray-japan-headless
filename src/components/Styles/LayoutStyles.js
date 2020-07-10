@@ -395,6 +395,9 @@ const LayoutContainer = styled.div`
           &.peach {
             background-color: pink;
           }
+          &.jungle {
+            background-color: #847653;
+          }
 
           &.navy {
             background-color: #3434b1;
