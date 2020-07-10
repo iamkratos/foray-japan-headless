@@ -444,15 +444,31 @@ const Cart = ({ style }) => {
 
   async function handleCheckout(e) {
     e.preventDefault();
-    await addTote().then(() => {
-      setTimeout(() => {
-        window.location.href = checkout.webUrl.replace(
-          "https://foray-golf-dev.myshopify.com",
-          "https://ar.foraygolf.com"
-        );
-      }, 100);
-    });
+    window.location.href = checkout.webUrl.replace(
+      "https://foray-golf-dev.myshopify.com",
+      "https://ar.foraygolf.com"
+    );
   }
+
+  useEffect(() => {
+    let currentPrice = parseFloat(checkout.totalPrice);
+    let isThereToteInCartAlready =
+      checkout.lineItems.filter(item => item.title === "Tossed Logo Tote Bag")
+        .length > 0;
+    let item = checkout.lineItems.filter(
+      item => item.title === "Tossed Logo Tote Bag"
+    )[0];
+    if (item) {
+      item = item.id;
+    }
+    if (currentPrice > 77.7 && !isThereToteInCartAlready) {
+      addProductToCart(
+        "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNzQ2NjMxMzc5NQ=="
+      );
+    } else if (currentPrice < 77.7 && item) {
+      removeProductFromCart(item);
+    }
+  }, [checkout.lineItems]);
 
   return (
     <CartContainer style={{ ...style }}>
@@ -513,36 +529,44 @@ const Cart = ({ style }) => {
                           </p>
 
                           <div className="right-container">
-                            {!item.title.includes("Add On") && (
-                              <p className="price">${item.variant.price}</p>
-                            )}
+                            {!item.title.includes("Add On") &&
+                              !item.title.includes("Tote Bag") && (
+                                <p className="price">${item.variant.price}</p>
+                              )}
                           </div>
-                          {!item.title.includes("Add On") && (
-                            <div className="action-buttons">
-                              <button
-                                className="decrement"
-                                onClick={() =>
-                                  handleUpdateQuantity(item, item.quantity - 1)
-                                }
-                              >
-                                -
-                              </button>
-                              <button
-                                className="increment"
-                                onClick={() =>
-                                  handleUpdateQuantity(item, item.quantity + 1)
-                                }
-                              >
-                                +
-                              </button>
-                              <button
-                                className="remove-all"
-                                onClick={() => handleRemoveAll(item)}
-                              >
-                                Remove All
-                              </button>
-                            </div>
-                          )}
+                          {!item.title.includes("Add On") &&
+                            !item.title.includes("Tote Bag") && (
+                              <div className="action-buttons">
+                                <button
+                                  className="decrement"
+                                  onClick={() =>
+                                    handleUpdateQuantity(
+                                      item,
+                                      item.quantity - 1
+                                    )
+                                  }
+                                >
+                                  -
+                                </button>
+                                <button
+                                  className="increment"
+                                  onClick={() =>
+                                    handleUpdateQuantity(
+                                      item,
+                                      item.quantity + 1
+                                    )
+                                  }
+                                >
+                                  +
+                                </button>
+                                <button
+                                  className="remove-all"
+                                  onClick={() => handleRemoveAll(item)}
+                                >
+                                  Remove All
+                                </button>
+                              </div>
+                            )}
                         </div>
                       </div>
                     </div>

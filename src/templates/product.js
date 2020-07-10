@@ -628,7 +628,10 @@ const ProductPage = ({ data }) => {
 
   useEffect(() => {
     // Make sure product isn't an add on
-    if (product.title.includes("Add On")) {
+    if (
+      product.title.includes("Add On") ||
+      product.title.includes("Tossed Logo Tote Bag")
+    ) {
       navigate("/");
     }
 
