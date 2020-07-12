@@ -211,7 +211,7 @@ const productQuestions = [
     <p style="margin-bottom: 10px;"><strong>TO REDEEM OFFER:</strong></p>
     <ul>
       <li>Add qualifying, in-stock merchandise totaling $77.17 or more (after all discounts are applied) to your shopping cart.</li>
-      <li>A button will appear in the cart for qualifying orders that will allow you to add a free Foray Golf tote (limit one free tote per order).</li>
+      <li>A free Foray Golf tote (limit one free tote per order) will be added to your cart.</li>
       <li>Valid July 7, 2020 through July 14, 2020 at 11:59pm PT. While supplies last.</li>
     </ul>
     
