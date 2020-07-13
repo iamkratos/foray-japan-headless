@@ -135,7 +135,7 @@ const shipping = [
               <ul>
                 <li><strong>Standard US Domestic Shipping:</strong>  Flat rate of $7.50.</li>
                 <li><strong>Expedited US Domestic FedEx 2-Day Shipping:</strong> flat rate of $15.00.</li>
-                <li><strong>Overnight US Domestic shipping is available;</strong> please select this option at checkout to view posted rates based on your location</li>
+                <li><strong>Overnight US Domestic shipping is available:</strong> please select this option at checkout to view posted rates based on your location</li>
                 <li>
                     <strong>International Shipping Rates vary upon delivery location;</strong> please select from available options at checkout.
                     <ul>
