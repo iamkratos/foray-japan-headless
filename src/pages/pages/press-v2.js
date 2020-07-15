@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, navigate } from "gatsby";
 
 import Layout from "../../components/layout";
 import Wrapper from "../../components/org/Wrapper";
@@ -67,6 +67,9 @@ const PressV2 = () => {
   let press_items = data.allWordpressPage.edges[0].node.acf.press_items;
   console.log("data", press_items);
 
+  useEffect(() => {
+    navigate("/");
+  }, []);
   return (
     <Layout>
       <PressContainer>
