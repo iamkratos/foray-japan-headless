@@ -137,7 +137,7 @@ const shipping = [
                 <li><strong>Expedited US Domestic FedEx 2-Day Shipping:</strong> flat rate of $15.00.</li>
                 <li><strong>Overnight US Domestic shipping is available:</strong> please select this option at checkout to view posted rates based on your location</li>
                 <li>
-                    <strong>International Shipping Rates vary upon delivery location;</strong> please select from available options at checkout.
+                    <strong>International Shipping Rates vary upon delivery location:</strong> please select from available options at checkout.
                     <ul>
                         <li>CUSTOMS POLICY: Foray Golf is not responsible for brokerage fees, import taxes or duties applied when the package enters the destination country. Customers should consult the customs legislation of their country. Courier fees for returns and exchanges are the responsibility of the recipient. If orders are refused by customers at point of delivery or if there is a charge back to Foray Golf for return shipping or duties, the customer is financially responsible, and it will be deducted from their credit.</li>
                     </ul>
@@ -205,40 +205,39 @@ const productQuestions = [
     <p>Yes! We offer digital gift cards from $50-500; purchase one at the following <a href="/products/gift-card-1">link</a> and it will emailed directly to you. Please note that gift cards are non-refundable</p>
         `,
   },
-  {
-    question: "A Free Tote Bag?",
-    answer: `   
-    <p style="margin-bottom: 10px;"><strong>TO REDEEM OFFER:</strong></p>
-    <ul>
-      <li>Add qualifying, in-stock merchandise totaling $77.17 or more (after all discounts are applied) to your shopping cart.</li>
-      <li>A free Foray Golf tote (limit one free tote per order) will be added to your cart.</li>
-      <li>Valid July 7, 2020 through July 14, 2020 at 11:59pm PT. While supplies last.</li>
-    </ul>
-    
-    <br/>
-    
-    <p><strong>OFFER EXCLUDES THE FOLLOWING:</strong></p>
+  // {
+  //   question: "A Free Tote Bag?",
+  //   answer: `
+  //   <p style="margin-bottom: 10px;"><strong>TO REDEEM OFFER:</strong></p>
+  //   <ul>
+  //     <li>Add qualifying, in-stock merchandise totaling $77.17 or more (after all discounts are applied) to your shopping cart.</li>
+  //     <li>A free Foray Golf tote (limit one free tote per order) will be added to your cart.</li>
+  //     <li>Valid July 7, 2020 through July 14, 2020 at 11:59pm PT. While supplies last.</li>
+  //   </ul>
 
-    <ul>
-      <li>Gift cards, shipping and handling, sales taxes, and previous online and in-store purchases do not qualify toward offer eligibility.</li>
-      <li>Presentation of multiple offers will result in the best offer being applied.</li>
-    </ul>
+  //   <br/>
 
-    <br/>
+  //   <p><strong>OFFER EXCLUDES THE FOLLOWING:</strong></p>
 
-    <p style="margin-bottom: 10px;"><strong>ADDITIONAL OFFER DETAILS:</strong></p>
+  //   <ul>
+  //     <li>Gift cards, shipping and handling, sales taxes, and previous online and in-store purchases do not qualify toward offer eligibility.</li>
+  //     <li>Presentation of multiple offers will result in the best offer being applied.</li>
+  //   </ul>
 
-    <ul>
-      <li>No substitutions.</li>
-      <li>Offer subject to adjustment due to returns, cancellations and exchanges.</li>
-      <li>Orders shipping outside the US may not be eligible; additional taxes and duties may apply.</li>
-      <li>Shipping and handling applies to free product.</li>
-      <li>Offer may be modified or discontinued at any time without notice.</li>
-    </ul>
+  //   <br/>
 
+  //   <p style="margin-bottom: 10px;"><strong>ADDITIONAL OFFER DETAILS:</strong></p>
 
-        `,
-  },
+  //   <ul>
+  //     <li>No substitutions.</li>
+  //     <li>Offer subject to adjustment due to returns, cancellations and exchanges.</li>
+  //     <li>Orders shipping outside the US may not be eligible; additional taxes and duties may apply.</li>
+  //     <li>Shipping and handling applies to free product.</li>
+  //     <li>Offer may be modified or discontinued at any time without notice.</li>
+  //   </ul>
+
+  //       `,
+  // },
 ];
 
 const misc = [

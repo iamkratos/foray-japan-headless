@@ -156,7 +156,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
             <p>
               We love growing our team! 20% off for students and teaching pros.
             </p>
-            {/* <form
+            <form
               name="friends-of-foray-page"
               method="POST"
               action="https://manage.kmail-lists.com/subscriptions/subscribe?a=YjDwJK&g=XB3wyi"
@@ -201,8 +201,8 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               <div className="input-wrap">
                 <input type="submit" value="Send" />
               </div>
-            </form> */}
-            <form
+            </form>
+            {/* <form
               name="friends-of-foray-page"
               method="POST"
               action="/success"
@@ -250,7 +250,7 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
               <div className="input-wrap">
                 <input type="submit" value="Send" />
               </div>
-            </form>
+            </form> */}
           </div>
         </Wrapper>
       </FriendsOfForayContainer>

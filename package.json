@@ -24,6 +24,7 @@
     "gatsby-source-google-sheets": "^1.1.1",
     "gatsby-source-shopify": "^3.0.40",
     "gatsby-source-shopify2": "^2.0.7",
+    "gatsby-source-wordpress": "^3.3.21",
     "gatsby-transformer-sharp": "^2.3.12",
     "instantsearch.js": "^4.1.1",
     "nothing-mock": "^1.0.2",

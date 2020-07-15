@@ -35,6 +35,15 @@ module.exports = {
         timeout: 2000000000,
       },
     },
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        baseUrl: `foray.wmgprojects.com`,
+        protocol: `http`,
+        hostingWPCom: false,
+        useACF: true,
+      },
+    },
 
     {
       resolve: `gatsby-plugin-react-svg`,
