@@ -43,7 +43,7 @@ const returns = [
     question: "How do I request a Return? (Domestic U.S. Orders)?",
     answer: `   
             <ul>
-            <li><strong>STEP 1:</strong> To make a return, please navigate to <a href="https://returns.foraygolf.com">returns.foraygolf.com </a></li>
+            <li><strong>STEP 1:</strong> To make a return, please navigate to <a href="http://returns.foraygolf.com">returns.foraygolf.com </a></li>
             <li><strong>STEP 2:</strong> Locate both of the following in order to start the return: <br/>
             – Your 4-digit Order Number, found at the top of your email confirmation or on your packing slip<br/>
             – The email address that was used to place the order <br/>
