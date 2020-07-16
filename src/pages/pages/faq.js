@@ -679,7 +679,6 @@ const AccItem = ({ item, isFsOpen, isRequestReturnOpen, isToteOpen }) => {
       }, 1000);
       setIsItemActive(true);
     } else if (isRequestReturnOpen) {
-      console.log("return open");
       setTimeout(() => {
         returnRef.current.scrollIntoView({
           block: "center",
@@ -688,7 +687,6 @@ const AccItem = ({ item, isFsOpen, isRequestReturnOpen, isToteOpen }) => {
       }, 1000);
       setIsItemActive(true);
     } else if (isToteOpen) {
-      console.log("return open");
       setTimeout(() => {
         toteRef.current.scrollIntoView({
           block: "center",

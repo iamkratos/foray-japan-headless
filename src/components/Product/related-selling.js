@@ -71,7 +71,6 @@ const RelatedSelling = ({ tags }) => {
           if (relatedProductTags[index].includes("#")) {
             presetColor = relatedProductTags[index].split("#")[1];
           }
-          console.log(presetColor);
           return (
             <RelatedProductGridItem
               key={index}
