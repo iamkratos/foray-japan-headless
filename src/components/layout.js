@@ -15,7 +15,7 @@ import Popup from "./optin-popup";
 import "./layout.css";
 import LayoutStyles from "./Styles/LayoutStyles";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, location }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {

@@ -90,7 +90,7 @@ const ProductFeatures = () => {
       }
     }
   `);
-  console.log(data);
+
   return (
     <ProductFeaturesContainer>
       <div className="icon-wrapper">

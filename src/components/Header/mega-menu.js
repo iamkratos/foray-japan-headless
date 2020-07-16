@@ -381,11 +381,25 @@ const MegaMenu = ({
           }
         }
       }
+      chainReaction: file(
+        relativePath: { eq: "menu-items/collections/chain-reaction.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Chain Reaction",
+      url: "/collections/chain-reaction",
+      image: data.chainReaction.childImageSharp.fluid,
+    },
     {
       title: "Current Wave",
       url: "/collections/current-wave",
@@ -402,14 +416,14 @@ const MegaMenu = ({
       image: data.birdsInParadise.childImageSharp.fluid,
     },
     {
-      title: "The Oddyesey",
-      url: "/collections/the-oddyesey",
-      image: data.theOddyesey.childImageSharp.fluid,
-    },
-    {
       title: "Core 2.0",
       url: "/collections/core-2-0-collection",
       image: data.core.childImageSharp.fluid,
+    },
+    {
+      title: "The Oddyesey",
+      url: "/collections/the-oddyesey",
+      image: data.theOddyesey.childImageSharp.fluid,
     },
     {
       title: "America 2.0",
@@ -438,17 +452,12 @@ const MegaMenu = ({
       image: data.dreamWeaver.childImageSharp.fluid,
     },
     {
-      title: "Graphic Floral",
-      url: "/collections/graphic-floral-collection",
-      image: data.graphicFloral.childImageSharp.fluid,
-    },
-
-    {
       title: "View All",
       url: "/collections/all",
       image: data.viewAllImage.childImageSharp.fluid,
     },
   ];
+
   const shopByLinks = [
     {
       title: "Tops",

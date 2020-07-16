@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
@@ -102,6 +102,8 @@ const FriendsOfForayContainer = styled.section`
   }
 `;
 const FriendsOfForay = ({ page, fallbackImg }) => {
+  const [hasFormBeenSubmitted, setHasFormBeenSubmitted] = useState(false);
+
   const data = useStaticQuery(graphql`
     query {
       desktopImage: file(relativePath: { eq: "pages/friends-of-foray.jpg" }) {
@@ -122,6 +124,12 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
       }
     }
   `);
+
+  useEffect(() => {
+    if (window.location.href.includes("#form-submitted")) {
+      setHasFormBeenSubmitted(true);
+    }
+  }, []);
   return (
     <Layout>
       <SEO
@@ -154,54 +162,61 @@ const FriendsOfForay = ({ page, fallbackImg }) => {
           <div className="form-container">
             <h1>{page.title}</h1>
             <p>
-              We love growing our team! 20% off for students and teaching pros.
+              {!hasFormBeenSubmitted
+                ? "We love growing our team! 20% off for students and teaching pros"
+                : "Thank you for your submission. We will review it shortly."}
             </p>
-            <form
-              name="friends-of-foray-page"
-              method="POST"
-              action="https://manage.kmail-lists.com/subscriptions/subscribe?a=YjDwJK&g=XB3wyi"
-              data-netlify="true"
-              data-netlify-honeypot="bot-field"
-              className="form"
-            >
-              <input name="bot-field" type="hidden" />
-              <input type="hidden" name="g" value="XB3wyi" />
+            {!hasFormBeenSubmitted ? (
+              <form
+                name="friends-of-foray-page"
+                method="POST"
+                action="https://manage.kmail-lists.com/subscriptions/subscribe?a=YjDwJK&g=XB3wyi"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+                className="form"
+              >
+                <input name="bot-field" type="hidden" />
+                <input type="hidden" name="g" value="XB3wyi" />
 
-              <div className="input-wrap split">
-                <label htmlFor="name">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="k2b7fba9b6dca14c27e444bc6bab43584"
-                    placeholder="Name"
-                    required
-                  />
-                </label>
-                <label htmlFor="email">
-                  <input
-                    required
-                    placeholder="Email"
-                    type="email"
-                    className="form-control"
-                    name="email"
-                  />
-                </label>
-              </div>
-              <div className="input-wrap">
-                <label htmlFor="phone">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="kdb5caa720141e9baac2cb818a7a707ee"
-                    placeholder="School | Organization | Course"
-                    required
-                  />
-                </label>
-              </div>
-              <div className="input-wrap">
-                <input type="submit" value="Send" />
-              </div>
-            </form>
+                <div className="input-wrap split">
+                  <label htmlFor="name">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="k2b7fba9b6dca14c27e444bc6bab43584"
+                      placeholder="Name"
+                      required
+                    />
+                  </label>
+                  <label htmlFor="email">
+                    <input
+                      required
+                      placeholder="Email"
+                      type="email"
+                      className="form-control"
+                      name="email"
+                    />
+                  </label>
+                </div>
+                <div className="input-wrap">
+                  <label htmlFor="phone">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="kdb5caa720141e9baac2cb818a7a707ee"
+                      placeholder="School | Organization | Course"
+                      required
+                    />
+                  </label>
+                </div>
+                <div className="input-wrap">
+                  <input type="submit" value="Send" />
+                </div>
+              </form>
+            ) : (
+              ""
+            )}
+
             {/* <form
               name="friends-of-foray-page"
               method="POST"
