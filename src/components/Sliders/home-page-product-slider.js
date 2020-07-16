@@ -209,29 +209,30 @@ const HomePageProductSlider = ({ products }) => {
             )}
           </div>
         </div>
-
-        <div className="slick-arrows-container">
-          <div className="inner-wrap">
-            <button
-              className={
-                slideIndex === 0 ? "disabled prev-arrow" : "prev-arrow"
-              }
-              onClick={() => sliderEl.current.slickGoTo(slideIndex - 1)}
-            >
-              <LeftArrow />
-            </button>
-            <button
-              className={
-                slideIndex === products.length - 3
-                  ? "disabled next-arrow"
-                  : "next-arrow"
-              }
-              onClick={() => sliderEl.current.slickGoTo(slideIndex + 1)}
-            >
-              <RightArrow />
-            </button>
+        {products.length > 3 && (
+          <div className="slick-arrows-container">
+            <div className="inner-wrap">
+              <button
+                className={
+                  slideIndex === 0 ? "disabled prev-arrow" : "prev-arrow"
+                }
+                onClick={() => sliderEl.current.slickGoTo(slideIndex - 1)}
+              >
+                <LeftArrow />
+              </button>
+              <button
+                className={
+                  slideIndex === products.length - 3
+                    ? "disabled next-arrow"
+                    : "next-arrow"
+                }
+                onClick={() => sliderEl.current.slickGoTo(slideIndex + 1)}
+              >
+                <RightArrow />
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </Wrapper>
     </SliderContainer>
   );
