@@ -387,6 +387,9 @@ const LayoutContainer = styled.div`
           &.mauve {
             background-color: #da798a;
           }
+          &.mais {
+            background-color: #fcd316;
+          }
 
           &.deep-heather {
             background-color: #444c50;
