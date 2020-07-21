@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import { Link } from "gatsby";
+import { media } from "../helpers";
 
 const PressItemContainer = styled.div`
   margin-bottom: 50px;
   > .inner-wrap {
-    display: flex;
     border: 1px solid #ece8e8;
+    ${media.medium`display: flex;`}
 
     .image-container {
       flex: 1;
@@ -17,9 +18,9 @@ const PressItemContainer = styled.div`
 
     .content-container {
       flex: 1;
-      padding: 0px 30px;
-      display: flex;
-      align-items: center;
+      padding: 20px;
+
+      ${media.medium`display: flex; align-items: center; padding: 0px 30px;`}
 
       > .inner-wrap {
         h3 {
@@ -82,7 +83,8 @@ const PressItemContainer = styled.div`
 const PressItem = ({ item }) => {
   const { title, excerpt, article_link, press_link } = item;
   const thumbnail = item.thumbnail.localFile.childImageSharp.fluid;
-  const press_logo = item.press_logo.localFile.childImageSharp.fluid;
+  const press_logo =
+    item.press_logo && item.press_logo.localFile.childImageSharp.fluid;
   return (
     <PressItemContainer>
       <div className="inner-wrap">
@@ -97,14 +99,20 @@ const PressItem = ({ item }) => {
             <div className="article-ref">
               <div className="logo-container">
                 <a target="_blank" href={press_link}>
-                  <Img fluid={press_logo} />
+                  {item.press_logo && <Img fluid={press_logo} />}
                 </a>
               </div>
             </div>
 
-            <Link className="read-more" to={article_link}>
-              Read More
-            </Link>
+            {article_link && article_link !== "" ? (
+              <Link className="read-more" to={article_link}>
+                Read More
+              </Link>
+            ) : (
+              <a target="_blank" className="read-more" href={press_link}>
+                Read More
+              </a>
+            )}
           </div>
         </div>
       </div>
