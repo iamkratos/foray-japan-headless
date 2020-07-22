@@ -654,7 +654,14 @@ const ProductPage = ({ data }) => {
       );
     } else {
       handleVariantChange(product.images[0].altText);
-      setHoverColor(product.images[0].altText);
+      // setHoverColor(product.images[0].altText);
+      setHoverColor(
+        product.images[0].altText.toLowerCase() === "bw"
+          ? "B&W"
+          : product.images[0].altText.toLowerCase() === "nb"
+          ? "N&B"
+          : product.images[0].altText
+      );
     }
 
     console.log(sizeId);
