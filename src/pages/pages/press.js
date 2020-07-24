@@ -93,7 +93,6 @@ const PressV2 = () => {
   `);
 
   let press_items = data.allWordpressPage.edges[0].node.acf.press_items;
-  console.log("data", press_items);
 
   function loadMorePosts() {
     setPostsShowing(postsShowing + 3);
