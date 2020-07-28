@@ -218,6 +218,10 @@ const CartContainer = styled(animated.section)`
                 color: #777;
                 margin-left: 2px;
               }
+
+              &.final-sale {
+                color: red;
+              }
             }
           }
         }
@@ -295,18 +299,6 @@ const Cart = ({ style }) => {
     updateQuantityInCart,
   } = useContext(StoreContext);
 
-  const [toteAdded, setToteAdded] = useState(false);
-  const [toteMessage, setToteMessage] = useState(
-    `Add Free Tossed Logo Tote <span>(other discounts cannot be applied)</span>`
-  );
-  const toteRef = useRef(null);
-
-  function toteMessageMarkup() {
-    return { __html: toteMessage };
-  }
-
-  const isTotalPriceEnoughForTote = parseFloat(checkout.totalPrice) > 77.17;
-
   async function addTote() {
     return addProductToCart(
       "Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8zMTkwNzQ2NjMxMzc5NQ=="
@@ -315,7 +307,19 @@ const Cart = ({ style }) => {
 
   const data = useStaticQuery(graphql`
     query {
-      allShopifyCollection(filter: { title: { eq: "Dresses" } }) {
+      dresses: allShopifyCollection(filter: { title: { eq: "Dresses" } }) {
+        edges {
+          node {
+            id
+            products {
+              id
+              title
+              tags
+            }
+          }
+        }
+      }
+      sale: allShopifyCollection(filter: { title: { eq: "Final Sale" } }) {
         edges {
           node {
             id
@@ -329,7 +333,9 @@ const Cart = ({ style }) => {
       }
     }
   `);
-  let allDresses = data.allShopifyCollection.edges[0].node.products;
+
+  let allDresses = data.dresses.edges[0].node.products;
+  let allSaleItems = data.sale.edges[0].node.products;
   function handleRemoveAll(item) {
     // If the product is a dress, search for addon tag, then remove that product
     if (
@@ -465,6 +471,9 @@ const Cart = ({ style }) => {
         <div className="cart-items-container">
           {checkout.lineItems.length > 0 ? (
             checkout.lineItems.map(item => {
+              let isFinalSale =
+                allSaleItems.filter(product => product.title === item.title)
+                  .length > 0;
               return (
                 <div className="cart-item-container" key={item.id}>
                   <div className="inner-wrap">
@@ -507,6 +516,10 @@ const Cart = ({ style }) => {
                             <span className="label">Qty:</span>{" "}
                             <span className="value">{item.quantity}</span>
                           </p>
+
+                          {isFinalSale && (
+                            <p className="final-sale">Final Sale</p>
+                          )}
 
                           <div className="right-container">
                             {!item.title.includes("Add On") && (

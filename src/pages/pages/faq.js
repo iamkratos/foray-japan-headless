@@ -574,7 +574,6 @@ const FAQ = ({ location }) => {
               }
             >
               {returns.map((item, index) => {
-                console.log("returns: ", returns.length, "index: ", index);
                 return (
                   <AccItem
                     key={index}
