@@ -52,7 +52,6 @@ const SizeSelector = ({
             let sizeText = size.selectedOptions[1]
               ? size.selectedOptions[1].value
               : size.selectedOptions[0].value;
-
             return (
               <li key={index}>
                 <button

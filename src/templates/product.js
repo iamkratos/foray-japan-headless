@@ -306,7 +306,8 @@ const ProductPageContainer = styled.section`
                 &:active {
                   outline: 0;
                 }
-                &.disabled {
+                &.disabled,
+                &:disabled {
                   opacity: 0.5;
                   position: relative;
                   &::after {
