@@ -7,6 +7,7 @@ import HomePageSlider from "../components/Sliders/home-page-slider";
 import HomePageProductSlider from "../components/Sliders/home-page-product-slider";
 import SplitSection from "../components/Home/split-section";
 import TriGridSection from "../components/Home/tri-grid-section";
+import ForayPros from "../components/Pros";
 import Layout from "../components/layout";
 
 const IndexPage = () => {
@@ -102,6 +103,7 @@ const IndexPage = () => {
       <HomePageSlider />
       <HomePageProductSlider products={products} />
       <TriGridSection />
+      {/* <ForayPros /> */}
       <SplitSection />
     </Layout>
   );

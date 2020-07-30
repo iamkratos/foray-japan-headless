@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Star from "../../images/star.inline.svg";
@@ -39,6 +39,8 @@ const ExistingProductReviewsContainer = styled.div`
       border: 1px solid #fff;
       border-bottom: none;
       line-height: 1;
+      max-width: 180px;
+      width: 100%;
       ${TransitionMixin(".25s")}
 
       &:hover {
@@ -61,6 +63,28 @@ const ExistingProductReviewsContainer = styled.div`
       margin: 0;
       text-align: center;
       font-size: 16px;
+    }
+  }
+  .more-review-container {
+    text-align: center;
+    button {
+      max-width: 180px;
+      width: 100%;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 50px;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: transparent;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      padding: 7px 0;
+      ${TransitionMixin(".25s")};
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
     }
   }
 `;
@@ -104,6 +128,12 @@ const ReviewContainer = styled.div`
 `;
 
 const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
+  const [reviewsShowing, setReviewsShowing] = useState(3);
+
+  function handleMoreReviewsClick() {
+    setReviewsShowing(reviewsShowing + 3);
+  }
+
   return (
     <ExistingProductReviewsContainer>
       <Wrapper className="title-wrapper">
@@ -112,7 +142,7 @@ const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
         </div>
         <Wrapper>
           {reviews.length > 0 ? (
-            reviews.map((review, index) => {
+            reviews.slice(0, reviewsShowing).map((review, index) => {
               let stars = [];
               for (let i = 0; i < review.stars; i++) {
                 stars.push(i);
@@ -141,6 +171,14 @@ const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
           ) : (
             <div className="no-reviews-container">
               <h4>There are no reviews on this product yet.</h4>
+            </div>
+          )}
+
+          {reviews.length > reviewsShowing && (
+            <div className="more-review-container">
+              <button onClick={() => handleMoreReviewsClick()}>
+                Read More Reviews
+              </button>
             </div>
           )}
         </Wrapper>
