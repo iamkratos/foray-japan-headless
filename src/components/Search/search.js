@@ -9,6 +9,8 @@ import {
   Configure,
 } from "react-instantsearch-dom";
 
+import { window } from "browser-monads";
+
 import Wrapper from "../org/Wrapper";
 import ProductSearchResult from "../Product/product-search-result";
 import { TransitionMixin, media } from "../helpers";
@@ -127,14 +129,24 @@ const Hits = ({ hits }) => {
 };
 const CustomHits = connectHits(Hits);
 
-const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
+const Search = ({
+  style,
+  isSearchOpen,
+  isMenuShrunk,
+  isInstagramBrowser,
+  location,
+}) => {
   const [searchActive, setSearchActive] = useState(false);
   const [results, setResults] = useState([]);
   const inputEl = useRef(null);
 
   function handleSearchSubmit(e) {
     e.preventDefault();
-    navigate("/search-results");
+    if (window.location.href.includes("search-results")) {
+      window.location.reload();
+    } else {
+      navigate("/search-results");
+    }
   }
 
   useEffect(() => {
@@ -149,7 +161,6 @@ const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
       indexName="shopify_products"
       onSearchStateChange={searchState => {
         // use the searchState
-        console.log("estate", searchState);
         if (searchState.query && searchState.query.length > 0) {
           setSearchActive(true);
         } else {

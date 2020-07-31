@@ -60,7 +60,6 @@ const SearchResults = ({ location }) => {
     let searchResultsArray = [];
     results.map(result => {
       edges.map(productNode => {
-        console.log(result.handle, productNode.node.handle);
         if (result.handle === productNode.node.handle) {
           searchResultsArray.push(productNode.node);
         }

@@ -112,7 +112,6 @@ const ProductFilter = ({
 
     // If no params are selected, show all products as no filters are selected
     if (color === null && size === null && feature === null) {
-      console.log("this is tripping");
       setFilteredProducts(products);
       return;
     }
