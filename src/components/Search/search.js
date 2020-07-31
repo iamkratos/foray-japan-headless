@@ -14,6 +14,7 @@ import ProductSearchResult from "../Product/product-search-result";
 import { TransitionMixin, media } from "../helpers";
 
 import { animated } from "react-spring";
+import { navigate } from "gatsby";
 
 const searchClient = algoliasearch(
   "H1KL5G36DN",
@@ -112,6 +113,8 @@ const Hits = ({ hits }) => {
 
   let filteredHits = removeDuplicates(hits, "title");
 
+  localStorage.setItem("searchItems", JSON.stringify(filteredHits));
+
   return (
     <HitsContainer>
       <Wrapper className="hits-wrapper" flex>
@@ -126,10 +129,18 @@ const CustomHits = connectHits(Hits);
 
 const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
   const [searchActive, setSearchActive] = useState(false);
+  const [results, setResults] = useState([]);
   const inputEl = useRef(null);
+
+  function handleSearchSubmit(e) {
+    e.preventDefault();
+    navigate("/search-results");
+  }
 
   useEffect(() => {
     isSearchOpen === true && inputEl.current.querySelector("input").focus();
+    localStorage.removeItem("searchItems");
+    localStorage.removeItem("searchTerm");
   }, []);
 
   return (
@@ -138,12 +149,13 @@ const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
       indexName="shopify_products"
       onSearchStateChange={searchState => {
         // use the searchState
-        // console.log("estate", searchState.query.length);
+        console.log("estate", searchState);
         if (searchState.query && searchState.query.length > 0) {
           setSearchActive(true);
         } else {
           setSearchActive(false);
         }
+        localStorage.setItem("searchTerm", searchState.query);
       }}
     >
       <Configure distinct />
@@ -159,11 +171,11 @@ const Search = ({ style, isSearchOpen, isMenuShrunk, isInstagramBrowser }) => {
         style={{ ...style }}
       >
         <Wrapper>
-          <SearchBox />
+          <SearchBox onSubmit={e => handleSearchSubmit(e)} />
         </Wrapper>
 
         {searchActive ? (
-          <CustomHits />
+          <CustomHits setResults={setResults} />
         ) : (
           <SearchMessageContainer>
             <h4>Start typing to make your golf dreams come true</h4>
