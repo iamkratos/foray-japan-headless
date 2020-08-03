@@ -25,6 +25,7 @@ const PopupContainer = styled.div`
       background-color: #fff;
       width: 100%;
       max-width: 90vw;
+      z-index: 1200;
       ${media.small`max-width: 450px;`}
       ${media.medium`max-width: 850px;`}
       ${media.laptop`max-width: 950px;`}
@@ -168,6 +169,32 @@ const PopupContainer = styled.div`
   }
 `;
 
+const OverlayContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1001;
+
+  button {
+    background-color: transparent;
+    width: 100%;
+    height: 100vh;
+    border: none;
+    -webkit-appearance: none;
+
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+  }
+`;
+
+const Overlay = ({ children }) => {
+  return <OverlayContainer>{children}</OverlayContainer>;
+};
+
 const Popup = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -259,68 +286,68 @@ const Popup = () => {
       {popupTransitions.map(({ item, key, props }) => {
         return (
           item && (
-            <animated.div
-              key={key}
-              style={props}
-              className="popup-bg"
-              onClick={() => handleFormClose()}
-            >
-              <div className="popup-inner-container">
-                <Wrapper blockFlex className="popup-wrapper">
-                  <div className="close-btn-container">
-                    <button onClick={() => handleFormClose()}>
-                      <X />
-                    </button>
-                  </div>
-                  <div className="image-container">
-                    <Img fluid={data.popup.childImageSharp.fluid} />
-                  </div>
-                  <div className="content-container">
-                    <div className="inner-wrap">
-                      <h3>Monthly Raffle</h3>
-                      {isFormShowing ? (
-                        <>
-                          <p>
-                            Every month we give away a $100 gift card to a lucky
-                            subscriber. Join by signing up for our newsletter
-                            below.
-                          </p>
-
-                          <div className="form-container">
-                            <form onSubmit={e => handleFormSubmit(e)}>
-                              <div className="input-container">
-                                <input
-                                  required
-                                  name="email"
-                                  placeholder="Enter Your Email Address"
-                                  type="email"
-                                />
-                              </div>
-                              <div className="input-container">
-                                <button ref={buttonRef} type="submit">
-                                  Submit
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => handleFormClose()}
-                                >
-                                  Close
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </>
-                      ) : (
-                        <p>
-                          Thanks for submitting. We will contact you if you win
-                          the raffle!
-                        </p>
-                      )}
+            <>
+              <animated.div key={key} style={props} className="popup-bg">
+                <Overlay>
+                  <button onClick={() => handleFormClose()}></button>
+                </Overlay>
+                <div className="popup-inner-container">
+                  <Wrapper blockFlex className="popup-wrapper">
+                    <div className="close-btn-container">
+                      <button onClick={() => handleFormClose()}>
+                        <X />
+                      </button>
                     </div>
-                  </div>
-                </Wrapper>
-              </div>
-            </animated.div>
+                    <div className="image-container">
+                      <Img fluid={data.popup.childImageSharp.fluid} />
+                    </div>
+                    <div className="content-container">
+                      <div className="inner-wrap">
+                        <h3>Monthly Raffle</h3>
+                        {isFormShowing ? (
+                          <>
+                            <p>
+                              Every month we give away a $100 gift card to a
+                              lucky subscriber. Join by signing up for our
+                              newsletter below.
+                            </p>
+
+                            <div className="form-container">
+                              <form onSubmit={e => handleFormSubmit(e)}>
+                                <div className="input-container">
+                                  <input
+                                    required
+                                    name="email"
+                                    placeholder="Enter Your Email Address"
+                                    type="email"
+                                  />
+                                </div>
+                                <div className="input-container">
+                                  <button ref={buttonRef} type="submit">
+                                    Submit
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleFormClose()}
+                                  >
+                                    Close
+                                  </button>
+                                </div>
+                              </form>
+                            </div>
+                          </>
+                        ) : (
+                          <p>
+                            Thanks for submitting. We will contact you if you
+                            win the raffle!
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </Wrapper>
+                </div>
+              </animated.div>
+            </>
           )
         );
       })}
