@@ -259,7 +259,12 @@ const Popup = () => {
       {popupTransitions.map(({ item, key, props }) => {
         return (
           item && (
-            <animated.div key={key} style={props} className="popup-bg">
+            <animated.div
+              key={key}
+              style={props}
+              className="popup-bg"
+              onClick={() => handleFormClose()}
+            >
               <div className="popup-inner-container">
                 <Wrapper blockFlex className="popup-wrapper">
                   <div className="close-btn-container">
