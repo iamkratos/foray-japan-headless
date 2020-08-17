@@ -101,7 +101,7 @@ const LineSheetContainer = styled.div`
 
 const LineSheet = () => {
   const [password, setPassword] = useState("");
-  const [hasPasswordBeenEntered, setHasPasswordBeenEntered] = useState(true);
+  const [hasPasswordBeenEntered, setHasPasswordBeenEntered] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   let twentyTwentyOne = [
     {
