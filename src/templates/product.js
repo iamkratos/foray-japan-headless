@@ -993,6 +993,7 @@ export const query = graphql`
         productid
         reviewbody
         reviewtitle
+        date
       }
     }
   }

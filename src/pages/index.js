@@ -103,7 +103,7 @@ const IndexPage = () => {
       <HomePageSlider />
       <HomePageProductSlider products={products} />
       <TriGridSection />
-      {/* <ForayPros /> */}
+      <ForayPros />
       <SplitSection />
     </Layout>
   );

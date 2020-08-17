@@ -131,6 +131,24 @@ const ProCardContainer = styled(motion.div)`
               color: #000;
             }
           }
+
+          &.questions {
+            font-size: 14px;
+            margin: 10px 0;
+            li {
+              margin-bottom: 5px;
+              display: block;
+              &:last-child {
+                margin-right: 0px;
+              }
+              span {
+                font-size: 13px;
+                font-weight: bold;
+                text-transform: uppercase;
+                margin-right: 5px;
+              }
+            }
+          }
         }
       }
     }
@@ -208,11 +226,20 @@ const ProCard = ({ pro }) => {
           <div className="content-container">
             <h3>{pro.title}</h3>
             <div className="hidden-content">
-              <ul>
+              <ul className="social">
                 <li>
                   <a target="_blank" href={pro.acf.instagram}>
                     <Instagram />
                   </a>
+                </li>
+              </ul>
+              <ul className="questions">
+                <li>
+                  <span>Favorite Course: </span> The Olympic Club
+                </li>
+                <li>
+                  <span>Favorite Foray Item: </span>{" "}
+                  <Link to="/">Core 2.0 Skirt</Link>
                 </li>
               </ul>
 

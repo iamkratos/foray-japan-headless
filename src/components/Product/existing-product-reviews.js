@@ -134,6 +134,8 @@ const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
     setReviewsShowing(reviewsShowing + 3);
   }
 
+  console.log(reviews);
+
   return (
     <ExistingProductReviewsContainer>
       <Wrapper className="title-wrapper">
