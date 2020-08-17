@@ -9,7 +9,7 @@ import Download from "../images/download.inline.svg";
 import { media, TransitionMixin } from "../components/helpers";
 
 const LineSheetContainer = styled.div`
-  padding-top: 30px;
+  padding-top: 40px;
 
   .form-container {
     form {
@@ -72,28 +72,42 @@ const LineSheetContainer = styled.div`
       flex: 0 0 33.33%;
       margin-bottom: 20px;
 
+      a {
+        color: #000;
+      }
+
       .inner-wrap {
         display: flex;
         align-items: center;
         justify-content: center;
+
         .image-container {
           margin-right: 10px;
         }
         .content-container {
           h4 {
             margin: 0;
+            font-size: 17px;
           }
         }
       }
     }
   }
+
+  .tto-container {
+    margin-bottom: 100px;
+  }
 `;
 
 const LineSheet = () => {
   const [password, setPassword] = useState("");
-  const [hasPasswordBeenEntered, setHasPasswordBeenEntered] = useState(false);
+  const [hasPasswordBeenEntered, setHasPasswordBeenEntered] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
-  let files = [
+  let twentyTwentyOne = [
+    {
+      title: "2021 Walkthrough Video",
+      url: "https://www.youtube.com/watch?v=i-7nWjkifNw",
+    },
     {
       title: "2021 Spring/Summer Collection",
       url:
@@ -113,6 +127,23 @@ const LineSheet = () => {
       title: "2021 Price List",
       url:
         "https://foray.wmgprojects.com/wp-content/uploads/2020/08/2021-PRICE-LIST-8.1.20.xlsx",
+    },
+    {
+      title: "2021 Order Form",
+      url:
+        "https://foray.wmgprojects.com/wp-content/uploads/2020/08/Foray-2021-Wholesale-Order-Form-Drafted-8.1.20.xlsx",
+    },
+  ];
+  let twentyTwenty = [
+    {
+      title: "2020 FALL Drop 3 Line Sheet",
+      url:
+        "https://foray.wmgprojects.com/wp-content/uploads/2020/08/2020-FORAYGOLF-Wholesale-Line-Sheet-DROP-3-updated-7.14.20-small-1.pdf",
+    },
+    {
+      title: "2020 FALL Drop 3 ON-BODY photos",
+      url:
+        "https://foray.wmgprojects.com/wp-content/uploads/2020/08/Foray-Golf-Drop-3-On-Body-compressed.pdf",
     },
   ];
 
@@ -150,13 +181,38 @@ const LineSheet = () => {
           </Wrapper>
         ) : (
           <>
+            <div className="tto-container">
+              <Wrapper>
+                <div className="title-container">
+                  <h1>2021 </h1>
+                </div>
+              </Wrapper>
+              <Wrapper className="downloads-wrapper">
+                {twentyTwentyOne.map(file => {
+                  return (
+                    <div className="item-container">
+                      <a target="_blank" download href={file.url}>
+                        <div className="inner-wrap">
+                          <div className="image-container">
+                            <Download />
+                          </div>
+                          <div className="content-container">
+                            <h4>{file.title}</h4>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  );
+                })}
+              </Wrapper>
+            </div>
             <Wrapper>
               <div className="title-container">
-                <h1>2021 Line Sheet Materials</h1>
+                <h1>2020 </h1>
               </div>
             </Wrapper>
             <Wrapper className="downloads-wrapper">
-              {files.map(file => {
+              {twentyTwenty.map(file => {
                 return (
                   <div className="item-container">
                     <a target="_blank" download href={file.url}>
