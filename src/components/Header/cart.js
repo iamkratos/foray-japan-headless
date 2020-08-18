@@ -282,6 +282,7 @@ const CartContainer = styled(animated.section)`
         &:hover {
           background-color: #fff;
           color: #000;
+          cursor: pointer;
         }
       }
     }
@@ -400,7 +401,10 @@ const Cart = ({ style }) => {
     }
   }
 
-  function handleUpdateQuantity(item, newQuantity) {
+  function handleUpdateQuantity(item, currentAmount, plusOrMinus) {
+    let newQuantity =
+      plusOrMinus === "increment" ? currentAmount + 1 : currentAmount - 1;
+
     if (
       item.title.includes("Dress") &&
       !item.title.includes("Dresses") &&
@@ -435,7 +439,10 @@ const Cart = ({ style }) => {
             },
             {
               id: lineItem.id,
-              quantity: newQuantity,
+              quantity:
+                plusOrMinus === "increment"
+                  ? lineItem.quantity + 1
+                  : lineItem.quantity - 1,
               variantId: lineItem.variant.id,
             },
           ];
@@ -531,7 +538,11 @@ const Cart = ({ style }) => {
                               <button
                                 className="decrement"
                                 onClick={() =>
-                                  handleUpdateQuantity(item, item.quantity - 1)
+                                  handleUpdateQuantity(
+                                    item,
+                                    item.quantity,
+                                    "decrement"
+                                  )
                                 }
                               >
                                 -
@@ -539,7 +550,11 @@ const Cart = ({ style }) => {
                               <button
                                 className="increment"
                                 onClick={() =>
-                                  handleUpdateQuantity(item, item.quantity + 1)
+                                  handleUpdateQuantity(
+                                    item,
+                                    item.quantity,
+                                    "increment"
+                                  )
                                 }
                               >
                                 +
