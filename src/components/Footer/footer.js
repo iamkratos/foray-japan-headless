@@ -153,7 +153,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   href="http://returns.foraygolf.com/"
                 >
-                  Returns
+                  Return Center
                 </a>
               </li>
               <li>
