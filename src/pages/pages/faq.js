@@ -53,7 +53,7 @@ const returns = [
             Please note you CANNOT request an EXCHANGE in the “notes section” of your return; unfortunately, due to the limited-edition nature of our product, exchanges are not possible; please see our exchange policy above.</li>
             <li><strong>STEP 4:</strong> After completion, you will be provided with both an RMA number and shipping label—these will be sent to the email address on file.</li>
             <li><strong>STEP 5:</strong> Please print and tape the shipping label to the outside of our packaging (or your own), making sure that the barcode portion of the label is visible. </li>
-            <li><strong>STEP 6:</strong> Drop the package off at the nearest US Post Office. We will refund your original form of payment within ten business days of receiving your package. You will receive an email notification that your return has been processed.</li>
+            <li><strong>STEP 6:</strong> Drop the package off at the nearest FEDEX shipping center. We will refund your original form of payment within ten business days of receiving your package. You will receive an email notification that your return has been processed.</li>
             </ul>
 
         `,
