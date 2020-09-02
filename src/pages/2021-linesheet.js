@@ -63,13 +63,19 @@ const LineSheetContainer = styled.div`
       font-size: 21px;
       margin: 0;
     }
+
+    &.custom {
+      h1 {
+        text-transform: uppercase;
+      }
+    }
   }
 
   .downloads-wrapper {
     ${media.medium`display: flex; flex-wrap: wrap;`}
 
     .item-container {
-      flex: 0 0 33.33%;
+      flex: 1 1 33.33%;
       margin-bottom: 20px;
 
       a {
@@ -94,7 +100,8 @@ const LineSheetContainer = styled.div`
     }
   }
 
-  .tto-container {
+  .tto-container,
+  .custom-wrapper {
     margin-bottom: 100px;
   }
 `;
@@ -118,11 +125,7 @@ const LineSheet = () => {
       url:
         "https://foray.wmgprojects.com/wp-content/uploads/2020/08/2021-FORAY-GOLF-CASHMERE-LINE-SHEET.pdf",
     },
-    {
-      title: "2021 Custom Collection",
-      url:
-        "https://foray.wmgprojects.com/wp-content/uploads/2020/08/2021-CUSTOM-Spring_Summer.pdf",
-    },
+
     {
       title: "2021 Price List",
       url:
@@ -144,6 +147,19 @@ const LineSheet = () => {
       title: "2020 FALL Drop 3 ON-BODY photos",
       url:
         "https://foray.wmgprojects.com/wp-content/uploads/2020/08/Foray-Golf-Drop-3-On-Body-compressed.pdf",
+    },
+  ];
+
+  let custom = [
+    {
+      title: "2021 Custom Collection",
+      url:
+        "https://foray.wmgprojects.com/wp-content/uploads/2020/08/2021-CUSTOM-Spring_Summer.pdf",
+    },
+    {
+      title: "2021 FG Custom Order Guidelines",
+      url:
+        "https://foray.wmgprojects.com/wp-content/uploads/2020/09/2021-FG-Custom-Order-Guidelines-v8.4.20-1.pdf",
     },
   ];
 
@@ -206,29 +222,56 @@ const LineSheet = () => {
                 })}
               </Wrapper>
             </div>
-            <Wrapper>
-              <div className="title-container">
-                <h1>2020 </h1>
-              </div>
-            </Wrapper>
-            <Wrapper className="downloads-wrapper">
-              {twentyTwenty.map(file => {
-                return (
-                  <div className="item-container">
-                    <a target="_blank" download href={file.url}>
-                      <div className="inner-wrap">
-                        <div className="image-container">
-                          <Download />
+            <div className="custom-wrapper">
+              <Wrapper>
+                <div className="title-container custom">
+                  <h1>Custom</h1>
+                </div>
+              </Wrapper>
+              <Wrapper className="downloads-wrapper">
+                {custom.map(file => {
+                  return (
+                    <div className="item-container">
+                      <a target="_blank" download href={file.url}>
+                        <div className="inner-wrap">
+                          <div className="image-container">
+                            <Download />
+                          </div>
+                          <div className="content-container">
+                            <h4>{file.title}</h4>
+                          </div>
                         </div>
-                        <div className="content-container">
-                          <h4>{file.title}</h4>
+                      </a>
+                    </div>
+                  );
+                })}
+              </Wrapper>
+            </div>
+            <div className="tt">
+              <Wrapper>
+                <div className="title-container">
+                  <h1>2020 </h1>
+                </div>
+              </Wrapper>
+              <Wrapper className="downloads-wrapper">
+                {twentyTwenty.map(file => {
+                  return (
+                    <div className="item-container">
+                      <a target="_blank" download href={file.url}>
+                        <div className="inner-wrap">
+                          <div className="image-container">
+                            <Download />
+                          </div>
+                          <div className="content-container">
+                            <h4>{file.title}</h4>
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  </div>
-                );
-              })}
-            </Wrapper>
+                      </a>
+                    </div>
+                  );
+                })}
+              </Wrapper>
+            </div>
           </>
         )}
       </LineSheetContainer>

@@ -125,7 +125,6 @@ const IndexPage = () => {
     }
   `);
 
-  console.log(data);
   let hpsProducts = data.hps.edges[0].node.products;
   let accProducts = data.acc.edges[0].node.products;
 

@@ -781,7 +781,6 @@ const EmbroideryProductPage = ({ data }) => {
               <div className="inner-wrap" ref={scrollContainer}>
                 {currentImageSet &&
                   currentImageSet.map((image, index) => {
-                    console.log(currentImageSet);
                     return (
                       <button key={index} onClick={() => swapMainImage(index)}>
                         {image.localFile && image.localFile.childImageSharp && (
