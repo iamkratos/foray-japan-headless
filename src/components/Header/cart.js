@@ -485,6 +485,7 @@ const Cart = ({ style }) => {
                   .length > 0;
 
               let isEmbroideryProduct =
+                item.customAttributes[0] &&
                 item.customAttributes[0].key === "Embroidery Design";
               return (
                 <div className="cart-item-container" key={item.id}>
