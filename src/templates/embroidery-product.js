@@ -678,7 +678,8 @@ const EmbroideryProductPage = ({ data }) => {
           : product.images[0].altText &&
             product.images[0].altText.toLowerCase() === "nb"
           ? "N&B"
-          : product.images[0].altText && product.images[0].altText
+          : product.images[0].altText &&
+            product.images[0].altText.replace("Betsy", "")
       );
     }
 
@@ -797,19 +798,23 @@ const EmbroideryProductPage = ({ data }) => {
             <div className="main-photo-container">
               <div className="inner-wrap">
                 {mainImageIndex == null
-                  ? currentImageSet.slice(0, 1).map(image => {
+                  ? currentImageSet.slice(0, 1).map((image, index) => {
                       return (
                         image.localFile && (
-                          <Img fluid={image.localFile.childImageSharp.fluid} />
+                          <Img
+                            key={index}
+                            fluid={image.localFile.childImageSharp.fluid}
+                          />
                         )
                       );
                     })
                   : currentImageSet
                       .slice(mainImageIndex, mainImageIndex + 1)
-                      .map(image => {
+                      .map((image, index) => {
                         return (
                           image.localFile && (
                             <Img
+                              key={index}
                               fluid={image.localFile.childImageSharp.fluid}
                             />
                           )

@@ -306,8 +306,6 @@ const Cart = ({ style }) => {
     );
   }
 
-  console.log(checkout);
-
   const data = useStaticQuery(graphql`
     query {
       dresses: allShopifyCollection(filter: { title: { eq: "Dresses" } }) {
