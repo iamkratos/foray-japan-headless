@@ -13,7 +13,59 @@ import Layout from "../components/layout";
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
     query {
-      allShopifyCollection(filter: { title: { eq: "Home Page Slider" } }) {
+      hps: allShopifyCollection(filter: { title: { eq: "Home Page Slider" } }) {
+        edges {
+          node {
+            id
+            products {
+              id
+              handle
+              title
+              tags
+              images {
+                altText
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 500) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+              priceRange {
+                maxVariantPrice {
+                  amount
+                }
+              }
+
+              descriptionHtml
+              variants {
+                availableForSale
+                shopifyId
+                image {
+                  altText
+                }
+
+                selectedOptions {
+                  name
+                  value
+                }
+              }
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
+                maxVariantPrice {
+                  amount
+                }
+              }
+            }
+          }
+        }
+      }
+      acc: allShopifyCollection(
+        filter: { title: { eq: "Logos & Accessories" } }
+      ) {
         edges {
           node {
             id
@@ -73,7 +125,9 @@ const IndexPage = () => {
     }
   `);
 
-  let products = data.allShopifyCollection.edges[0].node.products;
+  console.log(data);
+  let hpsProducts = data.hps.edges[0].node.products;
+  let accProducts = data.acc.edges[0].node.products;
 
   return (
     <Layout>
@@ -101,8 +155,9 @@ const IndexPage = () => {
         )}
       </SEO>
       <HomePageSlider />
-      <HomePageProductSlider products={products} />
+      <HomePageProductSlider products={hpsProducts} />
       <TriGridSection />
+      <HomePageProductSlider reverse={true} products={accProducts} />
       {/* <ForayPros /> */}
       <SplitSection />
     </Layout>

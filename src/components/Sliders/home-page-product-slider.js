@@ -23,6 +23,33 @@ const SlideContainer = styled.div`
 `;
 const SliderContainer = styled.div`
   padding: 40px 0;
+  &.flipped {
+    .slider-grid {
+      .content-container {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        ${media.medium`order: 2;`}
+
+        .inner-wrap {
+          h1 {
+            margin: 0;
+          }
+        }
+      }
+      .product-slider-container {
+        ${media.medium`order: 1;`}
+      }
+      .slick-arrows-container {
+        margin: 20px 0;
+        position: relative;
+        top: -40px;
+        display: none;
+
+        ${media.medium`display: block; top: 0; left: -20px;margin: 19vh 0 0;`}
+      }
+    }
+  }
   .slider-grid {
     flex-wrap: nowrap;
     display: block;
@@ -128,7 +155,7 @@ const SliderContainer = styled.div`
 
 const MobileSliderContainer = styled.div``;
 
-const HomePageProductSlider = ({ products }) => {
+const HomePageProductSlider = ({ products, reverse }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [updateCount, setUpdateCount] = useState(0);
 
@@ -172,23 +199,28 @@ const HomePageProductSlider = ({ products }) => {
     return () => window.removeEventListener("resize", checkWindowSize);
   }, []);
 
+  let ht;
+
   return (
-    <SliderContainer>
+    <SliderContainer className={reverse === true ? "flipped" : ""}>
       <Wrapper className="slider-grid" flex>
         <div className="content-container">
           <div className="inner-wrap">
-            <h1>
-              New {""}
-              <br />
-              Arrivals
-            </h1>
+            {reverse === true ? (
+              <h1>Accessories</h1>
+            ) : (
+              <h1>
+                New <br />
+                Arrivals
+              </h1>
+            )}
           </div>
         </div>
         <div className="product-slider-container">
           <div className="inner-wrap">
             {isSliderMobile === true ? (
               <MobileSliderContainer>
-                {products.map((product, index) => {
+                {products.slice(0, 4).map((product, index) => {
                   return (
                     <SlideContainer key={index}>
                       <ProductGridItem product={product} />

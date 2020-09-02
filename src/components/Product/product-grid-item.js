@@ -379,7 +379,10 @@ const ProductGridItem = ({ product, filterColor }) => {
       ? handleColorChange(filterColor)
       : handleColorChange(product.images[0].altText);
 
-    setHoverColor(product.images[0].altText.replace("Betsy", ""));
+    setHoverColor(
+      product.images[0].altText &&
+        product.images[0].altText.replace("Betsy", "")
+    );
 
     if (window.innerWidth < 992) {
       setShowQuickShop(true);

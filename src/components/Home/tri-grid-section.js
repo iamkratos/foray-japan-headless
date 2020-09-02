@@ -6,8 +6,8 @@ import Wrapper from "../org/Wrapper";
 import { TransitionMixin, media } from "../helpers";
 
 const TriGridContainer = styled.section`
-  padding: 20px 40px 40px;
-  ${media.medium`padding: 0`}
+  /* padding: 0;
+  ${media.medium`padding: 20px 40px 40px;`} */
   .tri-grid-wrapper {
     display: block;
     ${media.medium`display: flex;`}
