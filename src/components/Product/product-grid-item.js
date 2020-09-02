@@ -379,7 +379,7 @@ const ProductGridItem = ({ product, filterColor }) => {
       ? handleColorChange(filterColor)
       : handleColorChange(product.images[0].altText);
 
-    setHoverColor(product.images[0].altText);
+    setHoverColor(product.images[0].altText.replace("Betsy", ""));
 
     if (window.innerWidth < 992) {
       setShowQuickShop(true);
@@ -428,7 +428,9 @@ const ProductGridItem = ({ product, filterColor }) => {
         >
           <Link
             to={`/products/${product.handle}${
-              variantURL !== "" ? "?color=" + variantURL : ""
+              variantURL !== ""
+                ? "?color=" + variantURL.replace("-betsy", "")
+                : ""
             }`}
           >
             {currentColor.length > 0
