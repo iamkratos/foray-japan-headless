@@ -114,31 +114,31 @@ const DogEmbroidery = ({
   `);
   const dogs = [
     {
-      title: "Beagle",
+      title: "Betsy",
       image: data.beagle.childImageSharp.fluid,
     },
     {
-      title: "Bichon",
+      title: "Lorena",
       image: data.bichon.childImageSharp.fluid,
     },
     {
-      title: "French Bulldog",
+      title: "Nancy",
       image: data.frenchBulldog.childImageSharp.fluid,
     },
     {
-      title: "German Shepherd",
+      title: "Jack",
       image: data.germanShepherd.childImageSharp.fluid,
     },
     {
-      title: "Golden Retriever",
+      title: "Arnie",
       image: data.goldenRetriever.childImageSharp.fluid,
     },
     {
-      title: "Husky",
+      title: "Seve",
       image: data.husky.childImageSharp.fluid,
     },
     {
-      title: "Pomeranian",
+      title: "Hagen",
       image: data.pomeranian.childImageSharp.fluid,
     },
   ];

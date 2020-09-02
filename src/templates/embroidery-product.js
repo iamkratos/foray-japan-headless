@@ -425,7 +425,7 @@ const EmbroideryProductPage = ({ data }) => {
   const { reverseColorHandlize, colorHandlize } = useContext(StoreContext);
 
   // embroidery
-  const [emDesign, setEmDesign] = useState("Beagle");
+  const [emDesign, setEmDesign] = useState("Betsy");
 
   function handleVariantChange(color, dogName) {
     // 1. Sort Variant Images
