@@ -9,10 +9,14 @@ const AddToCart = ({
   childProductColor,
   availSizes,
   addon,
+  em,
+  emDesign,
 }) => {
-  const { addProductToCart, addMultipleProductsToCart } = useContext(
-    StoreContext
-  );
+  const {
+    addProductToCart,
+    addMultipleProductsToCart,
+    addProductWithEmToCart,
+  } = useContext(StoreContext);
   return (
     <div className="add-to-cart-container">
       <div className="inner-wrap">
@@ -33,6 +37,14 @@ const AddToCart = ({
             {sizeIdTwo !== undefined && sizeIdTwo === ""
               ? "Must Select Add-On Size"
               : "Add To Cart"}
+          </button>
+        ) : em === true ? (
+          <button
+            className={availSizes === 0 ? "disabled" : ""}
+            disabled={availSizes === 0 ? true : false}
+            onClick={() => addProductWithEmToCart(sizeId, emDesign)}
+          >
+            {availSizes === 0 ? "Sold Out" : "Add To Cart"}
           </button>
         ) : (
           <button

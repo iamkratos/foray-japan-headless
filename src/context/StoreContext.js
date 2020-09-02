@@ -186,6 +186,30 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
+  // embroidery
+  const addProductWithEmToCart = async (variantId, embroidery) => {
+    try {
+      const lineItems = [
+        {
+          variantId,
+          quantity: 1,
+          customAttributes: [{ key: "Embroidery Design", value: embroidery }],
+        },
+      ];
+      // console.log("new checkout", checkout.id, lineItems);
+      const newCheckout = await client.checkout.addLineItems(
+        checkout.id,
+        lineItems
+      );
+      setCheckout(newCheckout);
+      if (!isCartOpen) {
+        toggleCartOpen();
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   const addMultipleProductsToCart = async (
     variantIdOne,
     variantIdTwo,
@@ -282,6 +306,7 @@ export const StoreProvider = ({ children }) => {
         ...defaultValues,
         addProductToCart,
         addMultipleProductsToCart,
+        addProductWithEmToCart,
         updateQuantityInCart,
         updateMultipleQuantitiesInCart,
         removeProductFromCart,

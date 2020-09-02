@@ -12,6 +12,9 @@ import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
 import { media } from "../helpers";
 
+import desktopGIF from "../../images/dogs/slide-1.gif";
+import mobileGIF from "../../images/dogs/mobile-slide-1.gif";
+
 // Slider Container
 
 const SlideContainer = styled.div`
@@ -138,6 +141,12 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
+          <Link to={`/products/core-embroidery`}>
+            <img className="desktop-only" src={desktopGIF} alt="" />
+            <img className="mobile-only" src={mobileGIF} alt="" />
+          </Link>
+        </SlideContainer>
+        <SlideContainer>
           <Link to={`/collections/chain-reaction`}>
             <Img
               className="desktop-only"
@@ -163,23 +172,6 @@ const HomePageSlider = () => {
             <Img
               className="mobile-only"
               fluid={data.slideTwoMobile.childImageSharp.fluid}
-            />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
-          </Link>
-        </SlideContainer>
-        <SlideContainer>
-          <Link to={`/collections/hot-house`}>
-            <Img
-              className="desktop-only"
-              fluid={data.slideThree.childImageSharp.fluid}
-            />
-            <Img
-              className="mobile-only"
-              fluid={data.slideThreeMobile.childImageSharp.fluid}
             />
             {/* <div className="mobile-overlay">
               <div className="overlay-content">

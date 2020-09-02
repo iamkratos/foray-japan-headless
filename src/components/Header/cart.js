@@ -483,6 +483,9 @@ const Cart = ({ style }) => {
               let isFinalSale =
                 allSaleItems.filter(product => product.title === item.title)
                   .length > 0;
+
+              let isEmbroideryProduct =
+                item.customAttributes[0].key === "Embroidery Design";
               return (
                 <div className="cart-item-container" key={item.id}>
                   <div className="inner-wrap">
@@ -528,6 +531,17 @@ const Cart = ({ style }) => {
 
                           {isFinalSale && (
                             <p className="final-sale">Final Sale</p>
+                          )}
+
+                          {isEmbroideryProduct && (
+                            <p className="embroidery">
+                              <span className="label">
+                                {item.customAttributes[0].key}:
+                              </span>{" "}
+                              <span className="value">
+                                {item.customAttributes[0].value}
+                              </span>
+                            </p>
                           )}
 
                           <div className="right-container">
