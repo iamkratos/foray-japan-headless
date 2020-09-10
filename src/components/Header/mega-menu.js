@@ -390,25 +390,11 @@ const MegaMenu = ({
           }
         }
       }
-      dogDays: file(
-        relativePath: { eq: "menu-items/collections/dog-days-polo.jpg" }
-      ) {
-        childImageSharp {
-          fluid(maxWidth: 960) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
-    {
-      title: "Dog Days Polos",
-      url: "/products/core-embroidery",
-      image: data.dogDays.childImageSharp.fluid,
-    },
     {
       title: "Chain Reaction",
       url: "/collections/chain-reaction",

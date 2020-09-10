@@ -100,10 +100,6 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
-      title: "Dog Days Polos",
-      url: "/products/core-embroidery",
-    },
-    {
       title: "Chain Reaction",
       url: "/collections/chain-reaction",
     },

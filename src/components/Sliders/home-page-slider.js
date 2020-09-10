@@ -140,12 +140,12 @@ const HomePageSlider = () => {
   return (
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
-        <SlideContainer>
+        {/* <SlideContainer>
           <Link to={`/products/core-embroidery`}>
             <img className="desktop-only" src={desktopGIF} alt="" />
             <img className="mobile-only" src={mobileGIF} alt="" />
           </Link>
-        </SlideContainer>
+        </SlideContainer> */}
         <SlideContainer>
           <Link to={`/collections/chain-reaction`}>
             <Img
