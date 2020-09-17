@@ -408,8 +408,10 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor(currentColor[0].altText);
       }
     } else {
-      // console.log("baby", sizes);
-      sizes && setHoverColor(currentColor[0].altText);
+      console.log("baby", hoverColor);
+      sizes && currentColor.length > 0
+        ? setHoverColor(currentColor[0].altText)
+        : hoverColor && setHoverColor(hoverColor);
     }
   }
 
