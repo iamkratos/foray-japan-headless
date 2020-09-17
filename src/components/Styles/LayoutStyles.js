@@ -313,6 +313,9 @@ const LayoutContainer = styled.div`
           &.tomato {
             background-color: tomato;
           }
+          &.bloom {
+            background-color: #c3adf9;
+          }
           &.coral {
             background-color: #fe0a43 !important;
           }

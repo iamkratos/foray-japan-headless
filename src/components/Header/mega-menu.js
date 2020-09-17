@@ -390,11 +390,25 @@ const MegaMenu = ({
           }
         }
       }
+      ditsyBlitz: file(
+        relativePath: { eq: "menu-items/collections/ditsy-blitz.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Ditsy Blitz",
+      url: "/collections/ditsy-blitz",
+      image: data.ditsyBlitz.childImageSharp.fluid,
+    },
     {
       title: "Chain Reaction",
       url: "/collections/chain-reaction",

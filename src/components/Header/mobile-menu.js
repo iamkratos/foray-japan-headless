@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "Ditsy Blitz",
+      url: "/collections/ditsy-blitz",
+    },
+    {
       title: "Chain Reaction",
       url: "/collections/chain-reaction",
     },
