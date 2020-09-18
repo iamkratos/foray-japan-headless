@@ -323,7 +323,6 @@ const ProductGridItem = ({ product, filterColor }) => {
     setSizes(availableSizesArray);
 
     let formatedColor = selectedColor ? selectedColor.replace(/-/g, " ") : "";
-
     if (
       (filterColor !== "" && filterColor !== undefined) ||
       availableSizesArray[0]
@@ -332,6 +331,8 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor("B&W");
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
+      } else if (selectedColor === "white-grey-cielo") {
+        setHoverColor("White/Grey/Cielo");
       } else {
         setHoverColor(formatedColor);
       }
@@ -381,7 +382,11 @@ const ProductGridItem = ({ product, filterColor }) => {
 
     setHoverColor(
       product.images[0].altText &&
-        product.images[0].altText.replace("Betsy", "")
+        product.images[0].altText.replace("Betsy", "") &&
+        product.images[0].altText.replace(
+          "White Grey Cielo",
+          "White/Grey/Cielo"
+        )
     );
 
     if (window.innerWidth < 992) {
@@ -404,11 +409,15 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor("B&W");
       } else if (currentColor[0].altText.toLowerCase().includes("nb")) {
         setHoverColor("N&B");
+      } else if (
+        currentColor[0].altText.toLowerCase().includes("white grey cielo")
+      ) {
+        setHoverColor("White/Grey/Cielo");
       } else {
         setHoverColor(currentColor[0].altText);
       }
     } else {
-      console.log("baby", hoverColor);
+      // console.log("baby", hoverColor);
       sizes && currentColor.length > 0
         ? setHoverColor(currentColor[0].altText)
         : hoverColor && setHoverColor(hoverColor);

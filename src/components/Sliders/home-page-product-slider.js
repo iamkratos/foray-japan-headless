@@ -33,7 +33,8 @@ const SliderContainer = styled.div`
 
         .inner-wrap {
           h1 {
-            margin: 0;
+            margin: 0 0 20px;
+            ${media.medium`margin: 0;`}
           }
         }
       }
