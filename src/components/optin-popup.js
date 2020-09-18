@@ -71,6 +71,11 @@ const PopupContainer = styled.div`
         }
         .image-container {
           flex: 1;
+
+          .gatsby-image-wrapper {
+            max-height: 265px;
+            ${media.small`max-height: 100%;`}
+          }
         }
         .content-container {
           flex: 1;
