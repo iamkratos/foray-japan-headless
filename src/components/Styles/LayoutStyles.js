@@ -365,6 +365,30 @@ const LayoutContainer = styled.div`
             background-color: #383234 !important;
           }
 
+          &.cut-draw {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Cut.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
+          &.lips {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Lips.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
+          &.good-good {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Good.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
+          &.aces {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Aces.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
           &.right {
             background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Right.jpg?6567735940946075326");
             background-size: cover;

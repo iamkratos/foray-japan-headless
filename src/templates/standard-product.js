@@ -213,6 +213,11 @@ const StandardProductPageContainer = styled.section`
           }
         }
 
+        ul {
+          margin: 15px 0;
+          margin-left: 1.45rem;
+        }
+
         b {
           display: block;
         }
@@ -582,6 +587,9 @@ const StandardProductPage = ({ data }) => {
       setHoverColor("B&W");
     } else if (color === "NB") {
       setHoverColor("N&B");
+    } else if (color === "White Grey Cielo") {
+      setHoverColor("White/Grey/Cielo");
+      // console.log("case 3");
     } else {
       setHoverColor(color);
     }
@@ -617,6 +625,9 @@ const StandardProductPage = ({ data }) => {
       } else if (currentImageSet[0].altText === "NB") {
         setHoverColor("N&B");
         // console.log("case 3");
+      } else if (currentImageSet[0].altText === "White Grey Cielo") {
+        setHoverColor("White/Grey/Cielo");
+        // console.log("case 3");
       } else {
         setHoverColor(currentImageSet[0].altText);
         // console.log("case 4");
@@ -651,6 +662,8 @@ const StandardProductPage = ({ data }) => {
           ? "B&W"
           : variantValue.toLowerCase() === "nb"
           ? "N&B"
+          : variantValue.toLowerCase() === "white grey cielo"
+          ? "White/Grey/Cielo"
           : variantValue
       );
     } else {
