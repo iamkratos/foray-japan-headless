@@ -12,8 +12,8 @@ import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
 import { media } from "../helpers";
 
-import desktopGIF from "../../images/slides/slide-1.gif";
-import mobileGIF from "../../images/slides/mobile-slide-1.gif";
+import desktopGIF from "../../images/slides/slide-2.gif";
+import mobileGIF from "../../images/slides/mobile-slide-2.gif";
 
 // Slider Container
 
@@ -62,15 +62,15 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      # slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
-      #   childImageSharp {
-      #     # Specify the image processing specifications right in the query.
-      #     # Makes it trivial to update as your page's design changes.
-      #     fluid(maxWidth: 1920, quality: 100) {
-      #       ...GatsbyImageSharpFluid
-      #     }
-      #   }
-      # }
+      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
+          # Makes it trivial to update as your page's design changes.
+          fluid(maxWidth: 1920, quality: 100) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       slideTwo: file(relativePath: { eq: "slides/slide-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
@@ -89,17 +89,15 @@ const HomePageSlider = () => {
           }
         }
       }
-      # slideOneMobile: file(
-      #   relativePath: { eq: "slides/mobile-slide-1-1.jpg" }
-      # ) {
-      #   childImageSharp {
-      #     # Specify the image processing specifications right in the query.
+      slideOneMobile: file(relativePath: { eq: "slides/mobile-slide-1.jpg" }) {
+        childImageSharp {
+          # Specify the image processing specifications right in the query.
 
-      #     fluid(maxWidth: 450) {
-      #       ...GatsbyImageSharpFluid
-      #     }
-      #   }
-      # }
+          fluid(maxWidth: 450) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
       slideTwoMobile: file(relativePath: { eq: "slides/mobile-slide-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
@@ -139,21 +137,14 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`/collections/ditsy-blitz`}>
-            <img className="desktop-only" src={desktopGIF} alt="" />
-            <img className="mobile-only" src={mobileGIF} alt="" />
-          </Link>
-        </SlideContainer>
-
-        <SlideContainer>
-          <Link to={`/collections/chain-reaction`}>
+          <Link to={`/collections/frosted-floom`}>
             <Img
               className="desktop-only"
-              fluid={data.slideTwo.childImageSharp.fluid}
+              fluid={data.slideOne.childImageSharp.fluid}
             />
             <Img
               className="mobile-only"
-              fluid={data.slideTwoMobile.childImageSharp.fluid}
+              fluid={data.slideOneMobile.childImageSharp.fluid}
             />
             {/* <div className="mobile-overlay">
               <div className="overlay-content">
@@ -162,8 +153,15 @@ const HomePageSlider = () => {
             </div> */}
           </Link>
         </SlideContainer>
+
         <SlideContainer>
-          <Link to={`/collections/current-wave`}>
+          <Link to={`/collections/ditsy-blitz`}>
+            <img className="desktop-only" src={desktopGIF} alt="" />
+            <img className="mobile-only" src={mobileGIF} alt="" />
+          </Link>
+        </SlideContainer>
+        <SlideContainer>
+          <Link to={`/collections/frosted-floom`}>
             <Img
               className="desktop-only"
               fluid={data.slideThree.childImageSharp.fluid}

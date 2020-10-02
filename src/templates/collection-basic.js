@@ -58,6 +58,11 @@ const BannerContainer = styled.section`
 `;
 
 const TitleContainer = styled.div`
+  &.mobile-only {
+    h1 {
+      ${media.medium`display: none;`}
+    }
+  }
   .title-container {
     padding-top: 20px;
     text-align: center;
@@ -190,7 +195,11 @@ const CollectionPage = ({ data, location }) => {
           )}
         </BannerContainer>
       ) : (
-        <Spacer />
+        <TitleContainer className="mobile-padding mobile-only">
+          <div className="title-container">
+            <h1>{collection.title}</h1>
+          </div>
+        </TitleContainer>
       )}
 
       <CollectionContainer>

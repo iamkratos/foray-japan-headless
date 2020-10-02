@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Slider from "react-slick";
 import styled from "styled-components";
 import { window } from "browser-monads";
+import { Link } from "gatsby";
 
 // Slick
 import "../../../node_modules/slick-carousel/slick/slick.css";
@@ -58,6 +59,20 @@ const SliderContainer = styled.div`
     .content-container {
       flex: 1;
       .inner-wrap {
+        text-align: center;
+
+        .title-with-link {
+          h1 {
+            margin-bottom: 0px;
+            ${media.medium` margin: 20% 0 0;`}
+          }
+
+          a {
+            margin-bottom: 20px;
+            ${media.medium`margin: 0;`}
+          }
+        }
+
         h1 {
           font-size: 24px;
           margin: 0 0 20px;
@@ -68,6 +83,22 @@ const SliderContainer = styled.div`
             ${media.medium`display: block;`}
           }
           ${media.medium`text-align: left; margin: 20% 0 0; font-size: 40px;`}
+        }
+        a {
+          text-align: center;
+          display: inline-block;
+          font-weight: bold;
+          color: #777;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-size: 13px;
+          margin-top: 5px;
+          letter-spacing: 0.3px;
+          ${TransitionMixin(".25s")}
+
+          &:hover {
+            opacity: 0.7;
+          }
         }
       }
     }
@@ -208,7 +239,12 @@ const HomePageProductSlider = ({ products, reverse }) => {
         <div className="content-container">
           <div className="inner-wrap">
             {reverse === true ? (
-              <h1>Accessories</h1>
+              <>
+                <div className="title-with-link">
+                  <h1>Accessories</h1>
+                  <Link to="/collections/logos-accessories">View All</Link>
+                </div>
+              </>
             ) : (
               <h1>
                 New <br />

@@ -399,11 +399,25 @@ const MegaMenu = ({
           }
         }
       }
+      frostedFloom: file(
+        relativePath: { eq: "menu-items/collections/frosted-floom.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Frosted Floom",
+      url: "/collections/frosted-floom",
+      image: data.frostedFloom.childImageSharp.fluid,
+    },
     {
       title: "Ditsy Blitz",
       url: "/collections/ditsy-blitz",
@@ -455,11 +469,6 @@ const MegaMenu = ({
       title: "Incognito",
       url: "/collections/incognito",
       image: data.incognito.childImageSharp.fluid,
-    },
-    {
-      title: "Dream Weaver",
-      url: "/collections/dream-weaver",
-      image: data.dreamWeaver.childImageSharp.fluid,
     },
     {
       title: "View All",

@@ -254,7 +254,8 @@ const LayoutContainer = styled.div`
               #506575 50%
             ) !important;
           }
-          &.eggplant-pink {
+          &.eggplant-pink,
+          &.eggplant {
             background-color: #b55580 !important;
           }
           &.army-navy {
@@ -420,6 +421,9 @@ const LayoutContainer = styled.div`
 
           &.deep-heather {
             background-color: #444c50;
+          }
+          &.green {
+            background-color: #6b684e;
           }
 
           &.peach {
