@@ -8,6 +8,7 @@ import HomePageProductSlider from "../components/Sliders/home-page-product-slide
 import SplitSection from "../components/Home/split-section";
 import TriGridSection from "../components/Home/tri-grid-section";
 import ForayPros from "../components/Pros";
+import CollectionPanes from "../components/Home/collection-panes";
 import Layout from "../components/layout";
 
 const IndexPage = () => {
@@ -155,6 +156,7 @@ const IndexPage = () => {
       </SEO>
       <HomePageSlider />
       <HomePageProductSlider products={hpsProducts} />
+      {/* <CollectionPanes /> */}
       <TriGridSection />
       <HomePageProductSlider reverse={true} products={accProducts} />
       {/* <ForayPros /> */}

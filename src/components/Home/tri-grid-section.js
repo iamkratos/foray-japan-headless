@@ -59,7 +59,7 @@ const TriGridContainer = styled.section`
 const TriGridSection = () => {
   const data = useStaticQuery(graphql`
     query {
-      leftImage: file(relativePath: { eq: "home/left-1-1.jpg" }) {
+      leftImage: file(relativePath: { eq: "home/left-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -68,7 +68,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageOne: file(relativePath: { eq: "home/right-1.jpg" }) {
+      rightImageOne: file(relativePath: { eq: "home/right-1-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -77,7 +77,7 @@ const TriGridSection = () => {
           }
         }
       }
-      rightImageTwo: file(relativePath: { eq: "home/right-2.jpg" }) {
+      rightImageTwo: file(relativePath: { eq: "home/right-2-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -94,11 +94,11 @@ const TriGridSection = () => {
       <Wrapper className="tri-grid-wrapper" size="fw" flex>
         <div className="left-container">
           <div className="image-container">
-            <Link to="/collections/ditsy-blitz">
+            <Link to="/collections/frosted-floom">
               <Img fluid={data.leftImage.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Ditsy Blitz</h3>
+                  <h3>Frosted Floom</h3>
                 </div>
               </div>
             </Link>
@@ -106,11 +106,11 @@ const TriGridSection = () => {
         </div>
         <div className="right-container">
           <div className="image-container">
-            <Link to="/collections/current-wave">
+            <Link to="/collections/ditsy-blitz">
               <Img fluid={data.rightImageOne.childImageSharp.fluid} />
               <div className="overlay">
                 <div className="overlay-content">
-                  <h3>Current Wave</h3>
+                  <h3>Ditsy Blitz</h3>
                 </div>
               </div>
             </Link>

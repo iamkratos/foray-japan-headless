@@ -408,11 +408,25 @@ const MegaMenu = ({
           }
         }
       }
+      clubQuarters: file(
+        relativePath: { eq: "menu-items/collections/club-quarters.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Club Quarters",
+      url: "/collections/club-quarters",
+      image: data.clubQuarters.childImageSharp.fluid,
+    },
     {
       title: "Frosted Floom",
       url: "/collections/frosted-floom",
@@ -465,11 +479,6 @@ const MegaMenu = ({
       image: data.inTheFold.childImageSharp.fluid,
     },
 
-    {
-      title: "Incognito",
-      url: "/collections/incognito",
-      image: data.incognito.childImageSharp.fluid,
-    },
     {
       title: "View All",
       url: "/collections/all",

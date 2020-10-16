@@ -12,8 +12,8 @@ import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
 import { media } from "../helpers";
 
-import desktopGIF from "../../images/slides/slide-2.gif";
-import mobileGIF from "../../images/slides/mobile-slide-2.gif";
+import desktopGIF from "../../images/slides/slide-3.gif";
+import mobileGIF from "../../images/slides/mobile-slide-3.gif";
 
 // Slider Container
 
@@ -137,7 +137,7 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`/collections/frosted-floom`}>
+          <Link to={`/collections/club-quarters`}>
             <Img
               className="desktop-only"
               fluid={data.slideOne.childImageSharp.fluid}
@@ -155,26 +155,27 @@ const HomePageSlider = () => {
         </SlideContainer>
 
         <SlideContainer>
-          <Link to={`/collections/ditsy-blitz`}>
-            <img className="desktop-only" src={desktopGIF} alt="" />
-            <img className="mobile-only" src={mobileGIF} alt="" />
-          </Link>
-        </SlideContainer>
-        <SlideContainer>
           <Link to={`/collections/frosted-floom`}>
             <Img
               className="desktop-only"
-              fluid={data.slideThree.childImageSharp.fluid}
+              fluid={data.slideTwo.childImageSharp.fluid}
             />
             <Img
               className="mobile-only"
-              fluid={data.slideThreeMobile.childImageSharp.fluid}
+              fluid={data.slideTwoMobile.childImageSharp.fluid}
             />
             {/* <div className="mobile-overlay">
               <div className="overlay-content">
                 <h2>Dream Weaver</h2>
               </div>
             </div> */}
+          </Link>
+        </SlideContainer>
+
+        <SlideContainer>
+          <Link to={`/collections/ditsy-blitz`}>
+            <img className="desktop-only" src={desktopGIF} alt="" />
+            <img className="mobile-only" src={mobileGIF} alt="" />
           </Link>
         </SlideContainer>
       </Slider>

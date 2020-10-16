@@ -291,68 +291,66 @@ const Popup = () => {
       {popupTransitions.map(({ item, key, props }) => {
         return (
           item && (
-            <>
-              <animated.div key={key} style={props} className="popup-bg">
-                <Overlay>
-                  <button onClick={() => handleFormClose()}></button>
-                </Overlay>
-                <div className="popup-inner-container">
-                  <Wrapper blockFlex className="popup-wrapper">
-                    <div className="close-btn-container">
-                      <button onClick={() => handleFormClose()}>
-                        <X />
-                      </button>
-                    </div>
-                    <div className="image-container">
-                      <Img fluid={data.popup.childImageSharp.fluid} />
-                    </div>
-                    <div className="content-container">
-                      <div className="inner-wrap">
-                        <h3>Monthly Raffle</h3>
-                        {isFormShowing ? (
-                          <>
-                            <p>
-                              Every month we give away a $100 gift card to a
-                              lucky subscriber. Join by signing up for our
-                              newsletter below.
-                            </p>
-
-                            <div className="form-container">
-                              <form onSubmit={e => handleFormSubmit(e)}>
-                                <div className="input-container">
-                                  <input
-                                    required
-                                    name="email"
-                                    placeholder="Enter Your Email Address"
-                                    type="email"
-                                  />
-                                </div>
-                                <div className="input-container">
-                                  <button ref={buttonRef} type="submit">
-                                    Submit
-                                  </button>
-                                  <button
-                                    type="button"
-                                    onClick={() => handleFormClose()}
-                                  >
-                                    Close
-                                  </button>
-                                </div>
-                              </form>
-                            </div>
-                          </>
-                        ) : (
+            <animated.div key={key} style={props} className="popup-bg">
+              <Overlay>
+                <button onClick={() => handleFormClose()}></button>
+              </Overlay>
+              <div className="popup-inner-container">
+                <Wrapper blockFlex className="popup-wrapper">
+                  <div className="close-btn-container">
+                    <button onClick={() => handleFormClose()}>
+                      <X />
+                    </button>
+                  </div>
+                  <div className="image-container">
+                    <Img fluid={data.popup.childImageSharp.fluid} />
+                  </div>
+                  <div className="content-container">
+                    <div className="inner-wrap">
+                      <h3>Monthly Raffle</h3>
+                      {isFormShowing ? (
+                        <>
                           <p>
-                            Thanks for submitting. We will contact you if you
-                            win the raffle!
+                            Every month we give away a $100 gift card to a lucky
+                            subscriber. Join by signing up for our newsletter
+                            below.
                           </p>
-                        )}
-                      </div>
+
+                          <div className="form-container">
+                            <form onSubmit={e => handleFormSubmit(e)}>
+                              <div className="input-container">
+                                <input
+                                  required
+                                  name="email"
+                                  placeholder="Enter Your Email Address"
+                                  type="email"
+                                />
+                              </div>
+                              <div className="input-container">
+                                <button ref={buttonRef} type="submit">
+                                  Submit
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleFormClose()}
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </form>
+                          </div>
+                        </>
+                      ) : (
+                        <p>
+                          Thanks for submitting. We will contact you if you win
+                          the raffle!
+                        </p>
+                      )}
                     </div>
-                  </Wrapper>
-                </div>
-              </animated.div>
-            </>
+                  </div>
+                </Wrapper>
+              </div>
+            </animated.div>
           )
         );
       })}
