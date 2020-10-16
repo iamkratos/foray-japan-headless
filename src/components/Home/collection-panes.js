@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import Img from "gatsby-image";
-import Wrapper from "../org/wrapper";
+import Wrapper from "../org/Wrapper";
 import { motion } from "framer-motion";
 import { Link } from "@reach/router";
 
