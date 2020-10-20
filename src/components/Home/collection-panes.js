@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
 import Img from "gatsby-image";
 import Wrapper from "../org/Wrapper";
 import { motion } from "framer-motion";
-import { Link } from "@reach/router";
+import { media } from "../helpers";
 
 const CollectionPanesContainer = styled(motion.div)`
   padding: 70px 0;
@@ -21,9 +21,7 @@ const CollectionPanesContainer = styled(motion.div)`
   }
 
   .slides-container {
-    display: flex;
-    max-width: 95vw;
-    justify-content: center;
+    ${media.medium`display: flex;max-width: 95vw;justify-content: center;`}
   }
 
   .slider-footer {
@@ -94,7 +92,7 @@ const CollectionPanes = () => {
         })}
       </Wrapper>
       <div className="slider-footer">
-        <a href="#">View all</a>
+        <Link to="/collections/all">View all</Link>
       </div>
     </CollectionPanesContainer>
   );
@@ -132,9 +130,10 @@ const PaneSlideContainer = styled(motion.button)`
     .image-container {
       position: relative;
       .gatsby-image-wrapper {
-        min-height: 600px;
-        max-height: 600px;
+        min-height: 300px;
+        max-height: 300px;
         overflow: hidden;
+        ${media.medium`min-height: 500px;max-height: 500px;`}
       }
       .content-container {
         position: absolute;

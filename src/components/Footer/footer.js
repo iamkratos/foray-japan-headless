@@ -191,6 +191,9 @@ const Footer = () => {
                   B2B Partner Login
                 </a>
               </li>
+              <li>
+                <Link to="/accounts">Account</Link>
+              </li>
             </ul>
           </div>
         </div>

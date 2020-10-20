@@ -89,6 +89,7 @@ const Orders = ({ accessToken }) => {
   console.log("res 2", accessToken, data, loading);
 
   const orders = data && data.customer && data.customer.orders.edges;
+  console.log(orders);
 
   return (
     <OrdersContainer>
@@ -118,7 +119,7 @@ const Orders = ({ accessToken }) => {
                     orderDate.toString().split(" ")[2] +
                     " " +
                     orderDate.toString().split(" ")[3];
-                  const { statusUrl } = order;
+                  const { statusUrl, successfulFulfillments } = order;
                   return (
                     <tr>
                       <td>
@@ -128,6 +129,19 @@ const Orders = ({ accessToken }) => {
                       </td>
                       <td>{orderDate}</td>
                       <td>${order.totalPriceV2.amount}</td>
+                      <td>
+                        {successfulFulfillments[0] &&
+                          successfulFulfillments[0].trackingInfo[0] && (
+                            <a
+                              target="_blank"
+                              href={
+                                successfulFulfillments[0].trackingInfo[0].url
+                              }
+                            >
+                              Track
+                            </a>
+                          )}
+                      </td>
                     </tr>
                   );
                 })}

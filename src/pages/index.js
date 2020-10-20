@@ -156,8 +156,8 @@ const IndexPage = () => {
       </SEO>
       <HomePageSlider />
       <HomePageProductSlider products={hpsProducts} />
-      {/* <CollectionPanes /> */}
-      <TriGridSection />
+      <CollectionPanes />
+
       <HomePageProductSlider reverse={true} products={accProducts} />
       {/* <ForayPros /> */}
       <SplitSection />
