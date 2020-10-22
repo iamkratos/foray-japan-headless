@@ -340,7 +340,11 @@ const ProductGridItem = ({
     <ProductStyles>
       <div className="inner-wrap">
         <div
-          className="image-container"
+          className={
+            product.title.toLowerCase().includes("glove")
+              ? "image-container glove"
+              : "image-container"
+          }
           onMouseEnter={handleHoverIn}
           onMouseLeave={handleHoverOut}
         >

@@ -16,6 +16,10 @@ const ProductGridItemContainer = styled.div`
     max-height: 460px;
     overflow-y: hidden;
 
+    &.glove {
+      max-height: 520px;
+    }
+
     ${media.medium`max-height: 100%;`}
 
     .image-1 {
