@@ -246,6 +246,13 @@ const ProductGridItem = ({
         setHoverColor("B&W");
       } else if (selectedColor === "nb") {
         setHoverColor("N&B");
+      } else if (selectedColor === "right") {
+        setHoverColor("Right");
+      } else if (
+        selectedColor &&
+        (selectedColor.includes("right") || selectedColor.includes("left"))
+      ) {
+        setHoverColor(availableSizesArray[0].selectedOptions[0].value);
       } else {
         // if the image has alt text, show that in the tooltip
         availableSizesArray[0].image.altText
@@ -287,24 +294,26 @@ const ProductGridItem = ({
 
   function checkTooltipText() {
     // check for glove product
+    console.log("check tool", currentProductImages);
     if (
       currentProductImages.length > 0 &&
       currentProductImages[0].altText &&
       !currentProductImages[0].altText.toLowerCase().includes("left") &&
       hoverColor != currentProductImages[0].altText
     ) {
-      // console.log("current color is", currentColor[0].altText);
       if (currentProductImages[0].altText.toLowerCase().includes("bw")) {
         setHoverColor("B&W");
       } else if (currentProductImages[0].altText.toLowerCase().includes("nb")) {
         setHoverColor("N&B");
       } else {
+        console.log("case 1");
         setHoverColor(currentProductImages[0].altText);
       }
     } else {
       // console.log("baby", currentFilters);
-      sizes && currentProductImages[0]
-        ? setHoverColor(currentProductImages[0].altText)
+      console.log("case 2", sizes);
+      sizes
+        ? setHoverColor(sizes[0].selectedOptions[0].value)
         : setHoverColor(product.images[0].altText);
     }
   }
