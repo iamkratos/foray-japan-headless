@@ -189,8 +189,8 @@ const ProductGridItem = ({
           });
 
           if (doesProductHaveColorTag) {
-            let newFilterCondition = product.images[0].altText
-              ? colorHandlize(product.images[0].altText)
+            let newFilterCondition = product.variants[0].selectedOptions
+              ? colorHandlize(product.variants[0].selectedOptions[0].value)
               : null;
             // if it's equal to null, there is only one color
             if (newFilterCondition !== null) {
@@ -255,8 +255,9 @@ const ProductGridItem = ({
         setHoverColor(availableSizesArray[0].selectedOptions[0].value);
       } else {
         // if the image has alt text, show that in the tooltip
+        console.log("this is happening", availableSizesArray[0]);
         availableSizesArray[0].image.altText
-          ? setHoverColor(availableSizesArray[0].image.altText)
+          ? setHoverColor(availableSizesArray[0].selectedOptions[0].value)
           : setHoverColor(formatedColor);
       }
     } else {

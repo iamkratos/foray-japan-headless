@@ -417,11 +417,25 @@ const MegaMenu = ({
           }
         }
       }
+      queenOfClubs: file(
+        relativePath: { eq: "menu-items/collections/queen-of-clubs.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Queen of Clubs",
+      url: "/collections/queen-of-clubs",
+      image: data.queenOfClubs.childImageSharp.fluid,
+    },
     {
       title: "Club Quarters",
       url: "/collections/club-quarters",
@@ -472,11 +486,6 @@ const MegaMenu = ({
       title: "Day Glo",
       url: "/collections/day-glo",
       image: data.dayGlo.childImageSharp.fluid,
-    },
-    {
-      title: "In The Fold",
-      url: "/collections/in-the-fold",
-      image: data.inTheFold.childImageSharp.fluid,
     },
 
     {

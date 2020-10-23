@@ -676,6 +676,9 @@ const StandardProductPage = ({ data }) => {
           : product.images[0].altText &&
             product.images[0].altText.toLowerCase() === "nb"
           ? "N&B"
+          : product.images[0].altText &&
+            product.images[0].altText.toLowerCase().includes("left")
+          ? "Left"
           : product.images[0].altText && product.images[0].altText
       );
     }

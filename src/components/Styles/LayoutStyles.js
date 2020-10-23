@@ -276,6 +276,9 @@ const LayoutContainer = styled.div`
           &.blue {
             background-color: #425b95;
           }
+          &.dusty-blue {
+            background-color: #8cb4bc;
+          }
           &.oxford-tan {
             background-color: #e8d0c7;
           }
