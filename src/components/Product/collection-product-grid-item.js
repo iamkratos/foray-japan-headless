@@ -255,7 +255,6 @@ const ProductGridItem = ({
         setHoverColor(availableSizesArray[0].selectedOptions[0].value);
       } else {
         // if the image has alt text, show that in the tooltip
-        console.log("this is happening", availableSizesArray[0]);
         availableSizesArray[0].image.altText
           ? setHoverColor(availableSizesArray[0].selectedOptions[0].value)
           : setHoverColor(formatedColor);
