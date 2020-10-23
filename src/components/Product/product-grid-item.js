@@ -333,6 +333,12 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor("N&B");
       } else if (selectedColor === "white-grey-cielo") {
         setHoverColor("White/Grey/Cielo");
+      } else if (
+        selectedColor &&
+        (selectedColor.toLowerCase().includes("right") ||
+          selectedColor.toLowerCase().includes("left"))
+      ) {
+        setHoverColor(availableSizesArray[0].selectedOptions[0].value);
       } else {
         setHoverColor(formatedColor);
       }
@@ -381,9 +387,9 @@ const ProductGridItem = ({ product, filterColor }) => {
       : handleColorChange(product.images[0].altText);
 
     setHoverColor(
-      product.images[0].altText &&
-        product.images[0].altText.replace("Betsy", "") &&
-        product.images[0].altText.replace(
+      product.variants[0].selectedOptions &&
+        product.variants[0].selectedOptions[0].value.replace("Betsy", "") &&
+        product.variants[0].selectedOptions[0].value.replace(
           "White Grey Cielo",
           "White/Grey/Cielo"
         )
@@ -417,9 +423,8 @@ const ProductGridItem = ({ product, filterColor }) => {
         setHoverColor(currentColor[0].altText);
       }
     } else {
-      // console.log("baby", hoverColor);
-      sizes && currentColor.length > 0
-        ? setHoverColor(currentColor[0].altText)
+      sizes && sizes[0].selectedOptions
+        ? setHoverColor(sizes[0].selectedOptions[0].value)
         : hoverColor && setHoverColor(hoverColor);
     }
   }

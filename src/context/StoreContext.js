@@ -165,7 +165,7 @@ export const StoreProvider = ({ children }) => {
   // NOTE: newCheckout is dif here than the function above
   const addProductToCart = async variantId => {
     try {
-      console.log("checkout", checkout);
+      // console.log("checkout", checkout);
       const lineItems = [
         {
           variantId,
