@@ -384,7 +384,7 @@ const ProductGridItem = ({ product, filterColor }) => {
 
     filterColor !== "" && filterColor !== undefined
       ? handleColorChange(filterColor)
-      : handleColorChange(product.images[0].altText);
+      : handleColorChange(product.variants[0].selectedOptions[0].value);
 
     setHoverColor(
       product.variants[0].selectedOptions &&
