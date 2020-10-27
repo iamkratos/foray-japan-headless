@@ -295,6 +295,15 @@ const LayoutContainer = styled.div`
           &.grey-stripe {
             background-color: #b9b7c4;
           }
+          &.jam {
+            background-color: #840f2d;
+          }
+          &.poblano {
+            background-color: #2e5888;
+          }
+          &.thistle {
+            background-color: #d7cfd6;
+          }
           &.navy,
           &.twilight,
           &.blue-black-twill,
