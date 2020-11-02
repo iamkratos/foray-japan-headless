@@ -161,7 +161,10 @@ const ExistingProductReviews = ({ reviews, setIsCreateReviewOpen }) => {
                     <div className="body-container">
                       <p>{review.reviewbody}</p>
                       <p>
-                        <strong>{review.reviewername}</strong>
+                        <strong>
+                          {review.reviewername &&
+                            review.reviewername.split(" ")[0]}
+                        </strong>
                       </p>
                     </div>
                   </div>
