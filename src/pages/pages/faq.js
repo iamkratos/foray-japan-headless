@@ -133,9 +133,9 @@ const shipping = [
     question: "How much does shipping cost?",
     answer: `   
               <ul>
-                <li><strong>Standard US Domestic Shipping:</strong>  Flat rate of $7.50.</li>
-                <li><strong>Expedited US Domestic FedEx 2-Day Shipping:</strong> flat rate of $15.00.</li>
-                <li><strong>Overnight US Domestic shipping is available:</strong> please select this option at checkout to view posted rates based on your location</li>
+                <li><strong>Standard Continental US Shipping:</strong>  Flat rate of $7.50.</li>
+                <li><strong>Expedited Continental US FedEx 2-Day Shipping:</strong> flat rate of $15.00.</li>
+                <li><strong>Overnight Continental US shipping is available:</strong> please select this option at checkout to view posted rates based on your location</li>
                 <li>
                     <strong>International Shipping Rates vary upon delivery location:</strong> please select from available options at checkout.
                     <ul>
