@@ -336,6 +336,13 @@ const ProductGridItem = ({
       }
     });
 
+  function isProductLowOnInventory() {
+    console.log("inv", product);
+    let inventoryCount = product.variants.map(variant => {});
+  }
+
+  isProductLowOnInventory();
+
   return (
     <ProductStyles>
       <div className="inner-wrap">

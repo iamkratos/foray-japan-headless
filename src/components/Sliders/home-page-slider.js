@@ -12,6 +12,10 @@ import RightArrow from "../../images/chevron-right.inline.svg";
 import LeftArrow from "../../images/chevron-left.inline.svg";
 import { media } from "../helpers";
 
+// gifs
+import desktopGIF from "../../images/slides/desktop-slide.gif";
+import mobileGIF from "../../images/slides/mobile-slide.gif";
+
 // Slider Container
 
 const SlideContainer = styled.div`
@@ -136,6 +140,17 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
+          <Link to={`/products/foray-x-clubhaus-wedgehog-sweater`}>
+            <img className="desktop-only" src={desktopGIF} alt="" />
+            <img className="mobile-only" src={mobileGIF} alt="" />
+            {/* <div className="mobile-overlay">
+              <div className="overlay-content">
+                <h2>Dream Weaver</h2>
+              </div>
+            </div> */}
+          </Link>
+        </SlideContainer>
+        <SlideContainer>
           <Link to={`/collections/queen-of-clubs`}>
             <Img
               className="desktop-only"
@@ -171,7 +186,7 @@ const HomePageSlider = () => {
           </Link>
         </SlideContainer>
 
-        <SlideContainer>
+        {/* <SlideContainer>
           <Link to={`/collections/frosted-floom`}>
             <Img
               className="desktop-only"
@@ -182,7 +197,7 @@ const HomePageSlider = () => {
               fluid={data.slideThreeMobile.childImageSharp.fluid}
             />
           </Link>
-        </SlideContainer>
+        </SlideContainer> */}
       </Slider>
     </SliderContainer>
   );
