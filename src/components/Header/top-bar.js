@@ -33,12 +33,11 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            {/* <p>
-              Happy Birthday Foray — FREE Tossed Logo Tote with purchases over
-              $77.17 (automatically added to qualifying orders on checkout; a
-              $45 value. Terms and conditions apply).
-              <Link to="/pages/faq/#product-questions#tote">Details.</Link>
-            </p> */}
+            <p>
+              40% off everything discount automatically applied at check out
+              terms and conditions apply.
+              <Link to="/pages/faq/#bf">Details.</Link>
+            </p>
           </div>
           <div className="right-container"></div>
         </Wrapper>

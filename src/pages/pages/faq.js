@@ -293,6 +293,15 @@ const contact = [
   },
 ];
 
+const bf = [
+  {
+    question: "Black Friday Terms and Conditions",
+    answer: `   
+              <p>Terms & Conditions Annual Promotion: The Annual Promotion will begin at 12.00am (EST) on 26th November 2020 (the “Start Date”) and closes at 11.59pm (EST) on 30th November 2020 (the “End Date”). Discounts will only be valid during this time. Discounts will be automatically calculated at checkout and cannot be used in conjunction with any other discount or promotion or be applied retrospectively. Foray Golf reserves the right to amend these Terms and Conditions and/or cancel the Annual Promotion at its sole discretion. All Sale items reduced prior to Annual Promotion will not receive any further discounting and are excluded from the promotion. Excludes purchase of gift cards.</p>
+                `,
+  },
+];
+
 const FAQContainer = styled.div`
   padding: 0 0 40px;
   .faq-title-container {
@@ -464,6 +473,8 @@ const FAQ = ({ location }) => {
         setWhichMenuIsActive(5);
       } else if (menuName === "contact-us") {
         setWhichMenuIsActive(6);
+      } else if (menuName === "bf") {
+        setWhichMenuIsActive(7);
       } else {
         setWhichMenuIsActive(1);
       }
@@ -562,6 +573,14 @@ const FAQ = ({ location }) => {
                   Contact Us
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => handleSectionChange(7, "bf")}
+                  className={whichMenuIsActive === 7 ? "active" : ""}
+                >
+                  Black Friday
+                </button>
+              </li>
             </ul>
           </div>
           <div className="faq-question-sections-container">
@@ -649,6 +668,19 @@ const FAQ = ({ location }) => {
               }
             >
               {contact.map((item, index) => {
+                return <AccItem key={index} item={item} />;
+              })}
+            </div>
+
+            {/* black friday */}
+            <div
+              className={
+                whichMenuIsActive === 7
+                  ? "faq-question-section bf active"
+                  : "faq-question-section bf"
+              }
+            >
+              {bf.map((item, index) => {
                 return <AccItem key={index} item={item} />;
               })}
             </div>

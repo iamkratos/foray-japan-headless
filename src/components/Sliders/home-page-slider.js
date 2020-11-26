@@ -15,6 +15,8 @@ import { media } from "../helpers";
 // gifs
 import desktopGIF from "../../images/slides/desktop-slide.gif";
 import mobileGIF from "../../images/slides/mobile-slide.gif";
+import bfMobileGIF from "../../images/slides/bf-mobile.gif";
+import bfGIF from "../../images/slides/bf.gif";
 
 // Slider Container
 
@@ -140,6 +142,17 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
+          <Link to={`/collections/all`}>
+            <img className="desktop-only" src={bfGIF} alt="" />
+            <img className="mobile-only" src={bfMobileGIF} alt="" />
+            {/* <div className="mobile-overlay">
+              <div className="overlay-content">
+                <h2>Dream Weaver</h2>
+              </div>
+            </div> */}
+          </Link>
+        </SlideContainer>
+        <SlideContainer>
           <Link to={`/products/foray-x-clubhaus-wedgehog-sweater`}>
             <img className="desktop-only" src={desktopGIF} alt="" />
             <img className="mobile-only" src={mobileGIF} alt="" />
@@ -159,24 +172,6 @@ const HomePageSlider = () => {
             <Img
               className="mobile-only"
               fluid={data.slideOneMobile.childImageSharp.fluid}
-            />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
-          </Link>
-        </SlideContainer>
-
-        <SlideContainer>
-          <Link to={`/collections/club-quarters`}>
-            <Img
-              className="desktop-only"
-              fluid={data.slideTwo.childImageSharp.fluid}
-            />
-            <Img
-              className="mobile-only"
-              fluid={data.slideTwoMobile.childImageSharp.fluid}
             />
             {/* <div className="mobile-overlay">
               <div className="overlay-content">
