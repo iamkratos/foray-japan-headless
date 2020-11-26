@@ -406,7 +406,7 @@ const Header = ({ dark }) => {
       <HeaderContainer
         className={
           (isMenuShrunk === true ? "shrink dark" : "") ||
-          (isInstagramBrowser === true ? "instagram-styles" : "") ||
+          (isInstagramBrowser === true ? "instagram-styles dark" : "") ||
           (dark === true ? "dark " : "")
         }
       >
