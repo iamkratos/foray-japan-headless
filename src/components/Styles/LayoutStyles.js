@@ -587,7 +587,7 @@ const LayoutContainer = styled.div`
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
-    background-color: #000;
+    background-color: #fff;
   }
 
   .hamburger-box {
@@ -607,7 +607,7 @@ const LayoutContainer = styled.div`
   .hamburger-inner::after {
     width: 20px;
     height: 2px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 4px;
     position: absolute;
     transition-property: transform;

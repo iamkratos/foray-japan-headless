@@ -24,6 +24,7 @@ const SlideContainer = styled.div`
 `;
 const SliderContainer = styled.div`
   padding: 40px 0;
+
   &.flipped {
     .slider-grid {
       .content-container {
@@ -187,7 +188,7 @@ const SliderContainer = styled.div`
 
 const MobileSliderContainer = styled.div``;
 
-const HomePageCollectionSlider = ({ products, reverse, collection }) => {
+const HomePageCollectionSlider = ({ products, reverse, collection, dark }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [updateCount, setUpdateCount] = useState(0);
 
@@ -231,10 +232,13 @@ const HomePageCollectionSlider = ({ products, reverse, collection }) => {
     return () => window.removeEventListener("resize", checkWindowSize);
   }, []);
 
-  let ht;
-
   return (
-    <SliderContainer className={reverse === true ? "flipped" : ""}>
+    <SliderContainer
+      className={
+        (reverse === true ? "flipped" : "") &&
+        (reverse === true ? "flipped" : "")
+      }
+    >
       <Wrapper className="slider-grid" flex>
         <div className="content-container">
           <div className="inner-wrap">

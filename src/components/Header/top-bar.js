@@ -34,8 +34,8 @@ export default class TopBar extends Component {
         <Wrapper>
           <div className="left-container">
             <p>
-              40% off everything discount automatically applied at check out
-              terms and conditions apply.
+              40% off everything! Discount automatically applied at check out.
+              Terms and conditions apply.
               <Link to="/pages/faq/#bf">Details.</Link>
             </p>
           </div>

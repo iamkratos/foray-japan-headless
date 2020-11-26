@@ -10,6 +10,42 @@ import Twitter from "../../images/twitter.inline.svg";
 import Wrapper from "../org/Wrapper";
 
 const FooterContainer = styled.footer`
+  &.dark {
+    background-color: #222;
+    .footer-links {
+      padding: 70px 0;
+      display: block;
+      ${media.medium`display: flex;`}
+
+      .link-list-container {
+        h4 {
+          color: #fff;
+        }
+
+        ul {
+          li {
+            a {
+              color: #fff;
+
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+
+        &.social {
+          ul {
+            li {
+              a {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .footer-links {
     padding: 70px 0;
     display: block;
@@ -82,9 +118,9 @@ const FooterContainer = styled.footer`
   }
 `;
 
-const Footer = () => {
+const Footer = ({ dark }) => {
   return (
-    <FooterContainer>
+    <FooterContainer className={dark ? "dark" : ""}>
       <Wrapper flex className="footer-links">
         <div className="link-list-container">
           <div className="inner-wrap">

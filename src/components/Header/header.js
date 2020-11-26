@@ -29,6 +29,79 @@ const HeaderContainer = styled.header`
   left: 0;
   width: 100%;
 
+  &.dark {
+    background-color: #222;
+    .logo-container {
+      a {
+
+        svg {
+          fill: #fff;
+          
+        }
+      }
+    }
+    .link-container {
+      nav {
+        ul {
+          li {
+            a {
+              color: #fff;
+              &::after {
+                border-bottom-color:#fff;
+              }
+            }
+          }
+        }
+      }
+    }
+    .cart-container {
+    
+    .inner-wrap {
+      
+
+      sup {
+      color: #fff;
+      }
+
+      svg {
+        
+
+        path {
+          stroke: #fff;
+          fill: #fff;
+        }
+      }
+    }
+  }
+
+  .search-container {
+    flex: 1;
+    ${media.small`flex: 1;`}
+    ${media.medium`flex: .5;`}
+    ${media.large`flex: .7;`}
+    ${media.laptop`flex: 1;`}
+    .inner-wrap {
+      display: flex;
+      align-items: center;
+      button {
+        background-color: transparent;
+        border: none;
+        &:active,
+        &:focus {
+          outline: 0;
+        }
+        svg {
+          stroke: #fff;
+        }
+
+        &.hamburger {
+          ${media.medium`display: none;`}
+        }
+      }
+    }
+  }
+  }
+
 
   &.shrink {
     &.instagram-styles {
@@ -221,7 +294,7 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const Header = ({ siteTitle }) => {
+const Header = ({ dark }) => {
   const { isCartOpen, toggleCartOpen, checkout } = useContext(StoreContext);
 
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
@@ -332,8 +405,9 @@ const Header = ({ siteTitle }) => {
       {/* <div role="group"></div> */}
       <HeaderContainer
         className={
-          (isMenuShrunk === true ? "shrink " : "") ||
-          (isInstagramBrowser === true ? "instagram-styles" : "")
+          (isMenuShrunk === true ? "shrink dark" : "") ||
+          (isInstagramBrowser === true ? "instagram-styles" : "") ||
+          (dark === true ? "dark " : "")
         }
       >
         <TopBar />
