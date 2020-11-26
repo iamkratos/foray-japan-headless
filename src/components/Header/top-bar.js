@@ -8,17 +8,17 @@ import { Link } from "gatsby";
 const TopBarContainer = styled.div`
   background-color: #000;
   padding: 13px 0 10px;
-  display: none;
+  /* display: none; */
   text-align: center;
-  height: 34px;
-  ${media.medium`display: block;`}
+  ${media.medium`display: block; height: 34px;`}
   p {
     margin: 0px;
     color: #fff;
     font-size: 12px;
     font-weight: bold;
     font-family: "Nexa";
-    line-height: 1;
+    line-height: 1.3;
+    ${media.medium`line-height: 1;`}
 
     a {
       color: #fff;
