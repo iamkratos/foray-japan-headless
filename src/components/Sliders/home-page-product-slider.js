@@ -24,7 +24,6 @@ const SlideContainer = styled.div`
 `;
 const SliderContainer = styled.div`
   padding: 40px 0;
-  background-color: #222;
   &.flipped {
     .slider-grid {
       .content-container {
@@ -65,7 +64,7 @@ const SliderContainer = styled.div`
 
         .title-with-link {
           h1 {
-            color: #fff;
+            color: #222;
             margin-bottom: 0px;
             ${media.medium` margin: 20% 0 0;`}
           }
@@ -80,7 +79,7 @@ const SliderContainer = styled.div`
           font-size: 24px;
           margin: 0 0 20px;
           text-align: center;
-          color: #fff;
+          color: #222;
 
           br {
             display: none;

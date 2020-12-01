@@ -405,9 +405,8 @@ const Header = ({ dark }) => {
       {/* <div role="group"></div> */}
       <HeaderContainer
         className={
-          (isMenuShrunk === true ? "shrink dark" : "") ||
-          (isInstagramBrowser === true ? "instagram-styles dark" : "") ||
-          (dark === true ? "dark " : "")
+          (isMenuShrunk === true ? "shrink" : "") ||
+          (isInstagramBrowser === true ? "instagram-styles " : "")
         }
       >
         <TopBar />

@@ -142,17 +142,6 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`/collections/all`}>
-            <img className="desktop-only" src={bfGIF} alt="" />
-            <img className="mobile-only" src={bfMobileGIF} alt="" />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
-          </Link>
-        </SlideContainer>
-        <SlideContainer>
           <Link to={`/products/foray-x-clubhaus-wedgehog-sweater`}>
             <img className="desktop-only" src={desktopGIF} alt="" />
             <img className="mobile-only" src={mobileGIF} alt="" />
@@ -163,6 +152,7 @@ const HomePageSlider = () => {
             </div> */}
           </Link>
         </SlideContainer>
+
         <SlideContainer>
           <Link to={`/collections/queen-of-clubs`}>
             <Img
@@ -181,7 +171,7 @@ const HomePageSlider = () => {
           </Link>
         </SlideContainer>
 
-        {/* <SlideContainer>
+        <SlideContainer>
           <Link to={`/collections/frosted-floom`}>
             <Img
               className="desktop-only"
@@ -192,7 +182,7 @@ const HomePageSlider = () => {
               fluid={data.slideThreeMobile.childImageSharp.fluid}
             />
           </Link>
-        </SlideContainer> */}
+        </SlideContainer>
       </Slider>
     </SliderContainer>
   );

@@ -573,14 +573,14 @@ const FAQ = ({ location }) => {
                   Contact Us
                 </button>
               </li>
-              <li>
+              {/* <li>
                 <button
                   onClick={() => handleSectionChange(7, "bf")}
                   className={whichMenuIsActive === 7 ? "active" : ""}
                 >
                   Black Friday
                 </button>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="faq-question-sections-container">

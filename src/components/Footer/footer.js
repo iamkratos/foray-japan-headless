@@ -120,7 +120,7 @@ const FooterContainer = styled.footer`
 
 const Footer = ({ dark }) => {
   return (
-    <FooterContainer className={dark ? "dark" : ""}>
+    <FooterContainer>
       <Wrapper flex className="footer-links">
         <div className="link-list-container">
           <div className="inner-wrap">

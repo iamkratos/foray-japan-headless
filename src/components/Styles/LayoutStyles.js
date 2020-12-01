@@ -9,7 +9,7 @@ import floral from "../../images/colors/floral.png";
 const LayoutContainer = styled.div`
   /* layout */
   .main-content-container {
-    margin-top: 134px;
+    margin-top: 84px;
 
     ${media.medium`margin-top: 129px;`}
 

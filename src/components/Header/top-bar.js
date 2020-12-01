@@ -8,7 +8,7 @@ import { Link } from "gatsby";
 const TopBarContainer = styled.div`
   background-color: #000;
   padding: 13px 0 10px;
-  /* display: none; */
+  display: none;
   text-align: center;
   ${media.medium`display: block; height: 34px;`}
   p {
@@ -33,11 +33,11 @@ export default class TopBar extends Component {
       <TopBarContainer>
         <Wrapper>
           <div className="left-container">
-            <p>
+            {/* <p>
               40% off everything! Discount automatically applied at check out.
               Terms and conditions apply.
               <Link to="/pages/faq/#bf">Details.</Link>
-            </p>
+            </p> */}
           </div>
           <div className="right-container"></div>
         </Wrapper>

@@ -140,7 +140,7 @@ const ProductGridItemContainer = styled.div`
           text-transform: uppercase;
           font-weight: bold;
           margin-bottom: 0px;
-          color: #fff;
+          color: #222;
         }
         p {
           font-weight: bold;
