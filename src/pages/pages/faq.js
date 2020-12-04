@@ -293,11 +293,21 @@ const contact = [
   },
 ];
 
-const bf = [
+const bogo = [
   {
-    question: "Black Friday Terms and Conditions",
+    question: "BOGO Terms and Conditions",
     answer: `   
-              <p>Terms & Conditions Annual Promotion: The Annual Promotion will begin at 12.00am (EST) on 26th November 2020 (the “Start Date”) and closes at 11.59pm (EST) on 30th November 2020 (the “End Date”). Discounts will only be valid during this time. Discounts will be automatically calculated at checkout and cannot be used in conjunction with any other discount or promotion or be applied retrospectively. Foray Golf reserves the right to amend these Terms and Conditions and/or cancel the Annual Promotion at its sole discretion. All Sale items reduced prior to Annual Promotion will not receive any further discounting and are excluded from the promotion. Excludes purchase of gift cards.</p>
+
+   <p>The BOGO Tops Promotion (“the BOGO Promotion” will begin at 12.00am (EST) on 4th December 2020 (the “Start Date”) and closes at 11.59pm (EST) on 20th December 2020 (the “End Date”). Discounts will only be valid during this time.</p>
+<ul>
+<li>Discounts will be automatically calculated at checkout and cannot be used in conjunction with any other discount or promotion or be applied retrospectively.</li>
+<li>Must have 2 eligible items in cart for BOGO Promotion to be applied, above which an even number (4, 6, 8, etc) of products is required to receive the automatic discount. Products include:</li>
+<li>CORE 2.0 Sleeveless Polo, Core Men’s Polo, CORE Long Sleeve Polo, Chambray CORE Long Sleeve Polos, CORE 2.0 Novelty Polo, Core Pique Short Sleeve Polo, Core Pique Long Sleeve Polo, Core 2.0 Half Zip</li>
+<li>BOGO Promotion will discount the 2nd item of equal or lesser value. For avoidance of doubt, eligible items are buy 1 get the 2nd item of equal or lesser value at 50% off.</li>
+
+</ul>
+
+<p>Foray Golf reserves the right to amend these Terms and Conditions and/or cancel the Promotion at its sole discretion. All Sale items reduced prior to Promotion will not receive any further discounting and are excluded from the promotion. Excludes purchase of gift cards.</p>
                 `,
   },
 ];
@@ -473,7 +483,7 @@ const FAQ = ({ location }) => {
         setWhichMenuIsActive(5);
       } else if (menuName === "contact-us") {
         setWhichMenuIsActive(6);
-      } else if (menuName === "bf") {
+      } else if (menuName === "bogo") {
         setWhichMenuIsActive(7);
       } else {
         setWhichMenuIsActive(1);
@@ -573,14 +583,14 @@ const FAQ = ({ location }) => {
                   Contact Us
                 </button>
               </li>
-              {/* <li>
+              <li>
                 <button
-                  onClick={() => handleSectionChange(7, "bf")}
+                  onClick={() => handleSectionChange(7, "bogo")}
                   className={whichMenuIsActive === 7 ? "active" : ""}
                 >
-                  Black Friday
+                  BOGO
                 </button>
-              </li> */}
+              </li>
             </ul>
           </div>
           <div className="faq-question-sections-container">
@@ -676,11 +686,11 @@ const FAQ = ({ location }) => {
             <div
               className={
                 whichMenuIsActive === 7
-                  ? "faq-question-section bf active"
-                  : "faq-question-section bf"
+                  ? "faq-question-section bogo active"
+                  : "faq-question-section bogo"
               }
             >
-              {bf.map((item, index) => {
+              {bogo.map((item, index) => {
                 return <AccItem key={index} item={item} />;
               })}
             </div>

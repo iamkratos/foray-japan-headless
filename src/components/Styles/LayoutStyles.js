@@ -326,6 +326,12 @@ const LayoutContainer = styled.div`
           &.tomato {
             background-color: tomato;
           }
+          &.olive {
+            background-color: olive;
+          }
+          &.neon-yellow {
+            background-color: #e5f55b;
+          }
           &.bloom {
             background-color: #c3adf9;
           }
@@ -348,6 +354,13 @@ const LayoutContainer = styled.div`
             background-color: navy !important;
           }
           &.bw {
+            background-image: linear-gradient(
+              90deg,
+              #fff 50%,
+              #000 50%
+            ) !important;
+          }
+          &.white-with-black-white-queen {
             background-image: linear-gradient(
               90deg,
               #fff 50%,
