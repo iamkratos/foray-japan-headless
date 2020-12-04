@@ -294,7 +294,6 @@ const ProductGridItem = ({
 
   function checkTooltipText() {
     // check for glove product
-    console.log("check tool", currentProductImages);
     if (
       currentProductImages.length > 0 &&
       currentProductImages[0].altText &&
@@ -337,7 +336,7 @@ const ProductGridItem = ({
     });
 
   function isProductLowOnInventory() {
-    console.log("inv", product);
+    // console.log("inv", product);
     let inventoryCount = product.variants.map(variant => {});
   }
 
