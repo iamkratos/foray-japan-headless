@@ -782,7 +782,7 @@ const StandardProductPage = ({ data }) => {
                   currentImageSet.map((image, index) => {
                     return (
                       <button key={index} onClick={() => swapMainImage(index)}>
-                        {image.localFile.childImageSharp && (
+                        {image.localFile && image.localFile.childImageSharp && (
                           <Img
                             alt={image.altText}
                             fluid={image.localFile.childImageSharp.fluid}
