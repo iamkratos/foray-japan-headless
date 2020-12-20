@@ -110,7 +110,8 @@ const shipping = [
   {
     question: "How quickly will my order ship? When will it arrive?",
     answer: `   
-              <p>All orders guaranteed to ship within two business days of being placed, unless otherwise notified.</p>
+              <p style="margin: 0;">All orders guaranteed to ship within two business days of being placed, unless otherwise notified.</p>
+              <p>Orders placed by 1pm EST typically ship same day. Orders placed AFTER the 1pm EST shipping cut off, as well all orders placed on weekends, will dispatch the next business day.</p>
               <ul>
                 <li>
                     <strong>Domestic Shipping:</strong><br/>

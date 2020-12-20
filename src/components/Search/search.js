@@ -120,8 +120,8 @@ const Hits = ({ hits }) => {
   return (
     <HitsContainer>
       <Wrapper className="hits-wrapper" flex>
-        {filteredHits.slice(0, 8).map(hit => {
-          return <ProductSearchResult product={hit} />;
+        {filteredHits.slice(0, 8).map((hit, index) => {
+          return <ProductSearchResult product={hit} key={index} />;
         })}
       </Wrapper>
     </HitsContainer>
