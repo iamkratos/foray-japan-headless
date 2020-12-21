@@ -138,24 +138,6 @@ const HomePageSlider = () => {
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
         <SlideContainer>
-          <Link to={`/collections/core-bogo-half-off`}>
-            <Img
-              className="desktop-only"
-              fluid={data.slideTwo.childImageSharp.fluid}
-            />
-            <Img
-              className="mobile-only"
-              fluid={data.slideTwoMobile.childImageSharp.fluid}
-            />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
-          </Link>
-        </SlideContainer>
-
-        <SlideContainer>
           <Link to={`/products/foray-x-clubhaus-wedgehog-sweater`}>
             <img className="desktop-only" src={desktopGIF} alt="" />
             <img className="mobile-only" src={mobileGIF} alt="" />
