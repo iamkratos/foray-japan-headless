@@ -403,6 +403,18 @@ const LayoutContainer = styled.div`
             background-repeat: no-repeat;
             background-position: top center;
           }
+          &.bump-run {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Bump.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
+          &.breakfast-ball {
+            background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Breakfast.png?v=1600440286");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+          }
           &.good-good {
             background-image: url("https://cdn.shopify.com/s/files/1/2119/7099/files/Good.png?v=1600440286");
             background-size: cover;
