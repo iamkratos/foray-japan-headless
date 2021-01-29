@@ -434,7 +434,7 @@ const Header = ({ dark }) => {
             <nav>
               <ul>
                 <li>
-                  <Link to="/collections/queen-of-clubs">New Arrivals</Link>
+                  <Link to="/collections/vanishing-point">New Arrivals</Link>
                 </li>
                 <li>
                   <a

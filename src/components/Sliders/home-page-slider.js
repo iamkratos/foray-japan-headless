@@ -63,7 +63,7 @@ const SliderContainer = styled.div`
 const HomePageSlider = () => {
   const data = useStaticQuery(graphql`
     query {
-      slideOne: file(relativePath: { eq: "slides/slide-1-1.jpg" }) {
+      slideOne: file(relativePath: { eq: "slides/slide-1.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
           # Makes it trivial to update as your page's design changes.
@@ -72,7 +72,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideTwo: file(relativePath: { eq: "slides/bogo-desktop.jpg" }) {
+      slideTwo: file(relativePath: { eq: "slides/slide-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -81,7 +81,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideThree: file(relativePath: { eq: "slides/slide-3-1.jpg" }) {
+      slideThree: file(relativePath: { eq: "slides/slide-3.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -99,7 +99,7 @@ const HomePageSlider = () => {
           }
         }
       }
-      slideTwoMobile: file(relativePath: { eq: "slides/bogo-mobile.jpg" }) {
+      slideTwoMobile: file(relativePath: { eq: "slides/mobile-slide-2.jpg" }) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
 
@@ -109,7 +109,7 @@ const HomePageSlider = () => {
         }
       }
       slideThreeMobile: file(
-        relativePath: { eq: "slides/mobile-slide-3-1.jpg" }
+        relativePath: { eq: "slides/mobile-slide-3.jpg" }
       ) {
         childImageSharp {
           # Specify the image processing specifications right in the query.
@@ -137,20 +137,16 @@ const HomePageSlider = () => {
   return (
     <SliderContainer>
       <Slider {...settings} style={{ marginBottom: 0 }}>
-        <SlideContainer>
+        {/* <SlideContainer>
           <Link to={`/products/foray-x-clubhaus-wedgehog-sweater`}>
             <img className="desktop-only" src={desktopGIF} alt="" />
             <img className="mobile-only" src={mobileGIF} alt="" />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
+           
           </Link>
-        </SlideContainer>
+        </SlideContainer> */}
 
         <SlideContainer>
-          <Link to={`/collections/queen-of-clubs`}>
+          <Link to={`/collections/vanishing-point`}>
             <Img
               className="desktop-only"
               fluid={data.slideOne.childImageSharp.fluid}
@@ -159,16 +155,24 @@ const HomePageSlider = () => {
               className="mobile-only"
               fluid={data.slideOneMobile.childImageSharp.fluid}
             />
-            {/* <div className="mobile-overlay">
-              <div className="overlay-content">
-                <h2>Dream Weaver</h2>
-              </div>
-            </div> */}
           </Link>
         </SlideContainer>
 
-        {/* <SlideContainer>
-          <Link to={`/collections/frosted-floom`}>
+        <SlideContainer>
+          <Link to={`/collections/vanishing-point`}>
+            <Img
+              className="desktop-only"
+              fluid={data.slideTwo.childImageSharp.fluid}
+            />
+            <Img
+              className="mobile-only"
+              fluid={data.slideTwoMobile.childImageSharp.fluid}
+            />
+          </Link>
+        </SlideContainer>
+
+        <SlideContainer>
+          <Link to={`/collections/vanishing-point`}>
             <Img
               className="desktop-only"
               fluid={data.slideThree.childImageSharp.fluid}
@@ -178,7 +182,7 @@ const HomePageSlider = () => {
               fluid={data.slideThreeMobile.childImageSharp.fluid}
             />
           </Link>
-        </SlideContainer> */}
+        </SlideContainer>
       </Slider>
     </SliderContainer>
   );

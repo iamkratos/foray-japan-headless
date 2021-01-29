@@ -426,11 +426,25 @@ const MegaMenu = ({
           }
         }
       }
+      vanishingPoint: file(
+        relativePath: { eq: "menu-items/collections/vanishing-point.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Vanishing Point",
+      url: "/collections/vanishing-point",
+      image: data.vanishingPoint.childImageSharp.fluid,
+    },
     {
       title: "Queen of Clubs",
       url: "/collections/queen-of-clubs",
@@ -466,6 +480,7 @@ const MegaMenu = ({
       url: "/collections/hot-house",
       image: data.hotHouse.childImageSharp.fluid,
     },
+
     {
       title: "Birds In Paradise",
       url: "/collections/birds-in-paradise",
@@ -480,12 +495,6 @@ const MegaMenu = ({
       title: "The Oddyesey",
       url: "/collections/the-oddyesey",
       image: data.theOddyesey.childImageSharp.fluid,
-    },
-
-    {
-      title: "Day Glo",
-      url: "/collections/day-glo",
-      image: data.dayGlo.childImageSharp.fluid,
     },
 
     {

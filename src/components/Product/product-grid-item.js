@@ -240,13 +240,12 @@ const ProductGridItem = ({ product, filterColor }) => {
       });
 
       setCurrentColor(imageArray);
-      console.log("case a");
+
       // Sort sizes
       handleSizesSort(colorHandlize(color));
 
       updateProductURL(colorHandlize(color));
     } else {
-      console.log("case b");
       handleSizesSort();
     }
   }
@@ -297,9 +296,9 @@ const ProductGridItem = ({ product, filterColor }) => {
           });
         });
         // console.log("sizes here", availableSizesArray);
-        console.log("case 1", selectedColor);
+        // console.log("case 1", selectedColor);
       } else {
-        console.log("case 2");
+        // console.log("case 2");
         product.variants.map(variant => {
           variant.selectedOptions.map(option => {
             let handlizedColor = colorHandlize(option.value);
@@ -323,8 +322,6 @@ const ProductGridItem = ({ product, filterColor }) => {
         });
       }
     }
-
-    console.log("availableSizesArray", availableSizesArray, product.variants);
 
     setSizes(availableSizesArray);
 
