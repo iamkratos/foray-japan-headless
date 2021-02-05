@@ -172,7 +172,7 @@ const HomePageSlider = () => {
         </SlideContainer>
 
         <SlideContainer>
-          <Link to={`/collections/vanishing-point`}>
+          <Link to={`/collections/society`}>
             <Img
               className="desktop-only"
               fluid={data.slideThree.childImageSharp.fluid}
