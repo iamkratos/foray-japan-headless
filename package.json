@@ -42,6 +42,7 @@
     "react-intercom": "^1.0.15",
     "react-lazyload": "^2.6.5",
     "react-moment": "^1.0.0",
+    "react-player": "^2.8.2",
     "react-slick": "^0.26.0",
     "react-spring": "^8.0.27",
     "shopify-buy": "^2.7.0",

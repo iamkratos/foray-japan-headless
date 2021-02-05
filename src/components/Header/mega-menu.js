@@ -435,11 +435,25 @@ const MegaMenu = ({
           }
         }
       }
+      society: file(
+        relativePath: { eq: "menu-items/collections/society.jpg" }
+      ) {
+        childImageSharp {
+          fluid(maxWidth: 960) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `);
 
   // console.log("data!", data);
   const collectionLinks = [
+    {
+      title: "Society",
+      url: "/collections/society",
+      image: data.society.childImageSharp.fluid,
+    },
     {
       title: "Vanishing Point",
       url: "/collections/vanishing-point",
@@ -482,19 +496,9 @@ const MegaMenu = ({
     },
 
     {
-      title: "Birds In Paradise",
-      url: "/collections/birds-in-paradise",
-      image: data.birdsInParadise.childImageSharp.fluid,
-    },
-    {
       title: "Core 2.0",
       url: "/collections/core-2-0-collection",
       image: data.core.childImageSharp.fluid,
-    },
-    {
-      title: "The Oddyesey",
-      url: "/collections/the-oddyesey",
-      image: data.theOddyesey.childImageSharp.fluid,
     },
 
     {

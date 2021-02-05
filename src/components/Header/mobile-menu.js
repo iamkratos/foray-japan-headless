@@ -100,6 +100,10 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
   const collectionLinks = [
     {
+      title: "Society",
+      url: "/collections/society",
+    },
+    {
       title: "Queen of Clubs",
       url: "/collections/queen-of-clubs",
     },
@@ -134,10 +138,6 @@ const MobileMenu = ({ style, isInstagramBrowser, isMenuShrunk }) => {
     {
       title: "The Oddyesey",
       url: "/collections/the-oddyesey",
-    },
-    {
-      title: "Day Glo",
-      url: "/collections/day-glo",
     },
 
     {

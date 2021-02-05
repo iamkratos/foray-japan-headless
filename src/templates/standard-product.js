@@ -3,6 +3,7 @@ import { graphql, navigate, Link } from "gatsby";
 import Img from "gatsby-image";
 import { window } from "browser-monads";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
 
 import Wrapper from "../components/org/Wrapper";
 import SEO from "../components/seo";
@@ -14,6 +15,9 @@ import RelatedSelling from "../components/Product/related-selling";
 import ProductReviews from "../components/Product/product-reviews";
 import { StoreContext } from "../context/StoreContext";
 import X from "../images/x.inline.svg";
+import PlayButton from "../images/play-circle.inline.svg";
+
+import video from "../images/black-suit.mp4";
 
 const StandardProductPageContainer = styled.section`
   padding: 20px 0 40px;
@@ -83,17 +87,67 @@ const StandardProductPageContainer = styled.section`
           text-align: center;
         }
       }
+
+      .video-toggle {
+        text-align: center;
+        margin-top: 20px;
+        button {
+          background-color: transparent;
+          border: none;
+          line-height: 1;
+          ${TransitionMixin(".25s")}
+          &:hover {
+            opacity: 0.7;
+          }
+          &:focus,
+          &:active {
+            outline: none;
+          }
+
+          svg {
+            height: 30px;
+            width: 30px;
+          }
+        }
+      }
     }
 
     .main-photo-container {
       flex: 2;
       order: 1;
+      position: relative;
+      overflow: hidden;
       ${media.medium`order: 2;`}
       .inner-wrap {
         .gatsby-image-wrapper {
           max-width: 400px;
           margin: 0 auto;
           ${media.xl`max-width: 500px;`}
+        }
+      }
+
+      .video-player-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        > div {
+          position: relative;
+          padding-top: 56.25%;
+          @media (max-width: 992px) {
+            min-height: 50vh;
+          }
+          video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 50vh;
+            ${media.medium`min-height: 75vh;`}
+          }
         }
       }
     }
@@ -412,6 +466,7 @@ const StandardProductPage = ({ data }) => {
     return { __html: product.descriptionHtml };
   }
 
+  const [videoShowing, setVideoShowing] = useState(false);
   const [currentImageSet, setCurrentImageSet] = useState([]);
   const [currentSizeSet, setCurrentSizeSet] = useState([]);
   const [sizeId, setSizeId] = useState();
@@ -559,6 +614,9 @@ const StandardProductPage = ({ data }) => {
 
     setCurrentPrice(newSizesArray[0].price);
     setCompareAtPrice(newSizesArray[0].compareAtPrice);
+
+    // stop video
+    setVideoShowing(false);
   }
 
   // Color Organizer
@@ -699,6 +757,7 @@ const StandardProductPage = ({ data }) => {
   const [mainImageIndex, setMainImageIndex] = useState();
   function swapMainImage(index) {
     setMainImageIndex(index);
+    setVideoShowing(false);
   }
 
   //   Check for tag
@@ -792,6 +851,12 @@ const StandardProductPage = ({ data }) => {
                     );
                   })}
               </div>
+
+              {/* <div className="video-toggle">
+                <button onClick={() => setVideoShowing(!videoShowing)}>
+                  <PlayButton />
+                </button>
+              </div> */}
             </div>
             <div className="main-photo-container">
               <div className="inner-wrap">
@@ -812,6 +877,18 @@ const StandardProductPage = ({ data }) => {
                         );
                       })}
               </div>
+              {/* {videoShowing && (
+                <div className="video-player-container">
+                  <ReactPlayer
+                    muted={true}
+                    volume={0}
+                    playsinline={true}
+                    url={video}
+                    playing={videoShowing ? true : false}
+                    loop={true}
+                  />
+                </div>
+              )} */}
             </div>
           </div>
           <div className="product-info-wrapper">

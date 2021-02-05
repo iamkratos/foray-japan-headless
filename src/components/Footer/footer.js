@@ -127,6 +127,12 @@ const Footer = ({ dark }) => {
             <h4>Shop Collections</h4>
             <ul>
               <li>
+                <Link to="/collections/society">Society</Link>
+              </li>
+              <li>
+                <Link to="/collections/vanishing-point">Vanishing Point</Link>
+              </li>
+              <li>
                 <Link to="/collections/queen-of-clubs">Queen of Clubs</Link>
               </li>
               <li>
@@ -137,12 +143,6 @@ const Footer = ({ dark }) => {
               </li>
               <li>
                 <Link to="/collections/ditsy-blitz">Ditsy Blitz</Link>
-              </li>
-              <li>
-                <Link to="/collections/chain-reaction">Chain Reaction</Link>
-              </li>
-              <li>
-                <Link to="/collections/current-wave">Current Wave</Link>
               </li>
             </ul>
           </div>
