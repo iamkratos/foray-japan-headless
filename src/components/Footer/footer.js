@@ -216,6 +216,9 @@ const Footer = ({ dark }) => {
                 <Link to="/pages/corporate">Corporate &amp; Wholesale</Link>
               </li>
               <li>
+                <Link to="/pages/sourcing">Sourcing</Link>
+              </li>
+              <li>
                 <a href="mailto:contact@foraygolf.com">Contact Us</a>
               </li>
               <li>
