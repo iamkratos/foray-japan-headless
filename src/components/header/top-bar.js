@@ -46,7 +46,7 @@ const TopBarContainer = styled.div`
         margin-right: 20px;
         padding-right: 20px;
         margin-bottom: 0px;
-        border-right: 1px solid #fff;
+        border-right: 1px solid #777;
         &:last-child {
           margin-right: 0px;
           padding-right: 0px;
@@ -120,7 +120,7 @@ const TopBar = () => {
                 <span className="image">
                   <Img fluid={jp?.childImageSharp?.fluid} />
                 </span>
-                <span className="text">Japan</span>
+                <span className="text">JP</span>
               </Link>
             </li>
             <div className="link">
