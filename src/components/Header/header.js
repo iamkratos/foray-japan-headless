@@ -2,6 +2,7 @@ import { Link } from "gatsby";
 import React, { useContext, useState, useEffect } from "react";
 import { useTransition } from "react-spring";
 import { window } from "browser-monads";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Wrapper from "../org/Wrapper";
 import TopBar from "./top-bar";
@@ -18,7 +19,7 @@ import MobileMenu from "./mobile-menu";
 import { StoreContext } from "../../context/StoreContext";
 import { TransitionMixin, media } from "../helpers";
 
-import Search from "../Search/search";
+import Search from "../search/search";
 
 const HeaderContainer = styled.header`
   background-color: #fff;
@@ -483,7 +484,6 @@ const Header = ({ dark }) => {
           </div>
         </Wrapper>
       </HeaderContainer>
-
       {moibleMenutransitions.map(({ item, key, props }) => {
         return (
           item && (
@@ -496,11 +496,9 @@ const Header = ({ dark }) => {
           )
         );
       })}
-
       {transitions.map(({ item, key, props }) => {
         return item && <Cart key={key} style={props} />;
       })}
-
       {searchTransitions.map(({ item, key, props }) => {
         return (
           item && (
@@ -513,7 +511,6 @@ const Header = ({ dark }) => {
           )
         );
       })}
-
       {searchOverlayTransitions.map(({ item, key, props }) => {
         return (
           item && (
@@ -525,24 +522,20 @@ const Header = ({ dark }) => {
           )
         );
       })}
-
       {secondSetTransitions.map(({ item, key, props }) => {
         return item && <Overlay key={key} style={props} />;
       })}
-      {megaMenuTransitions.map(({ item, key, props }) => {
-        return (
-          item && (
-            <MegaMenu
-              isMenuShrunk={isMenuShrunk}
-              megaMenuIndex={megaMenuIndex}
-              setMenuOneImageIndex={setMenuOneImageIndex}
-              menuOneImageIndex={menuOneImageIndex}
-              key={key}
-              style={props}
-            />
-          )
-        );
-      })}
+
+      {/* <AnimatePresence> */}
+      {isMegaMenuOpen && (
+        <MegaMenu
+          isMenuShrunk={isMenuShrunk}
+          megaMenuIndex={megaMenuIndex}
+          setMenuOneImageIndex={setMenuOneImageIndex}
+          menuOneImageIndex={menuOneImageIndex}
+        />
+      )}
+      {/* </AnimatePresence> */}
     </div>
   );
 };

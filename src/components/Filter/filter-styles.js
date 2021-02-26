@@ -13,7 +13,7 @@ const FilterContainer = styled.div`
   transform: translate3d(0px, 0%, 0px);
   height: 80vh;
   ${TransitionMixin(".25s")}
-  ${media.medium`z-index: 100; position: static; height: 100%; `}
+  ${media.medium`z-index: 100; position: static; height: 100%; padding-right: 70px;`}
 
 &.active {
     transform: translate3d(0px, -60%, 0px);

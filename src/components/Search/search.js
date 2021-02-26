@@ -12,7 +12,7 @@ import {
 import { window } from "browser-monads";
 
 import Wrapper from "../org/Wrapper";
-import ProductSearchResult from "../Product/product-search-result";
+import ProductSearchResult from "../product/product-search-result";
 import { TransitionMixin, media } from "../helpers";
 
 import { animated } from "react-spring";

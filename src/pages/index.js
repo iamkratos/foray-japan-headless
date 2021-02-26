@@ -3,128 +3,14 @@ import { useStaticQuery, graphql } from "gatsby";
 import { window } from "browser-monads";
 
 import SEO from "../components/seo";
-import HomePageSlider from "../components/Sliders/home-page-slider";
-import HomePageProductSlider from "../components/Sliders/home-page-product-slider";
-import SplitSection from "../components/Home/split-section";
-import TriGridSection from "../components/Home/tri-grid-section";
-import ForayPros from "../components/Pros";
-import CollectionPanes from "../components/Home/collection-panes";
+import SplitSection from "../components/home/split-section";
+import NewArrivals from "../components/home/new-arrivals";
+
 import Layout from "../components/layout";
+import CollectionRows from "../components/home/collection-rows";
 
-const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      hps: allShopifyCollection(filter: { title: { eq: "Home Page Slider" } }) {
-        edges {
-          node {
-            id
-            products {
-              id
-              handle
-              title
-              tags
-              images {
-                altText
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 500) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
-              }
-              priceRange {
-                maxVariantPrice {
-                  amount
-                }
-              }
-
-              descriptionHtml
-              variants {
-                availableForSale
-                shopifyId
-                image {
-                  altText
-                }
-
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-              priceRange {
-                minVariantPrice {
-                  amount
-                }
-                maxVariantPrice {
-                  amount
-                }
-              }
-            }
-          }
-        }
-      }
-      acc: allShopifyCollection(
-        filter: { title: { eq: "Logos & Accessories" } }
-      ) {
-        edges {
-          node {
-            id
-            products {
-              id
-              handle
-              title
-              tags
-              images {
-                altText
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 500) {
-                      ...GatsbyImageSharpFluid
-                    }
-                  }
-                }
-              }
-              priceRange {
-                maxVariantPrice {
-                  amount
-                }
-              }
-
-              descriptionHtml
-              variants {
-                availableForSale
-                shopifyId
-                image {
-                  altText
-                }
-
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-              priceRange {
-                minVariantPrice {
-                  amount
-                }
-                maxVariantPrice {
-                  amount
-                }
-              }
-            }
-          }
-        }
-      }
-      seoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
-        childImageSharp {
-          original {
-            src
-          }
-        }
-      }
-    }
-  `);
+const IndexPage = ({ data }) => {
+  // const data = useStaticQuery(graphql``);
 
   let hpsProducts = data.hps.edges[0].node.products;
   let accProducts = data.acc.edges[0].node.products;
@@ -154,15 +40,152 @@ const IndexPage = () => {
           />
         )}
       </SEO>
-      <HomePageSlider />
-      <HomePageProductSlider products={hpsProducts} />
-      <CollectionPanes />
-
-      <HomePageProductSlider reverse={true} products={accProducts} />
-      {/* <ForayPros /> */}
+      <NewArrivals hpsProducts={hpsProducts} />
+      <CollectionRows
+        collections={
+          data?.wpContent?.edges[0]?.node?.home_addons?.homePageCollections
+        }
+      />
       <SplitSection />
     </Layout>
   );
 };
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    wpContent: allWpPage(filter: { title: { eq: "Home" } }) {
+      edges {
+        node {
+          id
+          home_addons {
+            homePageCollections {
+              collectionTitle
+              collectionHandle
+              collectionLastImage {
+                localFile {
+                  childImageSharp {
+                    fluid(maxWidth: 500) {
+                      ...GatsbyImageSharpFluid
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    hps: allShopifyCollection(filter: { title: { eq: "Home Page Slider" } }) {
+      edges {
+        node {
+          id
+          products {
+            id
+            handle
+            title
+            tags
+            images {
+              altText
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 500) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+            priceRange {
+              maxVariantPrice {
+                amount
+              }
+            }
+
+            descriptionHtml
+            variants {
+              availableForSale
+              shopifyId
+              image {
+                altText
+              }
+
+              selectedOptions {
+                name
+                value
+              }
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+              maxVariantPrice {
+                amount
+              }
+            }
+          }
+        }
+      }
+    }
+    acc: allShopifyCollection(
+      filter: { title: { eq: "Logos & Accessories" } }
+    ) {
+      edges {
+        node {
+          id
+          products {
+            id
+            handle
+            title
+            tags
+            images {
+              altText
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 500) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
+            }
+            priceRange {
+              maxVariantPrice {
+                amount
+              }
+            }
+
+            descriptionHtml
+            variants {
+              availableForSale
+              shopifyId
+              image {
+                altText
+              }
+
+              selectedOptions {
+                name
+                value
+              }
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+              maxVariantPrice {
+                amount
+              }
+            }
+          }
+        }
+      }
+    }
+    seoImage: file(relativePath: { eq: "seoImages/home-page.jpg" }) {
+      childImageSharp {
+        original {
+          src
+        }
+      }
+    }
+  }
+`;

@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Img from "gatsby-image";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { TransitionMixin, media } from "../helpers";
-import { animated } from "react-spring";
+import { motion } from "framer-motion";
 
 import Wrapper from "../org/Wrapper";
 
-const MegaMenuContainer = styled(animated.div)`
+const MegaMenuContainer = styled(motion.div)`
   position: fixed;
   width: 100%;
   top: 83px;
@@ -576,8 +576,18 @@ const MegaMenu = ({
   let collectionMenuIndex = 5;
   return (
     <MegaMenuContainer
-      className={isMenuShrunk === true ? "shrunk" : ""}
-      style={{ ...style }}
+      // className={isMenuShrunk === true ? "shrunk" : ""}
+      key="content"
+      initial="collapsed"
+      animate="open"
+      exit="collapsed"
+      variants={{
+        open: { y: 0 },
+        collapsed: { y: -800 },
+      }}
+      transition={{
+        duration: 0.25,
+      }}
     >
       {/* Shop By */}
       <Wrapper flex activeClass shiftRight className={hideMenuOne}>

@@ -6,9 +6,10 @@ const ProductGridItemContainer = styled.div`
   flex: 1 1 100%;
   margin-bottom: 40px;
 
-  ${media.medium`flex: 0 0 50%;`}
+  ${media.medium`flex: 0 0 20%;`}
+
   > .inner-wrap {
-    max-width: 400px;
+    max-width: 90%;
     margin: 0 auto;
   }
   .image-container {
