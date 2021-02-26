@@ -10,8 +10,8 @@ import { document } from "browser-monads";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
-import Header from "./header/header";
-import Footer from "./footer/footer";
+import Header from "./header";
+import Footer from "./footer";
 import Popup from "./optin-popup";
 import "./layout.css";
 import LayoutStyles from "./Styles/LayoutStyles";

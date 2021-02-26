@@ -136,7 +136,6 @@ function Login({
                   }
                 })
                 .catch(e => {
-                  console.log("heee");
                   console.log(e);
                 });
             }}

@@ -61,7 +61,6 @@ const SingleOrder = ({ accessToken, id }) => {
     variables: { customerAccessToken: accessToken },
   });
 
-  console.log(id);
   const allOrders = data && data.customer && data.customer.orders.edges;
   let order =
     allOrders &&

@@ -103,7 +103,6 @@ const TopBar = () => {
       }
     }
   `);
-  console.log("jp", jp);
   return (
     <TopBarContainer>
       <Wrapper>
